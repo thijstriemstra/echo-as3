@@ -100,6 +100,8 @@ package com.collab.echo.view.mediators
             return [ 
 						PresenceProxy.CONNECTING,
 						PresenceProxy.CONNECTION_SUCCESS,
+						PresenceProxy.CONNECTION_CLOSED,
+						PresenceProxy.DISCONNECTING,
 						PresenceProxy.ROOM_ADDED,
 						PresenceProxy.ROOM_REMOVED,
 						PresenceProxy.ROOM_JOINED,
@@ -131,6 +133,10 @@ package com.collab.echo.view.mediators
 					break;
 				
 				case PresenceProxy.CONNECTION_SUCCESS:
+					// TODO
+					break;
+				
+				case PresenceProxy.CONNECTION_CLOSED:
 					// TODO
 					break;
 				
@@ -167,28 +173,7 @@ package com.collab.echo.view.mediators
 				
 				case PresenceProxy.ROOM_ATTRIBUTE_UPDATE:
 					attributeEvent = AttributeEvent( note.getBody() );
-					
-					/*
-					var magnetData:Array;
-					var magnet:Magnet;
-					
-					// If the changed attribute's name begins with "magnet"
-					if (e.getChangedAttr().name.indexOf("magnet") == 0)
-						{
-						// If a magnet by the specified name exists in the magnets hash...
-						magnet = magnets[e.getChangedAttr().name];
-						if (magnet != null)
-						{
-						// The magnet exists. Check if it is being dragged. If not, 
-						// move it to the location specified by the room attribute value.
-						if (!magnet.isDragging()) {
-						magnetData = e.getChangedAttr().value.split(",");
-						magnet.x = parseInt(magnetData[1]);
-						magnet.y = parseInt(magnetData[2]);
-						}
-						}
-					}
-					*/
+					attributeUpdateListener( attributeEvent );
 					break;
 				
 				case PresenceProxy.ROOM_CLIENT_COUNT:
@@ -213,7 +198,53 @@ package com.collab.echo.view.mediators
 		{
 			trace( "Users connected: " + event.getNumClients() );
 		}
-
+		
+		/**
+		 * Dispatched when the number of occupants in a room changes while the
+		 * current client is in or observing the room.
+		 * 
+		 * @param event
+		 */		
+		protected function numClients( event:RoomEvent ):void
+		{
+		}
+		
+		/**
+		 * Create remote clients.
+		 *  
+		 * @param event
+		 */		
+		protected function addClient( event:RoomEvent ):void
+		{
+		}
+		
+		/**
+		 * Joined room.
+		 *  
+		 * @param event
+		 */		
+		protected function joinedRoom( event:RoomEvent ):void
+		{
+		}
+		
+		/**
+		 * Remove remote clients.
+		 *  
+		 * @param event
+		 */		
+		protected function removeClient( event:RoomEvent ):void
+		{
+		}
+		
+		/**
+		 * Triggered when one of the room's attributes changes.
+		 *  
+		 * @param event
+		 */		
+		protected function attributeUpdateListener( event:AttributeEvent ):void
+		{
+		}
+		
 		// ====================================
 		// INTERNAL METHODS
 		// ====================================

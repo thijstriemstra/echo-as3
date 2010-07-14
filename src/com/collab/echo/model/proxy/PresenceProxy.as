@@ -44,6 +44,8 @@ package com.collab.echo.model.proxy
 		// Notifications
 		public static const CONNECTING				: String = NAME + "_connecting";
 		public static const CONNECTION_SUCCESS		: String = NAME + "_connectionSuccess";
+		public static const CONNECTION_CLOSED		: String = NAME + "_connectionClosed";
+		public static const DISCONNECTING			: String = NAME + "_disconnecting";
 		public static const ROOM_JOINED				: String = NAME + "_roomJoined";
 		public static const ROOM_ADDED				: String = NAME + "_roomAdded";
 		public static const ROOM_REMOVED			: String = NAME + "_roomRemoved";
@@ -61,6 +63,9 @@ package com.collab.echo.model.proxy
 		// ====================================
 		
 		internal var _users							: Vector.<UserVO>;
+		internal var _hostUrl						: String;
+		internal var _hostPort						: int;
+		internal var _logging						: Boolean;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
@@ -72,6 +77,11 @@ package com.collab.echo.model.proxy
 		public function get users():Vector.<UserVO>
 		{
 			return _users;
+		}
+		
+		public function get isReady():Boolean
+		{
+			return false;
 		}
 		
 		/**
@@ -93,10 +103,24 @@ package com.collab.echo.model.proxy
 		 *  
 		 * @param host
 		 * @param port
+		 * @param logging
 		 */		
-		public function createConnection( host:String=null, port:int=80 ):void
+		public function createConnection( host:String=null, port:int=80,
+										  logging:Boolean=true ):void
 		{
+			_hostPort = port;
+			_hostUrl = host;
+			_logging = logging;
+			
 			sendNotification( CONNECTING );
+		}
+		
+		/**
+		 * Disconnect connection to server. 
+		 */		
+		public function closeConnection():void
+		{
+			sendNotification( DISCONNECTING );
 		}
 		
 		/**
@@ -105,6 +129,14 @@ package com.collab.echo.model.proxy
 		protected function connectionReady():void
 		{
 			sendNotification( CONNECTION_SUCCESS );
+		}
+		
+		/**
+		 * Triggered when the connection is closed.
+		 */		
+		protected function connectionClosed():void
+		{
+			sendNotification( CONNECTION_CLOSED );
 		}
 		
 		/**

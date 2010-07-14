@@ -20,6 +20,8 @@ package com.collab.echo.model.proxy
 {
 	import net.user1.logger.Logger;
 	import net.user1.reactor.AttributeEvent;
+	import net.user1.reactor.ConnectionManager;
+	import net.user1.reactor.HTTPConnection;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
 	import net.user1.reactor.Room;
@@ -27,6 +29,7 @@ package com.collab.echo.model.proxy
 	import net.user1.reactor.RoomManagerEvent;
 	import net.user1.reactor.RoomModules;
 	import net.user1.reactor.RoomSettings;
+	import net.user1.reactor.XMLSocketConnection;
 	
 	import org.osflash.thunderbolt.Logger;
 
@@ -44,7 +47,11 @@ package com.collab.echo.model.proxy
 		/**
 		 * Cannonical name of this <code>Proxy</code>.
 		 */    
-		public static const NAME	: String = "UnionProxy";
+		public static const NAME				: String = "UnionProxy";
+		
+		// ====================================
+		// INTERNAL VARS
+		// ====================================
 		
 		// ====================================
 		// PROTECTED VARS
@@ -53,18 +60,32 @@ package com.collab.echo.model.proxy
 		/**
 		 * The core Reactor object that connects to Union Server. 
 		 */		
-		protected var reactor		: Reactor;
+		protected var reactor					: Reactor;
 		
 		/**
 		 * 
 		 */		
-		protected var modules		: RoomModules;
+		protected var connectionManager			: ConnectionManager;
+		
+		/**
+		 * 
+		 */		
+		protected var modules					: RoomModules;
 
 		/**
 		 * Use a RoomSettings object to specify it's features.
 		 */		
-		protected var roomSettings	: RoomSettings;
+		protected var roomSettings				: RoomSettings;
 
+		// ====================================
+		// ACCESSOR/MUTATOR
+		// ====================================
+		
+		override public function get isReady():Boolean
+		{
+			return reactor.isReady();
+		}
+		
 		/**
 		 * Constructor.
 		 * 
@@ -87,18 +108,35 @@ package com.collab.echo.model.proxy
 		 *  
 		 * @param url
 		 * @param port
+		 * @param logging
 		 */		
-		override public function createConnection( url:String="tryunion.com",
-												   port:int=80 ):void
+		override public function createConnection( url:String="localhost",
+												   port:int=80, logging:Boolean=true ):void
 		{
 			super.createConnection( url, port );
 			
 			log( "Connecting to Union server on " + url + ":" + port );
 			
-			reactor = new Reactor();
+			reactor = new Reactor( "", logging );
 			reactor.getLog().setLevel( logLevel );
 			reactor.addEventListener( ReactorEvent.READY, unionConnectionReady );
-			reactor.connect( url, port );
+			reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
+			
+			try
+			{
+				connectionManager = reactor.getConnectionManager();
+				connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
+				connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
+				connectionManager.addConnection( new XMLSocketConnection( url, 443 ));
+				connectionManager.addConnection( new HTTPConnection( url, 80 ));
+				connectionManager.addConnection( new HTTPConnection( url, 443 ));
+				connectionManager.addConnection( new HTTPConnection( url, 9110 ));
+				reactor.connect();
+			}
+			catch ( e:Error )
+			{
+				trace('hey: ' + e);
+			}
 		}
 		
 		/**
@@ -139,12 +177,12 @@ package com.collab.echo.model.proxy
 		 * 
 		 * @param roomQualifier
 		 * @param settings
-		 * @param attrs
 		 * @param modules
+		 * @param attrs
 		 * @return 
 		 */		
 		protected function createRoom( roomQualifier:String, settings:RoomSettings,
-									   attrs:XML=null, modules:RoomModules=null ):Room
+									   modules:RoomModules=null, attrs:XML=null ):Room
 		{
 			var room:Room = reactor.getRoomManager().createRoom( roomQualifier, roomSettings, 
 																 attrs, modules );
@@ -185,6 +223,18 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Triggered when the connection is closed.
+		 *  
+		 * @param event
+		 */		
+		protected function unionConnectionClose( event:ReactorEvent ):void 
+		{
+			event.preventDefault();
+			
+			connectionClosed();
+		}
+		
+		/**
 		 * Triggered when the connection is established and ready for use.
 		 */		
 		override protected function connectionReady():void
@@ -194,7 +244,7 @@ package com.collab.echo.model.proxy
 			// specify that the rooms should not "die on empty"; otherwise,
 			// each room would automatically be removed when its last occupant leaves
 			roomSettings = new RoomSettings();
-			roomSettings.dieOnEmpty = true;
+			roomSettings.dieOnEmpty = false;
 		}
 
 		/**

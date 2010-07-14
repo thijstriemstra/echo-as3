@@ -1,0 +1,116 @@
+/*
+Echo project.
+
+Copyright (C) 2003-2010 Collab
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+package com.collab.echo.view.controls.buttons
+{
+	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.events.CommunicationPanelEvent;
+	
+	import flash.events.MouseEvent;
+	import flash.text.Font;
+
+	/**
+	 * Expands the communication panel.
+	 * 
+	 * @author Thijs Triemstra
+	 */	
+	public class BaseExpandButton extends LabelButton
+	{
+		// ====================================
+		// INTERNAL VARS
+		// ====================================
+		
+		internal var expanded	: Boolean;
+		
+		/**
+		 * Constructor.
+		 * 
+		 * @param font 
+		 */		
+		public function BaseExpandButton( width:Number=123, font:Font=null,
+										  fontSize:int=15,
+										  textUpColor:uint=StyleDict.BLACK,
+										  backgroundColor:uint=StyleDict.YELLOW1,
+										  backgroundAlpha:Number=1,
+										  cornerRadius:Number=0, padding:Number=4,
+										  alpha:Number=1, bold:Boolean=false  )
+		{
+			super( width, fontSize, textUpColor, backgroundColor, backgroundAlpha,
+				   cornerRadius, padding, alpha, bold, font );
+			
+			doubleClickEnabled = false;
+			
+			// listen for events
+			addEventListener( MouseEvent.CLICK, onMouseClick, false, 0, true );
+			
+			expand( true );
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		protected function onMouseClick( event:MouseEvent ):void
+		{
+			event.preventDefault();
+			
+			expand( !expanded );
+		}
+		
+		/**
+		* @param event
+		*/		
+		override protected function onMouseOver( event:MouseEvent ):void
+		{
+			event.preventDefault();
+		}
+		
+		/**
+		 * @param event
+		 */		
+		override protected function onMouseOut( event:MouseEvent ):void
+		{
+			event.preventDefault();
+		}
+		
+		// ====================================
+		// INTERNAL METHODS
+		// ====================================
+		
+		internal function expand( activate:Boolean ):void
+		{
+			var type:String;
+			expanded = activate;
+			
+			if ( expanded )
+			{
+				label = "Expand";
+				type = CommunicationPanelEvent.COLLAPSE;
+			}
+			else
+			{
+				label = "Collapse";
+				type = CommunicationPanelEvent.EXPAND;
+			}
+			
+			var evt:CommunicationPanelEvent = new CommunicationPanelEvent( type );
+			dispatchEvent( evt );
+		}
+		
+	}
+}

@@ -19,7 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.mediators
 {
 	import com.collab.echo.model.proxy.PresenceProxy;
+	import com.collab.echo.model.vo.RoomVO;
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
+	import com.collab.echo.view.rooms.BaseRoom;
 	
 	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.RoomEvent;
@@ -49,17 +51,17 @@ package com.collab.echo.view.mediators
 		// INTERNAL VARS
 		// ====================================
 		
-		internal var _rooms					: Array;
+		internal var _rooms					: Vector.<RoomVO>;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
-		public function get rooms()			: Array
+		public function get rooms()			: Vector.<RoomVO>
 		{
 			return _rooms;
 		}
-		public function set rooms( val:Array ):void
+		public function set rooms( val:Vector.<RoomVO> ):void
 		{
 			_rooms = val;
 		}
@@ -81,10 +83,25 @@ package com.collab.echo.view.mediators
 		// ====================================
 		
 		/**
-		 * 
+		 * Create rooms.
 		 */		
 		protected function createRooms():void
 		{
+			// rooms
+			var res:Vector.<BaseRoom> = new Vector.<BaseRoom>();
+			var room:BaseRoom;
+			var item:RoomVO;
+
+			for each ( item in _rooms )
+			{
+				room = new item.type( item.id );
+				res.push( room );
+			}
+			
+			if ( presence )
+			{
+				presence.rooms = res;
+			}
 		}
 		
         /**
@@ -133,7 +150,7 @@ package com.collab.echo.view.mediators
 					break;
 				
 				case PresenceProxy.CONNECTION_SUCCESS:
-					// TODO
+					createRooms();
 					break;
 				
 				case PresenceProxy.CONNECTION_CLOSED:

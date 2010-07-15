@@ -24,11 +24,8 @@ package com.collab.echo.model.proxy
 	import net.user1.reactor.HTTPConnection;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
-	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
 	import net.user1.reactor.RoomManagerEvent;
-	import net.user1.reactor.RoomModules;
-	import net.user1.reactor.RoomSettings;
 	import net.user1.reactor.XMLSocketConnection;
 	
 	import org.osflash.thunderbolt.Logger;
@@ -50,40 +47,22 @@ package com.collab.echo.model.proxy
 		public static const NAME				: String = "UnionProxy";
 		
 		// ====================================
-		// INTERNAL VARS
-		// ====================================
-		
-		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
 		/**
-		 * The core Reactor object that connects to Union Server. 
-		 */		
-		protected var reactor					: Reactor;
-		
-		/**
-		 * 
+		 * The ConnectionManager class manages all connections made by a
+		 * Reactor application to the Union Server.
 		 */		
 		protected var connectionManager			: ConnectionManager;
 		
-		/**
-		 * 
-		 */		
-		protected var modules					: RoomModules;
-
-		/**
-		 * Use a RoomSettings object to specify it's features.
-		 */		
-		protected var roomSettings				: RoomSettings;
-
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
 		override public function get isReady():Boolean
 		{
-			return reactor.isReady();
+			return Reactor( reactor ).isReady();
 		}
 		
 		/**
@@ -96,7 +75,6 @@ package com.collab.echo.model.proxy
 			super( data );
 			
 			logLevel = net.user1.logger.Logger.INFO;
-			modules = new RoomModules();
 		}
 
 		// ====================================
@@ -122,36 +100,14 @@ package com.collab.echo.model.proxy
 			reactor.addEventListener( ReactorEvent.READY, unionConnectionReady );
 			reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
 			
-			try
-			{
-				connectionManager = reactor.getConnectionManager();
-				connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
-				connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
-				connectionManager.addConnection( new XMLSocketConnection( url, 443 ));
-				connectionManager.addConnection( new HTTPConnection( url, 80 ));
-				connectionManager.addConnection( new HTTPConnection( url, 443 ));
-				connectionManager.addConnection( new HTTPConnection( url, 9110 ));
-				reactor.connect();
-			}
-			catch ( e:Error )
-			{
-				trace('hey: ' + e);
-			}
-		}
-		
-		/**
-		 * Add <code>RoomModule</code>s.
-		 * 
-		 * @param moduleObjects
-		 */		
-		protected function addRoomModules( ...moduleObjects:Array ):void
-		{
-			var module:Object;
-			for each ( module in moduleObjects )
-			{
-				log( "Adding '" + module.type + "' RoomModule: '" + module.alias + "'" );
-				modules.addModule( module.alias, module.type );
-			}
+			connectionManager = reactor.getConnectionManager();
+			connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
+			connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
+			connectionManager.addConnection( new XMLSocketConnection( url, 443 ));
+			connectionManager.addConnection( new HTTPConnection( url, 80 ));
+			connectionManager.addConnection( new HTTPConnection( url, 443 ));
+			connectionManager.addConnection( new HTTPConnection( url, 9110 ));
+			reactor.connect();
 		}
 		
 		/**
@@ -170,32 +126,6 @@ package com.collab.echo.model.proxy
 													   roomAddedListener );
 			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_REMOVED,
 													   roomRemovedListener );
-		}
-		
-		/**
-		 * Create and return a new <code>Room</code>.
-		 * 
-		 * @param roomQualifier
-		 * @param settings
-		 * @param modules
-		 * @param attrs
-		 * @return 
-		 */		
-		protected function createRoom( roomQualifier:String, settings:RoomSettings,
-									   modules:RoomModules=null, attrs:XML=null ):Room
-		{
-			var room:Room = reactor.getRoomManager().createRoom( roomQualifier, roomSettings, 
-																 attrs, modules );
-			log( "Creating new Room: " + roomQualifier );
-			
-			return room;
-		}
-		
-		/**
-		 * 
-		 */		
-		protected function createRooms():void
-		{
 		}
 		
 		/**
@@ -234,19 +164,6 @@ package com.collab.echo.model.proxy
 			connectionClosed();
 		}
 		
-		/**
-		 * Triggered when the connection is established and ready for use.
-		 */		
-		override protected function connectionReady():void
-		{
-			super.connectionReady();
-			
-			// specify that the rooms should not "die on empty"; otherwise,
-			// each room would automatically be removed when its last occupant leaves
-			roomSettings = new RoomSettings();
-			roomSettings.dieOnEmpty = false;
-		}
-
 		/**
 		 * Triggered when one of the room's attributes changes.
 		 *  

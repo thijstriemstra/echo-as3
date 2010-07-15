@@ -117,8 +117,10 @@ package com.collab.echo.view.hub.display
 		 * @param width
 		 * @param height
 		 * @param skin
+		 * @param paddingLeft
 		 */		
-		public function BaseCommunicationPanel( width:int, height:int, skin:Object=null, paddingLeft:int=0 )
+		public function BaseCommunicationPanel( width:int, height:int, skin:Object=null,
+												paddingLeft:int=0 )
 		{
 			super( true, width, height );
 			

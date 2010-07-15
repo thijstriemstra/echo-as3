@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
     import com.collab.echo.model.vo.UserVO;
+    import com.collab.echo.view.rooms.BaseRoom;
     
     import org.puremvc.as3.multicore.interfaces.IProxy;
     import org.puremvc.as3.multicore.patterns.proxy.Proxy;
@@ -57,6 +58,7 @@ package com.collab.echo.model.proxy
 		// ====================================
 		
 		protected var logLevel						: String;
+		protected var reactor						: *;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -66,10 +68,27 @@ package com.collab.echo.model.proxy
 		internal var _hostUrl						: String;
 		internal var _hostPort						: int;
 		internal var _logging						: Boolean;
+		internal var _rooms							: Vector.<BaseRoom>;
+		internal var _ready							: Boolean;
+		internal var _room							: BaseRoom;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
+		
+		public function get rooms():Vector.<BaseRoom>
+		{
+			return _rooms;
+		}
+		public function set rooms( val:Vector.<BaseRoom> ):void
+		{
+			_rooms = val;
+			
+			for each ( _room in _rooms )
+			{
+				_room.create( reactor );
+			}
+		}
 		
 		/**
 		 * @return 
@@ -81,7 +100,7 @@ package com.collab.echo.model.proxy
 		
 		public function get isReady():Boolean
 		{
-			return false;
+			return _ready;
 		}
 		
 		/**
@@ -92,6 +111,8 @@ package com.collab.echo.model.proxy
 		public function PresenceProxy ( data:Object = null ) 
         {
             super ( NAME, data );
+			
+			_ready = false;
         }
 		
 		// ====================================
@@ -128,6 +149,8 @@ package com.collab.echo.model.proxy
 		 */		
 		protected function connectionReady():void
 		{
+			_ready = true;
+			
 			sendNotification( CONNECTION_SUCCESS );
 		}
 		

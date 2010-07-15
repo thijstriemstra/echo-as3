@@ -24,11 +24,6 @@ package com.collab.echo.view.mediators
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
-	import net.user1.reactor.AttributeEvent;
-	import net.user1.reactor.RoomEvent;
-	import net.user1.reactor.RoomManagerEvent;
-	import net.user1.reactor.UpdateLevels;
-	
 	import org.puremvc.as3.multicore.interfaces.INotification;
 
     /**
@@ -93,23 +88,39 @@ package com.collab.echo.view.mediators
 		 */		
 		protected function createRooms():void
 		{
-			// rooms
-			var res:Vector.<BaseRoom> = new Vector.<BaseRoom>();
+			var newRooms:Vector.<BaseRoom> = new Vector.<BaseRoom>();
 			var room:BaseRoom;
 			var item:RoomVO;
 
 			for each ( item in _rooms )
 			{
+				// create new room and listen for events
 				room = new item.type( item.id );
 				room.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
 				room.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
-				res.push( room );
+				room.addEventListener( BaseRoomEvent.OCCUPANT_COUNT, numClients );
+				room.addEventListener( BaseRoomEvent.JOIN_RESULT, joinedRoom );
+				room.addEventListener( BaseRoomEvent.ATTRIBUTE_UPDATE, attributeUpdate );
+				newRooms.push( room );
 			}
 			
 			if ( presence )
 			{
-				presence.rooms = res;
+				presence.rooms = newRooms;
 			}
+		}
+		
+		/**
+		 * Create connection.
+		 */		
+		override public function onRegister():void
+		{
+			super.onRegister();
+			
+			// connect
+			presence.createConnection( config.config.presenceHost,
+									   config.config.presencePort,
+									   config.config.logging );
 		}
 		
         /**
@@ -126,12 +137,7 @@ package com.collab.echo.view.mediators
 						PresenceProxy.CONNECTING,
 						PresenceProxy.CONNECTION_SUCCESS,
 						PresenceProxy.CONNECTION_CLOSED,
-						PresenceProxy.DISCONNECTING,
-						PresenceProxy.ROOM_ADDED,
-						PresenceProxy.ROOM_REMOVED,
-						PresenceProxy.ROOM_JOINED,
-						PresenceProxy.ROOM_ATTRIBUTE_UPDATE,
-						PresenceProxy.ROOM_CLIENT_COUNT
+						PresenceProxy.DISCONNECTING
 					];
         }
 		
@@ -147,9 +153,7 @@ package com.collab.echo.view.mediators
         override public function handleNotification( note:INotification ):void 
         {
         	var name:String = note.getName();
-			var managerEvent:RoomManagerEvent;
-			var roomEvent:RoomEvent;
-			var attributeEvent:AttributeEvent;
+			var baseRoomEvent:BaseRoomEvent;
 			
 			switch ( name )
 			{
@@ -164,42 +168,6 @@ package com.collab.echo.view.mediators
 				case PresenceProxy.CONNECTION_CLOSED:
 					// TODO
 					break;
-				
-				case PresenceProxy.ROOM_ADDED:
-					managerEvent = RoomManagerEvent( note.getBody() );
-					
-					// Ask to be notified when the new room's client-count changes. Once the
-					// room is observed, if other clients join the room, this client will
-					// be notified. UpdateLevel values specify how much information this
-					// client should be told about the room. This is a lobby, so we want
-					// the room's occupant count only.
-					var updateLevels:UpdateLevels = new UpdateLevels();
-					updateLevels.clearAll();
-					updateLevels.occupantCount = true;
-					managerEvent.getRoom().observe( null, updateLevels );
-					
-					// XXX
-					// Register to be notified any time the new room's client count changes.
-					//managerEvent.getRoom().addEventListener( RoomEvent.OCCUPANT_COUNT, 
-					// roomClientCountListener );
-					break;
-
-				case PresenceProxy.ROOM_REMOVED:
-					managerEvent = RoomManagerEvent( note.getBody() );
-					break;
-				
-				case PresenceProxy.ROOM_JOINED:
-					roomEvent = RoomEvent( note.getBody() );
-					break;
-				
-				case PresenceProxy.ROOM_ATTRIBUTE_UPDATE:
-					attributeEvent = AttributeEvent( note.getBody() );
-					attributeUpdate( attributeEvent );
-					break;
-				
-				case PresenceProxy.ROOM_CLIENT_COUNT:
-					roomEvent = RoomEvent( note.getBody() );
-					break;
 			}
         }
 
@@ -208,24 +176,16 @@ package com.collab.echo.view.mediators
 		// ====================================
 		
 		/**
-		 * The number of clients in one of the rooms changed, so update 
-		 * the on-screen room list to show the new client count.
-		 * 
-		 * @param event
-		 */		
-		protected function clientCount( event:RoomEvent ):void
-		{
-			trace( "Users connected: " + event.getNumClients() );
-		}
-		
-		/**
 		 * Dispatched when the number of occupants in a room changes while the
 		 * current client is in or observing the room.
 		 * 
 		 * @param event
 		 */		
-		protected function numClients( event:RoomEvent ):void
+		protected function numClients( event:BaseRoomEvent ):void
 		{
+			event.preventDefault();
+			
+			sendNotification( PresenceProxy.ROOM_CLIENT_COUNT, event );
 		}
 		
 		/**
@@ -233,6 +193,9 @@ package com.collab.echo.view.mediators
 		 */		
 		protected function addOccupant( event:BaseRoomEvent ):void
 		{
+			event.preventDefault();
+			
+			sendNotification( PresenceProxy.ROOM_CLIENT_ADD, event );
 		}
 		
 		/**
@@ -242,6 +205,9 @@ package com.collab.echo.view.mediators
 		 */		
 		protected function removeOccupant( event:BaseRoomEvent ):void
 		{
+			event.preventDefault();
+			
+			sendNotification( PresenceProxy.ROOM_CLIENT_REMOVE, event );
 		}
 		
 		/**
@@ -249,8 +215,11 @@ package com.collab.echo.view.mediators
 		 *  
 		 * @param event
 		 */		
-		protected function joinedRoom( event:RoomEvent ):void
+		protected function joinedRoom( event:BaseRoomEvent ):void
 		{
+			event.preventDefault();
+			
+			sendNotification( PresenceProxy.ROOM_JOINED, event );
 		}
 		
 		/**
@@ -258,8 +227,9 @@ package com.collab.echo.view.mediators
 		 *  
 		 * @param event
 		 */		
-		protected function attributeUpdate( event:AttributeEvent ):void
+		protected function attributeUpdate( event:BaseRoomEvent ):void
 		{
+			// override in subclass
 		}
 		
         /**

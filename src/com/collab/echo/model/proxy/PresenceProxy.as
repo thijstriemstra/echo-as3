@@ -27,7 +27,7 @@ package com.collab.echo.model.proxy
     /**
      * A base <code>Proxy</code> for user presence.
 	 * 
-	 * <p>Should not rely on any third-party framework like Union.</p>
+	 * <p>Note: should not de dependent on any third-party frameworks like Union.</p>
 	 * 
 	 * @author Thijs Triemstra
      */
@@ -47,11 +47,14 @@ package com.collab.echo.model.proxy
 		public static const CONNECTION_SUCCESS		: String = NAME + "_connectionSuccess";
 		public static const CONNECTION_CLOSED		: String = NAME + "_connectionClosed";
 		public static const DISCONNECTING			: String = NAME + "_disconnecting";
-		public static const ROOM_JOINED				: String = NAME + "_roomJoined";
 		public static const ROOM_ADDED				: String = NAME + "_roomAdded";
 		public static const ROOM_REMOVED			: String = NAME + "_roomRemoved";
+		public static const ROOM_COUNT				: String = NAME + "_roomCount";
+		public static const ROOM_JOINED				: String = NAME + "_roomJoined";
 		public static const ROOM_ATTRIBUTE_UPDATE	: String = NAME + "_roomAttributeUpdate";
 		public static const ROOM_CLIENT_COUNT		: String = NAME + "_roomClientCount";
+		public static const ROOM_CLIENT_ADD			: String = NAME + "_roomClientAdd";
+		public static const ROOM_CLIENT_REMOVE		: String = NAME + "_roomClientRemove";
 		
 		// ====================================
 		// PROTECTED VARS
@@ -163,14 +166,8 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
-		 * @param data
-		 */		
-		protected function roomJoined( data:* ):void
-		{
-			sendNotification( ROOM_JOINED, data );
-		}
-		
-		/**
+		 * Triggered when a new room is added.
+		 * 
 		 * @param data
 		 */		
 		protected function roomAdded( data:* ):void
@@ -179,6 +176,8 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Triggered when a room has been removed.
+		 * 
 		 * @param data
 		 */		
 		protected function roomRemoved( data:* ):void
@@ -187,19 +186,13 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Triggered when the total number of rooms has changed.
+		 * 
 		 * @param data
 		 */		
-		protected function roomAttributeUpdate( data:* ):void
+		protected function roomCount( data:* ):void
 		{
-			sendNotification( ROOM_ATTRIBUTE_UPDATE, data );
-		}
-		
-		/**
-		 * @param data
-		 */		
-		protected function roomClientCount( data:* ):void
-		{
-			sendNotification( ROOM_CLIENT_COUNT, data );
+			sendNotification( ROOM_COUNT, data );
 		}
 		
 	}

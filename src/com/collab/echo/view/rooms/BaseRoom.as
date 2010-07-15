@@ -137,8 +137,6 @@ package com.collab.echo.view.rooms
 		
 		/**
 		 * Join the <code>Room</code>.
-		 *  
-		 * Note: called *after* <code>addOccupant</code>. 
 		 * 
 		 * @param event
 		 */		
@@ -149,6 +147,8 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * The amount of occupants in the <code>Room</code> changed.
+		 * 
 		 * @param event
 		 */		
 		protected function occupantCount( event:*=null ):void
@@ -158,6 +158,8 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * A new occupant was added to the <code>Room</code>.
+		 * 
 		 * @param event
 		 */		
 		protected function addOccupant( event:*=null ):void
@@ -167,6 +169,8 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * An existing occupant was removed from the <code>Room</code>.
+		 * 
 		 * @param event
 		 */		
 		protected function removeOccupant( event:*=null ):void
@@ -176,6 +180,8 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * A room attribute was changed.
+		 * 
 		 * @param event
 		 */		
 		protected function attributeUpdate( event:*=null ):void

@@ -19,12 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
 	import net.user1.logger.Logger;
-	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.ConnectionManager;
 	import net.user1.reactor.HTTPConnection;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
-	import net.user1.reactor.RoomEvent;
 	import net.user1.reactor.RoomManagerEvent;
 	import net.user1.reactor.XMLSocketConnection;
 	
@@ -33,6 +31,9 @@ package com.collab.echo.model.proxy
 	/**
 	 * Presence <code>Proxy</code> for the Union platform.
 	 * 
+	 * <p><Manages connection and rooms. Users are managed in <code>BaseRoom</code>s.</p>
+	 * 
+	 * @see com.collab.echo.view.rooms.BaseRoom BaseRoom
 	 * @author Thijs Triemstra
 	 */	
 	public class UnionProxy extends PresenceProxy
@@ -95,11 +96,13 @@ package com.collab.echo.model.proxy
 			
 			log( "Connecting to Union server on " + url + ":" + port );
 			
+			// create reactor
 			reactor = new Reactor( "", logging );
 			reactor.getLog().setLevel( logLevel );
 			reactor.addEventListener( ReactorEvent.READY, unionConnectionReady );
 			reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
 			
+			// add fallover connections
 			connectionManager = reactor.getConnectionManager();
 			connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
 			connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
@@ -118,6 +121,7 @@ package com.collab.echo.model.proxy
 		 */		
 		protected function watchForRooms( roomQualifier:String ):void
 		{
+			// watch for rooms.
 			reactor.getRoomManager().watchForRooms( roomQualifier );
 
 			// in response to this watchForRooms() call, the RoomManager will trigger 
@@ -126,6 +130,8 @@ package com.collab.echo.model.proxy
 													   roomAddedListener );
 			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_REMOVED,
 													   roomRemovedListener );
+			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_COUNT,
+													   roomCountListener );
 		}
 		
 		/**
@@ -166,7 +172,7 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Event listener triggered when a room is added to the 
-		      * room manager's room list.
+         * room manager's room list.
 		 *	 
 		 * @param event
 		 */		
@@ -179,7 +185,7 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Event listener triggered when a room is removed from the 
-		      * room manager's room list.
+         * room manager's room list.
 		 * 
 		 * @param event
 		 */		
@@ -191,28 +197,15 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
-		 * Triggered when one of the room's attributes changes.
-		 *  
-		 * @param event
-		 */		
-		protected function roomAttributeUpdateListener( event:AttributeEvent ):void
-		{
-			event.preventDefault();
-			
-			roomAttributeUpdate( event );
-		}
-
-		/**
-		 * The number of clients in one of the rooms changed, so update 
-	     * the on-screen room list to show the new client count.
+		 * Event listener triggered when the number of rooms has changed.
 		 * 
 		 * @param event
 		 */		
-		protected function roomClientCountListener( event:RoomEvent ):void
+		protected function roomCountListener( event:RoomManagerEvent ):void
 		{
 			event.preventDefault();
 			
-			roomClientCount( event );
+			roomCount( event );
 		}
 
 	}

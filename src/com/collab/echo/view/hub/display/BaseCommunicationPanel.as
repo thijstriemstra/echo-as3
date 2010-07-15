@@ -74,7 +74,6 @@ package com.collab.echo.view.hub.display
 		internal var _translator				: Translator;
 		internal var _videoPane					: VideoScrollPane;
 		internal var _expandButton				: BaseExpandButton;
-		
 		internal var _skin						: Object;
 		internal var _paddingLeft				: int;
 		internal var _data						: Vector.<UserVO>;
@@ -106,22 +105,6 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Users data.
-		 * 
-		 * @param val
-		 */		
-		public function set data( val:Vector.<UserVO> ):void
-		{
-			_data = val;
-			
-			if ( _videoPane )
-			{
-				// update/reset components
-				_videoPane.data = _data;
-			}
-		}
-		
-		/**
 		 * Constructor.
 		 *  
 		 * @param width
@@ -149,7 +132,7 @@ package com.collab.echo.view.hub.display
 		}
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 		
 		/**
@@ -373,6 +356,129 @@ package com.collab.echo.view.hub.display
 			chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition; 
 			*/
 		}
+		
+		/**
+		 * Total clients in room updated.
+		 * 
+		 * @param totalClients
+		 */		
+		public function numClients( totalClients:int ):void
+		{
+			trace("BaseCommunicationPanel.numClients: " + totalClients );
+		}
+		
+		/**
+		 * Joined the room.
+		 * 
+		 * @param data
+		 */		
+		public function joinedRoom( data:* ):void
+		{
+			trace("BaseCommunicationPanel.joinedRoom: " + data );
+			
+			// chatRoom
+			//var roomsControl:MovieClip = client.getTargetMC().chat.menu_accordion.preferences_mc;
+			
+			// client vars
+			var clientVars:Array = ["username", "location", "website", "email", "age"];
+			var clientID:String = data.getClientID();
+			
+			// set clientVars
+			for (var p:int=0; p<clientVars.length; p++)
+			{
+				var clientVar:String = clientVars[p];
+				
+				/*
+				// SO already contains the var
+				if (user_SO.data[clientVar] != null)
+				{
+				client.setClientAttribute(clientVar, 
+				user_SO.data[clientVar], 
+				null, 
+				true, 
+				false, 
+				false);
+				roomsControl[clientVar+"_txt"].text = user_SO.data[clientVar];
+				}
+				else
+				{
+				// SO does not contain a name
+				if (clientVar == "username")
+				{
+				roomsControl[clientVar+"_txt"].text = "user"+clientID;
+				
+				}
+				else
+				{
+				roomsControl[clientVar+"_txt"].text = "...";
+				}
+				}
+				*/
+			}
+			
+			/* Set user rank
+			client.setClientAttribute("rank", 
+			_root.userMode, 
+			null, true,  false, false);
+			
+			// Increment personal visitor counter
+			if (user_SO.data.counter != null)
+			{
+			user_SO.data.counter = user_SO.data.counter+1;
+			}
+			else
+			{
+			user_SO.data.counter = 0;
+			}
+			
+			// set countryFlag on users
+			if (user_SO.data.countryCode == null) {	
+			//Set countryFlag
+			client.setClientAttribute("countryFlag", 
+			user_SO.data.countryCode, 
+			null, 
+			true, 
+			false, 
+			false);
+			} else {
+			
+			}
+			//trace("visitor counter: " + user_SO.data.counter);
+			
+			// set scroll content
+			client.getTargetMC().chat.video_mcs.contentPath = "eenVideo";
+			client.getTargetMC().chat.video_mcs.content.screen.details_comp.contentPath = "videoDetails";
+			
+			// create array for videoPanels
+			var thePanel:MovieClip = client.getTargetMC().chat.video_mcs.content;
+			thePanel.panels = new Array();
+			
+			var coloredName:String = roomsControl.username_txt.text;
+			
+			// Notify room of arrival.
+			if (_root.userMode == "admin")
+			{
+			coloredName = "<font color = '#1D5EAB'>"+ roomsControl.username_txt.text +"</font>";
+			
+			}
+			else if (_root.userMode == "moderator")
+			{
+			coloredName = "<font color = '#1892AF'>"+ roomsControl.username_txt.text +"</font>";
+			}
+			
+			// Send the message to the server.
+			var safeMsg:String = '<![CDATA[' + ("<b>"+ coloredName +" has joined. </b>") + ']]>';
+			client.invokeOnRoom("joinMessage", AppSettings.fnsid, false, safeMsg);
+			//client.invokeOnNamespace("joinMessage", "collab", false, safeMsg);
+			
+			// Connect to flashcom
+			client.getTargetMC().connectFCS(roomsControl.username_txt.text);
+			*/
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		/**
 		 * Instantiate and add child(ren) to display list.

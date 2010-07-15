@@ -33,7 +33,7 @@ package com.collab.echo.view.rooms
 		// ====================================
 		
 		internal var _id		: String;
-		internal var _reactor	: *;
+		internal var _engine	: *;
 		internal var _autoJoin	: Boolean;
 		internal var _evt		: BaseRoomEvent;
 		
@@ -52,13 +52,13 @@ package com.collab.echo.view.rooms
 			return _id;
 		}
 		
-		public function get reactor():*
+		public function get engine():*
 		{
-			return _reactor;
+			return _engine;
 		}
-		public function set reactor( val:* ):void
+		public function set engine( val:* ):void
 		{
-			_reactor = val;
+			_engine = val;
 		}
 		
 		public function get autoJoin():Boolean
@@ -89,11 +89,12 @@ package com.collab.echo.view.rooms
 		/**
 		 * Create a new <code>Room</code>.
 		 * 
-		 * @param reactor
+		 * @param engine
 		 * @return 
 		 */		
-		public function create( reactor:* ):void
+		public function create( engine:* ):void
 		{
+			this.engine = engine;
 		}
 		
 		/**
@@ -132,6 +133,8 @@ package com.collab.echo.view.rooms
 		 */		
 		protected function occupantCount( event:*=null ):void
 		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.OCCUPANT_COUNT, event );
+			dispatchEvent( _evt );
 		}
 		
 		/**

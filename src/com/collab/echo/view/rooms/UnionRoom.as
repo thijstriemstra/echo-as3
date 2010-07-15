@@ -90,19 +90,19 @@ package com.collab.echo.view.rooms
 		/**
 		 * Create a new <code>Room</code>.
 		 * 
-		 * @param reactor
+		 * @param engine
 		 * @return 
 		 */		
-		override public function create( reactor:* ):void
+		override public function create( engine:* ):void
 		{
-			this.reactor = reactor;
+			super.create( engine );
 			
-			room = reactor.getRoomManager().createRoom( id, settings, null, modules );
-			room.addEventListener( RoomEvent.JOIN_RESULT, joinResult );
-			room.addEventListener( RoomEvent.OCCUPANT_COUNT, occupantCount );
-			room.addEventListener( RoomEvent.ADD_OCCUPANT, addOccupant );
-			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, removeOccupant );
-			room.addEventListener( AttributeEvent.UPDATE, attributeUpdate );
+			room = engine.getRoomManager().createRoom( id, settings, null, modules );
+			room.addEventListener( RoomEvent.JOIN_RESULT,		 joinResult );
+			room.addEventListener( RoomEvent.OCCUPANT_COUNT,	 occupantCount );
+			room.addEventListener( RoomEvent.ADD_OCCUPANT, 		 addOccupant );
+			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, 	 removeOccupant );
+			room.addEventListener( AttributeEvent.UPDATE, 		 attributeUpdate );
 			
 			log( "Creating new " + name + " called: " + id );
 			

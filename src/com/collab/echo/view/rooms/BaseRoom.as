@@ -18,12 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.rooms
 {
+	import com.collab.echo.view.events.BaseRoomEvent;
+	
+	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class BaseRoom
+	public class BaseRoom extends EventDispatcher
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -32,8 +35,17 @@ package com.collab.echo.view.rooms
 		internal var _id		: String;
 		internal var _reactor	: *;
 		internal var _autoJoin	: Boolean;
+		internal var _evt		: BaseRoomEvent;
+		
+		// ====================================
+		// PROTECTED VARS
+		// ====================================
 		
 		protected var name		: String;
+		
+		// ====================================
+		// ACCESSOR/MUTATOR
+		// ====================================
 		
 		public function get id():String
 		{
@@ -62,6 +74,8 @@ package com.collab.echo.view.rooms
 		 */		
 		public function BaseRoom( id:String, autoJoin:Boolean=false )
 		{
+			super();
+			
 			_id = id;
 			_autoJoin = autoJoin;
 			
@@ -101,12 +115,16 @@ package com.collab.echo.view.rooms
 		// ====================================
 		
 		/**
-		 * Join the <code>Room</code>. 
+		 * Join the <code>Room</code>.
+		 *  
+		 * Note: called *after* <code>addOccupant</code>. 
 		 * 
 		 * @param event
 		 */		
 		protected function joinResult( event:*=null ):void
 		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.JOIN_RESULT, event );
+			dispatchEvent( _evt );
 		}
 		
 		/**
@@ -121,6 +139,8 @@ package com.collab.echo.view.rooms
 		 */		
 		protected function addOccupant( event:*=null ):void
 		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.ADD_OCCUPANT, event );
+			dispatchEvent( _evt );
 		}
 		
 		/**
@@ -128,6 +148,17 @@ package com.collab.echo.view.rooms
 		 */		
 		protected function removeOccupant( event:*=null ):void
 		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.REMOVE_OCCUPANT, event );
+			dispatchEvent( _evt );
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function attributeUpdate( event:*=null ):void
+		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.ATTRIBUTE_UPDATE, event );
+			dispatchEvent( _evt );
 		}
 		
 	}

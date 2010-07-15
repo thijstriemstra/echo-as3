@@ -20,6 +20,7 @@ package com.collab.echo.view.mediators
 {
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.RoomVO;
+	import com.collab.echo.view.events.BaseRoomEvent;
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
@@ -95,6 +96,8 @@ package com.collab.echo.view.mediators
 			for each ( item in _rooms )
 			{
 				room = new item.type( item.id );
+				room.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
+				room.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
 				res.push( room );
 			}
 			
@@ -160,9 +163,6 @@ package com.collab.echo.view.mediators
 				case PresenceProxy.ROOM_ADDED:
 					managerEvent = RoomManagerEvent( note.getBody() );
 					
-					// There's a new room, so update the on-screen room list.
-					updateRoomList();
-					
 					// Ask to be notified when the new room's client-count changes. Once the
 					// room is observed, if other clients join the room, this client will
 					// be notified. UpdateLevel values specify how much information this
@@ -181,7 +181,6 @@ package com.collab.echo.view.mediators
 
 				case PresenceProxy.ROOM_REMOVED:
 					managerEvent = RoomManagerEvent( note.getBody() );
-					updateRoomList();
 					break;
 				
 				case PresenceProxy.ROOM_JOINED:
@@ -195,8 +194,6 @@ package com.collab.echo.view.mediators
 				
 				case PresenceProxy.ROOM_CLIENT_COUNT:
 					roomEvent = RoomEvent( note.getBody() );
-					
-					updateRoomList();
 					break;
 			}
         }
@@ -227,11 +224,18 @@ package com.collab.echo.view.mediators
 		}
 		
 		/**
-		 * Create remote clients.
+		 * @param event
+		 */		
+		protected function addOccupant( event:BaseRoomEvent ):void
+		{
+		}
+		
+		/**
+		 * Remove clients.
 		 *  
 		 * @param event
 		 */		
-		protected function addClient( event:RoomEvent ):void
+		protected function removeOccupant( event:BaseRoomEvent ):void
 		{
 		}
 		
@@ -245,31 +249,11 @@ package com.collab.echo.view.mediators
 		}
 		
 		/**
-		 * Remove remote clients.
-		 *  
-		 * @param event
-		 */		
-		protected function removeClient( event:RoomEvent ):void
-		{
-		}
-		
-		/**
 		 * Triggered when one of the room's attributes changes.
 		 *  
 		 * @param event
 		 */		
 		protected function attributeUpdateListener( event:AttributeEvent ):void
-		{
-		}
-		
-		// ====================================
-		// INTERNAL METHODS
-		// ====================================
-		
-		/**
-		 * Display the list of rooms in a text field. 
-		 */		
-		internal function updateRoomList():void
 		{
 		}
 		

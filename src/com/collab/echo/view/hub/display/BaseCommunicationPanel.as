@@ -106,7 +106,7 @@ package com.collab.echo.view.hub.display
 			
 			if ( _videoPane )
 			{
-				// update components
+				// update/reset components
 				_videoPane.data = _data;
 			}
 		}
@@ -141,6 +141,20 @@ package com.collab.echo.view.hub.display
 		// ====================================
 		// PUBLIC/PROTECTED METHODS
 		// ====================================
+		
+		public function addOccupant( client:* ):void
+		{
+			trace( 'BaseCommunicationPanel.addOccupant: ' + client );
+			
+			// XXX: _videoPane (and others) need a addOccupant method
+		}
+		
+		public function removeOccupant( client:* ):void
+		{
+			trace( 'BaseCommunicationPanel.removeOccupant: ' + client );
+			
+			// XXX: _videoPane (and others) need a removeOccupant method
+		}
 		
 		/**
 		 * Instantiate and add child(ren) to display list.

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.rooms
 {
+	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
 	import net.user1.reactor.RoomModules;
@@ -79,6 +80,40 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * Leave the room.
+		 */		
+		override public function leave():void
+		{
+			room.leave();
+		}
+		
+		/**
+		 * Create a new <code>Room</code>.
+		 * 
+		 * @param reactor
+		 * @return 
+		 */		
+		override public function create( reactor:* ):void
+		{
+			this.reactor = reactor;
+			
+			room = reactor.getRoomManager().createRoom( id, settings, null, modules );
+			room.addEventListener( RoomEvent.JOIN_RESULT, joinResult );
+			room.addEventListener( RoomEvent.OCCUPANT_COUNT, occupantCount );
+			room.addEventListener( RoomEvent.ADD_OCCUPANT, addOccupant );
+			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, removeOccupant );
+			room.addEventListener( AttributeEvent.UPDATE, attributeUpdate );
+			
+			log( "Creating new " + name + " called: " + id );
+			
+			if ( _autoJoin )
+			{
+				log( "Auto-joining: " + id );
+				join();
+			}
+		}
+		
+		/**
 		 * Add <code>RoomModule</code> objects.
 		 * 
 		 * @param moduleObjects
@@ -100,41 +135,6 @@ package com.collab.echo.view.rooms
 		protected function log( msg:* ):void
 		{
 			org.osflash.thunderbolt.Logger.debug( msg );
-		}
-		
-		/**
-		 * Create a new <code>Room</code>.
-		 * 
-		 * @param reactor
-		 * @return 
-		 */		
-		override public function create( reactor:* ):void
-		{
-			this.reactor = reactor;
-			
-			room = reactor.getRoomManager().createRoom( id, settings, null, modules );
-			room.addEventListener( RoomEvent.JOIN_RESULT, joinResult );
-			room.addEventListener( RoomEvent.OCCUPANT_COUNT, occupantCount );
-			room.addEventListener( RoomEvent.ADD_OCCUPANT, addOccupant );
-			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, removeOccupant );
-			
-			log( "Creating new " + name + " called: " + id );
-			
-			if ( _autoJoin )
-			{
-				log( "Auto-joining: " + id );
-				join();
-			}
-		}
-		
-		// ====================================
-		// EVENT HANDLERS
-		// ====================================
-		
-		override protected function joinResult( event:*=null ):void
-		{
-			var evt:RoomEvent = RoomEvent( event );
-			log("joinResult: " + evt );
 		}
 		
 	}

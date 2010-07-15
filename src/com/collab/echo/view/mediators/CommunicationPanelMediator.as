@@ -229,7 +229,9 @@ package com.collab.echo.view.mediators
 		 */		
 		protected function attributeUpdate( event:BaseRoomEvent ):void
 		{
-			// override in subclass
+			event.preventDefault();
+			
+			sendNotification( PresenceProxy.ROOM_ATTRIBUTE_UPDATE, event );
 		}
 		
         /**

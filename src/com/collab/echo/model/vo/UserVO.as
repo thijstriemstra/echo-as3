@@ -23,24 +23,33 @@ package com.collab.echo.model.vo
 	 */	
 	public class UserVO extends SAObject
 	{
-		public var username	: String;
-		public var location	: String;
-		public var website	: String;
-		public var email	: String;
-		public var age		: String;
+		// keys for union
+		public static const USERNAME	: String = "username";
+		public static const LOCATION	: String = "location";
+		public static const WEBSITE		: String = "website";
+		
+		public var id					: String;
+		public var username				: String;
+		public var location				: String;
+		public var website				: String;
+		public var email				: String;
+		public var age					: String;
+		public var client				: *;
 		
 		/**
 		 * Constructor.
 		 *  
+		 * @param id
 		 * @param username
 		 * @param location
 		 * @param website
 		 * @param email
 		 * @param age
 		 */		
-		public function UserVO( username:String="User1", location:String=null, website:String=null,
+		public function UserVO( id:String="1", username:String="User1", location:String=null, website:String=null,
 								email:String=null, age:String=null )
 		{
+			this.id = id;
 			this.username = username;
 			this.location = location;
 			this.website = website;
@@ -50,7 +59,7 @@ package com.collab.echo.model.vo
 		
 		public function toString():String
 		{
-			return "<UserVO name='" + username + "' location='" + location + "'/>";
+			return "<UserVO id='" + id + "' username='" + username + "' location='" + location + "'/>";
 		}
 		
 	}

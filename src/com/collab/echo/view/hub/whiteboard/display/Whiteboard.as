@@ -18,28 +18,54 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.controls.buttons.LabelButton;
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.hub.interfaces.IPresence;
 	
 	/**
 	 * A shared whiteboard.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Whiteboard extends BaseView
+	public class Whiteboard extends BaseView implements IPresence
 	{
-		internal var participants	: Array;
-		//internal var colorPicker	: Colorpicker;
-		internal var canvas			: Canvas;
-		internal var undoButton		: LabelButton;
+		// ====================================
+		// INTERNAL VARS
+		// ====================================
+		
+		internal var participants		: Array;
+		//internal var colorPicker		: Colorpicker;
+		internal var canvas				: Canvas;
+		internal var undoButton			: LabelButton;
 		
 		/**
-		 * Constructor. 
+		 * Constructor.
+		 * 
+		 * @param width
+		 * @param height
 		 */		
-		public function Whiteboard()
+		public function Whiteboard( width:int=0, height:int=0 )
 		{
-			super();
+			super( width, height );
+			show();
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
+		/**
+		 * @param client
+		 */		
+		public function addUser( client:UserVO ):void
+		{
+			trace("Whiteboard.addUser: " + client );
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		override protected function draw():void
 		{

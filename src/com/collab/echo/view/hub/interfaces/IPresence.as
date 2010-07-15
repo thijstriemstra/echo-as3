@@ -16,31 +16,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.model.vo
+package com.collab.echo.view.hub.interfaces
 {
+	import com.collab.echo.model.vo.UserVO;
+
 	/**
-	 * Room has a type and id.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class RoomVO extends SAObject
+	public interface IPresence
 	{
-		public var id		: String;
-		public var type		: Class;
-		
-		/**
-		 * Constructor.
-		 * 
-		 * @param id
-		 * @param type
-		 */		
-		public function RoomVO( id:String=null, type:Class=null )
-		{
-			super();
-			
-			this.id = id;
-			this.type = type;
-		}
-		
+		function addUser( client:UserVO ):void;
 	}
+	
 }

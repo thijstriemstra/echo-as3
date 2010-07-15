@@ -22,6 +22,7 @@ package com.collab.echo.view.hub.video
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.hub.interfaces.IPresence;
 	import com.collab.echo.view.hub.video.panels.UserPanel;
 	
 	import fl.controls.ScrollPolicy;
@@ -32,7 +33,7 @@ package com.collab.echo.view.hub.video
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class VideoScrollPane extends FlashScrollPane
+	public class VideoScrollPane extends FlashScrollPane implements IPresence
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -50,6 +51,11 @@ package com.collab.echo.view.hub.video
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * Active users.
+		 *  
+		 * @return 
+		 */		
 		public function get data():Vector.<UserVO>
 		{
 			return _users;
@@ -74,6 +80,11 @@ package com.collab.echo.view.hub.video
 			}
 		}
 		
+		/**
+		 * Skin for the <code>UserPanel</code>.
+		 *  
+		 * @return 
+		 */		
 		public function get panelSkin():Class
 		{
 			return _panelSkin;
@@ -106,6 +117,80 @@ package com.collab.echo.view.hub.video
 		// ====================================
 		
 		/**
+		 * @param client
+		 */		
+		public function addUser( client:UserVO ):void
+		{
+			trace("VideoScrollPane.addUser: " + client );
+			
+			/*
+			// init
+			newVideo.opener = userID;
+			newVideo.gotoAndStop("open");
+			
+			var totalWindows:Number = client.getTargetMC().chat.video_mcs.content.panels.length;
+			
+			newVideo._x = totalWindows*newVideo._width;
+			newVideo.screen.username = username;
+			newVideo.screen.location = location;
+			newVideo.screen.website = hyperlinked;
+			newVideo.screen.email = email;
+			newVideo.screen.age = age;
+			newVideo.screen.origPos = totalWindows;
+			newVideo.screen.curPos = totalWindows+1;
+			
+			// show rank icon
+			newVideo.screen.header_mc.gotoAndStop(rank);
+			
+			// show trivia icon
+			if (trivia == "true")
+			{
+			newVideo.screen.header_mc.trivia_icon._visible = true;
+			}
+			else
+			{
+			newVideo.screen.header_mc.trivia_icon._visible = false;
+			}
+			
+			// admin or mod
+			if (_root.userMode == "guest")
+			{
+			newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			else
+			{
+			newVideo.screen.header_mc.kick_icon._visible = true;
+			}
+			
+			if ( isSelf() )
+			{
+				// Hide the pm button 
+				newVideo.screen.header_mc.pm_mc._visible = false;
+				newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			*/
+		}
+		
+		/**
+		 * @param client
+		 */		
+		public function removeUser( client:UserVO ):void
+		{
+			/*
+			// remove videoPanel
+			for (var g:Number=0; g<allVideos.length; g++)
+			{
+			if (allVideos[g]._name == panelname)
+			{
+			removeMovieClip(allVideos[g]);
+			allVideos.splice(g,1);
+			break;
+			}
+			}
+			*/
+		}
+		
+		/**
 		 * Set the size of this <code>FlashScrollPane</code>.
 		 *  
 		 * @param arg0
@@ -113,6 +198,7 @@ package com.collab.echo.view.hub.video
 		 */		
 		override public function setSize( arg0:Number, arg1:Number ):void
 		{
+			// XXX: look into this redraw mess
 			// background
 			super.remove( _background );
 			_background = DrawingUtils.drawFill( arg0, arg1,

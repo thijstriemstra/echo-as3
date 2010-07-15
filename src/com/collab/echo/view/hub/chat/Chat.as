@@ -18,9 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat
 {
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.hub.interfaces.IPresence;
 	
 	import fl.controls.TextArea;
 	
@@ -29,7 +31,7 @@ package com.collab.echo.view.hub.chat
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class Chat extends BaseView
+	public class Chat extends BaseView implements IPresence
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -52,7 +54,30 @@ package com.collab.echo.view.hub.chat
 		}
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
+		// ====================================
+		
+		/**
+		 * @param client
+		 */		
+		public function addUser( client:UserVO ):void
+		{
+			trace("Chat.addUser: " + client );
+			
+			// show welcome message for this client
+			/*
+			if ( occupant.isSelf() )
+			{
+				trace("ME!");
+				chatMC.chat_txt.text += "<b><FONT COLOR='#000000'>" + welcomeLine + " " + username + "!</FONT></b><br>";
+				chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
+				chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
+			}
+			*/
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
 		// ====================================
 		
 		/**

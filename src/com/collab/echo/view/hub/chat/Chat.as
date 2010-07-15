@@ -76,6 +76,42 @@ package com.collab.echo.view.hub.chat
 			*/
 		}
 		
+		/**
+		 * @param client
+		 */		
+		public function removeUser( client:UserVO ):void
+		{
+			trace("Chat.removeUser: " + client );
+			
+			/*
+			// add Timestamp
+			if (timestamp)
+			{
+			var addStamp:String = _root.sc.createClientStamp();
+			}
+			else
+			{
+			var addStamp:String = "";
+			}
+			
+			// add to chat_txt : client left
+			if (rank == "admin")
+			{
+			chatMC.chat_txt.text += addStamp + " <font color = '#1D5EAB'><b>"+ username +" has left.</b></font>";
+			}
+			else if (rank == "moderator")
+			{
+			chatMC.chat_txt.text += addStamp + " <font color = '#1892AF'><b>"+ username +" has left.</b></font>";
+			}
+			else
+			{
+			chatMC.chat_txt.text += addStamp + " <b>"+ username +" has left.</b>";
+			}
+			
+			chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition; 
+			*/
+		}
+		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================

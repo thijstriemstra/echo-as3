@@ -61,6 +61,27 @@ package com.collab.echo.view.hub.whiteboard.display
 		public function addUser( client:UserVO ):void
 		{
 			trace("Whiteboard.addUser: " + client );
+			
+			/*
+			var timeLine:MovieClip = client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc;
+			var newCursor:MovieClip = timeLine.attachMovie("cursor", "cursor"+clientID, timeLine.getNextHighestDepth());
+			
+			newCursor.username = username;
+			newCursor._visible = false;
+			*/
+		}
+		
+		/**
+		 * @param client
+		 */		
+		public function removeUser( client:UserVO ):void
+		{
+			trace("Whiteboard.removeUser: " + client );
+			
+			/*
+			// remove user cursor
+			removeMovieClip(client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteboard_accordion.whiteboard_mc["cursor"+clientID]);
+			*/
 		}
 		
 		// ====================================

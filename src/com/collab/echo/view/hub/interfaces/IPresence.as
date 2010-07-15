@@ -25,7 +25,15 @@ package com.collab.echo.view.hub.interfaces
 	 */	
 	public interface IPresence
 	{
+		/**
+		 * @param client
+		 */		
 		function addUser( client:UserVO ):void;
+		
+		/**
+		 * @param client
+		 */		
+		function removeUser( client:UserVO ):void;
 	}
 	
 }

@@ -176,6 +176,8 @@ package com.collab.echo.view.hub.video
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
+			trace("VideoScrollPane.removeUser: " + client );
+			
 			/*
 			// remove videoPanel
 			for (var g:Number=0; g<allVideos.length; g++)
@@ -187,6 +189,25 @@ package com.collab.echo.view.hub.video
 			break;
 			}
 			}
+			
+			// reposition videoPanels
+			for (var f:Number=0; f<allVideos.length; f++)
+			{
+			// re-order windows
+			allVideos[f]._x = f*170;
+			
+			allVideos[f].screen.origPos = f+1;
+			allVideos[f].screen.curPos = f+1;
+			allVideos[f].screen.pos_stepper.value = f+1;
+			allVideos[f].screen.pos_stepper.maximum = allVideos.length;
+			
+			//trace(allVideos[f].windowID + ", " + f);
+			//trace("===================== ");
+			}
+			
+			// redraw component
+			client.getTargetMC().chat.video_mcs.redraw(true);
+
 			*/
 		}
 		
@@ -198,7 +219,7 @@ package com.collab.echo.view.hub.video
 		 */		
 		override public function setSize( arg0:Number, arg1:Number ):void
 		{
-			// XXX: look into this redraw mess
+			// XXX: look into this background redraw mess
 			// background
 			super.remove( _background );
 			_background = DrawingUtils.drawFill( arg0, arg1,
@@ -239,6 +260,9 @@ package com.collab.echo.view.hub.video
 			return _item;
 		}
 		
+		/**
+		 * Position all <code>UserPanel</code> instances. 
+		 */		
 		override public function layoutChildren():void
 		{
 			if ( _panels && _panels.length > 1 )
@@ -277,7 +301,7 @@ package com.collab.echo.view.hub.video
 		}
 		
 		/**
-		 * Remove all <code>UserPanel</code>s.
+		 * Remove all <code>UserPanel</code> instances.
 		 */		
 		override public function removeAll():void
 		{

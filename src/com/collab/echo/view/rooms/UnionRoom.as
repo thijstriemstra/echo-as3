@@ -20,7 +20,6 @@ package com.collab.echo.view.rooms
 {
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
-	import net.user1.reactor.RoomModuleType;
 	import net.user1.reactor.RoomModules;
 	import net.user1.reactor.RoomSettings;
 	
@@ -56,10 +55,11 @@ package com.collab.echo.view.rooms
 		 * Constructor. 
 		 * 
 		 * @param id
+		 * @param autoJoin
 		 */		
-		public function UnionRoom( id:String )
+		public function UnionRoom( id:String, autoJoin:Boolean=false )
 		{
-			super( id );
+			super( id, autoJoin );
 			
 			this.modules = new RoomModules();
 			
@@ -114,13 +114,17 @@ package com.collab.echo.view.rooms
 			
 			room = reactor.getRoomManager().createRoom( id, settings, null, modules );
 			room.addEventListener( RoomEvent.JOIN_RESULT, joinResult );
-			/*
 			room.addEventListener( RoomEvent.OCCUPANT_COUNT, occupantCount );
 			room.addEventListener( RoomEvent.ADD_OCCUPANT, addOccupant );
 			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, removeOccupant );
-			*/
 			
-			log( "Creating new UnionRoom: " + id );
+			log( "Creating new " + name + " called: " + id );
+			
+			if ( _autoJoin )
+			{
+				log( "Auto-joining: " + id );
+				join();
+			}
 		}
 		
 		// ====================================
@@ -129,7 +133,8 @@ package com.collab.echo.view.rooms
 		
 		override protected function joinResult( event:*=null ):void
 		{
-			log("joinResult: " + event );
+			var evt:RoomEvent = RoomEvent( event );
+			log("joinResult: " + evt );
 		}
 		
 	}

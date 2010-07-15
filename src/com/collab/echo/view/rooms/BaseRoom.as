@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.rooms
 {
+	import flash.utils.getQualifiedClassName;
+
 	/**
 	 * @author Thijs Triemstra
 	 */	
@@ -29,6 +31,9 @@ package com.collab.echo.view.rooms
 		
 		internal var _id		: String;
 		internal var _reactor	: *;
+		internal var _autoJoin	: Boolean;
+		
+		protected var name		: String;
 		
 		public function get id():String
 		{
@@ -44,15 +49,28 @@ package com.collab.echo.view.rooms
 			_reactor = val;
 		}
 		
+		public function get autoJoin():Boolean
+		{
+			return _autoJoin;
+		}
+		
 		/**
 		 * Constructor.
 		 *  
 		 * @param id
+		 * @param autoJoin
 		 */		
-		public function BaseRoom( id:String )
+		public function BaseRoom( id:String, autoJoin:Boolean=false )
 		{
 			_id = id;
+			_autoJoin = autoJoin;
+			
+			name =  getQualifiedClassName( this ).split("::")[1]
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		/**
 		 * Create a new <code>Room</code>.
@@ -78,12 +96,37 @@ package com.collab.echo.view.rooms
 		{
 		}
 		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
 		/**
 		 * Join the <code>Room</code>. 
 		 * 
 		 * @param event
 		 */		
 		protected function joinResult( event:*=null ):void
+		{
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function occupantCount( event:*=null ):void
+		{
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function addOccupant( event:*=null ):void
+		{
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function removeOccupant( event:*=null ):void
 		{
 		}
 		

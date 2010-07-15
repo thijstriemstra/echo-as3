@@ -47,6 +47,9 @@ package com.collab.echo.view.containers.scrollpane
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get children():Array
 		{
 			return _children;
@@ -92,7 +95,7 @@ package com.collab.echo.view.containers.scrollpane
 		}
 		
 		/**
-		 * Add specified child.
+		 * Add specified <code>child</code>.
 		 * 
 		 * @param child
 		 * @return 
@@ -110,7 +113,7 @@ package com.collab.echo.view.containers.scrollpane
 		}
 		
 		/**
-		 * Remove specified child.
+		 * Remove specified <code>child</code>.
 		 * 
 		 * @param child
 		 */		
@@ -134,7 +137,7 @@ package com.collab.echo.view.containers.scrollpane
 		}
 		
 		/**
-		 * Remove child at specified index.
+		 * Remove child at specified <code>index</code>.
 		 * 
 		 * @param index
 		 * @return 
@@ -184,20 +187,29 @@ package com.collab.echo.view.containers.scrollpane
 		// EVENT HANDLERS
 		// ====================================
 		
+		/**
+		 * @param event
+		 */		
 		protected function onLoadComplete( event:Event ):void
 		{
-			Logger.debug( "Load complete" );
+			Logger.debug( "ScrollPane Load complete" );
 		}
 		
+		/**
+		 * @param event
+		 */		
 		protected function onScroll( event:ScrollEvent ):void
 		{
 			switch ( event.direction )
 			{
 				case ScrollBarDirection.HORIZONTAL:
-					Logger.debug("horizontal scroll: " +  event.position + " of " + event.currentTarget.maxHorizontalScrollPosition);
+					Logger.debug( "horizontal scroll: " +  event.position + " of " +
+								  event.currentTarget.maxHorizontalScrollPosition);
 					break;
+				
 				case ScrollBarDirection.VERTICAL:
-					Logger.debug("vertical scroll: " + event.position + " of " + event.currentTarget.maxVerticalScrollPosition);
+					Logger.debug( "vertical scroll: " + event.position + " of " +
+								  event.currentTarget.maxVerticalScrollPosition);
 					break;
 			}
 		}

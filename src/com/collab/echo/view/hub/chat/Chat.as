@@ -27,6 +27,7 @@ package com.collab.echo.view.hub.chat
 	import fl.controls.TextArea;
 	
 	import flash.display.Sprite;
+	import flash.system.Capabilities;
 	
 	/**
 	 * @author Thijs Triemstra
@@ -69,7 +70,7 @@ package com.collab.echo.view.hub.chat
 			if ( occupant.isSelf() )
 			{
 				trace("ME!");
-				chatMC.chat_txt.text += "<b><FONT COLOR='#000000'>" + welcomeLine + " " + username + "!</FONT></b><br>";
+				chatMC.chat_txt.text += "<b><FONT COLOR='#000000'>" + getWelcomeLine() + " " + username + "!</FONT></b><br>";
 				chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
 				chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
 			}
@@ -85,27 +86,29 @@ package com.collab.echo.view.hub.chat
 			
 			/*
 			// add Timestamp
+			var timestamp:Boolean = client.getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
+			
 			if (timestamp)
 			{
-			var addStamp:String = _root.sc.createClientStamp();
+				var addStamp:String = _root.sc.createClientStamp();
 			}
 			else
 			{
-			var addStamp:String = "";
+				var addStamp:String = "";
 			}
 			
 			// add to chat_txt : client left
 			if (rank == "admin")
 			{
-			chatMC.chat_txt.text += addStamp + " <font color = '#1D5EAB'><b>"+ username +" has left.</b></font>";
+				chatMC.chat_txt.text += addStamp + " <font color = '#1D5EAB'><b>"+ username +" has left.</b></font>";
 			}
 			else if (rank == "moderator")
 			{
-			chatMC.chat_txt.text += addStamp + " <font color = '#1892AF'><b>"+ username +" has left.</b></font>";
+				chatMC.chat_txt.text += addStamp + " <font color = '#1892AF'><b>"+ username +" has left.</b></font>";
 			}
 			else
 			{
-			chatMC.chat_txt.text += addStamp + " <b>"+ username +" has left.</b>";
+				chatMC.chat_txt.text += addStamp + " <b>"+ username +" has left.</b>";
 			}
 			
 			chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition; 
@@ -135,6 +138,7 @@ package com.collab.echo.view.hub.chat
 			_textArea.setSize( viewWidth, viewHeight - _inputField.height ); 
 			_textArea.condenseWhite = true; 
 			_textArea.editable = false;
+			// XXX: dynamic
 			_textArea.htmlText = "<b>Welcome!</b>";
 			addChild( _textArea );
 		}
@@ -167,6 +171,45 @@ package com.collab.echo.view.hub.chat
 			removeChildFromDisplayList( _textArea );
 			
 			super.invalidate();
+		}
+		
+		/**
+		 * Create a welcome message depending on the nationality.
+		 * 
+		 * @return
+		 */
+		protected function getWelcomeLine():String
+		{
+			var welcome:String = "Welcome";
+			
+			switch ( Capabilities.language )
+			{
+				case "fr":
+					welcome = "Bienvenue";
+					break;
+				
+				case "de":
+					welcome = "Willkommen";
+					break;
+				
+				case "nl":
+					welcome = "Welkom";
+					break;
+				
+				case "it":
+					welcome = "Benvenuto";
+					break;
+				
+				case "pt":
+					welcome = "Boa vinda";
+					break;
+				
+				case "es":
+					welcome = "Recepción";
+					break;
+			}
+			
+			return welcome;
 		}
 		
 	}

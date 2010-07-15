@@ -42,43 +42,13 @@ package com.collab.echo.view.hub.video
 		internal var _panels			: Vector.<UserPanel>;
 		internal var _background		: Sprite;
 		internal var _item				: UserPanel;
-		internal var _user				: UserVO;
 		internal var _index				: int;
-		internal var _users				: Vector.<UserVO>;
 		internal var _panelSkin			: Class;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
-		/**
-		 * Active users.
-		 *  
-		 * @return 
-		 */		
-		public function get data():Vector.<UserVO>
-		{
-			return _users;
-		}
-		public function set data( val:Vector.<UserVO> ):void
-		{
-			if ( val && val.length > 0 )
-			{
-				// remove old panels
-				removeAll();
-				
-				// add new panels
-				_users = val;
-				for each ( _user in _users )
-				{
-					// panel
-					_item = new _panelSkin();
-					_item.data = _user;
-					_item.setSize( UserPanel.WIDTH, height );
-					add( _item );
-				}
-			}
-		}
 		
 		/**
 		 * Skin for the <code>UserPanel</code>.
@@ -117,98 +87,39 @@ package com.collab.echo.view.hub.video
 		// ====================================
 		
 		/**
+		 * Add new user.
+		 * 
 		 * @param client
 		 */		
 		public function addUser( client:UserVO ):void
 		{
 			trace("VideoScrollPane.addUser: " + client );
 			
-			/*
-			// init
-			newVideo.opener = userID;
-			newVideo.gotoAndStop("open");
-			
-			var totalWindows:Number = client.getTargetMC().chat.video_mcs.content.panels.length;
-			
-			newVideo._x = totalWindows*newVideo._width;
-			newVideo.screen.username = username;
-			newVideo.screen.location = location;
-			newVideo.screen.website = hyperlinked;
-			newVideo.screen.email = email;
-			newVideo.screen.age = age;
-			newVideo.screen.origPos = totalWindows;
-			newVideo.screen.curPos = totalWindows+1;
-			
-			// show rank icon
-			newVideo.screen.header_mc.gotoAndStop(rank);
-			
-			// show trivia icon
-			if (trivia == "true")
-			{
-			newVideo.screen.header_mc.trivia_icon._visible = true;
-			}
-			else
-			{
-			newVideo.screen.header_mc.trivia_icon._visible = false;
-			}
-			
-			// admin or mod
-			if (_root.userMode == "guest")
-			{
-			newVideo.screen.header_mc.kick_icon._visible = false;
-			}
-			else
-			{
-			newVideo.screen.header_mc.kick_icon._visible = true;
-			}
-			
-			if ( isSelf() )
-			{
-				// Hide the pm button 
-				newVideo.screen.header_mc.pm_mc._visible = false;
-				newVideo.screen.header_mc.kick_icon._visible = false;
-			}
-			*/
+			// panel
+			_item = new _panelSkin();
+			_item.data = client;
+			_item.setSize( UserPanel.WIDTH, height );
+			add( _item );
 		}
 		
 		/**
+		 * Remove existing user.
+		 * 
 		 * @param client
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
 			trace("VideoScrollPane.removeUser: " + client );
 			
-			/*
-			// remove videoPanel
-			for (var g:Number=0; g<allVideos.length; g++)
+			// remove by id
+			for each ( _item in _panels )
 			{
-			if (allVideos[g]._name == panelname)
-			{
-			removeMovieClip(allVideos[g]);
-			allVideos.splice(g,1);
-			break;
+				if ( _item.data.id == client.id )
+				{
+					remove( _item );
+					break;
+				}
 			}
-			}
-			
-			// reposition videoPanels
-			for (var f:Number=0; f<allVideos.length; f++)
-			{
-			// re-order windows
-			allVideos[f]._x = f*170;
-			
-			allVideos[f].screen.origPos = f+1;
-			allVideos[f].screen.curPos = f+1;
-			allVideos[f].screen.pos_stepper.value = f+1;
-			allVideos[f].screen.pos_stepper.maximum = allVideos.length;
-			
-			//trace(allVideos[f].windowID + ", " + f);
-			//trace("===================== ");
-			}
-			
-			// redraw component
-			client.getTargetMC().chat.video_mcs.redraw(true);
-
-			*/
 		}
 		
 		/**
@@ -219,7 +130,7 @@ package com.collab.echo.view.hub.video
 		 */		
 		override public function setSize( arg0:Number, arg1:Number ):void
 		{
-			// XXX: look into this background redraw mess
+			// XXX: look into this background redraw mess?
 			// background
 			super.remove( _background );
 			_background = DrawingUtils.drawFill( arg0, arg1,
@@ -229,7 +140,7 @@ package com.collab.echo.view.hub.video
 		}
 		
 		/**
-		 * Add a new <code>UserPanel</code>.
+		 * Add a new <code>UserPanel</code> instance.
 		 * 
 		 * @param child
 		 * @return 
@@ -265,16 +176,24 @@ package com.collab.echo.view.hub.video
 		 */		
 		override public function layoutChildren():void
 		{
-			if ( _panels && _panels.length > 1 )
+			if ( _panels )
 			{
-				var prevItem:UserPanel;
-				_index = 0;
-				
-				for each ( _item in _panels )
+				if ( _panels.length > 1 )
 				{
-					prevItem = _panels[ _index ];
-					_item.x = prevItem.width * _index;
-					_index++;
+					var prevItem:UserPanel;
+					_index = 0;
+					
+					for each ( _item in _panels )
+					{
+						prevItem = _panels[ _index ];
+						_item.x = prevItem.width * _index;
+						_index++;
+					}
+				}
+				else if ( _panels.length == 1 )
+				{
+					_item = _panels[ 0 ];
+					_item.x = 0;
 				}
 			}
 		}

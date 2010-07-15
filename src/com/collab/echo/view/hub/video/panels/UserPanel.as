@@ -34,11 +34,11 @@ package com.collab.echo.view.hub.video.panels
 	 */	
 	public class UserPanel extends Panel
 	{
-		internal static const COLOR1	: uint = 0xEFEFEF;
-		
 		// ====================================
 		// STATIC VARS
 		// ====================================
+		
+		internal static const COLOR1	: uint = 0xEFEFEF;
 		
 		public static const WIDTH		: int = 200;
 
@@ -60,6 +60,9 @@ package com.collab.echo.view.hub.video.panels
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get data():UserVO
 		{
 			return _data;
@@ -67,15 +70,45 @@ package com.collab.echo.view.hub.video.panels
 		public function set data( val:UserVO ):void
 		{
 			_data = val;
+			
+			name = "userPanel" + _data.id;
 			invalidate();
+			
+			/*
+			// show rank icon
+			newVideo.screen.header_mc.gotoAndStop(rank);
+			
+			// admin or mod
+			if (_root.userMode == "guest")
+			{
+				newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			else
+			{
+				newVideo.screen.header_mc.kick_icon._visible = true;
+			}
+			
+			if ( isSelf() )
+			{
+				// Hide the pm button 
+				newVideo.screen.header_mc.pm_mc._visible = false;
+				newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			*/
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get title():TextField
 		{
 			return TextUtils.createTextField( null, _data.username, 24,
 											  StyleDict.WHITE, false, true );
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get profile():ProfileInfo
 		{
 			var profileInfo:ProfileInfoVO = new ProfileInfoVO();

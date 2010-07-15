@@ -70,12 +70,12 @@ package com.collab.echo.view.hub.display
 		
 		internal var _skin						: Object;
 		internal var _paddingLeft				: int;
-		internal var _data						: Vector.<UserVO>;
 		
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
+		protected var data						: Vector.<UserVO>;
 		protected var pane						: FlashScrollPane;
 		protected var whiteboard				: Whiteboard;
 		protected var chat						: Chat;
@@ -131,6 +131,7 @@ package com.collab.echo.view.hub.display
 				_skin = skin;
 			}
 			
+			data = new Vector.<UserVO>();
 			_paddingLeft = paddingLeft;
 			
 			show();
@@ -198,12 +199,12 @@ package com.collab.echo.view.hub.display
 			// video pane
 			videoPane = _skin.videoPane;
 			videoPane.panelSkin = _skin.userPanel;
-			videoPane.data = _data;
 			videoPane.setSize( viewWidth, 200 );
 			pane.add( videoPane );
 			
 			// whiteboard
 			whiteboard = _skin.whiteboard;
+			whiteboard.setSize( 200, 520 );
 			whiteboard.hide();
 			pane.add( whiteboard );
 			

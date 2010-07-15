@@ -21,6 +21,7 @@ package com.collab.echo.view.rooms
 	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
+	import net.user1.reactor.RoomModuleType;
 	import net.user1.reactor.RoomModules;
 	import net.user1.reactor.RoomSettings;
 	
@@ -72,7 +73,7 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
-		 * Join the room.
+		 * Join the <code>Room</code>.
 		 */		
 		override public function join():void
 		{
@@ -80,7 +81,7 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
-		 * Leave the room.
+		 * Leave the <code>Room</code>.
 		 */		
 		override public function leave():void
 		{
@@ -123,13 +124,18 @@ package com.collab.echo.view.rooms
 			var module:Object;
 			for each ( module in moduleObjects )
 			{
-				// XXX: check if the type's supported
-				log( "Adding '" + module.type + "' RoomModule: '" + module.alias + "'" );
-				modules.addModule( module.alias, module.type );
+				if ( module.type == RoomModuleType.CLASS ||
+					 module.type == RoomModuleType.SCRIPT )
+				{
+					log( "Adding '" + module.type + "' RoomModule: '" + module.alias + "'" );
+					modules.addModule( module.alias, module.type );
+				}
 			}
 		}
 		
 		/**
+		 * Log a message.
+		 * 
 		 * @param msg
 		 */		
 		protected function log( msg:* ):void

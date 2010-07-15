@@ -24,6 +24,8 @@ package com.collab.echo.view.rooms
 	import flash.utils.getQualifiedClassName;
 
 	/**
+	 * Base room.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class BaseRoom extends EventDispatcher
@@ -41,17 +43,30 @@ package com.collab.echo.view.rooms
 		// PROTECTED VARS
 		// ====================================
 		
+		/**
+		 * <code>Room</code> class name. 
+		 */		
 		protected var name		: String;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * Unique qualifier for this room.
+		 *  
+		 * @return 
+		 */		
 		public function get id():String
 		{
 			return _id;
 		}
 		
+		/**
+		 * Room's engine/connection to the server.
+		 *  
+		 * @return 
+		 */		
 		public function get engine():*
 		{
 			return _engine;
@@ -61,6 +76,11 @@ package com.collab.echo.view.rooms
 			_engine = val;
 		}
 		
+		/**
+		 * Auto join room when it's created.
+		 *  
+		 * @return 
+		 */		
 		public function get autoJoin():Boolean
 		{
 			return _autoJoin;
@@ -98,7 +118,7 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
-		 * 
+		 * Join the <code>Room</code>.
 		 */		
 		public function join():void
 		{

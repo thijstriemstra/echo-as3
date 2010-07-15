@@ -36,7 +36,7 @@ package com.collab.echo.view.hub.display
 	import org.osflash.thunderbolt.Logger;
 
 	/**
-	 * Communication hub.
+	 * Communication hub view..
 	 * 
 	 * <p>Internal <code>FlashScrollPane</code> contains:</p>
 	 * <p><ul>
@@ -68,27 +68,37 @@ package com.collab.echo.view.hub.display
 		// INTERNAL VARS
 		// ====================================
 		
-		internal var _pane				: FlashScrollPane;
-		internal var _whiteboard		: Whiteboard;
-		internal var _chat				: Chat;
-		internal var _translator		: Translator;
-		internal var _videoPane			: VideoScrollPane;
-		internal var _expandButton		: BaseExpandButton;
+		internal var _pane						: FlashScrollPane;
+		internal var _whiteboard				: Whiteboard;
+		internal var _chat						: Chat;
+		internal var _translator				: Translator;
+		internal var _videoPane					: VideoScrollPane;
+		internal var _expandButton				: BaseExpandButton;
 		
-		internal var _skin				: Object;
-		internal var _paddingLeft		: int;
-		internal var _data				: Vector.<UserVO>;
+		internal var _skin						: Object;
+		internal var _paddingLeft				: int;
+		internal var _data						: Vector.<UserVO>;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * Panel skin.
+		 *  
+		 * @param val
+		 */		
 		public function set skin( val:Object ):void
 		{
 			_skin = val;
 			invalidate();
 		}
-		
+
+		/**
+		 * Padding on the left side.
+		 *  
+		 * @param val
+		 */		
 		public function set paddingLeft( val:int ):void
 		{
 			_paddingLeft = val;
@@ -96,7 +106,7 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Users.
+		 * Users data.
 		 * 
 		 * @param val
 		 */		
@@ -142,18 +152,226 @@ package com.collab.echo.view.hub.display
 		// PUBLIC/PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * Add a new occupant to the <code>Room</code>.
+		 *  
+		 * @param client
+		 */		
 		public function addOccupant( client:* ):void
 		{
 			trace( 'BaseCommunicationPanel.addOccupant: ' + client );
 			
 			// XXX: _videoPane (and others) need a addOccupant method
+			
+			/*
+			// Retrieve the username for the client that just joined.
+			var remoteuser:RemoteClient = client.getRemoteClientManager().getClient(e.getClientID());
+			// Retrieve the client-attributes.
+			var userID:String = e.getClientID();
+			//create the local Shared Object
+			var user_SO:SharedObject = SharedObject.getLocal("collab");
+			var username:String = remoteuser.getAttribute(null, "username");
+			var location:String = remoteuser.getAttribute(null, "location");
+			var url:String = remoteuser.getAttribute(null, "website");
+			var rank:String = remoteuser.getAttribute(null, "rank");
+			var age:String = remoteuser.getAttribute(null, "age");
+			var email:String = remoteuser.getAttribute(null, "email");
+			var avatar:String = remoteuser.getAttribute(null, "avatar");
+			var trivia:String = remoteuser.getAttribute(null, "trivia");
+			
+			var chatMC:MovieClip = client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.chat_accordion.chat_mc;
+			var welcomeLine:String = getWelcomeLine();
+			
+			// Use the client id as a user name if the user hasn't set a name.
+			if (username == undefined)
+			{
+			username = "user" + userID;
+			}
+			
+			// Use "..." as a location if the user hasn't set a location.
+			if (location == undefined)
+			{
+			location = "...";
+			}
+			
+			// Use "..." as a location if the user hasn't set a location.
+			if (age == undefined)
+			{
+			age = "...";
+			}
+			
+			// Use "..." as a email address if the user hasn't set one.
+			if (email == undefined)
+			{
+			email = "...";
+			}
+			
+			// Use "..." if the user hasn't given a URL.
+			if (url == undefined) {
+			var hyperlinked:String = "...";
+			} 
+			else
+			{
+			var hyperlinked:String = createHyperlink(url);
+			}
+			
+			// add videoImage to videoPanel
+			var newVideo:MovieClip = client.getTargetMC().chat.video_mcs.content.attachMovie("videoImage", "clientVideo"+userID,  client.getNewTargetDepth());
+			
+			// init
+			newVideo.opener = userID;
+			newVideo.gotoAndStop("open");
+			
+			var totalWindows:Number = client.getTargetMC().chat.video_mcs.content.panels.length;
+			
+			newVideo._x = totalWindows*newVideo._width;
+			newVideo.screen.username = username;
+			newVideo.screen.location = location;
+			newVideo.screen.website = hyperlinked;
+			newVideo.screen.email = email;
+			newVideo.screen.age = age;
+			newVideo.screen.origPos = totalWindows;
+			newVideo.screen.curPos = totalWindows+1;
+			
+			// show rank icon
+			newVideo.screen.header_mc.gotoAndStop(rank);
+			
+			// show trivia icon
+			if (trivia == "true")
+			{
+			newVideo.screen.header_mc.trivia_icon._visible = true;
+			}
+			else
+			{
+			newVideo.screen.header_mc.trivia_icon._visible = false;
+			}
+			
+			// admin or mod
+			if (_root.userMode == "guest")
+			{
+			newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			else
+			{
+			newVideo.screen.header_mc.kick_icon._visible = true;
+			}
+			
+			// print welcome message for this client
+			if (userID == client.getClientID()) 
+			{
+			chatMC.chat_txt.text += "<b><FONT COLOR='#000000'>" + welcomeLine + " " + username + "!</FONT></b><br>";
+			chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
+			chatMC.chat_txt.text += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
+			
+			// Get country name if this user hasn't set a location.
+			if (location == "..." || location == undefined || location == "undefined")
+			{
+			client.getTargetMC().ipaddress = remoteuser.getAttribute(null, "_IP");
+			client.getTargetMC().getLocationByIP();
+			}
+			
+			// Hide the pm button 
+			newVideo.screen.header_mc.pm_mc._visible = false;
+			newVideo.screen.header_mc.kick_icon._visible = false;
+			}
+			
+			// add whiteboard for client
+			addWhiteboard(userID, username); 
+			
+			// add to panels array
+			client.getTargetMC().chat.video_mcs.content.panels.push(newVideo);
+			
+			// redraw component
+			client.getTargetMC().chat.video_mcs.redraw(true);
+			*/
 		}
 		
+		/**
+		 * Remove an existing occupant from the room.
+		 *  
+		 * @param client
+		 */		
 		public function removeOccupant( client:* ):void
 		{
 			trace( 'BaseCommunicationPanel.removeOccupant: ' + client );
 			
 			// XXX: _videoPane (and others) need a removeOccupant method
+			
+			/*
+			var chatMC:MovieClip = client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.chat_accordion.chat_mc;
+			// Retrieve the username for the client that just joined.
+			var clientID:String = e.getClientID();
+			var remoteuser:RemoteClient = client.getRemoteClientManager().getClient(clientID);
+			var username:String = remoteuser.getAttribute(null, "username");
+			var rank:String = remoteuser.getAttribute(null, "rank");
+			var panelname:String = "clientVideo" + clientID;
+			var allVideos:Array = client.getTargetMC().chat.video_mcs.content.panels;
+			var timestamp:Boolean = client.getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
+			
+			// Use the client id as a user name if the user hasn't set a name.
+			if (username == undefined)
+			{
+			username = "user" + clientID;
+			}
+			
+			// remove videoPanel
+			for (var g:Number=0; g<allVideos.length; g++)
+			{
+			if (allVideos[g]._name == panelname)
+			{
+			removeMovieClip(allVideos[g]);
+			allVideos.splice(g,1);
+			break;
+			}
+			}
+			
+			// remove user cursor
+			removeMovieClip(client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteboard_accordion.whiteboard_mc["cursor"+clientID]);
+			
+			// reposition videoPanels
+			for (var f:Number=0; f<allVideos.length; f++)
+			{
+			// re-order windows
+			allVideos[f]._x = f*170;
+			
+			allVideos[f].screen.origPos = f+1;
+			allVideos[f].screen.curPos = f+1;
+			allVideos[f].screen.pos_stepper.value = f+1;
+			allVideos[f].screen.pos_stepper.maximum = allVideos.length;
+			
+			//trace(allVideos[f].windowID + ", " + f);
+			//trace("===================== ");
+			}
+			
+			// redraw component
+			client.getTargetMC().chat.video_mcs.redraw(true);
+			
+			// add Timestamp
+			if (timestamp)
+			{
+			var addStamp:String = _root.sc.createClientStamp();
+			}
+			else
+			{
+			var addStamp:String = "";
+			}
+			
+			// add to chat_txt : client left
+			if (rank == "admin")
+			{
+			chatMC.chat_txt.text += addStamp + " <font color = '#1D5EAB'><b>"+ username +" has left.</b></font>";
+			}
+			else if (rank == "moderator")
+			{
+			chatMC.chat_txt.text += addStamp + " <font color = '#1892AF'><b>"+ username +" has left.</b></font>";
+			}
+			else
+			{
+			chatMC.chat_txt.text += addStamp + " <b>"+ username +" has left.</b>";
+			}
+			
+			chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition; 
+			*/
 		}
 		
 		/**
@@ -193,9 +411,9 @@ package com.collab.echo.view.hub.display
 			_expandButton = _skin.expandButton;
 			_expandButton.width = _pane.width;
 			_expandButton.addEventListener( CommunicationPanelEvent.EXPAND, onExpandPanel,
-										 false, 0, true );
+										    false, 0, true );
 			_expandButton.addEventListener( CommunicationPanelEvent.COLLAPSE, onExpandPanel,
-										 false, 0, true );
+										    false, 0, true );
 			addChild( _expandButton );
 		}
 		
@@ -244,6 +462,8 @@ package com.collab.echo.view.hub.display
 		// ====================================
 		
 		/**
+		 * Invoked when the panel is expanded and collapsed.
+		 * 
 		 * @param event
 		 */		
 		protected function onExpandPanel( event:CommunicationPanelEvent ):void

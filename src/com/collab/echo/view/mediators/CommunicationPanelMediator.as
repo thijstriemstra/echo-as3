@@ -58,6 +58,11 @@ package com.collab.echo.view.mediators
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * Rooms.
+		 *  
+		 * @return 
+		 */		
 		public function get rooms()			: Vector.<RoomVO>
 		{
 			return _rooms;
@@ -84,7 +89,7 @@ package com.collab.echo.view.mediators
 		// ====================================
 		
 		/**
-		 * Create rooms.
+		 * Create rooms and listen for events.
 		 */		
 		protected function createRooms():void
 		{
@@ -189,7 +194,7 @@ package com.collab.echo.view.mediators
 				
 				case PresenceProxy.ROOM_ATTRIBUTE_UPDATE:
 					attributeEvent = AttributeEvent( note.getBody() );
-					attributeUpdateListener( attributeEvent );
+					attributeUpdate( attributeEvent );
 					break;
 				
 				case PresenceProxy.ROOM_CLIENT_COUNT:
@@ -208,7 +213,7 @@ package com.collab.echo.view.mediators
 		 * 
 		 * @param event
 		 */		
-		protected function roomClientCountListener( event:RoomEvent ):void
+		protected function clientCount( event:RoomEvent ):void
 		{
 			trace( "Users connected: " + event.getNumClients() );
 		}
@@ -253,7 +258,7 @@ package com.collab.echo.view.mediators
 		 *  
 		 * @param event
 		 */		
-		protected function attributeUpdateListener( event:AttributeEvent ):void
+		protected function attributeUpdate( event:AttributeEvent ):void
 		{
 		}
 		

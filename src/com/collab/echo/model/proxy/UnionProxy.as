@@ -165,6 +165,32 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Event listener triggered when a room is added to the 
+		      * room manager's room list.
+		 *	 
+		 * @param event
+		 */		
+		protected function roomAddedListener( event:RoomManagerEvent ):void
+		{
+			event.preventDefault();
+			
+			roomAdded( event );
+		}
+		
+		/**
+		 * Event listener triggered when a room is removed from the 
+		      * room manager's room list.
+		 * 
+		 * @param event
+		 */		
+		protected function roomRemovedListener( event:RoomManagerEvent ):void
+		{
+			event.preventDefault();
+			
+			roomRemoved( event );
+		}
+		
+		/**
 		 * Triggered when one of the room's attributes changes.
 		 *  
 		 * @param event
@@ -174,32 +200,6 @@ package com.collab.echo.model.proxy
 			event.preventDefault();
 			
 			roomAttributeUpdate( event );
-		}
-
-		/**
-		 * Event listener triggered when a room is added to the 
-	     * room manager's room list.
-	 	 *	 
-		 * @param event
-		 */		
-		protected function roomAddedListener( event:RoomManagerEvent ):void
-		{
-			event.preventDefault();
-			
-			roomAdded( event );
-		}
-
-		/**
-		 * Event listener triggered when a room is removed from the 
-	     * room manager's room list.
-	 	 * 
-		 * @param event
-		 */		
-		protected function roomRemovedListener( event:RoomManagerEvent ):void
-		{
-			event.preventDefault();
-			
-			roomRemoved( event );
 		}
 
 		/**

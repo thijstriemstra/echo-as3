@@ -21,7 +21,7 @@ package com.collab.echo.view.hub.display.skins
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.controls.buttons.BaseExpandButton;
 	import com.collab.echo.view.display.util.SkinUtils;
-	import com.collab.echo.view.hub.chat.Chat;
+	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.translator.Translator;
 	import com.collab.echo.view.hub.video.VideoScrollPane;
 	import com.collab.echo.view.hub.video.panels.UserPanel;

@@ -60,10 +60,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			trace("Whiteboard.addUser: " + client );
+			//Logger.debug( "Whiteboard.addUser: " + client );
 			
 			/*
-			var timeLine:MovieClip = client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc;
 			var newCursor:MovieClip = timeLine.attachMovie("cursor", "cursor"+clientID, timeLine.getNextHighestDepth());
 			
 			newCursor.username = username;
@@ -76,7 +75,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
-			trace("Whiteboard.removeUser: " + client );
+			//Logger.debug( "Whiteboard.removeUser: " + client );
 			
 			/*
 			// remove user cursor

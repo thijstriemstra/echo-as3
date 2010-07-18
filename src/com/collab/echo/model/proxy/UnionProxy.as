@@ -21,13 +21,15 @@ package com.collab.echo.model.proxy
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ConnectionManager;
 	import net.user1.reactor.HTTPConnection;
+	import net.user1.reactor.MessageManager;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
+	import net.user1.reactor.RoomManager;
 	import net.user1.reactor.RoomManagerEvent;
 	import net.user1.reactor.XMLSocketConnection;
 	
 	import org.osflash.thunderbolt.Logger;
-
+	
 	/**
 	 * Presence <code>Proxy</code> for the Union platform.
 	 * 
@@ -48,22 +50,35 @@ package com.collab.echo.model.proxy
 		public static const NAME				: String = "UnionProxy";
 		
 		// ====================================
-		// PROTECTED VARS
-		// ====================================
-		
-		/**
-		 * The ConnectionManager class manages all connections made by a
-		 * Reactor application to the Union Server.
-		 */		
-		protected var connectionManager			: ConnectionManager;
-		
-		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
 		override public function get isReady():Boolean
 		{
 			return Reactor( reactor ).isReady();
+		}
+		
+		public function get roomManager():RoomManager
+		{
+			return Reactor( reactor ).getRoomManager();
+		}
+		
+		/**
+		 *
+		 * The ConnectionManager class manages all connections made by a
+		 * Reactor application to the Union Server.
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get connectionManager():ConnectionManager
+		{
+			return Reactor( reactor ).getConnectionManager();
+		}
+		
+		public function get messageManager():MessageManager
+		{
+			return Reactor( reactor ).getMessageManager();
 		}
 		
 		/**
@@ -103,7 +118,6 @@ package com.collab.echo.model.proxy
 			reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
 			
 			// add fallover connections
-			connectionManager = reactor.getConnectionManager();
 			connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
 			connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
 			connectionManager.addConnection( new XMLSocketConnection( url, 443 ));
@@ -122,16 +136,13 @@ package com.collab.echo.model.proxy
 		protected function watchForRooms( roomQualifier:String ):void
 		{
 			// watch for rooms.
-			reactor.getRoomManager().watchForRooms( roomQualifier );
+			roomManager.watchForRooms( roomQualifier );
 
 			// in response to this watchForRooms() call, the RoomManager will trigger 
 			// RoomManagerEvent.ROOM_ADDED and RoomManagerEvent.ROOM_REMOVED events.
-			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_ADDED,
-													   roomAddedListener );
-			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_REMOVED,
-													   roomRemovedListener );
-			reactor.getRoomManager().addEventListener( RoomManagerEvent.ROOM_COUNT,
-													   roomCountListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_ADDED, roomAddedListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_REMOVED, roomRemovedListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_COUNT, roomCountListener );
 		}
 		
 		/**

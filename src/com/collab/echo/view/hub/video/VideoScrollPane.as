@@ -29,6 +29,8 @@ package com.collab.echo.view.hub.video
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	
+	import org.osflash.thunderbolt.Logger;
 
 	/**
 	 * @author Thijs Triemstra
@@ -93,7 +95,7 @@ package com.collab.echo.view.hub.video
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			trace("VideoScrollPane.addUser: " + client );
+			//Logger.debug( "VideoScrollPane.addUser: " + client );
 			
 			// panel
 			_item = new _panelSkin();
@@ -109,12 +111,12 @@ package com.collab.echo.view.hub.video
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
-			trace("VideoScrollPane.removeUser: " + client );
+			//Logger.debug( "VideoScrollPane.removeUser: " + client );
 			
 			// remove by id
 			for each ( _item in _panels )
 			{
-				if ( _item.data.id == client.id )
+				if ( _item.data && _item.data.id == client.id )
 				{
 					remove( _item );
 					break;

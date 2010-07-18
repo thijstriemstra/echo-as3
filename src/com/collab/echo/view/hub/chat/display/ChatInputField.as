@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat
+package com.collab.echo.view.hub.chat.display
 {
 	import com.collab.echo.view.display.BaseView;
 	
@@ -34,6 +34,24 @@ package com.collab.echo.view.hub.chat
 		
 		internal var textInput		: TextInput;
 		internal var submitButton	: Button;
+		
+		public function get text():String
+		{
+			return textInput.text;
+		}
+		public function set text( val:String ):void
+		{
+			textInput.text = val;
+		}
+		
+		public function get htmlText():String
+		{
+			return textInput.htmlText;
+		}
+		public function set htmlText( val:String ):void
+		{
+			textInput.htmlText = val;
+		}
 		
 		/**
 		 * Constructor. 

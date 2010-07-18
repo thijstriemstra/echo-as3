@@ -24,6 +24,8 @@ package com.collab.echo.view.mediators
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
+	import net.user1.reactor.Client;
+	
 	import org.puremvc.as3.multicore.interfaces.INotification;
 
     /**
@@ -232,6 +234,15 @@ package com.collab.echo.view.mediators
 			event.preventDefault();
 			
 			sendNotification( PresenceProxy.ROOM_ATTRIBUTE_UPDATE, event );
+		}
+		
+		/**
+		 * @param client
+		 * @return 
+		 */		
+		protected function getUnionOccupant( client:* ):Client
+		{
+			return Client( client );	
 		}
 		
         /**

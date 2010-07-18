@@ -23,7 +23,7 @@ package com.collab.echo.view.hub.display
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.controls.buttons.BaseExpandButton;
 	import com.collab.echo.view.events.CommunicationPanelEvent;
-	import com.collab.echo.view.hub.chat.Chat;
+	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.view.hub.translator.Translator;
 	import com.collab.echo.view.hub.video.VideoScrollPane;
@@ -146,9 +146,10 @@ package com.collab.echo.view.hub.display
 		 *  
 		 * @param client
 		 */		
-		public function addOccupant( client:* ):void
+		public function addOccupant( client:* ):UserVO
 		{
 			// override in subclass
+			return null;
 		}
 		
 		/**
@@ -156,9 +157,10 @@ package com.collab.echo.view.hub.display
 		 *  
 		 * @param client
 		 */		
-		public function removeOccupant( client:* ):void
+		public function removeOccupant( client:* ):UserVO
 		{
 			// override in subclass
+			return null;
 		}
 		
 		/**
@@ -179,6 +181,14 @@ package com.collab.echo.view.hub.display
 		public function joinedRoom( data:* ):void
 		{
 			// override in subclass
+		}
+		
+		/**
+		 * @param message
+		 */		
+		public function addMessage( message:String ):void
+		{
+			chat.addMessage( message );
 		}
 		
 		// ====================================

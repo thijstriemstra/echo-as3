@@ -27,6 +27,12 @@ package com.collab.echo.model.vo
 		public static const USERNAME	: String = "username";
 		public static const LOCATION	: String = "location";
 		public static const WEBSITE		: String = "website";
+		public static const EMAIL		: String = "email";
+		public static const AGE			: String = "age";
+		
+		// ====================================
+		// PUBLIC VARS
+		// ====================================
 		
 		public var id					: String;
 		public var username				: String;
@@ -35,6 +41,7 @@ package com.collab.echo.model.vo
 		public var email				: String;
 		public var age					: String;
 		public var client				: *;
+		public var fields				: Array = [ USERNAME, LOCATION, WEBSITE, EMAIL, AGE ];
 		
 		/**
 		 * Constructor.
@@ -45,9 +52,10 @@ package com.collab.echo.model.vo
 		 * @param website
 		 * @param email
 		 * @param age
+		 * @param client
 		 */		
 		public function UserVO( id:String="1", username:String="User1", location:String=null, website:String=null,
-								email:String=null, age:String=null )
+								email:String=null, age:String=null, client:*=null )
 		{
 			this.id = id;
 			this.username = username;
@@ -55,6 +63,7 @@ package com.collab.echo.model.vo
 			this.website = website;
 			this.email = email;
 			this.age = age;
+			this.client = client;
 		}
 		
 		public function toString():String

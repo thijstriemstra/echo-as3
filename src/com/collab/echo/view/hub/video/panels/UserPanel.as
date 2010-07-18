@@ -69,32 +69,35 @@ package com.collab.echo.view.hub.video.panels
 		}
 		public function set data( val:UserVO ):void
 		{
-			_data = val;
-			
-			name = "userPanel" + _data.id;
-			invalidate();
-			
-			/*
-			// show rank icon
-			newVideo.screen.header_mc.gotoAndStop(rank);
-			
-			// admin or mod
-			if (_root.userMode == "guest")
+			if ( val )
 			{
-				newVideo.screen.header_mc.kick_icon._visible = false;
+				_data = val;
+				
+				name = "userPanel" + _data.id;
+				invalidate();
+				
+				/*
+				// show rank icon
+				newVideo.screen.header_mc.gotoAndStop(rank);
+				
+				// admin or mod
+				if (_root.userMode == "guest")
+				{
+					newVideo.screen.header_mc.kick_icon._visible = false;
+				}
+				else
+				{
+					newVideo.screen.header_mc.kick_icon._visible = true;
+				}
+				
+				if ( isSelf() )
+				{
+					// Hide the pm button 
+					newVideo.screen.header_mc.pm_mc._visible = false;
+					newVideo.screen.header_mc.kick_icon._visible = false;
+				}
+				*/
 			}
-			else
-			{
-				newVideo.screen.header_mc.kick_icon._visible = true;
-			}
-			
-			if ( isSelf() )
-			{
-				// Hide the pm button 
-				newVideo.screen.header_mc.pm_mc._visible = false;
-				newVideo.screen.header_mc.kick_icon._visible = false;
-			}
-			*/
 		}
 		
 		/**
@@ -102,8 +105,14 @@ package com.collab.echo.view.hub.video.panels
 		 */		
 		public function get title():TextField
 		{
-			return TextUtils.createTextField( null, _data.username, 24,
-											  StyleDict.WHITE, false, true );
+			var value:String
+			
+			if ( _data )
+			{
+				value = _data.username;
+			}
+			return TextUtils.createTextField( null, value, 24,
+										      StyleDict.WHITE, false, true );
 		}
 		
 		/**
@@ -112,10 +121,14 @@ package com.collab.echo.view.hub.video.panels
 		public function get profile():ProfileInfo
 		{
 			var profileInfo:ProfileInfoVO = new ProfileInfoVO();
-			profileInfo.age = _data.age;
-			profileInfo.email = _data.email;
-			profileInfo.location = _data.location;
-			profileInfo.website = _data.website;
+			
+			if ( _data )
+			{
+				profileInfo.age = _data.age;
+				profileInfo.email = _data.email;
+				profileInfo.location = _data.location;
+				profileInfo.website = _data.website;
+			}
 			
 			return new ProfileInfo( viewWidth, viewHeight, profileInfo );
 		}

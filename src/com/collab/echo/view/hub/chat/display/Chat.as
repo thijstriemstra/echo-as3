@@ -42,7 +42,6 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		
 		internal var _background		: Sprite;
-		internal var _inputField		: ChatInputField;
 		internal var _user				: *;
 		
 		// ====================================
@@ -51,6 +50,7 @@ package com.collab.echo.view.hub.chat.display
 		
 		protected var textArea			: TextArea;
 		protected var messageHistory	: Array;
+		protected var inputField		: ChatInputField;
 		
 		/**
 		 * Constructor.
@@ -128,7 +128,7 @@ package com.collab.echo.view.hub.chat.display
 		public function sendMessage(): void
 		{
 			// the message typed by the user
-			var msg:String = _inputField.text;
+			var msg:String = inputField.text;
 			
 			// only send the message if there's text
 			if ( msg.length > 0 )
@@ -137,7 +137,7 @@ package com.collab.echo.view.hub.chat.display
 				updateHistory( msg );
 				
 				// clear the user input text field
-				_inputField.text = "";
+				inputField.text = "";
 				
 				switch ( msg )
 				{
@@ -170,7 +170,7 @@ package com.collab.echo.view.hub.chat.display
 						break;
 					
 					case ChatMessageTypes.ME:
-						var bericht  = msg.substr( 4 );
+						var bericht:String  = msg.substr( 4 );
 						
 						if ( bericht.length > 0 )
 						{
@@ -288,7 +288,7 @@ package com.collab.echo.view.hub.chat.display
 				if ( foundIt.clientID == undefined )
 				{
 					textArea.htmlText += addStamp + " <b>Username not found.</b>";
-					_inputField.text = bericht;
+					inputField.text = bericht;
 				}
 				else
 				{
@@ -361,7 +361,7 @@ package com.collab.echo.view.hub.chat.display
 					{
 						//messageGeluid.start();
 					}
-					
+					/*
 					// add tags for staff 
 					if (rank == "admin")
 					{
@@ -374,11 +374,12 @@ package com.collab.echo.view.hub.chat.display
 					
 					// print external message
 					textArea.htmlText += addStamp + " <b>"+ username + ": </b>" + msg + "<br>";
+					*/
 				//}
 				//else
 				//{
 					// internal message
-					textArea.htmlText +=  addStamp + ' <font color="#990000"><b>' + username + ': </b>' + msg + '</font><br>';
+					//textArea.htmlText +=  addStamp + ' <font color="#990000"><b>' + username + ': </b>' + msg + '</font><br>';
 				//}
 				
 				// Scroll the incoming_txt text field to the bottom.
@@ -414,7 +415,7 @@ package com.collab.echo.view.hub.chat.display
 			// play sound for incoming user
 			if (messageSound)
 			{
-				userGeluid.start();
+				//userGeluid.start();
 			}
 			
 			textArea.htmlText += addStamp + " " + msg;
@@ -442,7 +443,7 @@ package com.collab.echo.view.hub.chat.display
 			// cutoff lines
 			truncateChatField(textArea);
 			
-			textArea.htmlText +=  '<font color="#1B701F"><b>' + username + ' ' + msg + '</b></font><br>'
+			//textArea.htmlText +=  '<font color="#1B701F"><b>' + username + ' ' + msg + '</b></font><br>'
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 		
@@ -459,6 +460,7 @@ package com.collab.echo.view.hub.chat.display
 			// cutoff lines
 			truncateChatField( textArea );
 			
+			/*
 			for (var i:int = 0; i < attrList.length; i++) 
 			{
 				var clientName:String = attrList[i].value.toLowerCase();
@@ -478,6 +480,7 @@ package com.collab.echo.view.hub.chat.display
 					break;
 				}
 			}
+			*/
 			
 			// if the username wasn't found
 			if (!foundIt) 
@@ -516,7 +519,7 @@ package com.collab.echo.view.hub.chat.display
 		 * @param welke
 		 * @return 
 		 */		
-		public function truncateChatField( welke:String ):void
+		public function truncateChatField( welke:TextArea ):void
 		{
 			if (welke.text.length > 15000)
 			{
@@ -528,7 +531,7 @@ package com.collab.echo.view.hub.chat.display
 		/**
 		 * Trim text
 		 */
-		public function truncateTxt(welke:String):void
+		public function truncateTxt(welke:TextArea):void
 		{
 			var maxChars:Number = 15000;
 			if (welke.text.length > maxChars) 
@@ -543,12 +546,12 @@ package com.collab.echo.view.hub.chat.display
 		 * 
 		 * @param userName
 		 */
-		public function getIP(userName:String) 
+		public function getIP(userName:String):void
 		{
 			var timestamp	: Boolean 	= true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
-			//var clientList 				= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			//var attrList 				= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			var foundIt 				= undefined;
+			var clientList:Array =[]; 		//		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
+			var attrList 	:Array=[];//			= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
+			var foundIt:Boolean 				= null;
 			
 			for (var i = 0; i < attrList.length; i++)
 			{
@@ -587,24 +590,25 @@ package com.collab.echo.view.hub.chat.display
 				textArea.htmlText += addStamp + "<b>IPAddress for " + clientName + ": "+ ipaddress +" </b>";
 			}
 			
-			chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition;
+			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 		
 		/**
 		 * Look up the clientID and userName of a selected client.
 		 */
-		public function findUserName (userName:String) 
+		public function findUserName (userName:String):Object
 		{
-			var foundIt 		= new Object();
-			var clientList 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			var attrList 		= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
+			var foundIt:Object 		= new Object();
+			var clientList:Array=[];// 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
+			var attrList:Array=[];// 		= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
 			
-			for (var i = 0; i < attrList.length; i++) 
+			for (var i:int = 0; i < attrList.length; i++) 
 			{
 				var clientName:String = attrList[i].value.toLowerCase();
 				
 				// give user generic name
-				if (clientName == undefined) {
+				if (clientName == null)
+				{
 					clientName = "user"+attrList[i].clientID;
 				}
 				
@@ -612,11 +616,12 @@ package com.collab.echo.view.hub.chat.display
 				if (clientName == userName.toLowerCase()) {
 					foundIt.clientID = attrList[i].clientID;
 				}
-				
+				/*
 				if (attrList[i].clientID == getClientID()) {
 					foundIt.myName = attrList[i].value;
 					foundIt.myID = attrList[i].clientID;
 				}
+				*/
 			}
 			
 			// if the username wasnt found
@@ -645,12 +650,12 @@ package com.collab.echo.view.hub.chat.display
 			addChild( _background );
 			
 			// inputField
-			_inputField = new ChatInputField( _background.width );
-			addChild( _inputField );
+			inputField = new ChatInputField( _background.width );
+			addChild( inputField );
 			
 			// text
 			textArea = new TextArea();
-			textArea.setSize( viewWidth, viewHeight - _inputField.height ); 
+			textArea.setSize( viewWidth, viewHeight - inputField.height ); 
 			textArea.condenseWhite = true; 
 			textArea.editable = false;
 			addChild( textArea );
@@ -670,8 +675,8 @@ package com.collab.echo.view.hub.chat.display
 			textArea.y = 0;
 			
 			// inputField
-			_inputField.x = 0;
-			_inputField.y = textArea.y + textArea.height;
+			inputField.x = 0;
+			inputField.y = textArea.y + textArea.height;
 		}
 		
 		/**
@@ -680,7 +685,7 @@ package com.collab.echo.view.hub.chat.display
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( _background );
-			removeChildFromDisplayList( _inputField );
+			removeChildFromDisplayList( inputField );
 			removeChildFromDisplayList( textArea );
 			
 			super.invalidate();

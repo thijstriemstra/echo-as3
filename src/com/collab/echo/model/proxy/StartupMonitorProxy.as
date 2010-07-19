@@ -24,8 +24,6 @@ package com.collab.echo.model.proxy
 	import org.puremvc.as3.multicore.patterns.proxy.Proxy;
 	
     /**
-	 * TODO: remove site import
-	 * 
      * A proxy for the startup loading process.
      * 
      * @author Thijs Triemstra

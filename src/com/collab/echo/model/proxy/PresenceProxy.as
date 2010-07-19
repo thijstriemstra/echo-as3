@@ -86,6 +86,11 @@ package com.collab.echo.model.proxy
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * The rooms we loaded into the reactor.
+		 * 
+		 * @return 
+		 */		
 		public function get rooms():Vector.<BaseRoom>
 		{
 			return _rooms;
@@ -101,6 +106,8 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Users we're monitoring.
+		 * 
 		 * @return 
 		 */		
 		public function get users():Vector.<UserVO>
@@ -108,6 +115,12 @@ package com.collab.echo.model.proxy
 			return _users;
 		}
 		
+		/**
+		 * True if the connection to the presence server has been successfully
+		 * completed.
+		 * 
+		 * @return 
+		 */		
 		public function get isReady():Boolean
 		{
 			return _ready;

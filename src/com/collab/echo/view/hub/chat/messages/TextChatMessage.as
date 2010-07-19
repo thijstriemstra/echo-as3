@@ -20,10 +20,10 @@ package com.collab.echo.view.hub.chat.messages
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
-	
-	import org.osflash.thunderbolt.Logger;
 
 	/**
+	 * Simple text chat message.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class TextChatMessage extends BaseChatMessage
@@ -45,6 +45,10 @@ package com.collab.echo.view.hub.chat.messages
 			super( type, data, includeSelf, local, privateMessage, append );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
 		override protected function parseCommand():void
 		{
 			// check it's a private message
@@ -63,9 +67,10 @@ package com.collab.echo.view.hub.chat.messages
 						  privateMessage + ", local: " + local + ")" );
 			*/
 			
+			// XXX: this should come from a populated UserVO
 			var username:String = sender.getAttribute( UserVO.USERNAME );
 			
-			// Use the client id as a user name if the user hasn't set a name.
+			// use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
 			{
 				username = "user" + sender.getClientID();
@@ -82,7 +87,6 @@ package com.collab.echo.view.hub.chat.messages
 			else
 			{
 				// remote message
-				
 				/*
 				// add tags for staff 
 				if (rank == "admin")
@@ -98,6 +102,10 @@ package com.collab.echo.view.hub.chat.messages
 				message = "<b>"+ username + ": </b>" + command;
 			}
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function load():void
 		{
@@ -115,12 +123,46 @@ package com.collab.echo.view.hub.chat.messages
 			dispatchEvent( evt );
 		}
 		
+		override public function toString():String
+		{
+			return "<TextChatMessage type='" + type + "' data='" + data + "' local='" + local + "' />";	
+		}
+		
+		// ====================================
+		// STATIC METHODS
+		// ====================================
+		
+		/**
+		 * XXX: move to utils class
+		 * 
+		 * Create a client-side timestamp.
+		 */
+		public static function createClientStamp():String
+		{
+			var my_date:Date = new Date();
+			var theTime:Array = [my_date.getHours(), my_date.getMinutes(), my_date.getSeconds()];
+			var v:int = 0;
+			
+			for ( v; v<theTime.length; v++)
+			{
+				if (theTime[v] < 10) {
+					theTime[v] = "0" + theTime[v];
+				}
+			}
+			
+			return "(" + theTime[0] + ":" + theTime[1] + ":" + theTime[2] + ")";
+		}
+		
+		// ====================================
+		// INTERNAL METHODS
+		// ====================================
+		
 		/**
 		 * XXX: probably needs to be determined outside the message.
 		 * 
 		 * @param msg
 		 */		
-		protected function parsePrivateMessage():void
+		internal function parsePrivateMessage():void
 		{
 			// check it's a private message
 			var msgsplit:Array = data.substr( 5 ).split( " : ", 2 );
@@ -170,30 +212,9 @@ package com.collab.echo.view.hub.chat.messages
 		}
 		
 		/**
-		 * XXX: move to utils class
-		 * 
-		 * Create a client-side timestamp.
-		 */
-		public static function createClientStamp():String
-		{
-			var my_date:Date = new Date();
-			var theTime:Array = [my_date.getHours(), my_date.getMinutes(), my_date.getSeconds()];
-			var v:int = 0;
-			
-			for ( v; v<theTime.length; v++)
-			{
-				if (theTime[v] < 10) {
-					theTime[v] = "0" + theTime[v];
-				}
-			}
-			
-			return "(" + theTime[0] + ":" + theTime[1] + ":" + theTime[2] + ")";
-		}
-		
-		/**
 		 * Look up the clientID and userName of a selected client.
 		 */
-		protected function findUserName( userName:String ):Object
+		internal function findUserName( userName:String ):Object
 		{
 			var foundIt:Object 		= new Object();
 			var clientList:Array=[];// 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
@@ -292,11 +313,6 @@ package com.collab.echo.view.hub.chat.messages
 			//hilited += "<font color=\"#0000FF\"><u><a href=\"" + urlstr + "\">" + urlstr + "</a></u></font>" + trailer;
 			
 			return hilited;
-		}
-		
-		override public function toString():String
-		{
-			return "<TextChatMessage type='" + type + "' data='" + data + "' local='" + local + "' />";	
 		}
 		
 	}

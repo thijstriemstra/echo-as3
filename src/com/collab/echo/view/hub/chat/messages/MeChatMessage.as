@@ -18,7 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.vo.UserVO;
+
 	/**
+	 * A public '[username] ...' chat message.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class MeChatMessage extends TextChatMessage
@@ -26,16 +30,21 @@ package com.collab.echo.view.hub.chat.messages
 		/**
 		 * Constructor.
 		 * 
+		 * @param type
 		 * @param data
 		 */		
-		public function MeChatMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, includeSelf );
+			super( type, data, true, false, false, true );
 		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		override protected function parseCommand():void
 		{
-			var bericht:String  = data.substr( 4 );
+			var bericht:String = data.substr( 4 );
 			
 			if ( bericht.length > 0 )
 			{
@@ -43,30 +52,29 @@ package com.collab.echo.view.hub.chat.messages
 			}
 		}
 		
-		override protected function execute( message:String ):void
+		/**
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
 		{
-			var safeMsg:String = '<![CDATA[' + message + ']]>';
+			// XXX: this should come from a populated UserVO
+			var username:String = sender.getAttribute( UserVO.USERNAME );
 			
-			// Send the message to the server.
-			//invokeOnRoom("meText", "collab.global", true, safeMsg);
-			//invokeOnNamespace("meText", AppSettings.appNamespaceID, true, safeMsg);
+			// Use the client id as a user name if the user hasn't set a name.
+			if ( username == null )
+			{
+				username = "user" + sender.getClientID();
+			}
+			
+			// add hyperlinks to msg	
+			//data = hiliteURLs( command );
+			
+			message = '<font color="#1B701F"><b>' + username + ' ' + command + '</b></font>';
 		}
 		
-		/**
-		 * Recieve special message!
-		 */
-		public function meText (clientID:String, msg:String):void
-		{
-			// Retrieve the username for the client that sent the message.
-			//var remoteuser	: RemoteClient 	= getRemoteClientManager().getClient(clientID);
-			//var username	: String 		= remoteuser.getAttribute(null, "username");
-			
-			// cutoff lines
-			//truncateChatField(textArea);
-			
-			//textArea.htmlText +=  '<font color="#1B701F"><b>' + username + ' ' + msg + '</b></font><br>'
-			//textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-		}
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{

@@ -169,6 +169,10 @@ package com.collab.echo.view.hub.chat.messages
 			super();
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
 		/**
 		 * 
 		 */		
@@ -184,6 +188,10 @@ package com.collab.echo.view.hub.chat.messages
 		{
 			// override in subclass
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		/**
 		 * 

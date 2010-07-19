@@ -94,11 +94,11 @@ package com.collab.echo.model.proxy
 		}
 
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 
 		/**
-		 * Create the Reactor object and connect to the Union Server.
+		 * Create the <code>Reactor</code> object and connect to the Union Server.
 		 *  
 		 * @param url
 		 * @param port
@@ -126,6 +126,10 @@ package com.collab.echo.model.proxy
 			connectionManager.addConnection( new HTTPConnection( url, 9110 ));
 			reactor.connect();
 		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		/**
 		 * Ask to be notified when a room with the qualifier

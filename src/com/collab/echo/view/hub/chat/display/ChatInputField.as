@@ -19,11 +19,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.display
 {
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	
 	import fl.controls.Button;
 	import fl.controls.TextInput;
 	
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
+	import flash.ui.Keyboard;
+	
 	/**
+	 * Component with a text input field and send button.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class ChatInputField extends BaseView
@@ -32,25 +39,34 @@ package com.collab.echo.view.hub.chat.display
 		// INTERNAL VARS
 		// ====================================
 		
-		internal var textInput		: TextInput;
-		internal var submitButton	: Button;
+		internal var _textInput			: TextInput;
+		internal var _submitButton		: Button;
+		internal var _inputMessage		: String;
+		internal var _buttonLabel		: String;
+		internal var _event				: ChatEvent;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
 		
 		public function get text():String
 		{
-			return textInput.text;
+			return _textInput.text;
 		}
 		public function set text( val:String ):void
 		{
-			textInput.text = val;
+			_inputMessage = val;
+			invalidate();
 		}
 		
-		public function get htmlText():String
+		public function get buttonLabel():String
 		{
-			return textInput.htmlText;
+			return _submitButton.label;
 		}
-		public function set htmlText( val:String ):void
+		public function set buttonLabel( val:String ):void
 		{
-			textInput.htmlText = val;
+			_buttonLabel = val;
+			invalidate();
 		}
 		
 		/**
@@ -66,7 +82,7 @@ package com.collab.echo.view.hub.chat.display
 		}
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 		
 		/**
@@ -75,16 +91,24 @@ package com.collab.echo.view.hub.chat.display
 		override protected function draw() : void
 		{
 			// textInput
-			textInput = new TextInput();
-			textInput.text = "Hello!";
-			textInput.width = viewWidth - 50;
-			addChild( textInput );
+			_textInput = new TextInput();
+			if ( _inputMessage )
+			{
+				_textInput.text = _inputMessage;
+			}
+			_textInput.width = viewWidth - 50;
+			_textInput.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown, false, 0, true );
+			addChild( _textInput );
 			
 			// submit btn
-			submitButton = new Button();
-			submitButton.width = 50;
-			submitButton.label = "Submit";
-			addChild( submitButton );
+			_submitButton = new Button();
+			if ( _buttonLabel )
+			{
+				_submitButton.label = _buttonLabel;
+			}
+			_submitButton.width = 50;
+			_submitButton.addEventListener( MouseEvent.CLICK, onSubmitClick, false, 0, true );
+			addChild( _submitButton );
 		}
 		
 		/**
@@ -93,12 +117,12 @@ package com.collab.echo.view.hub.chat.display
 		override protected function layout():void
 		{
 			// textInput
-			textInput.x = 0;
-			textInput.y = 0;
+			_textInput.x = 0;
+			_textInput.y = 0;
 			
 			// submit btn
-			submitButton.x = textInput.width;
-			submitButton.y = 0;
+			_submitButton.x = _textInput.width;
+			_submitButton.y = 0;
 		}
 		
 		/**
@@ -106,10 +130,84 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		override protected function invalidate():void
 		{
-			removeChildFromDisplayList( textInput );
-			removeChildFromDisplayList( submitButton );
+			removeChildFromDisplayList( _textInput );
+			removeChildFromDisplayList( _submitButton );
 			
 			super.invalidate();
+		}
+		
+		/**
+		 * @return 
+		 */		
+		protected function submitMessage():ChatEvent
+		{
+			var event:ChatEvent;
+			
+			// the message typed by the user
+			var msg:String = _textInput.text;
+			
+			// only send the message if there's text
+			if ( msg.length > 0 )
+			{
+				event = new ChatEvent( ChatEvent.SUBMIT );
+				event.data = msg;
+				
+				// clear the user input text field
+				_textInput.text = "";
+			}
+			
+			return event;
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @param event
+		 */		
+		protected function onSubmitClick( event:MouseEvent ):void
+		{
+			event.stopPropagation();
+			
+			_event = submitMessage();
+			dispatchEvent( _event );
+			_event = null;
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function onKeyDown( event:KeyboardEvent ):void
+		{
+			event.stopPropagation();
+			
+			switch ( event.keyCode )
+			{
+				case Keyboard.ENTER:
+					_event = submitMessage();
+					break;
+				
+				case Keyboard.UP:
+					if ( event.altKey )
+					{
+						_event = new ChatEvent( ChatEvent.HISTORY_UP );
+					}
+					break;
+				
+				case Keyboard.DOWN:
+					if ( event.altKey )
+					{
+						_event = new ChatEvent( ChatEvent.HISTORY_DOWN );
+					}
+					break;
+			}
+			
+			if ( _event )
+			{
+				dispatchEvent( _event );
+				_event = null;
+			}
 		}
 		
 	}

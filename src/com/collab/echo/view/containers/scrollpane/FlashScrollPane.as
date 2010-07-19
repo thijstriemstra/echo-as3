@@ -26,6 +26,7 @@ package com.collab.echo.view.containers.scrollpane
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.utils.getQualifiedClassName;
 	
 	import org.osflash.thunderbolt.Logger;
@@ -196,6 +197,22 @@ package com.collab.echo.view.containers.scrollpane
 		}
 		
 		/**
+		 * @param arg0
+		 */		
+		override protected function keyUpHandler( arg0:KeyboardEvent ):void
+		{
+			super.keyUpHandler( arg0 );
+		}
+		
+		/**
+		 * @param arg0
+		 */		
+		override protected function keyDownHandler( arg0:KeyboardEvent ):void
+		{
+			super.keyDownHandler( arg0 );
+		}
+		
+		/**
 		 * @param event
 		 */		
 		protected function onScroll( event:ScrollEvent ):void
@@ -208,8 +225,16 @@ package com.collab.echo.view.containers.scrollpane
 					break;
 				
 				case ScrollBarDirection.VERTICAL:
-					Logger.debug( "vertical scroll: " + event.position + " of " +
-								  event.currentTarget.maxVerticalScrollPosition);
+					// HACK: to prevent vertical scrolling with keyboard
+					if ( verticalScrollPolicy == ScrollPolicy.OFF )
+					{
+						verticalScrollPosition = 0;
+					}
+					else
+					{
+						Logger.debug( "vertical scroll: " + event.position + " of " +
+								      event.currentTarget.maxVerticalScrollPosition );
+					}
 					break;
 			}
 		}

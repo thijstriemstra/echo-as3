@@ -250,7 +250,14 @@ package com.collab.echo.view.display
 		{
 			if ( child && contains( child ))
 			{
-				removeChild( child );
+				try
+				{
+					removeChild( child );
+				}
+				catch ( e:ArgumentError )
+				{
+				}
+				
 				child = null;
 			}
 		}

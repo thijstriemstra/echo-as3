@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
     import com.collab.echo.model.vo.UserVO;
+    import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
     import org.puremvc.as3.multicore.interfaces.IProxy;
@@ -55,6 +56,8 @@ package com.collab.echo.model.proxy
 		public static const ROOM_CLIENT_COUNT		: String = NAME + "_roomClientCount";
 		public static const ROOM_CLIENT_ADD			: String = NAME + "_roomClientAdd";
 		public static const ROOM_CLIENT_REMOVE		: String = NAME + "_roomClientRemove";
+		public static const SEND_MESSAGE			: String = NAME + "_sendMessage";
+		public static const RECEIVE_MESSAGE			: String = NAME + "_receiveMessage";
 		
 		// ====================================
 		// PROTECTED VARS
@@ -137,6 +140,21 @@ package com.collab.echo.model.proxy
 			_logging = logging;
 			
 			sendNotification( CONNECTING );
+		}
+		
+		/**
+		 * Send a message to a room.
+		 * 
+		 * @param type
+		 * @param message
+		 * @param includeSelf
+		 */		
+		public function sendMessage( type:String, message:BaseChatMessage, includeSelf:Boolean=false ):void
+		{
+			// XXX: vo this
+			var obj:Object = {'type': type, 'message': message};
+			
+			sendNotification( SEND_MESSAGE, obj );
 		}
 		
 		/**

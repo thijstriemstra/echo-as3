@@ -70,6 +70,8 @@ package com.collab.echo.view.hub.display
 		
 		internal var _skin						: Object;
 		internal var _paddingLeft				: int;
+		internal var _welcomeMessage			: String;
+		internal var _sendLabel					: String;
 		
 		// ====================================
 		// PROTECTED VARS
@@ -106,6 +108,24 @@ package com.collab.echo.view.hub.display
 		public function set paddingLeft( val:int ):void
 		{
 			_paddingLeft = val;
+			invalidate();
+		}
+		
+		/**
+		 * @param val
+		 */		
+		public function set welcomeMessage( val:String ):void
+		{
+			_welcomeMessage = val;
+			invalidate();
+		}
+		
+		/**
+		 * @param val
+		 */		
+		public function set sendLabel( val:String ):void
+		{
+			_sendLabel = val;
 			invalidate();
 		}
 		
@@ -191,6 +211,14 @@ package com.collab.echo.view.hub.display
 			chat.addMessage( message );
 		}
 		
+		/**
+		 * @param message
+		 */		
+		public function joinMessage( message:String ):void
+		{
+			chat.joinMessage( message );
+		}
+		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
@@ -220,7 +248,9 @@ package com.collab.echo.view.hub.display
 			
 			// chat
 			chat = _skin.chat;
-			chat.setSize( 350, 520 );
+			chat.welcomeMessage = _welcomeMessage;
+			chat.sendLabel = _sendLabel;
+			chat.setSize( 350, 385 );
 			pane.add( chat );
 			
 			// translator

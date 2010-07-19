@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
 	import com.collab.echo.model.vo.ResourceVO;
-	import com.collab.site.v2.ApplicationSettings;
 	
 	import org.puremvc.as3.multicore.interfaces.IProxy;
 	import org.puremvc.as3.multicore.patterns.proxy.Proxy;
@@ -119,9 +118,9 @@ package com.collab.echo.model.proxy
 					_loadedResources++;
 					
 					// send the notification to update the progress bar
-					var percentage:int = (_loadedResources * ApplicationSettings.DATA_LOADER_PERCENTAGE) /
+					var percentage:int = (_loadedResources * 20) /
 										  _resourceList.length;
-					sendNotification( LOADING_STEP, percentage + ApplicationSettings.CONTENT_LOADER_PERCENTAGE );
+					sendNotification( LOADING_STEP, percentage + 80 );
 					
 					// check if the process is completed
 					// if it's not completed and the resources have blocked the process chain

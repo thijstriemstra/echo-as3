@@ -16,29 +16,32 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.factory
+package com.collab.echo.view.hub.chat.messages
 {
 	/**
-	 * Chat message types.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class ChatMessageTypes
+	public class KickMessage extends TextChatMessage
 	{
-		// ====================================
-		// CONSTANTS
-		// ====================================
+		/**
+		 * @param data
+		 */		
+		public function KickMessage( data:String=null )
+		{
+			super( data );
+		}
 		
-		public static const TEXT 				: String = "text";
-		public static const TIME_ONLINE			: String = "timeonline";
-		public static const NICK				: String = "nick";
-		public static const PRIVATE_MESSAGE		: String = "msg";
-		public static const ME					: String = "me";
-		public static const KICK				: String = "kick";
-		public static const CLEAR				: String = "clear";
-		public static const IP					: String = "ip";
-		public static const HELP1				: String = "help";
-		public static const HELP2				: String = "?";
+		override protected function parseCommand():void
+		{
+			// change the users nickname
+			var userName:String = data.substr( 6 );
+			execute( userName );
+		}
+		
+		override public function toString():String
+		{
+			return "<KickMessage data='" + data + "' />";	
+		}
+		
 	}
-	
 }

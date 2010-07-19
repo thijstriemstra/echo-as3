@@ -29,7 +29,8 @@ package com.collab.echo.view.hub.chat.messages
 		// INTERNAL VARS
 		// ====================================
 		
-		internal var _data						: String;
+		internal var _data							: String;
+		internal var _privateMessage				: Boolean;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -47,12 +48,51 @@ package com.collab.echo.view.hub.chat.messages
 			}
 		}
 		
+		public function get privateMessage():Boolean
+		{
+			return _privateMessage;
+		}
+		public function set privateMessage( val:Boolean ):void
+		{
+			if ( val )
+			{
+				_privateMessage = val;
+			}
+		}
+		
 		/**
-		 * Constructor. 
+		 * Constructor.
+		 *  
+		 * @param data
+		 * @param privateMessage
 		 */		
-		public function BaseChatMessage( data:String=null )
+		public function BaseChatMessage( data:String=null, privateMessage:Boolean=false )
 		{
 			_data = data;
+			_privateMessage = privateMessage;
+			
+			parseCommand();
+		}
+		
+		/**
+		 * 
+		 */		
+		protected function parseCommand():void
+		{
+			// override in subclass
+		}
+		
+		/**
+		 * @param command
+		 */		
+		protected function execute( command:String ):void
+		{
+			// override in subclass
+		}
+		
+		public function toString():String
+		{
+			return "<BaseChatMessage data='" + data + "' />";	
 		}
 		
 	}

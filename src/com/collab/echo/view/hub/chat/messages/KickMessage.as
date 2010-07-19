@@ -24,11 +24,13 @@ package com.collab.echo.view.hub.chat.messages
 	public class KickMessage extends TextChatMessage
 	{
 		/**
+		 * Constructor.
+		 * 
 		 * @param data
 		 */		
-		public function KickMessage( data:String=null )
+		public function KickMessage( type:String, data:String, includeSelf:Boolean=false )
 		{
-			super( data );
+			super( type, data, includeSelf );
 		}
 		
 		override protected function parseCommand():void

@@ -18,23 +18,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import flash.events.EventDispatcher;
+
 	/**
 	 * ABSTRACT Class (should be subclassed and not instantiated).
 	 *  
 	 * @author Thijs Triemstra
 	 */	
-	public class BaseChatMessage
+	public class BaseChatMessage extends EventDispatcher
 	{
 		// ====================================
 		// INTERNAL VARS
 		// ====================================
 		
 		internal var _data							: String;
+		internal var _type							: String;
 		internal var _privateMessage				: Boolean;
+		internal var _includeSelf					: Boolean;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
+		
+		public function get type():String
+		{
+			return _type;
+		}
+		
+		public function get includeSelf():Boolean
+		{
+			return _includeSelf;
+		}
 		
 		public function get data():String
 		{
@@ -66,10 +80,14 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param data
 		 * @param privateMessage
 		 */		
-		public function BaseChatMessage( data:String=null, privateMessage:Boolean=false )
+		public function BaseChatMessage( type:String=null, data:String=null, includeSelf:Boolean=false )
 		{
+			_type = type;
 			_data = data;
-			_privateMessage = privateMessage;
+			_privateMessage = false;
+			_includeSelf = includeSelf;
+			
+			super();
 			
 			parseCommand();
 		}
@@ -90,7 +108,15 @@ package com.collab.echo.view.hub.chat.messages
 			// override in subclass
 		}
 		
-		public function toString():String
+		/**
+		 * 
+		 */		
+		public function load():void
+		{
+			// override in subclass
+		}
+		
+		override public function toString():String
 		{
 			return "<BaseChatMessage data='" + data + "' />";	
 		}

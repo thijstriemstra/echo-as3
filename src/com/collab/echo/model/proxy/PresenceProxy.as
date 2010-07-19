@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
     import com.collab.echo.model.vo.UserVO;
+    import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
@@ -65,6 +66,7 @@ package com.collab.echo.model.proxy
 		
 		protected var logLevel						: String;
 		protected var reactor						: *;
+		protected var message						: BaseChatMessage;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -145,16 +147,14 @@ package com.collab.echo.model.proxy
 		/**
 		 * Send a message to a room.
 		 * 
-		 * @param type
 		 * @param message
-		 * @param includeSelf
 		 */		
-		public function sendMessage( type:String, message:BaseChatMessage, includeSelf:Boolean=false ):void
+		public function sendMessage( message:BaseChatMessage ):void
 		{
-			// XXX: vo this
-			var obj:Object = {'type': type, 'message': message};
+			this.message = message;
+			this.message.addEventListener( ChatMessageEvent.LOAD_COMPLETE, onMessageComplete, false, 0, true );
 			
-			sendNotification( SEND_MESSAGE, obj );
+			sendNotification( SEND_MESSAGE, message );
 		}
 		
 		/**
@@ -211,6 +211,13 @@ package com.collab.echo.model.proxy
 		protected function roomCount( data:* ):void
 		{
 			sendNotification( ROOM_COUNT, data );
+		}
+		
+		/**
+		 * @param event
+		 */		
+		protected function onMessageComplete( event:ChatMessageEvent ):void
+		{
 		}
 		
 	}

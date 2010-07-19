@@ -28,9 +28,9 @@ package com.collab.echo.view.hub.chat.messages
 		 *  
 		 * @param data
 		 */		
-		public function ClearChatMessage( data:String=null )
+		public function ClearChatMessage( type:String, data:String, includeSelf:Boolean=false )
 		{
-			super( data );
+			super( type, data, includeSelf );
 		}
 		
 		override protected function parseCommand():void

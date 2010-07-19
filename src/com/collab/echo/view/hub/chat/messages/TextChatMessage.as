@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
+	
 	import org.osflash.thunderbolt.Logger;
 
 	/**
@@ -28,14 +30,67 @@ package com.collab.echo.view.hub.chat.messages
 		/**
 		 * Constructor.
 		 *  
+		 * @param type
 		 * @param data
+		 * @param includeSelf
 		 */		
-		public function TextChatMessage( data:String=null )
+		public function TextChatMessage( type:String=null, data:String=null, includeSelf:Boolean=false )
 		{
-			super( data );
+			super( type, data, includeSelf );
 		}
 		
 		override protected function parseCommand():void
+		{
+			// check it's a private message
+			parsePrivateMessage();
+			
+			execute( data );
+		}
+		
+		override protected function execute( message:String ):void
+		{
+			Logger.debug( "TextChatMessage.execute: " + message + " (private: " + privateMessage + ")" );
+			
+			var username:String = "";//remoteuser.getAttribute(null, "username");
+			var timestamp:Boolean = true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;	
+			
+			// Use the client id as a user name if the user hasn't set a name.
+			if (username == null)
+			{
+				//username = "user" + clientID;
+			}
+			
+			// add timestamp
+			var addStamp:String = "";
+			if ( timestamp )
+			{
+				addStamp = createClientStamp();
+			}
+			
+			// add hyperlinks to msg	
+			data = hiliteURLs( message );
+		}
+		
+		override public function load():void
+		{
+			Logger.debug( "TextChatMessage.load" );
+			
+			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
+			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
+			
+			// Send the message to the namespace.
+			//invokeOnNamespace("displayMessage", AppSettings.appNamespaceID, true, safeMsg);
+			
+			// XXX: dispatch after async completed
+			var evt:ChatMessageEvent = new ChatMessageEvent( ChatMessageEvent.LOAD_COMPLETE );
+			evt.data = this;
+			dispatchEvent( evt );
+		}
+		
+		/**
+		 * @param msg
+		 */		
+		protected function parsePrivateMessage():void
 		{
 			// check it's a private message
 			var msgsplit:Array = data.substr( 5 ).split( " : ", 2 );
@@ -48,49 +103,7 @@ package com.collab.echo.view.hub.chat.messages
 				privateMessage = true;
 			}
 			
-			execute( data );
-		}
-		
-		override protected function execute( message:String ):void
-		{
-			Logger.debug( "TextChatMessage.execute: " + message + " (private: " + privateMessage + ")" );
-			
-			// log the message
-			//var remoteuser:RemoteClient = getRemoteClientManager().getClient(getClientID());
-			var username:String = "";//remoteuser.getAttribute(null, "username");
-			
-			// Use the client id as a user name if the user hasn't set a name.
-			if (username == null)
-			{
-				//username = "user" + clientID;
-			}
-			
-			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
-			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
-			
-			// add hyperlinks to msg	
-			message = hiliteURLs(message);
-			
-			// The normal message we'll send to the server.
-			var safeMsg:String = '<![CDATA[' + message + ']]>';
-			
-			// Send the message to the namespace.
-			//invokeOnNamespace("displayMessage", AppSettings.appNamespaceID, true, safeMsg);
-		}
-		
-		/**
-		 * @param msg
-		 */		
-		protected function parsePrivateMessage( msg:String ):void
-		{
-			var timestamp:Boolean = true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;	
-			
-			// add Timestamp
-			var addStamp:String = "";
-			if (timestamp)
-			{
-				addStamp = createClientStamp();
-			}
+			// OLD
 			
 			/*
 			// lookup username			

@@ -25,34 +25,24 @@ package com.collab.echo.view.hub.chat.events
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class ChatEvent extends Event
+	public class ChatMessageEvent extends Event
 	{
 		// ====================================
-		// CONSTANTS
+		// COSNTANTS
 		// ====================================
 		
-		internal static const NAME				: String = "ChatEvent";
+		internal static const NAME				: String = "ChatMessageEvent";
 		
-		public static const SUBMIT				: String = NAME + "_submit";
-		public static const HISTORY_UP			: String = NAME + "_historyUp";
-		public static const HISTORY_DOWN		: String = NAME + "_historyDown";
+		public static const LOAD_COMPLETE		: String = NAME + "_loadComplete";
 		
-		// ====================================
-		// INTERNAL VARS
-		// ====================================
+		internal var _data						: BaseChatMessage;
 		
-		internal var _data						: String;
-		
-		// ====================================
-		// GETTER/SETTER
-		// ====================================
-		
-		public function get data()				: String
+		public function get data()				: BaseChatMessage
 		{
 			return _data;
 		}
 		
-		public function set data( val:String ):void
+		public function set data( val:BaseChatMessage ):void
 		{
 			_data = val;
 		}
@@ -61,9 +51,10 @@ package com.collab.echo.view.hub.chat.events
 		 * Constructor.
 		 * 
 		 * @param type
+		 * @param bubbles
+		 * @param cancelable
 		 */		
-		public function ChatEvent( type:String, bubbles:Boolean=true,
-								   cancelable:Boolean=true )
+		public function ChatMessageEvent( type:String, bubbles:Boolean=false, cancelable:Boolean=false )
 		{
 			super( type, bubbles, cancelable );
 		}
@@ -74,7 +65,7 @@ package com.collab.echo.view.hub.chat.events
 		
 		override public function toString():String
 		{
-			return "<ChatEvent type='" + type + "' data='" + _data + "' />";
+			return "<ChatMessageEvent type='" + type + "' data='" + _data + "' />";
 		}
 		
 	}

@@ -25,12 +25,14 @@ package com.collab.echo.view.hub.chat.messages
 	{
 		/**
 		 * Constructor.
-		 * 
+		 *  
+		 * @param type
 		 * @param data
+		 * @param includeSelf
 		 */		
-		public function IPChatMessage( data:String=null )
+		public function IPChatMessage( type:String, data:String, includeSelf:Boolean=false )
 		{
-			super( data );
+			super( type, data, includeSelf );
 		}
 		
 		override protected function parseCommand():void

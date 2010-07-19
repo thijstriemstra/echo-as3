@@ -223,10 +223,8 @@ package com.collab.echo.view.mediators
 		{
 			event.stopPropagation();
 			
-			trace('onSubmitChatMessage: ' + this + " : " + event);
-			
-			var msg:BaseChatMessage = messageCreator.create( event.data );
-			presence.sendMessage( PresenceProxy.SEND_MESSAGE, msg );
+			var msg:BaseChatMessage = messageCreator.create( PresenceProxy.SEND_MESSAGE, event.data, true );
+			presence.sendMessage( msg );
 		}
 		
 		/**

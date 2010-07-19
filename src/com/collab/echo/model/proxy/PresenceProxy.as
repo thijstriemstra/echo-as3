@@ -140,7 +140,7 @@ package com.collab.echo.model.proxy
         }
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 		
 		/**
@@ -157,6 +157,7 @@ package com.collab.echo.model.proxy
 			_hostUrl = host;
 			_logging = logging;
 			
+			// notify others
 			sendNotification( CONNECTING );
 		}
 		
@@ -184,6 +185,10 @@ package com.collab.echo.model.proxy
 			sendNotification( DISCONNECTING );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
 		/**
 		 * Triggered when the connection is established and ready for use.
 		 */		
@@ -201,6 +206,10 @@ package com.collab.echo.model.proxy
 		{
 			sendNotification( CONNECTION_CLOSED );
 		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
 		
 		/**
 		 * Triggered when a new room is added.

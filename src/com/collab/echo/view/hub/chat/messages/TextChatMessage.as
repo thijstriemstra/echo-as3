@@ -112,9 +112,6 @@ package com.collab.echo.view.hub.chat.messages
 			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
 			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
 			
-			// Send the message to the namespace.
-			//invokeOnNamespace("displayMessage", AppSettings.appNamespaceID, true, safeMsg);
-			
 			//Logger.debug( "TextChatMessage.load: " + this );
 			
 			// XXX: dispatch after async completed
@@ -226,68 +223,6 @@ package com.collab.echo.view.hub.chat.messages
 			{
 				return foundIt;
 			}
-		}
-		
-		/**
-		 * Hilite the urls in a message
-		 */
-		internal function hiliteURLs( msg:String ):String
-		{
-			//+
-			//escape all <
-			//-
-			var escaped:String = "";
-			var ltPos:Number = msg.indexOf("<");
-			while (ltPos != -1) {
-				escaped = msg.substring(0, ltPos) + "&lt;" + msg.substring(ltPos+1,msg.length);
-				//trace ("escaped: "+escaped);
-				msg = escaped;
-				ltPos = msg.indexOf("<");
-			}
-			
-			//+
-			//escape all >
-			//-
-			var escaped:String = "";
-			var ltPos = msg.indexOf(">");
-			while (ltPos != -1) {
-				escaped = msg.substring(0, ltPos) + "&gt;" + msg.substring(ltPos+1,msg.length);
-				//trace ("escaped: "+escaped);
-				msg = escaped;
-				ltPos = msg.indexOf(">");
-			}
-			
-			//+
-			//highlight urls
-			//-
-			var url_begin = msg.indexOf("http:");
-			if ( url_begin == -1 )
-				url_begin = msg.indexOf("www.");
-			
-			if ( url_begin == -1 )
-				return msg;
-			
-			var hilited = msg.substring(0, url_begin);
-			var url_end = msg.indexOf( " ", url_begin );
-			
-			var urlstr = "";
-			if ( url_end == -1 )
-				urlstr = msg.substring(url_begin);
-			else
-				urlstr = msg.substring(url_begin, url_end);
-			
-			var urlref = urlstr;
-			if ( urlstr.indexOf("www.") == 0 )
-				urlref = "http://" + urlstr;
-			
-			var trailer = "";
-			if ( url_end != -1 )
-				trailer = this.hiliteURLs( msg.substring(url_end) );
-			
-			hilited += "<font color=\"#0000FF\"><u><a href=\"" + urlref + "\" target=\"_blank\">" + urlstr + "</a></u></font>" + trailer;
-			//hilited += "<font color=\"#0000FF\"><u><a href=\"" + urlstr + "\">" + urlstr + "</a></u></font>" + trailer;
-			
-			return hilited;
 		}
 		
 	}

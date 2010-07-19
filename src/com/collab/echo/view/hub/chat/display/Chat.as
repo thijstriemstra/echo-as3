@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.display
 {
 	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.util.DateUtils;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.chat.messages.TextChatMessage;
 	import com.collab.echo.view.hub.interfaces.IPresence;
 	
 	import fl.controls.TextArea;
@@ -186,7 +186,7 @@ package com.collab.echo.view.hub.chat.display
 			// add timestamp
 			if ( _showTimestamp )
 			{
-				addStamp = TextChatMessage.createClientStamp();
+				addStamp = DateUtils.createClientStamp();
 			}
 			
 			// add text to chat
@@ -224,7 +224,7 @@ package com.collab.echo.view.hub.chat.display
 			// add timestamp
 			if ( _showTimestamp )
 			{
-				addStamp = TextChatMessage.createClientStamp();
+				addStamp = DateUtils.createClientStamp();
 			}
 			
 			// append to chat

@@ -125,32 +125,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<TextChatMessage type='" + type + "' data='" + data + "' local='" + local + "' />";	
-		}
-		
-		// ====================================
-		// STATIC METHODS
-		// ====================================
-		
-		/**
-		 * XXX: move to utils class
-		 * 
-		 * Create a client-side timestamp.
-		 */
-		public static function createClientStamp():String
-		{
-			var my_date:Date = new Date();
-			var theTime:Array = [my_date.getHours(), my_date.getMinutes(), my_date.getSeconds()];
-			var v:int = 0;
-			
-			for ( v; v<theTime.length; v++)
-			{
-				if (theTime[v] < 10) {
-					theTime[v] = "0" + theTime[v];
-				}
-			}
-			
-			return "(" + theTime[0] + ":" + theTime[1] + ":" + theTime[2] + ")";
+			return "<TextChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	
 		}
 		
 		// ====================================

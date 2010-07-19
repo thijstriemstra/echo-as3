@@ -24,6 +24,7 @@ package com.collab.echo.view.hub.display
 	import com.collab.echo.view.controls.buttons.BaseExpandButton;
 	import com.collab.echo.view.events.CommunicationPanelEvent;
 	import com.collab.echo.view.hub.chat.display.Chat;
+	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.view.hub.translator.Translator;
 	import com.collab.echo.view.hub.video.VideoScrollPane;
@@ -206,7 +207,7 @@ package com.collab.echo.view.hub.display
 		/**
 		 * @param message
 		 */		
-		public function addMessage( message:String ):void
+		public function addMessage( message:BaseChatMessage ):void
 		{
 			chat.addMessage( message );
 		}

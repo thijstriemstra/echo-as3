@@ -23,6 +23,8 @@ package com.collab.echo.view.hub.chat.display
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
+	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
+	import com.collab.echo.view.hub.chat.messages.TextChatMessage;
 	import com.collab.echo.view.hub.interfaces.IPresence;
 	
 	import fl.controls.TextArea;
@@ -51,6 +53,11 @@ package com.collab.echo.view.hub.chat.display
 		internal var _user							: *;
 		internal var _welcomeMessage				: String;
 		internal var _sendLabel						: String;
+		internal var _playSound						: Boolean;
+		internal var _showTimestamp					: Boolean;
+		
+		//var messageGeluid:Sound = new Sound();
+		//messageGeluid.attachSound("messageGeluid");
 		
 		// ====================================
 		// PROTECTED VARS
@@ -63,6 +70,24 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
+		
+		public function get playSound():Boolean
+		{
+			return _playSound;
+		}
+		public function set playSound( val:Boolean ):void
+		{
+			_playSound = val;
+		}
+
+		public function get showTimestamp():Boolean
+		{
+			return _showTimestamp;
+		}
+		public function set showTimestamp( val:Boolean ):void
+		{
+			_showTimestamp = val;
+		}
 		
 		public function get welcomeMessage()		: String
 		{
@@ -92,6 +117,10 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		public function Chat( width:Number=0, height:Number=0 )
 		{
+			messageHistory = [];
+			_playSound = false;
+			_showTimestamp = true;
+			
 			super( width, height );
 			show();
 		}
@@ -112,6 +141,9 @@ package com.collab.echo.view.hub.chat.display
 			{
 				textArea.htmlText += "<b><FONT COLOR='#000000'>" + getWelcomeLine() +
 					                 " " + client.username + "!</FONT></b><br>";
+				// XXX: localize
+				textArea.htmlText += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
+				textArea.htmlText += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
 			}
 		}
 		
@@ -128,66 +160,51 @@ package com.collab.echo.view.hub.chat.display
 		/**
 		 * Add a chat message to the <code>textArea</code>.
 		 * 
-		 * @param message
+		 * @param data
 		 */		
-		public function addMessage( message:String ):void
+		public function addMessage( data:BaseChatMessage ):void
 		{
-			// Retrieve the username for the client that sent the message.
-			var username		: String 		= "user"; //remoteuser.getAttribute(null, "username");
-			//var rank			: String 		= remoteuser.getAttribute(null, "rank");
-			var chatMax			: Number 		= textArea.maxVerticalScrollPosition;
-			var messageSound	: Boolean		= true; //getTargetMC().chat.menu_accordion.preferences_mc.messageSound_cb.selected;
-			var timestamp		: Boolean 		= true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
+			var chatMax			: Number = textArea.maxVerticalScrollPosition;
+			var addStamp		: String = "";
+			var text			: String = "";
 			
-			//var messageGeluid:Sound = new Sound();
-			//messageGeluid.attachSound("messageGeluid");
+			// update history
+			updateHistory( data.message );
 			
-			// Use the client id as a user name if the user hasn't set a name.
-			//if (username == null) {
-			//	username = "user" + clientID;
-			//}
-			
-			// cutoff lines
-			truncateChatField( textArea );
-			
-			// add Timestamp
-			var addStamp:String = "";
-			if (timestamp)
+			// play sound
+			if ( _playSound )
 			{
-				//addStamp = createClientStamp();
+				//messageGeluid.start();
 			}
 			
-			// Add the message to chat.
-			//if (clientID != getClientID())
-			//{	
-				// play Sound
-				if (messageSound)
-				{
-					//messageGeluid.start();
-				}
-				/*
-				// add tags for staff 
-				if (rank == "admin")
-				{
-				username = '<font color="#1D5EAB">'+username+'</font>';
-				}
-				else if (rank == "moderator")
-				{
-				username = '<font color="#1892AF">'+username+'</font>';
-				}
-				
-					// print external message
-					textArea.htmlText += addStamp + " <b>"+ username + ": </b>" + msg + "<br>";
-				*/
-				//}
-				//else
-				//{
-					// internal message
-					textArea.htmlText +=  addStamp + ' <font color="#990000"><b>' + username + ': </b>' + message + '</font><br>';
-				//}
-				
-				textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-			//}
+			// cutoff lines
+			if ( data.append )
+			{
+				truncateChatField( textArea );
+			}
+			
+			// add timestamp
+			if ( _showTimestamp )
+			{
+				addStamp = TextChatMessage.createClientStamp();
+			}
+			
+			// add text to chat
+			text = addStamp + " " + data.message;
+			
+			if ( data.append )
+			{
+				// append
+				textArea.htmlText += text;
+			}
+			else
+			{
+				// replace
+				textArea.htmlText = text;
+			}
+
+			// scroll chat to bottom
+			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 		
 		/**
@@ -196,93 +213,25 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		public function joinMessage( message:String ):void
 		{
-			var timestamp		: Boolean 		= true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
-			var messageSound	: Boolean 		= true; //getTargetMC().chat.menu_accordion.preferences_mc.messageSound_cb.selected;
-			//var userGeluid		: Sound 		= new Sound();
-			//userGeluid.attachSound("userGeluid");
+			var addStamp		: String = "";
 			
-			// cutoff lines
-			truncateChatField( textArea );
-			
-			// add Timestamp
-			var addStamp:String = "";
-			if (timestamp)
+			// play sound
+			if ( _playSound )
 			{
-				//addStamp = createClientStamp();
+				//messageGeluid.start();
 			}
 			
-			// play sound for incoming user
-			if (messageSound)
+			// add timestamp
+			if ( _showTimestamp )
 			{
-				//userGeluid.start();
+				addStamp = TextChatMessage.createClientStamp();
 			}
 			
+			// append to chat
 			textArea.htmlText += addStamp + " " + message;
+			
+			// scroll chat to bottom
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-		}
-		
-		/**
-		 * Send message to all clients in the room.
-		 * 
-		 * @param msg
-		 */
-		public function sendMessage( msg:String ): void
-		{
-			trace("Chat.sendMessage( " + msg + " )" );
-			
-			// only send the message if there's text
-			if ( msg.length > 0 )
-			{
-				// update history
-				updateHistory( msg );
-				
-				// YAH
-				
-				// scroll the chat txt
-				textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-			}
-		}
-		
-		/**
-		 * Look up the clientID and userName of a selected client.
-		 */
-		protected function findUserName (userName:String):Object
-		{
-			var foundIt:Object 		= new Object();
-			var clientList:Array=[];// 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			var attrList:Array=[];// 		= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			
-			for (var i:int = 0; i < attrList.length; i++) 
-			{
-				var clientName:String = attrList[i].value.toLowerCase();
-				
-				// give user generic name
-				if (clientName == null)
-				{
-					clientName = "user"+attrList[i].clientID;
-				}
-				
-				// find other name
-				if (clientName == userName.toLowerCase()) {
-					foundIt.clientID = attrList[i].clientID;
-				}
-				/*
-				if (attrList[i].clientID == getClientID()) {
-					foundIt.myName = attrList[i].value;
-					foundIt.myID = attrList[i].clientID;
-				}
-				*/
-			}
-			
-			// if the username wasnt found
-			if (foundIt.clientID == undefined)
-			{
-				return undefined;
-			} 
-			else 
-			{
-				return foundIt;
-			}
 		}
 		
 		// ====================================

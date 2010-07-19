@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.messages
 {
 	/**
+	 * Find out how long a user has spent online, by username.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class TimeOnlineMessage extends TextChatMessage
@@ -26,75 +28,66 @@ package com.collab.echo.view.hub.chat.messages
 		/**
 		 * Constructor.
 		 *  
+		 * @param type
 		 * @param data
 		 */		
-		public function TimeOnlineMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function TimeOnlineMessage( type:String, data:String )
 		{
-			super( type, data, includeSelf );
+			super( type, data, false, true, false, true );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * Find out how long user is online. 
+		 */		
 		override protected function parseCommand():void
 		{
-			// calculate the time the selected user's online
-			var userNaam:String = data.substr( 12 );
-			execute( userNaam );
-		}
-
-		/**
-		 * Find out how long user is online.
-		 * 
-		 * @param message
-		 */
-		override protected function execute( message:String ):void
-		{
-			var timestamp	: Boolean 		= true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
 			//var clientList 					= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
 			//var attrList 					= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
 			var foundIt		: Boolean 		= false;
-			
-			// cutoff lines
-			//truncateChatField( textArea );
+			var userNaam:String = data.substr( 12 );
 			
 			/*
 			for (var i:int = 0; i < attrList.length; i++) 
 			{
-			var clientName:String = attrList[i].value.toLowerCase();
+				var clientName:String = attrList[i].value.toLowerCase();
+				
+				// give user generic name
+				if (clientName == undefined)
+				{
+					clientName = "user"+attrList[i].clientID;
+				}
 			
-			// give user generic name
-			if (clientName == undefined)
-			{
-			clientName = "user"+attrList[i].clientID;
-			}
-			
-			if (clientName == userName.toLowerCase())
-			{
-			// Invoke the function on the client.
-			//invokeOnClient("sendTimer", attrList[i].clientID, userName);
-			
-			foundIt = true;
-			break;
-			}
+				if (clientName == userNaam.toLowerCase())
+				{
+					// Invoke the function on the client.
+					//invokeOnClient("sendTimer", attrList[i].clientID, userNaam);
+					
+					foundIt = true;
+					break;
+				}
 			}
 			*/
 			
 			// if the username wasn't found
 			if (!foundIt) 
 			{
-				// add Timestamp
-				var addStamp:String = "";
-				if (timestamp)
-				{
-					addStamp = createClientStamp();
-				}
-				
-				//textArea.htmlText += addStamp + " <b>Username not found.</b>";
-				//textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
+				data = " <b>Username not found.</b>";
 			}
+			
+			execute( data );
 		}
+
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{
-			return "<TimeOnlineMessage data='" + data + "' />";	
+			return "<TimeOnlineMessage data='" + data + "' local='" + local + "' />";	
 		}
 		
 	}

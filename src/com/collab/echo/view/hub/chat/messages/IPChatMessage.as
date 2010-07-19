@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.messages
 {
 	/**
+	 * Check the IP address for a client by username.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class IPChatMessage extends TextChatMessage
@@ -28,77 +30,39 @@ package com.collab.echo.view.hub.chat.messages
 		 *  
 		 * @param type
 		 * @param data
-		 * @param includeSelf
 		 */		
-		public function IPChatMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function IPChatMessage( type:String, data:String )
 		{
-			super( type, data, includeSelf );
+			super( type, data, false, true, false, true );
 		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		override protected function parseCommand():void
 		{
 			// the username
 			var username:String = data.substr( 4 );
 			
+			// XXX: check if username exists and get it's client object
+			
+			// retrieve the IP address for the client
+			var ipaddress:String = sender.getIP();
+			
+			data = "<b>IPAddress for " + username + ": "+ ipaddress +" </b>";
+			
 			// get the users ip
-			execute( username );
+			execute( data );
 		}
 		
-		/**
-		 * Check the IP address.
-		 * 
-		 * @param message
-		 */
-		override protected function execute( message:String ):void
-		{
-			var timestamp	: Boolean 	= true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;
-			var clientList	:Array =[]; 		//		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			var attrList 	:Array=[];//			= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			var foundIt		:Boolean 				= null;
-			
-			for (var i = 0; i < attrList.length; i++)
-			{
-				var clientName:String = attrList[i].value;
-				
-				// give user generic name
-				if (clientName == undefined) {
-					clientName = "user"+attrList[i].clientID;
-				}
-				
-				// find other name
-				if (clientName.toLowerCase() == message.toLowerCase()) {
-					foundIt = attrList[i].clientID;
-					break;
-				}
-			}
-			
-			// add Timestamp
-			var addStamp:String = "";
-			if (timestamp) 
-			{
-				addStamp = createClientStamp() + " ";
-			} 
-			
-			// if the username wasnt found
-			if ( foundIt == undefined )
-			{
-				//textArea.htmlText += addStamp + " <b>Username not found.</b>";
-				
-			}
-			else
-			{
-				// Retrieve the IPAddress for the client.
-				var ipaddress:String = "";//remoteuser.getAttribute(null, "_IP");
-				
-				//textArea.htmlText += addStamp + "<b>IPAddress for " + clientName + ": "+ ipaddress +" </b>";
-			}
-			
-			//textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-		}
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{
-			return "<IPChatMessage data='" + data + "' />";	
+			return "<IPChatMessage data='" + data + "' local='" + local + "' />";	
 		}
 		
 	}

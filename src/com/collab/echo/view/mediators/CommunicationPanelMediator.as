@@ -87,10 +87,9 @@ package com.collab.echo.view.mediators
          */
         public function CommunicationPanelMediator( viewComponent:BaseCommunicationPanel ) 
         {
-            // pass the viewComponent to the superclass where 
-            // it will be stored in the inherited viewComponent property
             super( NAME, viewComponent );
 			
+			// init vars
 			messageCreator = new ChatMessageCreator();
 			
 			// listen for events
@@ -176,7 +175,6 @@ package com.collab.echo.view.mediators
         override public function handleNotification( note:INotification ):void 
         {
         	var name:String = note.getName();
-			var baseRoomEvent:BaseRoomEvent;
 			
 			switch ( name )
 			{
@@ -193,7 +191,7 @@ package com.collab.echo.view.mediators
 					break;
 				
 				case PresenceProxy.RECEIVE_MESSAGE:
-					panel.addMessage( note.getBody() as String );
+					panel.addMessage( BaseChatMessage( note.getBody() ));
 					break;
 			}
         }

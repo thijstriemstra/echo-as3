@@ -25,27 +25,33 @@ package com.collab.echo.view.hub.chat.messages
 	{
 		/**
 		 * Constructor.
-		 *  
+		 * 
+		 * @param type
 		 * @param data
 		 */		
-		public function ClearChatMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function ClearChatMessage( type:String, data:String )
 		{
-			super( type, data, includeSelf );
+			super( type, data, false, true, false, false );
 		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		override protected function parseCommand():void
 		{
-			// clear chat txt window
-			//textArea.htmlText = "<b>Cleared.</b>";
+			// XXX: localize
+			execute( "Cleared chat." );
 		}
 		
-		override protected function execute( message:String ):void
-		{
-		}
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{
-			return "<ClearChatMessage data='" + data + "' />";	
+			return "<ClearChatMessage type='" + type + "' data='" + data +
+				   "' local='" + local + "' />";		
 		}
 		
 	}

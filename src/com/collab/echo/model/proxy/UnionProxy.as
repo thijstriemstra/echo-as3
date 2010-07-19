@@ -18,12 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
+	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
+	
 	import net.user1.logger.Logger;
+	import net.user1.reactor.ClientManager;
 	import net.user1.reactor.ConnectionManager;
 	import net.user1.reactor.HTTPConnection;
+	import net.user1.reactor.IClient;
 	import net.user1.reactor.MessageManager;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
+	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomManager;
 	import net.user1.reactor.RoomManagerEvent;
 	import net.user1.reactor.XMLSocketConnection;
@@ -58,9 +63,19 @@ package com.collab.echo.model.proxy
 			return Reactor( reactor ).isReady();
 		}
 		
+		public function get self():IClient
+		{
+			return Reactor( reactor ).self();
+		}
+		
 		public function get roomManager():RoomManager
 		{
 			return Reactor( reactor ).getRoomManager();
+		}
+		
+		public function get clientManager():ClientManager
+		{
+			return Reactor( reactor ).getClientManager();
 		}
 		
 		/**
@@ -140,9 +155,9 @@ package com.collab.echo.model.proxy
 
 			// in response to this watchForRooms() call, the RoomManager will trigger 
 			// RoomManagerEvent.ROOM_ADDED and RoomManagerEvent.ROOM_REMOVED events.
-			roomManager.addEventListener( RoomManagerEvent.ROOM_ADDED, roomAddedListener );
-			roomManager.addEventListener( RoomManagerEvent.ROOM_REMOVED, roomRemovedListener );
-			roomManager.addEventListener( RoomManagerEvent.ROOM_COUNT, roomCountListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_ADDED, 		roomAddedListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_REMOVED, 	roomRemovedListener );
+			roomManager.addEventListener( RoomManagerEvent.ROOM_COUNT, 		roomCountListener );
 		}
 		
 		/**
@@ -158,6 +173,46 @@ package com.collab.echo.model.proxy
 		// ====================================
 
 		/**
+		 * @param event
+		 */		
+		override protected function onMessageComplete( event:ChatMessageEvent ):void
+		{
+			super.onMessageComplete( event );
+			
+			if ( message.local )
+			{
+				// dont send with union
+				trace( "Invoke local command");
+				message.local = true;
+				message.sender = self;
+				sendNotification( RECEIVE_MESSAGE, message );
+			}
+			else
+			{
+				// send with union
+				roomManager.sendMessage( message.type, [ "collab.global" ], message.includeSelf,
+									 	 null, message.message );
+			}
+		}
+		
+		/**
+		 * @param fromClient
+		 * @param toRoom
+		 * @param chatMessage
+		 */		
+		public function centralChatListener( fromClient:IClient, toRoom:Room,
+											 chatMessage:String ):void
+		{
+			message = messageCreator.create( PresenceProxy.RECEIVE_MESSAGE, chatMessage );
+			message.sender = fromClient;
+			message.receiver = self;
+			
+			trace("centralChatListener: " + message);
+			
+			sendNotification( PresenceProxy.RECEIVE_MESSAGE, message );
+		}
+		
+		/**
 		 * Triggered when the connection is established and ready for use.
 		 *  
 		 * @param event
@@ -165,6 +220,8 @@ package com.collab.echo.model.proxy
 		protected function unionConnectionReady( event:ReactorEvent ):void 
 		{
 			event.preventDefault();
+			
+			messageManager.addMessageListener( PresenceProxy.SEND_MESSAGE, centralChatListener );
 			
 			connectionReady();
 		}

@@ -20,6 +20,7 @@ package com.collab.echo.model.proxy
 {
     import com.collab.echo.model.vo.UserVO;
     import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
+    import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
@@ -67,6 +68,7 @@ package com.collab.echo.model.proxy
 		protected var logLevel						: String;
 		protected var reactor						: *;
 		protected var message						: BaseChatMessage;
+		protected var messageCreator				: ChatMessageCreator;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -121,6 +123,7 @@ package com.collab.echo.model.proxy
             super ( NAME, data );
 			
 			_ready = false;
+			messageCreator = new ChatMessageCreator();
         }
 		
 		// ====================================
@@ -151,10 +154,13 @@ package com.collab.echo.model.proxy
 		 */		
 		public function sendMessage( message:BaseChatMessage ):void
 		{
-			this.message = message;
-			this.message.addEventListener( ChatMessageEvent.LOAD_COMPLETE, onMessageComplete, false, 0, true );
-			
 			sendNotification( SEND_MESSAGE, message );
+			
+			// load the message (can be async)
+			this.message = message;
+			this.message.addEventListener( ChatMessageEvent.LOAD_COMPLETE,
+										   onMessageComplete, false, 0, true );
+			this.message.load();	
 		}
 		
 		/**
@@ -218,6 +224,7 @@ package com.collab.echo.model.proxy
 		 */		
 		protected function onMessageComplete( event:ChatMessageEvent ):void
 		{
+			this.message = event.data;
 		}
 		
 	}

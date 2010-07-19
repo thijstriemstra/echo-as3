@@ -25,40 +25,56 @@ package com.collab.echo.view.hub.chat.messages
 	{
 		/**
 		 * Constructor.
-		 *  
+		 * 
+		 * @param type
 		 * @param data
 		 */		
-		public function HelpChatMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function HelpChatMessage( type:String, data:String )
 		{
-			super( type, data, includeSelf );
+			super( type, data, false, true, false, true );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * Compile list based on available commands. 
+		 */		
 		override protected function parseCommand():void
 		{
-			/*
-			textArea.text += "<b>Command List</b><br>";
-			textArea.text += "/msg [nickname] : [string]     ; send someone a private message.<br>";
-			textArea.text += "/nick [nickname]   ; change your nickname.<br>";
-			textArea.text += "/stats    ; FlashCom application bandwidth stats.<br>";
-			textArea.text += "/clear     ; clear the text in the chat window.<br>";
-			textArea.text += "/timeOnline [nickname]  ; find out how long the user has been online.<br>";
-			textArea.text += "/quote    ; random quote from 'famous' people.<br>";
-			textArea.text += "/me [message] <br>";
-			textArea.text += "/eliza [string]   ; Eliza is a 24/7 psychotherapist.<br>";
-			textArea.text += "/alice [message]   ; A.L.I.C.E. is a natural language robot.<br>";
-			textArea.text += "/mrtrivia [message]   ; QuizMaster bot.<br>";
-			// add staff items
+			// XXX: localize
+			// XXX: compile list based on available commands, something like BaseChatMessage.help
+			data = "<b>Command List</b><br>";
+			data += "/msg [nickname] : [string]     ; send someone a private message.<br>";
+			data += "/nick [nickname]   ; change your nickname.<br>";
+			data += "/stats    ; FlashCom application bandwidth stats.<br>";
+			data += "/clear     ; clear the text in the chat window.<br>";
+			data += "/timeOnline [nickname]  ; find out how long the user has been online.<br>";
+			data += "/quote    ; random quote from 'famous' people.<br>";
+			data += "/me [message] <br>";
+			data += "/eliza [string]   ; Eliza is a 24/7 psychotherapist.<br>";
+			data += "/alice [message]   ; A.L.I.C.E. is a natural language robot.<br>";
+			data += "/mrtrivia [message]   ; QuizMaster bot.";
+			
+			// XXX: add additional app items
 			//if (_root.userMode != "guest")
 			//{
-			textArea.text += "/ip [nickname]   ; get user's IP address.<br>";
-			textArea.text += "/kick [nickname]   ; kick a user.<br>";
+				//data += "/ip [nickname]   ; get user's IP address.<br>";
+				//data += "/kick [nickname]   ; kick a user.<br>";
 			//}
-			*/
+			
+			execute( data );
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{
-			return "<HelpChatMessage data='" + data + "' />";	
+			return "<HelpChatMessage type='" + type + "' data='" + data +
+				   "' local='" + local + "' append='" + append + "' />";		
 		}
 		
 	}

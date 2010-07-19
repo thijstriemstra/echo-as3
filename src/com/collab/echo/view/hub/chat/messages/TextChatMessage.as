@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
 	
 	import org.osflash.thunderbolt.Logger;
@@ -33,10 +34,15 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param type
 		 * @param data
 		 * @param includeSelf
+		 * @param local
+		 * @param privateMessage
+		 * @param append
 		 */		
-		public function TextChatMessage( type:String=null, data:String=null, includeSelf:Boolean=false )
+		public function TextChatMessage( type:String=null, data:String=null, includeSelf:Boolean=false,
+										 local:Boolean=false, privateMessage:Boolean=false,
+										 append:Boolean=true )
 		{
-			super( type, data, includeSelf );
+			super( type, data, includeSelf, local, privateMessage, append );
 		}
 		
 		override protected function parseCommand():void
@@ -47,39 +53,61 @@ package com.collab.echo.view.hub.chat.messages
 			execute( data );
 		}
 		
-		override protected function execute( message:String ):void
+		/**
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
 		{
-			Logger.debug( "TextChatMessage.execute: " + message + " (private: " + privateMessage + ")" );
+			/*
+			Logger.debug( "TextChatMessage.execute: " + command + " (private: " +
+						  privateMessage + ", local: " + local + ")" );
+			*/
 			
-			var username:String = "";//remoteuser.getAttribute(null, "username");
-			var timestamp:Boolean = true; //getTargetMC().chat.menu_accordion.preferences_mc.timestamp_cb.selected;	
+			var username:String = sender.getAttribute( UserVO.USERNAME );
 			
 			// Use the client id as a user name if the user hasn't set a name.
-			if (username == null)
+			if ( username == null )
 			{
-				//username = "user" + clientID;
-			}
-			
-			// add timestamp
-			var addStamp:String = "";
-			if ( timestamp )
-			{
-				addStamp = createClientStamp();
+				username = "user" + sender.getClientID();
 			}
 			
 			// add hyperlinks to msg	
-			data = hiliteURLs( message );
+			//data = hiliteURLs( command );
+			
+			if ( local )
+			{
+				// local message
+				message = '<font color="#990000"><b>' + username + ': </b>' + command + '</font><br/>';
+			}
+			else
+			{
+				// remote message
+				
+				/*
+				// add tags for staff 
+				if (rank == "admin")
+				{
+				username = '<font color="#1D5EAB">'+username+'</font>';
+				}
+				else if (rank == "moderator")
+				{
+				username = '<font color="#1892AF">'+username+'</font>';
+				}
+				*/
+				
+				message = "<b>"+ username + ": </b>" + command;
+			}
 		}
 		
 		override public function load():void
 		{
-			Logger.debug( "TextChatMessage.load" );
-			
 			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
 			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
 			
 			// Send the message to the namespace.
 			//invokeOnNamespace("displayMessage", AppSettings.appNamespaceID, true, safeMsg);
+			
+			//Logger.debug( "TextChatMessage.load: " + this );
 			
 			// XXX: dispatch after async completed
 			var evt:ChatMessageEvent = new ChatMessageEvent( ChatMessageEvent.LOAD_COMPLETE );
@@ -88,6 +116,8 @@ package com.collab.echo.view.hub.chat.messages
 		}
 		
 		/**
+		 * XXX: probably needs to be determined outside the message.
+		 * 
 		 * @param msg
 		 */		
 		protected function parsePrivateMessage():void
@@ -103,12 +133,10 @@ package com.collab.echo.view.hub.chat.messages
 				privateMessage = true;
 			}
 			
-			// OLD
+			// lookup username			
+			var foundIt:Boolean = findUserName( userName );
 			
 			/*
-			// lookup username			
-			var foundIt = findUserName(userName);
-			
 			// if the username wasnt found
 			if ( foundIt.clientID == undefined )
 			{
@@ -131,6 +159,7 @@ package com.collab.echo.view.hub.chat.messages
 				{
 					textArea.text += addStamp + " <b>Please don't send yourself private messages.</b>";
 				}
+			
 			}
 			*/
 			
@@ -141,19 +170,66 @@ package com.collab.echo.view.hub.chat.messages
 		}
 		
 		/**
+		 * XXX: move to utils class
+		 * 
 		 * Create a client-side timestamp.
 		 */
-		internal function createClientStamp():String
+		public static function createClientStamp():String
 		{
 			var my_date:Date = new Date();
 			var theTime:Array = [my_date.getHours(), my_date.getMinutes(), my_date.getSeconds()];
+			var v:int = 0;
 			
-			for (var v:int=0; v<theTime.length; v++) {
+			for ( v; v<theTime.length; v++)
+			{
 				if (theTime[v] < 10) {
 					theTime[v] = "0" + theTime[v];
 				}
 			}
+			
 			return "(" + theTime[0] + ":" + theTime[1] + ":" + theTime[2] + ")";
+		}
+		
+		/**
+		 * Look up the clientID and userName of a selected client.
+		 */
+		protected function findUserName( userName:String ):Object
+		{
+			var foundIt:Object 		= new Object();
+			var clientList:Array=[];// 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
+			var attrList:Array=[];// 		= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
+			
+			for (var i:int = 0; i < attrList.length; i++) 
+			{
+				var clientName:String = attrList[i].value.toLowerCase();
+				
+				// give user generic name
+				if (clientName == null)
+				{
+					clientName = "user"+attrList[i].clientID;
+				}
+				
+				// find other name
+				if (clientName == userName.toLowerCase()) {
+					foundIt.clientID = attrList[i].clientID;
+				}
+				/*
+				if (attrList[i].clientID == getClientID()) {
+				foundIt.myName = attrList[i].value;
+				foundIt.myID = attrList[i].clientID;
+				}
+				*/
+			}
+			
+			// if the username wasnt found
+			if (foundIt.clientID == undefined)
+			{
+				return undefined;
+			} 
+			else 
+			{
+				return foundIt;
+			}
 		}
 		
 		/**
@@ -220,7 +296,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<TextChatMessage data='" + data + "' />";	
+			return "<TextChatMessage type='" + type + "' data='" + data + "' local='" + local + "' />";	
 		}
 		
 	}

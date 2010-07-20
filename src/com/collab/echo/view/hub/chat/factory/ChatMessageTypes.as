@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.factory
 {
 	/**
-	 * Chat message types.
+	 * The <code>ChatMessageTypes</code> class is an enumeration of constant values
+	 * representing different types for a chat message.
 	 * 
 	 * @author Thijs Triemstra
 	 */	

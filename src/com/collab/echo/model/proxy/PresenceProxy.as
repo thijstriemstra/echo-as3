@@ -24,6 +24,8 @@ package com.collab.echo.model.proxy
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
+    import net.user1.reactor.IClient;
+    
     import org.puremvc.as3.multicore.interfaces.IProxy;
     import org.puremvc.as3.multicore.patterns.proxy.Proxy;
     
@@ -186,11 +188,35 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Get user's IP address by username.
 		 * 
 		 * @param name
 		 * @return 
 		 */		
 		public function getIPByUserName( name:String ):String
+		{
+			// override in subclass
+			return null;
+		}
+		
+		/**
+		 * Get client by attribute.
+		 * 
+		 * @param attrName
+		 * @param attrValue
+		 * @return 
+		 */		
+		public function getClientByAttribute( attrName:String, attrValue:String ):*
+		{
+			// override in subclass
+			return null;
+		}
+		
+		/**
+		 * @param id
+		 * @return 
+		 */		
+		public function getClientById( id:String ):*
 		{
 			// override in subclass
 			return null;

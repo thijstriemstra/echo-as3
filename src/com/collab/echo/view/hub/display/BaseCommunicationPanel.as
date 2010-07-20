@@ -52,7 +52,7 @@ package com.collab.echo.view.hub.display
 	 * @see com.collab.echo.view.hub.chat.Chat Chat
 	 * @see com.collab.echo.view.hub.translator.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.Whiteboard Whiteboard
-	 * @see com.collab.echo.view.hub.VideoScrollPane VideoScrollPane
+	 * @see com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane VideoScrollPane
 	 * @see com.collab.echo.view.controls.buttons.BaseExpandButton BaseExpandButton
 	 * 
 	 * @author Thijs Triemstra

@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.messages
 {
 	import com.collab.echo.model.proxy.PresenceProxy;
+	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 
 	/**
 	 * Find out how long a user has spent online, by username.
@@ -35,7 +37,7 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param presence
 		 */		
 		public function TimeOnlineMessage( type:String, data:String,
-										   presence:PresenceProxy=null )
+										   presence:PresenceProxy )
 		{
 			super( type, data, presence, false, true, false, true );
 		}
@@ -49,37 +51,65 @@ package com.collab.echo.view.hub.chat.messages
 		 */		
 		override protected function parseCommand():void
 		{
-			//var clientList 					= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			//var attrList 					= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			var foundIt		: Boolean 		= false;
-			var userNaam:String = data.substr( 12 );
+			var username:String = data.substr( ChatMessageTypes.TIME_ONLINE.length + 2 );
+			var id:String = username.substr( 4 );
+			var time:Number;
+			var user:*;
 			
-			/*
-			for (var i:int = 0; i < attrList.length; i++) 
+			if ( username )
 			{
-				var clientName:String = attrList[i].value.toLowerCase();
-				
-				// give user generic name
-				if (clientName == undefined)
-				{
-					clientName = "user"+attrList[i].clientID;
-				}
-			
-				if (clientName == userNaam.toLowerCase())
-				{
-					// Invoke the function on the client.
-					//invokeOnClient("sendTimer", attrList[i].clientID, userNaam);
-					
-					foundIt = true;
-					break;
-				}
+				user = presence.getClientByAttribute( UserVO.USERNAME, username );
 			}
-			*/
 			
 			// if the username wasn't found
-			if (!foundIt) 
+			if ( user == null ) 
 			{
-				data = " <b>Username not found.</b>";
+				if ( username.length > 4 )
+				{
+					user = presence.getClientById( id );
+				}
+				
+				if ( user )
+				{
+					time = user.getConnectTime();
+				}
+				else
+				{
+					// XXX: localize
+					data = " <b>Username not found.</b>";
+				}
+			}
+			else
+			{
+				time = user.getConnectTime();
+			}
+			
+			if ( time > 0 )
+			{
+				var userDate:Date = new Date( time );
+				var now:Date = new Date();
+				var ms:int = now.valueOf() - userDate.valueOf();
+				var minutes:Number = Math.floor( ms / 60000 );
+				var seconds:Number = Math.floor(( ms - ( minutes * 60000 )) / 1000 );
+				var totalHours:Number;
+				var hours:Number;
+				
+				// if its longer than an hour
+				if ( minutes >= 60 )
+				{
+					totalHours = minutes / 60;
+					hours = Math.floor( totalHours );
+					minutes = Math.floor( 60 * ( totalHours - hours ));
+					
+					// XXX: localize
+					data = "<b>" + username + " has been online for " + hours + " hours, " +
+						   minutes + " minutes and " + seconds + " seconds.</b>";
+				} 
+				else 
+				{
+					data = "<b>" + username + " has been online for " + minutes +
+						   " minutes and " + seconds + " seconds.</b>";
+				}
 			}
 			
 			execute( data );

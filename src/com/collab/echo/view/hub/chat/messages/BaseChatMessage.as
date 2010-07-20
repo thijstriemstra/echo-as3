@@ -71,6 +71,8 @@ package com.collab.echo.view.hub.chat.messages
 		}
 		
 		/**
+		 * XXX: no union specific references here.
+		 * 
 		 * @return 
 		 */		
 		public function get sender():IClient
@@ -187,9 +189,13 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function BaseChatMessage( type:String=null, data:String=null, presence:PresenceProxy=null,
-										 includeSelf:Boolean=false, local:Boolean=false,
-										 privateMessage:Boolean=false, append:Boolean=true )
+		public function BaseChatMessage( type:String=null,
+										 data:String=null,
+										 presence:PresenceProxy=null,
+										 includeSelf:Boolean=false,
+										 local:Boolean=false,
+										 privateMessage:Boolean=false,
+										 append:Boolean=true )
 		{
 			_type = type;
 			_message = data;
@@ -238,7 +244,8 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<BaseChatMessage data='" + data + "' local='" + _local + "' />";	
+			return "<BaseChatMessage data='" + data + "' local='" + _local +
+				   "' append='" + append + "' />";	
 		}
 		
 	}

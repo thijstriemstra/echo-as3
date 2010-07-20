@@ -167,8 +167,8 @@ package com.collab.echo.model.proxy
 			if ( id )
 			{
 				// XXX: remove hardcoded name length
-				var poss:Array = [ clientManager.getClientByAttribute( UserVO.USERNAME, name ),
-								   clientManager.getClient( id ) ];
+				var poss:Array = [ getClientByAttribute( UserVO.USERNAME, name ),
+								   getClientById( id ) ];
 				
 				for each ( client in poss )
 				{
@@ -182,6 +182,27 @@ package com.collab.echo.model.proxy
 			}
 			
 			return ip;
+		}
+		
+		/**
+		 * Get user's client by attribute.
+		 * 
+		 * @param attrName
+		 * @param attrValue
+		 * @return 
+		 */		
+		override public function getClientByAttribute( attrName:String, attrValue:String ):*
+		{
+			return clientManager.getClientByAttribute( attrName, attrValue );
+		}
+		
+		/**
+		 * @param id
+		 * @return 
+		 */		
+		override public function getClientById( id:String ):*
+		{
+			return clientManager.getClient( id );
 		}
 		
 		/**

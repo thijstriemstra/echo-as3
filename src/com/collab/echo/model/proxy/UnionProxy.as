@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
+	import com.collab.echo.view.hub.chat.messages.JoinChatMessage;
 	
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;
@@ -53,6 +54,8 @@ package com.collab.echo.model.proxy
 		 * Cannonical name of this <code>Proxy</code>.
 		 */    
 		public static const NAME				: String = "UnionProxy";
+		
+		protected var joinedChat:Boolean = false;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
@@ -182,8 +185,6 @@ package com.collab.echo.model.proxy
 			if ( message.local )
 			{
 				// perform only locally
-				trace( "Invoke local command" );
-				
 				message.local = true;
 				message.sender = self;
 				sendNotification( RECEIVE_MESSAGE, message );
@@ -192,8 +193,8 @@ package com.collab.echo.model.proxy
 			{
 				// send remotely
 				// XXX: remove hardcoded room name
-				roomManager.sendMessage( message.type, [ "collab.global" ], message.includeSelf,
-									 	 null, message.message );
+				roomManager.sendMessage( message.type, [ "collab.global" ],
+										 message.includeSelf, null, message.message );
 			}
 		}
 		
@@ -209,7 +210,20 @@ package com.collab.echo.model.proxy
 			message.sender = fromClient;
 			message.receiver = self;
 			
-			trace( "centralChatListener: " + message );
+			if ( message is JoinChatMessage )
+			{
+				// only allow to send join message once
+				if ( joinedChat == false )
+				{
+					joinedChat = true;
+				}
+				else
+				{
+					return;
+				}
+			}
+			
+			//log( "UnionProxy.centralChatListener: " + message );
 			
 			sendNotification( RECEIVE_MESSAGE, message );
 		}
@@ -223,6 +237,7 @@ package com.collab.echo.model.proxy
 		{
 			event.preventDefault();
 			
+			// listen for events
 			messageManager.addMessageListener( SEND_MESSAGE, centralChatListener );
 			
 			connectionReady();

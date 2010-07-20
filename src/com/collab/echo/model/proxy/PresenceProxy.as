@@ -24,8 +24,6 @@ package com.collab.echo.model.proxy
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
-    import net.user1.reactor.IClient;
-    
     import org.puremvc.as3.multicore.interfaces.IProxy;
     import org.puremvc.as3.multicore.patterns.proxy.Proxy;
     

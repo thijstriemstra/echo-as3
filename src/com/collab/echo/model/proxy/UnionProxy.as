@@ -283,7 +283,7 @@ package com.collab.echo.model.proxy
 				}
 			}
 			
-			//log( "UnionProxy.centralChatListener: " + message );
+			log( "UnionProxy.centralChatListener: " + message );
 			
 			sendNotification( RECEIVE_MESSAGE, message );
 		}

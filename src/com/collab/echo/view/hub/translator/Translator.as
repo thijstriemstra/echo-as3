@@ -58,7 +58,7 @@ package com.collab.echo.view.hub.translator
 		{
 			// background
 			background = DrawingUtils.drawFill( viewWidth, viewHeight,
-												0, StyleDict.YELLOW1, 1 ); 
+												0, StyleDict.YELLOW1, 0 ); 
 			addChild( background );
 		}
 		

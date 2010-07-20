@@ -206,11 +206,11 @@ package com.collab.echo.view.mediators
 		 */		
 		override protected function onCreationComplete( event:Event=null ):void
 		{
-			super.onCreationComplete( event );
-			
 			// XXX: localize
 			panel.welcomeMessage = "Hello!";
 			panel.sendLabel = "Submit";
+			
+			super.onCreationComplete( event );
 		}
 		
 		/**

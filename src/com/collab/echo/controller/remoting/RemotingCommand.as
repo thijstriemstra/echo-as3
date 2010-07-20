@@ -46,7 +46,7 @@ package com.collab.echo.controller.remoting
 		 * Name of the calling notification that is mapped to this command. 
 		 */		
 		protected var name 		: String;
-		
+
 		/**
 		 * Payload.
 		 */		

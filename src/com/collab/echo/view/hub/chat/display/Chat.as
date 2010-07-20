@@ -240,7 +240,7 @@ package com.collab.echo.view.hub.chat.display
 			// background
 			_background = DrawingUtils.drawFill( viewWidth, viewHeight,
 												0, StyleDict.GREEN1, 1 ); 
-			addChild( _background );
+			//addChild( _background );
 			
 			// inputField
 			inputField = new ChatInputField( _background.width );

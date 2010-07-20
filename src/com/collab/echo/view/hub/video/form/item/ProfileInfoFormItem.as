@@ -88,7 +88,7 @@ package com.collab.echo.view.hub.video.form.item
 			// label
 			labelField = TextUtils.createTextField( null, _label, 12, StyleDict.WHITE,
 													false, false );
-			labelField.border = true;
+			labelField.border = false;
 			labelField.borderColor = StyleDict.RED1;
 			addChild( labelField );
 			
@@ -97,7 +97,7 @@ package com.collab.echo.view.hub.video.form.item
 												    false, false );
 			valueField.selectable = true;
 			valueField.mouseEnabled = true;
-			valueField.border = true;
+			valueField.border = false;
 			valueField.borderColor = StyleDict.RED1;
 			addChild( valueField );
 		}

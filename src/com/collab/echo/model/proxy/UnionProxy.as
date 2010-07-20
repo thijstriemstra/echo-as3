@@ -181,15 +181,17 @@ package com.collab.echo.model.proxy
 			
 			if ( message.local )
 			{
-				// dont send with union
-				trace( "Invoke local command");
+				// perform only locally
+				trace( "Invoke local command" );
+				
 				message.local = true;
 				message.sender = self;
 				sendNotification( RECEIVE_MESSAGE, message );
 			}
 			else
 			{
-				// send with union
+				// send remotely
+				// XXX: remove hardcoded room name
 				roomManager.sendMessage( message.type, [ "collab.global" ], message.includeSelf,
 									 	 null, message.message );
 			}
@@ -203,13 +205,13 @@ package com.collab.echo.model.proxy
 		public function centralChatListener( fromClient:IClient, toRoom:Room,
 											 chatMessage:String ):void
 		{
-			message = messageCreator.create( PresenceProxy.RECEIVE_MESSAGE, chatMessage );
+			message = messageCreator.create( RECEIVE_MESSAGE, chatMessage );
 			message.sender = fromClient;
 			message.receiver = self;
 			
-			trace("centralChatListener: " + message);
+			trace( "centralChatListener: " + message );
 			
-			sendNotification( PresenceProxy.RECEIVE_MESSAGE, message );
+			sendNotification( RECEIVE_MESSAGE, message );
 		}
 		
 		/**
@@ -221,7 +223,7 @@ package com.collab.echo.model.proxy
 		{
 			event.preventDefault();
 			
-			messageManager.addMessageListener( PresenceProxy.SEND_MESSAGE, centralChatListener );
+			messageManager.addMessageListener( SEND_MESSAGE, centralChatListener );
 			
 			connectionReady();
 		}

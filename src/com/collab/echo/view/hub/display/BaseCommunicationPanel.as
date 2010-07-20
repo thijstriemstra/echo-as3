@@ -212,14 +212,6 @@ package com.collab.echo.view.hub.display
 			chat.addMessage( message );
 		}
 		
-		/**
-		 * @param message
-		 */		
-		public function joinMessage( message:String ):void
-		{
-			chat.joinMessage( message );
-		}
-		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================

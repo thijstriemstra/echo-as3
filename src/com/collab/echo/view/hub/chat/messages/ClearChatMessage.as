@@ -41,7 +41,7 @@ package com.collab.echo.view.hub.chat.messages
 		override protected function parseCommand():void
 		{
 			// XXX: localize
-			execute( "Cleared chat." );
+			execute( "<b>Cleared chat.</b>" );
 		}
 		
 		// ====================================

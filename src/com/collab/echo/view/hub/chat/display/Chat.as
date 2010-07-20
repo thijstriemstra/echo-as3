@@ -24,13 +24,13 @@ package com.collab.echo.view.hub.chat.display
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
+	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.interfaces.IPresence;
 	
 	import fl.controls.TextArea;
 	
 	import flash.display.Sprite;
-	import flash.system.Capabilities;
 	
 	/**
 	 * Chat.
@@ -136,14 +136,12 @@ package com.collab.echo.view.hub.chat.display
 		{
 			//Logger.debug( "Chat.addUser: " + client );
 			
-			// show welcome message for this client
+			// show welcome message for local client
 			if ( client.client.isSelf() )
 			{
-				textArea.htmlText += "<b><FONT COLOR='#000000'>" + getWelcomeLine() +
-					                 " " + client.username + "!</FONT></b><br>";
-				// XXX: localize
-				textArea.htmlText += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
-				textArea.htmlText += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
+				var evt:ChatEvent = new ChatEvent( ChatEvent.JOIN );
+				evt.data = "/" + ChatMessageTypes.JOIN + " " + client.username;
+				dispatchEvent( evt );
 			}
 		}
 		
@@ -206,34 +204,7 @@ package com.collab.echo.view.hub.chat.display
 			// scroll chat to bottom
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
-		
-		/**
-		 * @param message
-		 * @return 
-		 */		
-		public function joinMessage( message:String ):void
-		{
-			var addStamp		: String = "";
-			
-			// play sound
-			if ( _playSound )
-			{
-				//messageGeluid.start();
-			}
-			
-			// add timestamp
-			if ( _showTimestamp )
-			{
-				addStamp = DateUtils.createClientStamp();
-			}
-			
-			// append to chat
-			textArea.htmlText += addStamp + " " + message;
-			
-			// scroll chat to bottom
-			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-		}
-		
+
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
@@ -338,46 +309,6 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		// INTERNAL METHODS
 		// ====================================
-		
-		/**
-		 * Create a welcome message depending on the nationality.
-		 * 
-		 * @return
-		 */
-		internal function getWelcomeLine():String
-		{
-			var welcome:String = "Welcome";
-			
-			// XXX: localize
-			switch ( Capabilities.language )
-			{
-				case "fr":
-					welcome = "Bienvenue";
-					break;
-				
-				case "de":
-					welcome = "Willkommen";
-					break;
-				
-				case "nl":
-					welcome = "Welkom";
-					break;
-				
-				case "it":
-					welcome = "Benvenuto";
-					break;
-				
-				case "pt":
-					welcome = "Boa vinda";
-					break;
-				
-				case "es":
-					welcome = "Recepción";
-					break;
-			}
-			
-			return welcome;
-		}
 		
 		/**
 		 * Trim the chat text field.

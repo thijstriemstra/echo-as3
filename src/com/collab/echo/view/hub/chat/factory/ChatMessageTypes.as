@@ -37,6 +37,7 @@ package com.collab.echo.view.hub.chat.factory
 		public static const KICK				: String = "kick";
 		public static const CLEAR				: String = "clear";
 		public static const IP					: String = "ip";
+		public static const JOIN				: String = "join";
 		public static const HELP1				: String = "help";
 		public static const HELP2				: String = "?";
 	}

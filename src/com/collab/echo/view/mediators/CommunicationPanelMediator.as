@@ -94,6 +94,7 @@ package com.collab.echo.view.mediators
 			
 			// listen for events
 			panel.addEventListener( ChatEvent.SUBMIT, onSubmitChatMessage, false, 0, true );
+			panel.addEventListener( ChatEvent.JOIN, onSubmitChatMessage, false, 0, true );
         }
 		
 		// ====================================
@@ -221,7 +222,8 @@ package com.collab.echo.view.mediators
 		{
 			event.stopPropagation();
 			
-			var msg:BaseChatMessage = messageCreator.create( PresenceProxy.SEND_MESSAGE, event.data, true );
+			var msg:BaseChatMessage = messageCreator.create( PresenceProxy.SEND_MESSAGE,
+															 event.data, true );
 			presence.sendMessage( msg );
 		}
 		

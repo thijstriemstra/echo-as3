@@ -34,6 +34,7 @@ package com.collab.echo.view.hub.chat.events
 		internal static const NAME				: String = "ChatEvent";
 		
 		public static const SUBMIT				: String = NAME + "_submit";
+		public static const JOIN				: String = NAME + "_join";
 		public static const HISTORY_UP			: String = NAME + "_historyUp";
 		public static const HISTORY_DOWN		: String = NAME + "_historyDown";
 		
@@ -61,6 +62,8 @@ package com.collab.echo.view.hub.chat.events
 		 * Constructor.
 		 * 
 		 * @param type
+		 * @param bubbles
+		 * @param cancelable
 		 */		
 		public function ChatEvent( type:String, bubbles:Boolean=true,
 								   cancelable:Boolean=true )

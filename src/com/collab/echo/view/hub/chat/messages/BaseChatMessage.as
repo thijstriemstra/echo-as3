@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+	
 	import flash.events.EventDispatcher;
 	
 	import net.user1.reactor.IClient;
@@ -47,11 +49,30 @@ package com.collab.echo.view.hub.chat.messages
 		internal var _includeSelf					: Boolean;
 		internal var _local							: Boolean;
 		internal var _append						: Boolean;
+		internal var _presence						: PresenceProxy;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
+		public function get presence():PresenceProxy
+		{
+			return _presence;
+		}
+		public function set presence( val:PresenceProxy ):void
+		{
+			if ( val )
+			{
+				_presence = val;
+			}
+		}
+		
+		/**
+		 * @return 
+		 */		
 		public function get sender():IClient
 		{
 			return _sender;
@@ -71,6 +92,9 @@ package com.collab.echo.view.hub.chat.messages
 			}
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get receiver():IClient
 		{
 			return _receiver;
@@ -90,11 +114,17 @@ package com.collab.echo.view.hub.chat.messages
 			}
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get append():Boolean
 		{
 			return _append;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get local():Boolean
 		{
 			return _local;
@@ -114,6 +144,9 @@ package com.collab.echo.view.hub.chat.messages
 			return _includeSelf;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get privateMessage():Boolean
 		{
 			return _privateMessage;
@@ -148,17 +181,19 @@ package com.collab.echo.view.hub.chat.messages
 		 *  
 		 * @param type
 		 * @param data
+		 * @param presence
 		 * @param includeSelf
 		 * @param local
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function BaseChatMessage( type:String=null, data:String=null,
+		public function BaseChatMessage( type:String=null, data:String=null, presence:PresenceProxy=null,
 										 includeSelf:Boolean=false, local:Boolean=false,
 										 privateMessage:Boolean=false, append:Boolean=true )
 		{
 			_type = type;
 			_message = data;
+			_presence = presence;
 			_privateMessage = privateMessage;
 			_includeSelf = includeSelf;
 			_local = local;

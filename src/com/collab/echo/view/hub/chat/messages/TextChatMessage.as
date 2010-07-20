@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
 
@@ -38,11 +39,11 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function TextChatMessage( type:String=null, data:String=null, includeSelf:Boolean=false,
-										 local:Boolean=false, privateMessage:Boolean=false,
-										 append:Boolean=true )
+		public function TextChatMessage( type:String=null, data:String=null, presence:PresenceProxy=null,
+										 includeSelf:Boolean=false, local:Boolean=false,
+										 privateMessage:Boolean=false, append:Boolean=true )
 		{
-			super( type, data, includeSelf, local, privateMessage, append );
+			super( type, data, presence, includeSelf, local, privateMessage, append );
 		}
 		
 		// ====================================
@@ -109,6 +110,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function load():void
 		{
+			// XXX: addd logging
 			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
 			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
 			

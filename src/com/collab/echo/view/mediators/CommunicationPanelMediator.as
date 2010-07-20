@@ -222,7 +222,7 @@ package com.collab.echo.view.mediators
 		{
 			event.stopPropagation();
 			
-			var msg:BaseChatMessage = messageCreator.create( PresenceProxy.SEND_MESSAGE,
+			var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
 															 event.data, true );
 			presence.sendMessage( msg );
 		}

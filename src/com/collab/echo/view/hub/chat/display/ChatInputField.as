@@ -171,8 +171,12 @@ package com.collab.echo.view.hub.chat.display
 			event.stopPropagation();
 			
 			_event = submitMessage();
-			dispatchEvent( _event );
-			_event = null;
+			
+			if ( _event )
+			{
+				dispatchEvent( _event );
+				_event = null;
+			}
 		}
 		
 		/**

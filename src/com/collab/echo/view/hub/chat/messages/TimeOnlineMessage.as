@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+
 	/**
 	 * Find out how long a user has spent online, by username.
 	 * 
@@ -30,10 +32,12 @@ package com.collab.echo.view.hub.chat.messages
 		 *  
 		 * @param type
 		 * @param data
+		 * @param presence
 		 */		
-		public function TimeOnlineMessage( type:String, data:String )
+		public function TimeOnlineMessage( type:String, data:String,
+										   presence:PresenceProxy=null )
 		{
-			super( type, data, false, true, false, true );
+			super( type, data, presence, false, true, false, true );
 		}
 		
 		// ====================================

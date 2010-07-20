@@ -31,7 +31,7 @@ package com.collab.echo.view.hub.chat.messages
 		 */		
 		public function ClearChatMessage( type:String, data:String )
 		{
-			super( type, data, false, true, false, false );
+			super( type, data, null, false, true, false, false );
 		}
 		
 		// ====================================

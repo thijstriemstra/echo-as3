@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
 	import com.collab.echo.view.hub.chat.messages.JoinChatMessage;
 	
@@ -55,7 +56,14 @@ package com.collab.echo.model.proxy
 		 */    
 		public static const NAME				: String = "UnionProxy";
 		
-		protected var joinedChat:Boolean = false;
+		// ====================================
+		// PROTECTED VARS
+		// ====================================
+		
+		/**
+		 * 
+		 */		
+		protected var joinedChat				: Boolean = false;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
@@ -146,6 +154,37 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * 
+		 * @param name
+		 * @return 
+		 */		
+		override public function getIPByUserName( name:String ):String
+		{
+			var ip:String;
+			var client:IClient;
+			var id:String = name.substr( 4 );
+			
+			if ( id )
+			{
+				// XXX: remove hardcoded name length
+				var poss:Array = [ clientManager.getClientByAttribute( UserVO.USERNAME, name ),
+								   clientManager.getClient( id ) ];
+				
+				for each ( client in poss )
+				{
+					if ( client )
+					{
+						// UNION BUG: this only works for own client
+						ip = client.getIP();
+						break;
+					}
+				}
+			}
+			
+			return ip;
+		}
+		
+		/**
 		 * Ask to be notified when a room with the qualifier
 		 * <code>roomQualifier</code> is added to or removed from the server. 
 		 * 
@@ -206,7 +245,7 @@ package com.collab.echo.model.proxy
 		public function centralChatListener( fromClient:IClient, toRoom:Room,
 											 chatMessage:String ):void
 		{
-			message = messageCreator.create( RECEIVE_MESSAGE, chatMessage );
+			message = messageCreator.create( this, RECEIVE_MESSAGE, chatMessage );
 			message.sender = fromClient;
 			message.receiver = self;
 			

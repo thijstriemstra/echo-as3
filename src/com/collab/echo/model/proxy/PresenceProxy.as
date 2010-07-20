@@ -185,6 +185,17 @@ package com.collab.echo.model.proxy
 			sendNotification( DISCONNECTING );
 		}
 		
+		/**
+		 * 
+		 * @param name
+		 * @return 
+		 */		
+		public function getIPByUserName( name:String ):String
+		{
+			// override in subclass
+			return null;
+		}
+		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================

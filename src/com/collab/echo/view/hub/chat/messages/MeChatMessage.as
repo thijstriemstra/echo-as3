@@ -35,7 +35,7 @@ package com.collab.echo.view.hub.chat.messages
 		 */		
 		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, true, false, false, true );
+			super( type, data, null, true, false, false, true );
 		}
 		
 		// ====================================

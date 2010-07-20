@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	
 	import flash.system.Capabilities;
@@ -32,10 +33,12 @@ package com.collab.echo.view.hub.chat.messages
 		 * 
 		 * @param type
 		 * @param data
+		 * @param presence
 		 */		
-		public function JoinChatMessage( type:String=null, data:String=null )
+		public function JoinChatMessage( type:String=null, data:String=null,
+										 presence:PresenceProxy=null )
 		{
-			super( type, data, true, false, false, true );
+			super( type, data, presence, true, false, false, true );
 		}
 		
 		// ====================================

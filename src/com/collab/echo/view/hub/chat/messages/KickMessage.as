@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+
 	/**
 	 * @author Thijs Triemstra
 	 */	
@@ -26,11 +28,13 @@ package com.collab.echo.view.hub.chat.messages
 		/**
 		 * Constructor.
 		 * 
+		 * @param type
 		 * @param data
+		 * @param presence
 		 */		
-		public function KickMessage( type:String, data:String, includeSelf:Boolean=false )
+		public function KickMessage( type:String, data:String, presence:PresenceProxy )
 		{
-			super( type, data, includeSelf );
+			super( type, data, presence, false, true, true, true );
 		}
 		
 		override protected function parseCommand():void

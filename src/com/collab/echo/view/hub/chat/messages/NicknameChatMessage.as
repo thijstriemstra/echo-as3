@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+
 	/**
 	 * Change the users nickname.
 	 * 
@@ -30,10 +32,11 @@ package com.collab.echo.view.hub.chat.messages
 		 * 
 		 * @param type
 		 * @param data
+		 * @param presence
 		 */		
-		public function NicknameChatMessage( type:String, data:String )
+		public function NicknameChatMessage( type:String, data:String, presence:PresenceProxy=null )
 		{
-			super( type, data, false, true, false, true );
+			super( type, data, presence, false, true, false, true );
 		}
 		
 		// ====================================

@@ -18,6 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
+
 	/**
 	 * Check the IP address for a client by username.
 	 * 
@@ -30,10 +33,11 @@ package com.collab.echo.view.hub.chat.messages
 		 *  
 		 * @param type
 		 * @param data
+		 * @param presence
 		 */		
-		public function IPChatMessage( type:String, data:String )
+		public function IPChatMessage( type:String, data:String, presence:PresenceProxy )
 		{
-			super( type, data, false, true, false, true );
+			super( type, data, presence, false, true, false, true );
 		}
 		
 		// ====================================
@@ -43,14 +47,18 @@ package com.collab.echo.view.hub.chat.messages
 		override protected function parseCommand():void
 		{
 			// the username
-			var username:String = data.substr( 4 );
+			var username:String = data.substr( ChatMessageTypes.IP.length + 2 );
 			
-			// XXX: check if username exists and get it's client object
+			// retrieve the IP address for the client by username
+			var ip:String = presence.getIPByUserName( username );
 			
-			// retrieve the IP address for the client
-			var ipaddress:String = sender.getIP();
+			// XXX: localize
+			if ( ip == null )
+			{
+				ip = "Username not found.";
+			}
 			
-			data = "<b>IPAddress for " + username + ": "+ ipaddress +" </b>";
+			data = "<b>IP address for " + username + ": "+ ip +" </b>";
 			
 			// get the users ip
 			execute( data );

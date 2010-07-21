@@ -354,6 +354,8 @@ package com.collab.echo.view.mediators
 			if ( user )
 			{
 				totalClients = event.data.getNumClients();
+				
+				// update view
 				panel.numClients( totalClients );
 			}
 		}
@@ -369,11 +371,12 @@ package com.collab.echo.view.mediators
 			
 			if ( user )
 			{
+				// update view
 				panel.addOccupant( user );
 				
 				// show join message for:
 				// - users that are added *after* the local user *joined*
-				// - local user itself
+				// - local user
 				if ( joined || user.client.isSelf() )
 				{
 					var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
@@ -396,7 +399,14 @@ package com.collab.echo.view.mediators
 			
 			if ( user )
 			{
+				// update view
 				panel.removeOccupant( user );
+				
+				// show leave message
+				var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
+																 ChatMessageTypes.LEAVE, false );
+				msg.sender = user.client;
+				presence.sendMessage( msg );
 			}
 		}
 		
@@ -408,7 +418,7 @@ package com.collab.echo.view.mediators
 		protected function joinedRoom( event:BaseRoomEvent ):void
 		{
 			// Note: union returns null for roomEvent.getClient(),
-			// so we use Reactor.self() instead, this may change in
+			// so we use presence.self instead, this may change in
 			// a future version of union. We invoke the parseEvent
 			// anyway to get a notification etc
 			user = parseEvent( PresenceProxy.ROOM_JOINED, event );

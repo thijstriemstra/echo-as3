@@ -167,10 +167,19 @@ package com.collab.echo.view.hub.display
 		 *  
 		 * @param client
 		 */		
-		public function addOccupant( client:* ):UserVO
+		public function addOccupant( client:UserVO ):UserVO
 		{
-			// override in subclass
-			return null;
+			// add the user to the data provider
+			data.push( client );
+			
+			//Logger.debug( 'BaseCommunicationPanel.addOccupant: ' + client );
+			
+			// add occupant to components
+			videoPane.addUser( client );
+			chat.addUser( client );
+			whiteboard.addUser( client );
+			
+			return client;
 		}
 		
 		/**
@@ -178,10 +187,31 @@ package com.collab.echo.view.hub.display
 		 *  
 		 * @param client
 		 */		
-		public function removeOccupant( client:* ):UserVO
+		public function removeOccupant( client:UserVO ):UserVO
 		{
-			// override in subclass
-			return null;
+			var myGuy:UserVO;
+			var index:int = 0;
+			
+			// find the user
+			for each ( myGuy in data )
+			{
+				if ( myGuy == client )
+				{
+					// remove the user from the data provider
+					data.splice( index, 1 );
+					break;
+				}
+				index++;
+			}
+			
+			//Logger.debug( 'BaseCommunicationPanel.removeOccupant: ' + client );
+			
+			// remove occupant from components
+			videoPane.removeUser( client );
+			whiteboard.removeUser( client );
+			chat.removeUser( client );
+			
+			return client;
 		}
 		
 		/**
@@ -191,17 +221,23 @@ package com.collab.echo.view.hub.display
 		 */		
 		public function numClients( totalClients:int ):void
 		{
-			// override in subclass
+			chat.numClients( totalClients );
+			videoPane.numClients( totalClients );
+			whiteboard.numClients( totalClients );
 		}
 		
 		/**
 		 * Joined the room.
 		 * 
-		 * @param data
+		 * @param client
 		 */		
-		public function joinedRoom( data:* ):void
+		public function joinedRoom( client:UserVO ):void
 		{
-			// override in subclass
+			//Logger.debug( 'BaseCommunicationPanel.joinedRoom: ' + client );
+			
+			chat.joinedRoom( client );
+			videoPane.joinedRoom( client );
+			whiteboard.joinedRoom( client );
 		}
 		
 		/**

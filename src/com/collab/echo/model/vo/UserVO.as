@@ -30,6 +30,8 @@ package com.collab.echo.model.vo
 		public static const EMAIL		: String = "email";
 		public static const AGE			: String = "age";
 		
+		public static const fields		: Array = [ USERNAME, LOCATION, WEBSITE, EMAIL, AGE ];
+		
 		// ====================================
 		// PUBLIC VARS
 		// ====================================
@@ -41,7 +43,7 @@ package com.collab.echo.model.vo
 		public var email				: String;
 		public var age					: String;
 		public var client				: *;
-		public var fields				: Array = [ USERNAME, LOCATION, WEBSITE, EMAIL, AGE ];
+		
 		
 		/**
 		 * Constructor.

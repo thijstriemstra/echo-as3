@@ -32,6 +32,7 @@ package com.collab.echo.view.events
 		internal static const NAME				: String = "BaseRoomEvent";
 		
 		public static const JOIN_RESULT			: String = NAME + "_joinResult";
+		public static const SYNCHRONIZE			: String = NAME + "_synchronize";
 		public static const OCCUPANT_COUNT		: String = NAME + "_occupantCount";
 		public static const ADD_OCCUPANT		: String = NAME + "_addOccupant";
 		public static const REMOVE_OCCUPANT		: String = NAME + "_removeOccupant";
@@ -43,11 +44,13 @@ package com.collab.echo.view.events
 		
 		internal var _data 						: *;
 		
-		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get data()				: *
 		{
 			return _data;
@@ -62,6 +65,7 @@ package com.collab.echo.view.events
 		public function BaseRoomEvent( type:String, data:* )
 		{
 			super( type, false, true );
+			
 			_data = data;
 		}
 		

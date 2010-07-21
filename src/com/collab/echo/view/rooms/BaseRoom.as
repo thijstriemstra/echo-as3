@@ -48,6 +48,11 @@ package com.collab.echo.view.rooms
 		 */		
 		protected var name		: String;
 		
+		/**
+		 * The optional string password used to enter the room.
+		 */		
+		protected var password	: String;
+		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
@@ -187,6 +192,19 @@ package com.collab.echo.view.rooms
 		protected function attributeUpdate( event:*=null ):void
 		{
 			_evt = new BaseRoomEvent( BaseRoomEvent.ATTRIBUTE_UPDATE, event );
+			dispatchEvent( _evt );
+		}
+		
+		/**
+		 * The room has been synchronized to match the state of the server.
+		 * 
+		 * <p>A room is synchronized when the current client joins or observes it.</p>
+		 * 
+		 * @param event
+		 */		
+		protected function synchronize( event:*=null ):void
+		{
+			_evt = new BaseRoomEvent( BaseRoomEvent.SYNCHRONIZE, event );
 			dispatchEvent( _evt );
 		}
 		

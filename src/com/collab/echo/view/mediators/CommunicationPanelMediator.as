@@ -20,16 +20,20 @@ package com.collab.echo.view.mediators
 {
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.RoomVO;
+	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.util.URLUtils;
 	import com.collab.echo.view.events.BaseRoomEvent;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
+	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
 	import flash.events.Event;
 	
-	import net.user1.reactor.Client;
+	import net.user1.reactor.IClient;
+	import net.user1.reactor.RoomEvent;
 	
 	import org.puremvc.as3.multicore.interfaces.INotification;
 
@@ -50,11 +54,16 @@ package com.collab.echo.view.mediators
          */    	
         public static const NAME			: String = "CommunicationPanelMediator";
         
+		protected static const EMPTY_FIELD	: String = "...";
+		
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
 		protected var messageCreator		: ChatMessageCreator;
+		protected var user					: UserVO;
+		protected var roomEvent				: RoomEvent;
+		protected var joined				: Boolean;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -91,53 +100,15 @@ package com.collab.echo.view.mediators
 			
 			// init vars
 			messageCreator = new ChatMessageCreator();
+			joined = false;
 			
-			// listen for events
+			// listen for component events
 			panel.addEventListener( ChatEvent.SUBMIT, onSubmitChatMessage, false, 0, true );
-			panel.addEventListener( ChatEvent.JOIN, onSubmitChatMessage, false, 0, true );
         }
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
-		
-		/**
-		 * Create rooms and listen for events.
-		 */		
-		protected function createRooms():void
-		{
-			var newRooms:Vector.<BaseRoom> = new Vector.<BaseRoom>();
-			var room:BaseRoom;
-			var item:RoomVO;
-
-			for each ( item in _rooms )
-			{
-				// create new room and listen for events
-				room = new item.type( item.id );
-				room.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
-				room.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
-				room.addEventListener( BaseRoomEvent.OCCUPANT_COUNT, numClients );
-				room.addEventListener( BaseRoomEvent.JOIN_RESULT, joinedRoom );
-				room.addEventListener( BaseRoomEvent.ATTRIBUTE_UPDATE, attributeUpdate );
-				newRooms.push( room );
-			}
-			
-			if ( presence )
-			{
-				presence.rooms = newRooms;
-			}
-		}
-		
-		/**
-		 * XXX: refactor this union specific class.
-		 * 
-		 * @param client
-		 * @return 
-		 */		
-		protected function getUnionOccupant( client:* ):Client
-		{
-			return Client( client );	
-		}
 		
 		/**
 		 * Create presence connection.
@@ -196,6 +167,147 @@ package com.collab.echo.view.mediators
 					break;
 			}
         }
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * Create rooms and listen for events.
+		 */		
+		protected function createRooms():void
+		{
+			var newRooms:Vector.<BaseRoom> = new Vector.<BaseRoom>();
+			var room:BaseRoom;
+			var item:RoomVO;
+			
+			for each ( item in _rooms )
+			{
+				// create new room and listen for events
+				room = new item.type( item.id );
+				room.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
+				room.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
+				room.addEventListener( BaseRoomEvent.OCCUPANT_COUNT, numClients );
+				room.addEventListener( BaseRoomEvent.JOIN_RESULT, joinedRoom );
+				room.addEventListener( BaseRoomEvent.ATTRIBUTE_UPDATE, attributeUpdate );
+				newRooms.push( room );
+			}
+			
+			if ( presence )
+			{
+				presence.rooms = newRooms;
+			}
+		}
+		
+		/**
+		 * Helper function to parse a user.
+		 * 
+		 * @param note
+		 * @param event
+		 * @return 
+		 */		
+		protected function parseEvent( note:String, event:BaseRoomEvent ):UserVO
+		{
+			var user:UserVO;
+		
+			if ( event == null )
+			{
+				return user;
+			}
+			
+			event.preventDefault();
+			
+			// notify others
+			sendNotification( note, event );
+			
+			roomEvent = RoomEvent( event.data );
+			if ( roomEvent )
+			{
+				// parse user
+				user = parseUser( roomEvent.getClient() );
+			}
+			
+			return user;
+		}
+		
+		/**
+		 * @param occupant
+		 * @return 
+		 */		
+		protected function parseUser( occupant:IClient ):UserVO
+		{
+			var user:UserVO;
+			
+			try
+			{
+				user = new UserVO( occupant.getClientID() );
+			}
+			catch ( e:TypeError )
+			{
+				return user;
+			}
+			
+			user.client = occupant;
+			
+			// retrieve the client-attributes
+			user.username = occupant.getAttribute( UserVO.USERNAME );
+			user.email = occupant.getAttribute( UserVO.EMAIL );
+			user.website = occupant.getAttribute( UserVO.WEBSITE );
+			user.location = occupant.getAttribute( UserVO.LOCATION );
+			user.age = occupant.getAttribute( UserVO.AGE );
+			//user.rank = occupant.getAttribute( AppUserVO.RANK );
+			
+			/*
+			var avatar:String = remoteuser.getAttribute(null, "avatar");
+			var trivia:String = remoteuser.getAttribute(null, "trivia");
+			*/
+			
+			// use the client id as a user name if the user hasn't set a name.
+			if ( user.username == null )
+			{
+				// XXX: localize
+				user.username = "user" + user.id;
+			}
+			
+			// use "..." as a location if the user hasn't set a location.
+			if ( user.location == null )
+			{
+				user.location = EMPTY_FIELD;
+			}
+			
+			// get country name if this user hasn't set a location.
+			/*
+			if (location == EMPTY_FIELD || location == undefined || location == "undefined")
+			{
+			ipaddress = occupant.getIP();
+			getLocationByIP();
+			}
+			*/
+			
+			// use "..." as the age if the user hasn't set one.
+			if ( user.age == null )
+			{
+				user.age = EMPTY_FIELD;
+			}
+			
+			// use "..." as a email address if the user hasn't set one.
+			if ( user.email == null )
+			{
+				user.email = EMPTY_FIELD;
+			}
+			
+			// use "..." if the user hasn't given a URL.
+			if ( user.website == null )
+			{
+				user.website = EMPTY_FIELD;
+			} 
+			else
+			{
+				user.website = URLUtils.createHyperlink( user.website );
+			}
+			
+			return user;
+		}
 
 		// ====================================
 		// EVENT HANDLERS
@@ -229,37 +341,63 @@ package com.collab.echo.view.mediators
 		
 		/**
 		 * Dispatched when the number of occupants in a room changes while the
-		 * current client is in or observing the room.
+		 * current client is in, or observing, the room.
 		 * 
 		 * @param event
 		 */		
 		protected function numClients( event:BaseRoomEvent ):void
 		{
-			event.preventDefault();
+			var totalClients:int;
 			
-			sendNotification( PresenceProxy.ROOM_CLIENT_COUNT, event );
+			user = parseEvent( PresenceProxy.ROOM_CLIENT_COUNT, event );
+			
+			if ( user )
+			{
+				totalClients = event.data.getNumClients();
+				panel.numClients( totalClients );
+			}
 		}
 		
 		/**
+		 * Add a new occupant to the <code>viewComponent</code>.
+		 * 
 		 * @param event
 		 */		
 		protected function addOccupant( event:BaseRoomEvent ):void
 		{
-			event.preventDefault();
+			var user:UserVO = parseEvent( PresenceProxy.ROOM_CLIENT_ADD, event );
 			
-			sendNotification( PresenceProxy.ROOM_CLIENT_ADD, event );
+			if ( user )
+			{
+				panel.addOccupant( user );
+				
+				// show join message for:
+				// - users that are added *after* the local user *joined*
+				// - local user itself
+				if ( joined || user.client.isSelf() )
+				{
+					var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
+																	 ChatMessageTypes.JOIN, true );
+					msg.sender = user.client;
+					msg.receiver = user.client;
+					presence.sendMessage( msg );
+				}
+			}
 		}
 		
 		/**
-		 * Remove clients.
+		 * Remove occupant from the <code>viewComponent</code>.
 		 *  
 		 * @param event
 		 */		
 		protected function removeOccupant( event:BaseRoomEvent ):void
 		{
-			event.preventDefault();
+			user = parseEvent( PresenceProxy.ROOM_CLIENT_REMOVE, event );
 			
-			sendNotification( PresenceProxy.ROOM_CLIENT_REMOVE, event );
+			if ( user )
+			{
+				panel.removeOccupant( user );
+			}
 		}
 		
 		/**
@@ -269,9 +407,25 @@ package com.collab.echo.view.mediators
 		 */		
 		protected function joinedRoom( event:BaseRoomEvent ):void
 		{
-			event.preventDefault();
+			// Note: union returns null for roomEvent.getClient(),
+			// so we use Reactor.self() instead, this may change in
+			// a future version of union. We invoke the parseEvent
+			// anyway to get a notification etc
+			user = parseEvent( PresenceProxy.ROOM_JOINED, event );
+			user = parseUser( presence.self );
 			
-			sendNotification( PresenceProxy.ROOM_JOINED, event );
+			if ( user )
+			{
+				panel.joinedRoom( user );
+				
+				// connect to RTMP server
+				presence.connectRTMP();
+				
+				// the local user joined the room
+				// XXX: this should be a property on a specific instance
+				// in the 'rooms' vector
+				joined = true;
+			}
 		}
 		
 		/**
@@ -286,15 +440,15 @@ package com.collab.echo.view.mediators
 			sendNotification( PresenceProxy.ROOM_ATTRIBUTE_UPDATE, event );
 		}
 		
-        /**
-         * Cast the <code>viewComponent</code> to its actual type.
-         * 
-         * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.hub.display.BaseCommunicationPanel
-         */
-        protected function get panel():BaseCommunicationPanel
+		/**
+		 * Cast the <code>viewComponent</code> to its actual type.
+		 * 
+		 * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.hub.display.BaseCommunicationPanel
+		 */
+		protected function get panel():BaseCommunicationPanel
 		{
-            return viewComponent as BaseCommunicationPanel;
-        }
+			return viewComponent as BaseCommunicationPanel;
+		}
 		
     }
 }

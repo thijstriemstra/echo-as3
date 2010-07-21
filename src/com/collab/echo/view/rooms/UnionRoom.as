@@ -24,6 +24,7 @@ package com.collab.echo.view.rooms
 	import net.user1.reactor.RoomModuleType;
 	import net.user1.reactor.RoomModules;
 	import net.user1.reactor.RoomSettings;
+	import net.user1.reactor.UpdateLevels;
 	
 	import org.osflash.thunderbolt.Logger;
 	
@@ -49,6 +50,13 @@ package com.collab.echo.view.rooms
 		protected var settings					: RoomSettings;
 		
 		/**
+		 * Specifies the amount of information a client wishes to
+		 * receive from the server about a room it has either joined
+		 * or is observing.
+		 */		
+		protected var updateLevels				: UpdateLevels;
+		
+		/**
 		 * A place for clients to engage in group communication.
 		 */		
 		protected var room						: Room;
@@ -58,11 +66,13 @@ package com.collab.echo.view.rooms
 		 * 
 		 * @param id
 		 * @param autoJoin
+		 * @param password
 		 */		
-		public function UnionRoom( id:String, autoJoin:Boolean=false )
+		public function UnionRoom( id:String, autoJoin:Boolean=false, password:String=null )
 		{
 			super( id, autoJoin );
 			
+			this.password = password;
 			this.modules = new RoomModules();
 			
 			// specify that the rooms should not "die on empty"; otherwise,
@@ -70,6 +80,9 @@ package com.collab.echo.view.rooms
 			settings = new RoomSettings();
 			settings.dieOnEmpty = false;
 			settings.maxClients = -1;
+			
+			updateLevels = new UpdateLevels();
+			updateLevels.roomMessages = true;
 		}
 		
 		/**
@@ -77,7 +90,7 @@ package com.collab.echo.view.rooms
 		 */		
 		override public function join():void
 		{
-			room.join();
+			room.join( password, updateLevels );
 		}
 		
 		/**
@@ -98,12 +111,16 @@ package com.collab.echo.view.rooms
 		{
 			super.create( engine );
 			
+			// create the room
 			room = engine.getRoomManager().createRoom( id, settings, null, modules );
+			
+			// listen for events
 			room.addEventListener( RoomEvent.JOIN_RESULT,		 joinResult );
 			room.addEventListener( RoomEvent.OCCUPANT_COUNT,	 occupantCount );
 			room.addEventListener( RoomEvent.ADD_OCCUPANT, 		 addOccupant );
 			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, 	 removeOccupant );
 			room.addEventListener( AttributeEvent.UPDATE, 		 attributeUpdate );
+			room.addEventListener( RoomEvent.SYNCHRONIZE,		 synchronize );
 			
 			log( "Creating new " + name + " called: " + id );
 			

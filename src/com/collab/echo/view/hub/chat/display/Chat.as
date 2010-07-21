@@ -24,20 +24,21 @@ package com.collab.echo.view.hub.chat.display
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
-	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.interfaces.IPresence;
+	import com.collab.echo.view.hub.interfaces.IChatRoom;
 	
 	import fl.controls.TextArea;
 	
 	import flash.display.Sprite;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	
 	/**
 	 * Chat.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Chat extends BaseView implements IPresence
+	public class Chat extends BaseView implements IChatRoom
 	{
 		// ====================================
 		// CONSTANTS
@@ -55,9 +56,10 @@ package com.collab.echo.view.hub.chat.display
 		internal var _sendLabel						: String;
 		internal var _playSound						: Boolean;
 		internal var _showTimestamp					: Boolean;
+		internal var _soundFactory					: Sound;
+		internal var _messageSound					: SoundChannel;
 		
-		//var messageGeluid:Sound = new Sound();
-		//messageGeluid.attachSound("messageGeluid");
+		//_messageSound.attachSound("messageGeluid");
 		
 		// ====================================
 		// PROTECTED VARS
@@ -117,9 +119,10 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		public function Chat( width:Number=0, height:Number=0 )
 		{
-			messageHistory = [];
 			_playSound = false;
 			_showTimestamp = true;
+			
+			this.messageHistory = [];
 			
 			super( width, height );
 			show();
@@ -130,22 +133,18 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		
 		/**
+		 * Add a new occupant to the <code>Room</code>.
+		 * 
 		 * @param client
 		 */		
 		public function addUser( client:UserVO ):void
 		{
 			//Logger.debug( "Chat.addUser: " + client );
-			
-			// show welcome message for local client
-			if ( client.client.isSelf() )
-			{
-				var evt:ChatEvent = new ChatEvent( ChatEvent.JOIN );
-				evt.data = "/" + ChatMessageTypes.JOIN + " " + client.username;
-				dispatchEvent( evt );
-			}
 		}
 		
 		/**
+		 * Remove an existing occupant from the room.
+		 * 
 		 * @param client
 		 */		
 		public function removeUser( client:UserVO ):void
@@ -153,6 +152,26 @@ package com.collab.echo.view.hub.chat.display
 			//Logger.debug( "Chat.removeUser: " + client );
 			
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
+		}
+		
+		/**
+		 * Joined the room.
+		 * 
+		 * @param client
+		 */		
+		public function joinedRoom( client:UserVO ):void
+		{
+			//Logger.debug( "Chat.joinedRoom: " + client );
+		}
+		
+		/**
+		 * Total clients in room updated.
+		 * 
+		 * @param totalClients
+		 */		
+		public function numClients( totalClients:int ):void
+		{
+			//Logger.debug( "Chat.numClients: " + totalClients );
 		}
 		
 		/**
@@ -172,7 +191,7 @@ package com.collab.echo.view.hub.chat.display
 			// play sound
 			if ( _playSound )
 			{
-				//messageGeluid.start();
+				//_messageSound.play();
 			}
 			
 			// cutoff lines
@@ -240,6 +259,7 @@ package com.collab.echo.view.hub.chat.display
 			// background
 			_background = DrawingUtils.drawFill( viewWidth, viewHeight,
 												0, StyleDict.GREEN1, 1 ); 
+			// XXX: for now
 			//addChild( _background );
 			
 			// inputField

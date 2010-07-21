@@ -24,6 +24,7 @@ package com.collab.echo.model.proxy
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     import com.collab.echo.view.rooms.BaseRoom;
     
+    import org.osflash.thunderbolt.Logger;
     import org.puremvc.as3.multicore.interfaces.IProxy;
     import org.puremvc.as3.multicore.patterns.proxy.Proxy;
     
@@ -65,10 +66,13 @@ package com.collab.echo.model.proxy
 		// PROTECTED VARS
 		// ====================================
 		
-		protected var logLevel						: String;
+		/**
+		 * 
+		 */		
 		protected var reactor						: *;
 		protected var message						: BaseChatMessage;
 		protected var messageCreator				: ChatMessageCreator;
+		protected var logLevel						: String;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -127,6 +131,17 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Get the application's own client object (i.e., the "current client").
+		 * 
+		 * @return 
+		 */		
+		public function get self():*
+		{
+			// override in subclass
+			return null;
+		}
+		
+		/**
 		 * Constructor.
 		 * 
 		 * @param data
@@ -175,6 +190,14 @@ package com.collab.echo.model.proxy
 			this.message.addEventListener( ChatMessageEvent.LOAD_COMPLETE,
 										   onMessageComplete, false, 0, true );
 			this.message.load();	
+		}
+		
+		/**
+		 * 
+		 */		
+		public function connectRTMP():void
+		{
+			Logger.debug( "TODO: Connect to RTMP server.." );
 		}
 		
 		/**

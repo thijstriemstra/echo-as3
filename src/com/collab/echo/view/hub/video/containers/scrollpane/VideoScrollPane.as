@@ -22,7 +22,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
-	import com.collab.echo.view.hub.interfaces.IPresence;
+	import com.collab.echo.view.hub.interfaces.IRoom;
 	import com.collab.echo.view.hub.video.containers.panels.UserPanel;
 	
 	import fl.controls.ScrollPolicy;
@@ -35,7 +35,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class VideoScrollPane extends FlashScrollPane implements IPresence
+	public class VideoScrollPane extends FlashScrollPane implements IRoom
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -122,6 +122,26 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 					break;
 				}
 			}
+		}
+		
+		/**
+		 * Joined the room.
+		 * 
+		 * @param client
+		 */		
+		public function joinedRoom( client:UserVO ):void
+		{
+			//Logger.debug( "VideoScrollPane.joinedRoom: " + client );
+		}
+		
+		/**
+		 * Total clients in room updated.
+		 * 
+		 * @param totalClients
+		 */		
+		public function numClients( totalClients:int ):void
+		{
+			//Logger.debug( "VideoScrollPane.numClients: " + totalClients );
 		}
 		
 		/**

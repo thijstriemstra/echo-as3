@@ -18,22 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.interfaces
 {
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public interface IPresence
+	public interface IChatRoom extends IRoom
 	{
 		/**
-		 * @param client
+		 * Add a message to the <code>Chat</code>.
+		 * 
+		 * @param data
 		 */		
-		function addUser( client:UserVO ):void;
-		
-		/**
-		 * @param client
-		 */		
-		function removeUser( client:UserVO ):void;
+		function addMessage( data:BaseChatMessage ):void;
 	}
 	
 }

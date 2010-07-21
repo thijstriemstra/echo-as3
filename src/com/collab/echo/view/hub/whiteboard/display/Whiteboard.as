@@ -21,14 +21,14 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.controls.buttons.LabelButton;
 	import com.collab.echo.view.display.BaseView;
-	import com.collab.echo.view.hub.interfaces.IPresence;
+	import com.collab.echo.view.hub.interfaces.IRoom;
 	
 	/**
 	 * A shared whiteboard.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Whiteboard extends BaseView implements IPresence
+	public class Whiteboard extends BaseView implements IRoom
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -56,6 +56,16 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Joined the room.
+		 * 
+		 * @param client
+		 */		
+		public function joinedRoom( client:UserVO ):void
+		{
+			//Logger.debug( "Chat.joinedRoom: " + client );
+		}
+		
+		/**
 		 * @param client
 		 */		
 		public function addUser( client:UserVO ):void
@@ -81,6 +91,16 @@ package com.collab.echo.view.hub.whiteboard.display
 			// remove user cursor
 			removeMovieClip(client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteboard_accordion.whiteboard_mc["cursor"+clientID]);
 			*/
+		}
+		
+		/**
+		 * Total clients in room updated.
+		 * 
+		 * @param totalClients
+		 */		
+		public function numClients( totalClients:int ):void
+		{
+			//Logger.debug( "Whiteboard.numClients: " + totalClients );
 		}
 		
 		// ====================================

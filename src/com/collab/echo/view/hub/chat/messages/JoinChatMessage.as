@@ -18,8 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
+	import com.collab.echo.EchoFacade;
 	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
+	import com.collab.echo.model.vo.UserVO;
 	
 	import flash.system.Capabilities;
 
@@ -35,10 +36,10 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param data
 		 * @param presence
 		 */		
-		public function JoinChatMessage( type:String=null, data:String=null,
-										 presence:PresenceProxy=null )
+		public function JoinChatMessage( type:String, data:String,
+										 presence:PresenceProxy )
 		{
-			super( type, data, presence, true, false, false, true );
+			super( type, data, presence, false, true, false, true );
 		}
 		
 		// ====================================
@@ -47,19 +48,58 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override protected function parseCommand():void
 		{
-			var name:String = data.substr( ChatMessageTypes.JOIN.length + 1 );
-			
-			execute( name );
+			if ( _sender && _receiver )
+			{
+				execute( data );
+			}
 		}
 		
 		override protected function execute( command:String ):void
 		{
-			var coloredName:String = command;
+			// XXX: this should come from a populated UserVO
+			var username:String = _receiver.getAttribute( UserVO.USERNAME );
+			var clientID:String = _receiver.getClientID();
 			
-			if ( local )
+			// use the client id as a user name if the user hasn't set a name.
+			if ( username == null )
 			{
+				username = "user" + clientID;
+			}
+			
+			if ( _receiver == presence.self )
+			{
+				var rank:String = "guest";
+				var clientVar:String;
+				var value:String;
+				
+				// set clientVars
+				for each ( clientVar in UserVO.fields )
+				{
+					value = EchoFacade.userCookie.data[ clientVar ];
+					
+					// SO already contains the var
+					if ( value != null )
+					{
+						_sender.setAttribute( clientVar, value );
+						//user[ clientVar ] = value;
+					}
+				}
+				
+				// set user rank
+				_sender.setAttribute( "rank", rank );
+				
+				// increment personal visitor counter
+				if ( EchoFacade.userCookie.data.counter != null )
+				{
+					EchoFacade.userCookie.data.counter++;
+				}
+				else
+				{
+					EchoFacade.userCookie.data.counter = 0;
+				}
+				
 				// XXX: localize
-				message = "<b><FONT COLOR='#000000'>" + getWelcomeLine() + " " + coloredName + "!</FONT></b><br>";
+				message = "<b><FONT COLOR='#000000'>" + getWelcomeLine() + " " + username + "!</FONT></b><br>";
 				message += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
 				message += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
 			}
@@ -77,7 +117,7 @@ package com.collab.echo.view.hub.chat.messages
 				*/
 				
 				// XXX: localize
-				message = "<b>"+ coloredName +" has joined.</b>";
+				message = "<b>"+ username +" has joined.</b>";
 			}
 		}
 		

@@ -31,6 +31,9 @@ package com.collab.echo.view.hub.chat.factory
 		// ====================================
 		
 		public static const TEXT 				: String = "text";
+		public static const JOIN				: String = "join";
+		public static const LEAVE				: String = "leave";
+		
 		public static const TIME_ONLINE			: String = "timeonline";
 		public static const NICK				: String = "nick";
 		public static const PRIVATE_MESSAGE		: String = "msg";
@@ -38,9 +41,7 @@ package com.collab.echo.view.hub.chat.factory
 		public static const KICK				: String = "kick";
 		public static const CLEAR				: String = "clear";
 		public static const IP					: String = "ip";
-		public static const JOIN				: String = "join";
 		public static const HELP1				: String = "help";
 		public static const HELP2				: String = "?";
 	}
-	
 }

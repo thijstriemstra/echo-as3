@@ -20,7 +20,6 @@ package com.collab.echo.model.proxy
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
-	import com.collab.echo.view.hub.chat.messages.JoinChatMessage;
 	
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;
@@ -57,15 +56,6 @@ package com.collab.echo.model.proxy
 		public static const NAME				: String = "UnionProxy";
 		
 		// ====================================
-		// PROTECTED VARS
-		// ====================================
-		
-		/**
-		 * 
-		 */		
-		protected var joinedChat				: Boolean = false;
-		
-		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
@@ -74,7 +64,7 @@ package com.collab.echo.model.proxy
 			return Reactor( reactor ).isReady();
 		}
 		
-		public function get self():IClient
+		override public function get self():*
 		{
 			return Reactor( reactor ).self();
 		}
@@ -207,7 +197,7 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Ask to be notified when a room with the qualifier
-		 * <code>roomQualifier</code> is added to or removed from the server. 
+		 * <code>roomQualifier</code> is updated on the server. 
 		 * 
 		 * @param roomQualifier
 		 */		
@@ -269,19 +259,6 @@ package com.collab.echo.model.proxy
 			message = messageCreator.create( this, RECEIVE_MESSAGE, chatMessage );
 			message.sender = fromClient;
 			message.receiver = self;
-			
-			if ( message is JoinChatMessage )
-			{
-				// only allow to send join message once
-				if ( joinedChat == false )
-				{
-					joinedChat = true;
-				}
-				else
-				{
-					return;
-				}
-			}
 			
 			log( "UnionProxy.centralChatListener: " + message );
 			

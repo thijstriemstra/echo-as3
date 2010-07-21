@@ -242,7 +242,7 @@ package com.collab.echo.model.proxy
 			else
 			{
 				// send remotely
-				// XXX: remove hardcoded room name
+				// XXX: remove hardcoded room name, target rooms[].id instead
 				roomManager.sendMessage( message.type, [ "collab.global" ],
 										 message.includeSelf, null, message.message );
 			}

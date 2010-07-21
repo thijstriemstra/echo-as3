@@ -51,7 +51,6 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		
 		internal var _background					: Sprite;
-		internal var _user							: *;
 		internal var _welcomeMessage				: String;
 		internal var _sendLabel						: String;
 		internal var _playSound						: Boolean;

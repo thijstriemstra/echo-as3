@@ -406,6 +406,7 @@ package com.collab.echo.view.mediators
 				var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
 																 ChatMessageTypes.LEAVE, false );
 				msg.sender = user.client;
+				msg.receiver = user.client;
 				presence.sendMessage( msg );
 			}
 		}
@@ -432,8 +433,7 @@ package com.collab.echo.view.mediators
 				presence.connectRTMP();
 				
 				// the local user joined the room
-				// XXX: this should be a property on a specific instance
-				// in the 'rooms' vector
+				// XXX: this should be a property on instances in the 'rooms' vector?
 				joined = true;
 			}
 		}

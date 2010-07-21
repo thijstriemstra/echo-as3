@@ -49,5 +49,83 @@ package com.collab.echo.view.hub.chat.messages
 			return "<KickMessage data='" + data + "' />";	
 		}
 		
+		/**
+		 * Kick a client
+		 */
+		internal function kickUser (userName:String):void
+		{
+			/*
+			var clientList						= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
+			var attrList 						= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
+			
+			var kickClientID = undefined;
+			
+			for (var i = 0; i < attrList.length; i++) 
+			{
+				var clientName:String = attrList[i].value;
+				
+				// give user generic name
+				if (clientName == undefined) {
+					clientName = "user"+attrList[i].clientID;
+				}
+				
+				if (clientName.toLowerCase() == userName.toLowerCase()) {
+					// the to be kicked user was found
+					kickClientID = attrList[i].clientID;
+				}
+				
+				if (getClientID() == attrList[i].clientID) {
+					// identify the kicker
+					var kicker:String = attrList[i].value;
+				}
+			}
+			
+			//trace("kicking: "+kickClientID+", by " + kicker);
+			
+			// if the username wasnt found
+			if (kickClientID == undefined) 
+			{
+				chatMC.chat_txt.text += addStamp + " <b>Username not found.</b>";
+			} 
+			else
+			{
+				// user is found
+				if (userName != kicker) {
+					// Invoke the function on the client.
+					invokeOnClient("beingKicked", kickClientID, userName, kicker);
+					
+					// Retrieve the IPAddress for the client.
+					var remoteuser:RemoteClient = getRemoteClientManager().getClient(kickClientID);
+					var ipaddress:String = remoteuser.getAttribute(null, "_IP");
+					
+					// log the kick
+					var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(kicker, userName, ipaddress, 2); 
+					logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
+					
+				} else {
+					chatMC.chat_txt.text += addStamp + " <b>Don't kick yourself!</b>";
+				}
+				
+				chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition;
+			}
+			*/
+		}
+		
+		/**
+		 * Receiving the boot and telling the others who did it.
+		 */
+		internal function beingKicked (clientID:String, userName:String, kicker:String):void
+		{
+			//trace("kicking: "+userName+" , " + kicker);
+			// Send the message to the server.
+			var safeMsg:String = "<font color='#CE0000'><b>"+ userName +" was kicked by " +  '!</b></font>';
+			
+			// Tell this client he's been kicked by an admin.
+			//chatMC.chat_txt.text += "<font color='#CE0000'><b>You were kicked by " + kicker + "!</b></font>";
+			
+			// Disconnect user from server.
+			//disconnect();
+		}
+		
 	}
 }

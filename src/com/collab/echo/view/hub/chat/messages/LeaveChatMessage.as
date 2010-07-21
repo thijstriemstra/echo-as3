@@ -44,7 +44,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override protected function parseCommand():void
 		{
-			if ( _sender )
+			if ( _sender && _receiver )
 			{
 				execute( data );
 			}
@@ -53,8 +53,8 @@ package com.collab.echo.view.hub.chat.messages
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
-			var username:String = _sender.getAttribute( UserVO.USERNAME );
-			var clientID:String = _sender.getClientID();
+			var username:String = _receiver.getAttribute( UserVO.USERNAME );
+			var clientID:String = _receiver.getClientID();
 			
 			// use the client id as a user name if the user hasn't set a name.
 			if ( username == null )

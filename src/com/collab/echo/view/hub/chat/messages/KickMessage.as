@@ -25,6 +25,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class KickMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/kick [nickname]   ; kick a user.";
+		
 		/**
 		 * Constructor.
 		 * 

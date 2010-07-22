@@ -23,6 +23,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class ClearChatMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/clear     ; clear the text in the chat window.";
+		
 		/**
 		 * Constructor.
 		 * 

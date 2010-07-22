@@ -266,7 +266,7 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
-		 * Handles a received message.
+		 * Dispatched when a remote chat message is received.
 		 * 
 		 * @param fromClient
 		 * @param toRoom
@@ -275,6 +275,7 @@ package com.collab.echo.model.proxy
 		public function centralChatListener( fromClient:IClient, toRoom:Room,
 											 chatMessage:String ):void
 		{
+			// XXX: implement toRoom in BaseChatMessage
 			message = messageCreator.create( this, RECEIVE_MESSAGE, chatMessage );
 			message.sender = fromClient;
 			message.receiver = self;

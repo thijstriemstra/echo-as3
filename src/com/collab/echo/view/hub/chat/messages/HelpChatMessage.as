@@ -23,8 +23,10 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class HelpChatMessage extends TextChatMessage
 	{
-		public var types	: Array;
-		
+		protected var fields	: Array = [ TextChatMessage, NicknameChatMessage,
+											MeChatMessage, ClearChatMessage,
+											TimeOnlineMessage, IPChatMessage,
+											KickMessage ];
 		/**
 		 * Constructor.
 		 * 
@@ -45,30 +47,16 @@ package com.collab.echo.view.hub.chat.messages
 		 */		
 		override protected function parseCommand():void
 		{
-			trace(types);
+			var field:Class;
 			
 			// XXX: localize
-			// XXX: compile list based on available commands, something like BaseChatMessage.help
 			data = "<b>Command List</b><br>";
-			data += "/msg [nickname] : [string]     ; send someone a private message.<br>";
-			data += "/nick [nickname]   ; change your nickname.<br>";
-			data += "/stats    ; Application bandwidth stats.<br>";
-			data += "/clear     ; clear the text in the chat window.<br>";
-			data += "/timeOnline [nickname]  ; find out how long the user has been online.<br>";
-			data += "/quote    ; random quote from 'famous' people.<br>";
-			data += "/me [message] <br>";
-			data += "/eliza [string]   ; Eliza is a 24/7 psychotherapist.<br>";
-			data += "/alice [message]   ; A.L.I.C.E. is a natural language robot.<br>";
-			data += "/mrtrivia [message]   ; QuizMaster bot.";
+			for each ( field in fields )
+			{
+				data += field["DOC"] + "<br/>";
+			}
 			
-			// XXX: add additional app items
-			//if (_root.userMode != "guest")
-			//{
-				//data += "/ip [nickname]   ; get user's IP address.<br>";
-				//data += "/kick [nickname]   ; kick a user.<br>";
-			//}
-			
-			execute( data );
+			execute( data.substr( 0, data.length -5 ));
 		}
 		
 		// ====================================

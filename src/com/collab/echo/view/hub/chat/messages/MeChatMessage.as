@@ -27,6 +27,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class MeChatMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/me [message]";
+		
 		/**
 		 * Constructor.
 		 * 

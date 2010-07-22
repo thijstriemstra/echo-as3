@@ -27,6 +27,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class NicknameChatMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/nick [nickname]   ; change your nickname.";
+		
 		/**
 		 * Constructor.
 		 * 

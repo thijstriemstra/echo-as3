@@ -28,6 +28,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class IPChatMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
+		
 		/**
 		 * Constructor.
 		 *  

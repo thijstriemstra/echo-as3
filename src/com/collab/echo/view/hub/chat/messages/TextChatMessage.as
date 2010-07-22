@@ -29,6 +29,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class TextChatMessage extends BaseChatMessage
 	{
+		public static const DOC	: String = "/msg [nickname] : [string]     ; send someone a private message.";
+		
 		/**
 		 * Constructor.
 		 *  

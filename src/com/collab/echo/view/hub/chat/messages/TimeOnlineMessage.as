@@ -29,6 +29,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class TimeOnlineMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/timeOnline [nickname]  ; find out how long the user has been online.";
+		
 		/**
 		 * Constructor.
 		 *  

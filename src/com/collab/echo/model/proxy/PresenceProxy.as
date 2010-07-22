@@ -63,6 +63,12 @@ package com.collab.echo.model.proxy
 		public static const RECEIVE_MESSAGE			: String = NAME + "_receiveMessage";
 		
 		// ====================================
+		// PUBLIC VARS
+		// ====================================
+		
+		public var messageCreator					: ChatMessageCreator;
+		
+		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
@@ -70,8 +76,15 @@ package com.collab.echo.model.proxy
 		 * 
 		 */		
 		protected var reactor						: *;
+		
+		/**
+		 * 
+		 */		
 		protected var message						: BaseChatMessage;
-		protected var messageCreator				: ChatMessageCreator;
+		
+		/**
+		 * 
+		 */		
 		protected var logLevel						: String;
 		
 		// ====================================

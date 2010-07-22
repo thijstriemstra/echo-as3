@@ -45,6 +45,7 @@ package com.collab.echo.view.hub.chat.messages
 		internal var _sender						: IClient;
 		internal var _message						: String;
 		internal var _type							: String;
+		internal var _doc							: String;
 		internal var _privateMessage				: Boolean;
 		internal var _includeSelf					: Boolean;
 		internal var _local							: Boolean;
@@ -175,6 +176,23 @@ package com.collab.echo.view.hub.chat.messages
 			if ( val )
 			{
 				_message = val;
+			}
+		}
+		
+		/**
+		 * Documentation.
+		 *  
+		 * @return 
+		 */		
+		public function get doc():String
+		{
+			return _doc;
+		}
+		public function set doc( val:String ):void
+		{
+			if ( val )
+			{
+				_doc = val;
 			}
 		}
 		

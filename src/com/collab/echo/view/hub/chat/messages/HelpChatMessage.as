@@ -23,6 +23,8 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class HelpChatMessage extends TextChatMessage
 	{
+		public var types	: Array;
+		
 		/**
 		 * Constructor.
 		 * 
@@ -43,12 +45,14 @@ package com.collab.echo.view.hub.chat.messages
 		 */		
 		override protected function parseCommand():void
 		{
+			trace(types);
+			
 			// XXX: localize
 			// XXX: compile list based on available commands, something like BaseChatMessage.help
 			data = "<b>Command List</b><br>";
 			data += "/msg [nickname] : [string]     ; send someone a private message.<br>";
 			data += "/nick [nickname]   ; change your nickname.<br>";
-			data += "/stats    ; FlashCom application bandwidth stats.<br>";
+			data += "/stats    ; Application bandwidth stats.<br>";
 			data += "/clear     ; clear the text in the chat window.<br>";
 			data += "/timeOnline [nickname]  ; find out how long the user has been online.<br>";
 			data += "/quote    ; random quote from 'famous' people.<br>";

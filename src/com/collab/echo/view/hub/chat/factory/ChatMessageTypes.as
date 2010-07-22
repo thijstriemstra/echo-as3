@@ -30,18 +30,26 @@ package com.collab.echo.view.hub.chat.factory
 		// CONSTANTS
 		// ====================================
 		
-		public static const TEXT 				: String = "text";
 		public static const JOIN				: String = "join";
 		public static const LEAVE				: String = "leave";
 		
+		// public
+		public static const TEXT 				: String = "text";
 		public static const TIME_ONLINE			: String = "timeonline";
 		public static const NICK				: String = "nick";
 		public static const PRIVATE_MESSAGE		: String = "msg";
 		public static const ME					: String = "me";
-		public static const KICK				: String = "kick";
 		public static const CLEAR				: String = "clear";
-		public static const IP					: String = "ip";
 		public static const HELP1				: String = "help";
 		public static const HELP2				: String = "?";
+		
+		// restricted
+		public static const KICK				: String = "kick";
+		public static const IP					: String = "ip";
+		
+		public static const publicTypes			: Array = [ TEXT, TIME_ONLINE, NICK,
+															PRIVATE_MESSAGE, ME,
+															CLEAR, HELP1, HELP2 ];
+												
 	}
 }

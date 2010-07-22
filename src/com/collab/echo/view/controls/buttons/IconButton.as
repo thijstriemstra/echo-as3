@@ -97,9 +97,9 @@ package com.collab.echo.view.controls.buttons
 			addChild( _icon );
 			
 			// text
-			_titleField = TextUtils.createStandardTextField( _title, 15, StyleDict.WHITE,
-															 true, false, 3,
-															 TextFormatAlign.LEFT );
+			_titleField = TextUtils.createTextField( null, _title, 15, StyleDict.WHITE,
+													 true, false, 3,
+													 TextFormatAlign.LEFT );
 			_titleField.width = 200;
 			addChild( _titleField );
 		}

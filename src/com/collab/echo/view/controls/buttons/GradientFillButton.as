@@ -67,10 +67,9 @@ package com.collab.echo.view.controls.buttons
 			var w:int = _width;
 			var h:int = 28;
 			var radius:int = 15;
-			var colors:Array = [ StyleDict.PINK5, StyleDict.PINK6, StyleDict.PINK7,
-								 StyleDict.PINK8, StyleDict.PINK9 ];
-			var alphas:Array = [ 1, 1, 1, 1, 1 ];
-			var ratios:Array = [ 0, 130, 180, 200, 255 ];
+			var colors:Array = [ StyleDict.PURPLE1, StyleDict.RED1, StyleDict.YELLOW1 ];
+			var alphas:Array = [ 1, 1, 1 ];
+			var ratios:Array = [ 0, 130, 180 ];
 
 			var matr:Matrix = new Matrix();
 	  		matr.createGradientBox( w, h, 300 );

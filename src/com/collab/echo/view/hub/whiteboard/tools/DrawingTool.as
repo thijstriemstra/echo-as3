@@ -50,7 +50,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 		/**
 		 * Constructor. 
 		 */		
-		public function DrawingTool( mode:String, type:String )
+		public function DrawingTool( mode:String=null, type:String=null )
 		{
 			this.mode = mode;
 			this.type = type;

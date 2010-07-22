@@ -1,1 +1,3 @@
 /lib/*.swc
+/bin
+/bin-debug

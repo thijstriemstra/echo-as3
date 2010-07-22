@@ -23,7 +23,7 @@
 			<arg value="-main-title" />
 			<arg value="${title}"/>
 			<arg value="-window-title" />
-			<arg value="${title} API Documentation"/>
+			<arg value="${title} - API Documentation"/>
 			<arg value="-footer" />
 			<arg value="${footer}"/>
 			<arg value="-left-frameset-width"/>
@@ -40,6 +40,7 @@
 			  dir="${src.folder}">
 			<arg line="-source-path ${basedir}"/>
 			<arg value="-benchmark" />
+			<arg value="-define=CONFIG::version,${lib.version}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${lib.outputfolder}/${lib.outputfile}"/>
 			<arg value="-include-libraries" />

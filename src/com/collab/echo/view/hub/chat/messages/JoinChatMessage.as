@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
-	import com.collab.echo.EchoFacade;
+	import com.collab.echo.Echo;
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.UserVO;
 	
@@ -75,7 +75,7 @@ package com.collab.echo.view.hub.chat.messages
 				// set clientVars
 				for each ( clientVar in UserVO.fields )
 				{
-					value = EchoFacade.userCookie.data[ clientVar ];
+					value = Echo.userCookie.data[ clientVar ];
 					
 					// SO already contains the var
 					if ( value != null )
@@ -89,13 +89,13 @@ package com.collab.echo.view.hub.chat.messages
 				_sender.setAttribute( "rank", rank );
 				
 				// increment personal visitor counter
-				if ( EchoFacade.userCookie.data.counter != null )
+				if ( Echo.userCookie.data.counter != null )
 				{
-					EchoFacade.userCookie.data.counter++;
+					Echo.userCookie.data.counter++;
 				}
 				else
 				{
-					EchoFacade.userCookie.data.counter = 0;
+					Echo.userCookie.data.counter = 0;
 				}
 				
 				// XXX: localize

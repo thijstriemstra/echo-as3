@@ -20,8 +20,14 @@
 			  dir="${src.folder}">
 			<arg line="-doc-sources ${domainextensions}"/>
 			<arg value="-benchmark"/>
-			<arg value="-window-title" />
+			<arg value="-main-title" />
 			<arg value="${title}"/>
+			<arg value="-window-title" />
+			<arg value="${title} API Documentation"/>
+			<arg value="-footer" />
+			<arg value="${footer}"/>
+			<arg value="-left-frameset-width"/>
+			<arg value="${frameset.width}" />
 			<arg value="-output" />
 			<arg value="${basedir}/${docs.outputfolder}"/>
 			<arg value="-external-library-path" />

@@ -13,8 +13,8 @@
 	</target>
 
 	<target name="cleanDir" description="DELETE the existing output folder and files and then re-generate the output folder">
-		<delete dir="${basedir}/${docsoutputfolder}" failOnError="true" includeEmptyDirs="true"/>
-		<mkdir dir="${basedir}/${docsoutputfolder}"/>
+		<delete dir="${basedir}/${docs.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
+		<mkdir dir="${basedir}/${docs.outputfolder}"/>
 		
 		<!-- echo dumps output to the console window -->
 		<echo>doc directory cleaned</echo>

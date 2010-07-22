@@ -37,16 +37,21 @@ package com.collab.echo.view.hub.video.form.item
 		protected var valueField	: TextField;
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _label			: String;
-		internal var _value			: String;
+		private var _label			: String;
+		private var _value			: String;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * The form item's label.
+		 *  
+		 * @return 
+		 */		
 		public function get label():String
 		{
 			return _label;
@@ -56,7 +61,12 @@ package com.collab.echo.view.hub.video.form.item
 			_label = val;
 			invalidate();
 		}	
-		
+
+		/**
+		 * The form item's value.
+		 *  
+		 * @return 
+		 */		
 		public function get value():String
 		{
 			return _value;

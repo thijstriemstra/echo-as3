@@ -31,17 +31,17 @@ package com.collab.echo.view.hub.chat.events
 		// CONSTANTS
 		// ====================================
 		
-		internal static const NAME				: String = "ChatEvent";
+		public static const NAME				: String = "ChatEvent";
 		
 		public static const SUBMIT				: String = NAME + "_submit";
 		public static const HISTORY_UP			: String = NAME + "_historyUp";
 		public static const HISTORY_DOWN		: String = NAME + "_historyDown";
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _data						: String;
+		private var _data						: String;
 		
 		// ====================================
 		// GETTER/SETTER

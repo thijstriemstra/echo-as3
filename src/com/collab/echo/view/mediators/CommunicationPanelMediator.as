@@ -66,10 +66,10 @@ package com.collab.echo.view.mediators
 		protected var joined				: Boolean;
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _rooms					: Vector.<RoomVO>;
+		private var _rooms					: Vector.<RoomVO>;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR

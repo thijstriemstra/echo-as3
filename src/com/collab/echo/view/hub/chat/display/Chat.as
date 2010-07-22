@@ -44,19 +44,19 @@ package com.collab.echo.view.hub.chat.display
 		// CONSTANTS
 		// ====================================
 		
-		internal static const HISTORY_MAX_LENGTH	: int = 20;
+		public static const HISTORY_MAX_LENGTH		: int = 20;
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _background					: Sprite;
-		internal var _welcomeMessage				: String;
-		internal var _sendLabel						: String;
-		internal var _playSound						: Boolean;
-		internal var _showTimestamp					: Boolean;
-		internal var _soundFactory					: Sound;
-		internal var _messageSound					: SoundChannel;
+		private var _background						: Sprite;
+		private var _welcomeMessage					: String;
+		private var _sendLabel						: String;
+		private var _playSound						: Boolean;
+		private var _showTimestamp					: Boolean;
+		private var _soundFactory					: Sound;
+		private var _messageSound					: SoundChannel;
 		
 		//_messageSound.attachSound("messageGeluid");
 		

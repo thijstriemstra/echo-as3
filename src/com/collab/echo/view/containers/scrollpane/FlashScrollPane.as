@@ -39,16 +39,18 @@ package com.collab.echo.view.containers.scrollpane
 	public class FlashScrollPane extends ScrollPane
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _children		: Array;
+		private var _children		: Array;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
 		/**
+		 * The panel's children.
+		 * 
 		 * @return 
 		 */		
 		public function get children():Array

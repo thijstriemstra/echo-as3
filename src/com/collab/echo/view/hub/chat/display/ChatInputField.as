@@ -36,19 +36,22 @@ package com.collab.echo.view.hub.chat.display
 	public class ChatInputField extends BaseView
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _textInput			: TextInput;
-		internal var _submitButton		: Button;
-		internal var _inputMessage		: String;
-		internal var _buttonLabel		: String;
-		internal var _event				: ChatEvent;
+		private var _textInput			: TextInput;
+		private var _submitButton		: Button;
+		private var _inputMessage		: String;
+		private var _buttonLabel		: String;
+		private var _event				: ChatEvent;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get text():String
 		{
 			return _textInput.text;
@@ -59,6 +62,9 @@ package com.collab.echo.view.hub.chat.display
 			invalidate();
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get buttonLabel():String
 		{
 			return _submitButton.label;

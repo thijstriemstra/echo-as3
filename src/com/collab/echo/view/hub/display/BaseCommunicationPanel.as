@@ -49,9 +49,9 @@ package com.collab.echo.view.hub.display
 	 * </ul></p>
 	 * 
 	 * @see com.collab.echo.view.containers.scrollpane.FlashScrollPane FlashScrollPane
-	 * @see com.collab.echo.view.hub.chat.Chat Chat
+	 * @see com.collab.echo.view.hub.chat.display.Chat Chat
 	 * @see com.collab.echo.view.hub.translator.Translator Translator
-	 * @see com.collab.echo.view.hub.whiteboard.Whiteboard Whiteboard
+	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
 	 * @see com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane VideoScrollPane
 	 * @see com.collab.echo.view.controls.buttons.BaseExpandButton BaseExpandButton
 	 * 
@@ -60,30 +60,60 @@ package com.collab.echo.view.hub.display
 	public class BaseCommunicationPanel extends Panel
 	{
 		// ====================================
-		// STATIC VARS
+		// CONSTANTS
 		// ====================================
 		
-		internal static const PANEL_WIDTH_MIN	: int = 140;
+		/**
+		 * The initial width of the panel. 
+		 */		
+		public static const PANEL_WIDTH_MIN		: int = 140;
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _skin						: Object;
-		internal var _paddingLeft				: int;
-		internal var _welcomeMessage			: String;
-		internal var _sendLabel					: String;
+		private var _skin						: Object;
+		private var _paddingLeft				: int;
+		private var _welcomeMessage				: String;
+		private var _sendLabel					: String;
 		
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
+		/**
+		 * The active users. 
+		 */		
 		protected var data						: Vector.<UserVO>;
+		
+		/**
+		 * The scroll pane where the panel's components are attached to. 
+		 */		
 		protected var pane						: FlashScrollPane;
+		
+		/**
+		 * The whiteboard component. 
+		 */		
 		protected var whiteboard				: Whiteboard;
+		
+		/**
+		 * The chat component. 
+		 */		
 		protected var chat						: Chat;
+		
+		/**
+		 * The translator component. 
+		 */		
 		protected var translator				: Translator;
+		
+		/**
+		 * The video pane component containing the video panels. 
+		 */		
 		protected var videoPane					: VideoScrollPane;
+		
+		/**
+		 * The button that expands the panel. 
+		 */		
 		protected var expandButton				: BaseExpandButton;
 		
 		// ====================================
@@ -100,6 +130,10 @@ package com.collab.echo.view.hub.display
 			_skin = val;
 			invalidate();
 		}
+		public function get skin():Object
+		{
+			return _skin;
+		}
 
 		/**
 		 * Padding on the left side.
@@ -111,8 +145,14 @@ package com.collab.echo.view.hub.display
 			_paddingLeft = val;
 			invalidate();
 		}
+		public function get paddingLeft():int
+		{
+			return _paddingLeft;
+		}
 		
 		/**
+		 * Welcome message for the <code>Chat</code>.
+		 * 
 		 * @param val
 		 */		
 		public function set welcomeMessage( val:String ):void
@@ -120,8 +160,13 @@ package com.collab.echo.view.hub.display
 			_welcomeMessage = val;
 			invalidate();
 		}
+		public function get welcomeMessage():String
+		{
+			return _welcomeMessage;
+		}
 		
 		/**
+		 * Label for the <code>Chat</code>'s send button.
 		 * @param val
 		 */		
 		public function set sendLabel( val:String ):void
@@ -163,7 +208,7 @@ package com.collab.echo.view.hub.display
 		// ====================================
 		
 		/**
-		 * Add a new occupant to the <code>Room</code>.
+		 * Add a new occupant to the panel's components.
 		 *  
 		 * @param client
 		 */		
@@ -183,7 +228,7 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Remove an existing occupant from the room.
+		 * Remove an existing occupant from the panel's components.
 		 *  
 		 * @param client
 		 */		
@@ -215,7 +260,7 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Total clients in room updated.
+		 * Notify the panel's component that the clients in the room updated.
 		 * 
 		 * @param totalClients
 		 */		
@@ -227,7 +272,7 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Joined the room.
+		 * Notify the panel's components that a client joined the room.
 		 * 
 		 * @param client
 		 */		
@@ -241,6 +286,8 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
+		 * Add a new message to the <code>Chat</code>.
+		 * 
 		 * @param message
 		 */		
 		public function addMessage( message:BaseChatMessage ):void
@@ -364,6 +411,8 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
+		 * Invoked when the panel is scrolled.
+		 * 
 		 * @param event
 		 */		
 		protected function scrollHandler( event:ScrollEvent ):void

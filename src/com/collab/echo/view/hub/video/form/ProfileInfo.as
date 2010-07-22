@@ -40,11 +40,11 @@ package com.collab.echo.view.hub.video.form
 		protected var fields			: Vector.<ProfileInfoFormItem>;
 		
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _item				: ProfileInfoFormItem;
-		internal var _data				: ProfileInfoVO;
+		private var _item				: ProfileInfoFormItem;
+		private var _data				: ProfileInfoVO;
 
 		// ====================================
 		// GETTER/SETTER

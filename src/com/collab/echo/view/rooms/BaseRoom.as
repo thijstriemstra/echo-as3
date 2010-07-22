@@ -31,13 +31,13 @@ package com.collab.echo.view.rooms
 	public class BaseRoom extends EventDispatcher
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _id		: String;
-		internal var _engine	: *;
-		internal var _autoJoin	: Boolean;
-		internal var _evt		: BaseRoomEvent;
+		private var _id			: String;
+		private var _engine		: *;
+		private var _autoJoin	: Boolean;
+		private var _evt		: BaseRoomEvent;
 		
 		// ====================================
 		// PROTECTED VARS
@@ -112,7 +112,7 @@ package com.collab.echo.view.rooms
 		// ====================================
 		
 		/**
-		 * Create a new <code>Room</code>.
+		 * Create a new <code>BaseRoom</code>.
 		 * 
 		 * @param engine
 		 * @return 
@@ -123,14 +123,14 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
-		 * Join the <code>Room</code>.
+		 * Join the <code>BaseRoom</code>.
 		 */		
 		public function join():void
 		{
 		}
 		
 		/**
-		 * Leave the <code>Room</code>. 
+		 * Leave the <code>BaseRoom</code>. 
 		 */		
 		public function leave():void
 		{
@@ -141,7 +141,7 @@ package com.collab.echo.view.rooms
 		// ====================================
 		
 		/**
-		 * Join the <code>Room</code>.
+		 * Invoked when the <code>BaseRoom</code> was joined.
 		 * 
 		 * @param event
 		 */		

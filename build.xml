@@ -24,7 +24,7 @@
 			<arg line="-doc-sources ${domainextensions}"/>
 			<arg value="-benchmark"/>
 			<arg value="-window-title" />
-			<arg value="'${title}'"/>
+			<arg value="${title}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${docs.outputfolder}"/>
 			<arg value="-external-library-path" />
@@ -42,7 +42,7 @@
 			<source-path path-element="${basedir}" />
 			
 			<!-- include our Class packages into the build (com folder) -->
-			<include-sources dir="${basedir}/${domainextensions}" includes="*" />
+			<include-sources dir="${basedir}/src/${domainextensions}" includes="*" />
 		</compc>
 		
 		<echo>SWC created</echo>

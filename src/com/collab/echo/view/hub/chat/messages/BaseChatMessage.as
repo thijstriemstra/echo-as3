@@ -41,16 +41,22 @@ package com.collab.echo.view.hub.chat.messages
 		// INTERNAL VARS
 		// ====================================
 		
+		// XXX: no union specific references here.
 		internal var _receiver						: IClient;
 		internal var _sender						: IClient;
-		internal var _message						: String;
-		internal var _type							: String;
-		internal var _doc							: String;
-		internal var _privateMessage				: Boolean;
-		internal var _includeSelf					: Boolean;
-		internal var _local							: Boolean;
-		internal var _append						: Boolean;
-		internal var _presence						: PresenceProxy;
+		
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		private var _message						: String;
+		private var _type							: String;
+		private var _doc							: String;
+		private var _privateMessage					: Boolean;
+		private var _includeSelf					: Boolean;
+		private var _local							: Boolean;
+		private var _append							: Boolean;
+		private var _presence						: PresenceProxy;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -72,8 +78,6 @@ package com.collab.echo.view.hub.chat.messages
 		}
 		
 		/**
-		 * XXX: no union specific references here.
-		 * 
 		 * @return 
 		 */		
 		public function get sender():IClient

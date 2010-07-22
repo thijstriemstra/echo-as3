@@ -21,12 +21,14 @@ package com.collab.echo.view.hub.interfaces
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 
 	/**
+	 * Interface for a chat room.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public interface IChatRoom extends IRoom
 	{
 		/**
-		 * Add a message to the <code>Chat</code>.
+		 * Add a message to the chat room.
 		 * 
 		 * @param data
 		 */		

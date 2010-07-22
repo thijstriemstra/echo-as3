@@ -28,14 +28,22 @@ package com.collab.echo.view.hub.chat.events
 	public class ChatMessageEvent extends Event
 	{
 		// ====================================
-		// COSNTANTS
+		// CONSTANTS
 		// ====================================
 		
-		internal static const NAME				: String = "ChatMessageEvent";
+		public static const NAME				: String = "ChatMessageEvent";
 		
 		public static const LOAD_COMPLETE		: String = NAME + "_loadComplete";
 		
-		internal var _data						: BaseChatMessage;
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		private var _data						: BaseChatMessage;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
 		
 		public function get data()				: BaseChatMessage
 		{

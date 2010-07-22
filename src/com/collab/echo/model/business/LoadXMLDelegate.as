@@ -81,13 +81,13 @@ package com.collab.echo.model.business
 		}
 		
 		// ====================================
-		// PRIVATE METHODS
+		// PROTECTED METHODS
 		// ====================================
 		
 		/**
 		 * Setup service and listeners.
 		 */		
-		private function configureService():void
+		protected function configureService():void
 		{
 			_service = new URLLoader();
             _service.addEventListener( Event.COMPLETE, completeHandler,

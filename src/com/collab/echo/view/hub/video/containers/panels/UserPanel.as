@@ -30,6 +30,8 @@ package com.collab.echo.view.hub.video.containers.panels
 	import flash.text.TextField;
 	
 	/**
+	 * Panel containing profile info, video and username.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class UserPanel extends Panel
@@ -43,10 +45,10 @@ package com.collab.echo.view.hub.video.containers.panels
 		public static const WIDTH		: int = 200;
 
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _data				: UserVO;
+		private var _data				: UserVO;
 		
 		// ====================================
 		// PROTECTED VARS

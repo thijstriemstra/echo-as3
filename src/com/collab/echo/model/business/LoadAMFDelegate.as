@@ -39,13 +39,13 @@ package com.collab.echo.model.business
 	public class LoadAMFDelegate extends EventDispatcher
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var url					: String;
-		internal var servicePath			: String;
-		internal var resp	 				: Responder;
-		internal var service				: NetConnection;
+		private var url					: String;
+		private var servicePath			: String;
+		private var resp	 			: Responder;
+		private var service				: NetConnection;
 		
 		/**
 		 * Constructor.
@@ -100,7 +100,7 @@ package com.collab.echo.model.business
 		/**
 		 * Setup service and listeners.
 		 */		
-		internal function configureService():void
+		protected function configureService():void
 		{
 			service = new NetConnection();
 			service.addEventListener( NetStatusEvent.NET_STATUS, statusHandler,
@@ -117,7 +117,7 @@ package com.collab.echo.model.business
         /**
          * @param result
          */		
-		internal function resultHandler( result:Object ):void
+		protected function resultHandler( result:Object ):void
         {
 			var evt:LoadAMFEvent = new LoadAMFEvent( LoadAMFEvent.COMPLETE );
 			evt.result = result;
@@ -131,7 +131,7 @@ package com.collab.echo.model.business
 		/**
 		 * @param error
 		 */		
-		internal function faultHandler( error:Object=null ):void
+		protected function faultHandler( error:Object=null ):void
 		{
 			Logger.error( "Error loading AMF response." );
 			
@@ -142,7 +142,7 @@ package com.collab.echo.model.business
 			dispose();
 		}
 		
-		internal function dispose():void
+		protected function dispose():void
 		{
 			service = null;
 			url = null;
@@ -157,7 +157,7 @@ package com.collab.echo.model.business
 		/**
 		 * @param event
 		 */		
-		internal function statusHandler( event:NetStatusEvent ):void
+		protected function statusHandler( event:NetStatusEvent ):void
 		{
 			event.stopImmediatePropagation();
 			event.target.removeEventListener( event.type, statusHandler );
@@ -170,7 +170,7 @@ package com.collab.echo.model.business
         /**
          * @param event
          */		
-		internal function ioErrorHandler( event:IOErrorEvent ):void
+		protected function ioErrorHandler( event:IOErrorEvent ):void
         {
 			event.stopImmediatePropagation();
         	event.target.removeEventListener( event.type, ioErrorHandler );
@@ -183,7 +183,7 @@ package com.collab.echo.model.business
 		/**
 		 * @param event
 		 */		
-		internal function asyncErrorHandler( event:AsyncErrorEvent ):void
+		protected function asyncErrorHandler( event:AsyncErrorEvent ):void
 		{
 			event.stopImmediatePropagation();
 			event.target.removeEventListener( event.type, asyncErrorHandler );
@@ -196,7 +196,7 @@ package com.collab.echo.model.business
 		/**
 		 * @param event
 		 */		
-		internal function securityHandler( event:SecurityErrorEvent ):void
+		protected function securityHandler( event:SecurityErrorEvent ):void
 		{
 			event.stopImmediatePropagation();
 			event.target.removeEventListener( event.type, securityHandler );

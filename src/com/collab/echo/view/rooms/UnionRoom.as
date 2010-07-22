@@ -124,7 +124,7 @@ package com.collab.echo.view.rooms
 			
 			log( "Creating new " + name + " called: " + id );
 			
-			if ( _autoJoin )
+			if ( autoJoin )
 			{
 				log( "Auto-joining: " + id );
 				join();

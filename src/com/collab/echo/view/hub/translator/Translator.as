@@ -30,10 +30,10 @@ package com.collab.echo.view.hub.translator
 	public class Translator extends BaseView
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var background		: Sprite;
+		private var background		: Sprite;
 		
 		/**
 		 * Constructor.

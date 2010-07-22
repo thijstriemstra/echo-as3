@@ -29,8 +29,6 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	
-	import org.osflash.thunderbolt.Logger;
 
 	/**
 	 * @author Thijs Triemstra
@@ -38,19 +36,18 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 	public class VideoScrollPane extends FlashScrollPane implements IRoom
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PRIVATE VARS
 		// ====================================
 		
-		internal var _panels			: Vector.<UserPanel>;
-		internal var _background		: Sprite;
-		internal var _item				: UserPanel;
-		internal var _index				: int;
-		internal var _panelSkin			: Class;
+		private var _panels				: Vector.<UserPanel>;
+		private var _background			: Sprite;
+		private var _item				: UserPanel;
+		private var _index				: int;
+		private var _panelSkin			: Class;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
-		
 		
 		/**
 		 * Skin for the <code>UserPanel</code>.

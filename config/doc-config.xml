@@ -16,4 +16,7 @@
    <!-- left-frameset-width: width of the left frame.-->
    <left-frameset-width>350</left-frameset-width>
    
+   <!-- lenient: Report XHTML errors as warnings.-->
+   <lenient>false</lenient>
+   
 </flex-config>

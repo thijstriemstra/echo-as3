@@ -27,21 +27,24 @@
 			<arg value="${basedir}/${docs.packages}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${docs.outputfolder}"/>
+			<arg value="-keep-xml"/>
 			<arg value="-external-library-path" />
 			<arg value="${basedir}/${lib.path}" />
 		</exec>
 	</target>
 
 	<target name="build-lib">
-		<exec executable="${compc.exe}" failonerror="true"
-			  dir="${app.src}">
+		<exec executable="${compc.exe}" failonerror="true">
 			<arg line="-load-config+=${basedir}/${app.config}"/>
 			<arg value="-source-path"/>
 			<arg value="${basedir}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${app.outputfolder}/${lib.outputfile}"/>
-			<arg value="-include-libraries" />
-			<arg value="${basedir}/${lib.path}" />
+			<arg line="-library-path+=${basedir}/${lib.path}" />
+			<arg value="-source-path"/>
+			<arg value="${app.src}"/>
+			<arg line="-namespace ${lib.namespace} ${lib.manifest}" />
+			<arg line="-include-namespaces ${lib.namespace}"/>
 			<arg value="-link-report"/>
 			<arg value="${app.outputfolder}/link-report.xml"/>
 		</exec>

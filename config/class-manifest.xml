@@ -1,0 +1,6 @@
+<?xml version="1.0"?> 
+<componentPackage> 
+    <component id="RemotingCommand" class="com.collab.echo.controller.remoting.RemotingCommand"/>
+    <component id="ModelPrepCommand" class="com.collab.echo.controller.ModelPrepCommand"/>
+    <component id="Echo" class="com.collab.echo.Echo"/>
+</componentPackage>

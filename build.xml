@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="echo-as3" default="compile" basedir=".">
+	
+	<!-- import our build properties file -->
+	<property file="${basedir}/build.properties" />
+	
+	<taskdef resource="flexTasks.tasks" classpath="${basedir}/ant/lib/flexTasks.jar" />
+	
+	<target name="compile" description="series of tasks to create docs and swc">
+		<antcall target="cleanDir" description="clean the docs directory"/>
+		<antcall target="asDocs" description="full build of asdocs"/>
+		<antcall target="buildSWC" description="build the SWC file"/>
+	</target>
+
+	<target name="cleanDir" description="DELETE the existing output folder and files and then re-generate the output folder">
+		<delete dir="${basedir}/${docsoutputfolder}" failOnError="true" includeEmptyDirs="true"/>
+		<mkdir dir="${basedir}/${docsoutputfolder}"/>
+		
+		<!-- echo dumps output to the console window -->
+		<echo>doc directory cleaned</echo>
+	</target>
+
+	<target name="asDocs" description="Run the ASDoc executable and generate the ASDocs to the new output folder">
+		<exec executable="${asdoc.exe}" failonerror="true">
+			<arg line="-doc-sources ${domainextensions}"/>
+			<arg value="-window-title" />
+			<arg value="'${title}'"/>
+			<arg value="-output" />
+			<arg value="${basedir}/${docs.outputfolder}"/>
+			<arg value="-external-library-path" />
+			<arg value="${basedir}/${lib.path}" />
+		</exec>
+	
+		<echo>docs created</echo>
+	</target>
+
+	<target name="buildSWC" description="Compile the SWC file">
+
+		<compc output="${basedir}/${lib.outputfolder}/${lib.outputfile}">
+			<include-libraries file="${basedir}/${lib.path}/" />
+			<source-path path-element="${basedir}" />
+			
+			<!-- include our Class packages into the build (com folder) -->
+			<include-sources dir="${basedir}/${domainextensions}" includes="*" />
+		</compc>
+		<echo>SWC created</echo>
+	</target>
+
+</project>

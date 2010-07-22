@@ -11,8 +11,8 @@
 	<target name="clean">
 		<delete dir="${basedir}/${docs.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
 		<mkdir dir="${basedir}/${docs.outputfolder}"/>
-		<delete dir="${basedir}/${lib.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
-		<mkdir dir="${basedir}/${lib.outputfolder}"/>
+		<delete dir="${basedir}/${app.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
+		<mkdir dir="${basedir}/${app.outputfolder}"/>
 	</target>
 
 	<target name="api-docs">
@@ -23,6 +23,8 @@
 			<arg value="${docs.title}"/>
 			<arg value="-window-title" />
 			<arg value="${docs.title} - API Documentation"/>
+			<arg value="-package-description-file" />
+			<arg value="${basedir}/${docs.packages}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${docs.outputfolder}"/>
 			<arg value="-external-library-path" />
@@ -37,9 +39,11 @@
 			<arg value="-source-path"/>
 			<arg value="${basedir}"/>
 			<arg value="-output" />
-			<arg value="${basedir}/${lib.outputfolder}/${lib.outputfile}"/>
+			<arg value="${basedir}/${app.outputfolder}/${lib.outputfile}"/>
 			<arg value="-include-libraries" />
 			<arg value="${basedir}/${lib.path}" />
+			<arg value="-link-report"/>
+			<arg value="${app.outputfolder}/link-report.xml"/>
 		</exec>
 	</target>
 

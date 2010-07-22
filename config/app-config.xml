@@ -20,9 +20,6 @@
       <show-actionscript-warnings>true</show-actionscript-warnings>
    </compiler>
    
-   <!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
-   <link-report>bin/link-report.xml</link-report>
-   
    <metadata>
       <!-- metadata.creator: A creator's name to store in the SWF metadata-->
       <creator>Collab</creator>

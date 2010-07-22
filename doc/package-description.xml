@@ -1,0 +1,16 @@
+<overviews> 
+    <packages> 
+        <package name="com.collab.echo"> 
+            <shortDescription> 
+                <![CDATA[ 
+                    Short description appears on the All Packages page. 
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                    Long description appears on the package page. 
+                ]]> 
+            </description> 
+        </package> 
+    </packages> 
+</overviews>

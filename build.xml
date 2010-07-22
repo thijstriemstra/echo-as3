@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="echo-as3" default="compile" basedir=".">
 	
-	<!-- import our build properties file -->
 	<property file="${basedir}/build.properties" />
 	
-	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-	
-	<target name="compile" description="series of tasks to create docs and swc">
-		<antcall target="clean" description="clean the build directories"/>
-		<antcall target="apidocs" description="full build of API docs"/>
-		<antcall target="buildSWC" description="build the SWC file"/>
+	<target name="compile" depends="clean">
+		<antcall target="api-docs" description="Full build of API docs"/>
+		<antcall target="build-lib" description="Build the SWC file"/>
 	</target>
 
 	<target name="clean">
@@ -19,8 +15,9 @@
 		<mkdir dir="${basedir}/${lib.outputfolder}"/>
 	</target>
 
-	<target name="apidocs" depends="clean">
-		<exec executable="${asdoc.exe}" failonerror="true" dir="src">
+	<target name="api-docs">
+		<exec executable="${asdoc.exe}" failonerror="true"
+			  dir="${src.folder}">
 			<arg line="-doc-sources ${domainextensions}"/>
 			<arg value="-benchmark"/>
 			<arg value="-window-title" />
@@ -30,22 +27,18 @@
 			<arg value="-external-library-path" />
 			<arg value="${basedir}/${lib.path}" />
 		</exec>
-	
-		<echo>docs created</echo>
 	</target>
 
-	<target name="buildSWC" description="Compile the SWC file">
-
-		<compc output="${basedir}/${lib.outputfolder}/${lib.outputfile}"
-			   benchmark="true">
-			<include-libraries file="${basedir}/${lib.path}/" />
-			<source-path path-element="${basedir}" />
-			
-			<!-- include our Class packages into the build (com folder) -->
-			<include-sources dir="${basedir}/src/${domainextensions}" includes="*" />
-		</compc>
-		
-		<echo>SWC created</echo>
+	<target name="build-lib">
+		<exec executable="${compc.exe}" failonerror="true"
+			  dir="${src.folder}">
+			<arg line="-source-path ${basedir}"/>
+			<arg value="-benchmark" />
+			<arg value="-output" />
+			<arg value="${basedir}/${lib.outputfolder}/${lib.outputfile}"/>
+			<arg value="-include-libraries" />
+			<arg value="${basedir}/${lib.path}" />
+		</exec>
 	</target>
 
 </project>

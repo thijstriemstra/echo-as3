@@ -1,15 +1,4 @@
 <?xml version="1.0"?>
-
-<!-- 
-	As it isn't good form to have classes / components etc defined in the default package 
-	(i.e. the root of your
-	source), this script automatically comments them out. This 
-	is only because it is best to only really have the
-	default application file in the 
-	source root i.e. myApplication.mxml. However if you do this script only comments out 
-	the source root files so you can easily uncomment them.
--->
-	
 <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.view.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
@@ -98,9 +87,3 @@
 	<component id="VideoScrollPane" class="com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane"/>
 	<component id="Whiteboard" class="com.collab.echo.view.hub.whiteboard.display.Whiteboard"/>
 </componentPackage>
-
-<!--
-	This file was auto-generated using FlashGen.Com's Flex Ant scripts for Flex Builder
-	Created by Mike Jones (fgdevelopment@flashgen.com) and released under the Creative 
-	Commons Attribution-Share Alike 3.0 license
--->

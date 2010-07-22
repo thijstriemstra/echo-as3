@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.controls.buttons
 {
+	import com.collab.echo.view.display.util.StyleDict;
+	
 	import flash.display.GradientType;
 	import flash.display.Shape;
 	import flash.events.MouseEvent;

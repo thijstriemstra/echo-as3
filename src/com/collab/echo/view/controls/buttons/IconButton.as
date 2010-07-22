@@ -18,6 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.controls.buttons
 {
+	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.display.util.TextUtils;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;

@@ -17,17 +17,12 @@
 
 	<target name="api-docs">
 		<exec executable="${asdoc.exe}" failonerror="true"
-			  dir="${src.folder}">
-			<arg line="-doc-sources ${domainextensions}"/>
-			<arg value="-benchmark"/>
+			  dir="${app.src}">
+			<arg line="-load-config+=${basedir}/${app.config} -load-config+=${basedir}/${docs.config}"/>
 			<arg value="-main-title" />
-			<arg value="${title}"/>
+			<arg value="${docs.title}"/>
 			<arg value="-window-title" />
-			<arg value="${title} - API Documentation"/>
-			<arg value="-footer" />
-			<arg value="${footer}"/>
-			<arg value="-left-frameset-width"/>
-			<arg value="${frameset.width}" />
+			<arg value="${docs.title} - API Documentation"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${docs.outputfolder}"/>
 			<arg value="-external-library-path" />
@@ -37,10 +32,10 @@
 
 	<target name="build-lib">
 		<exec executable="${compc.exe}" failonerror="true"
-			  dir="${src.folder}">
-			<arg line="-source-path ${basedir}"/>
-			<arg value="-benchmark" />
-			<arg value="-define=CONFIG::version,${lib.version}"/>
+			  dir="${app.src}">
+			<arg line="-load-config+=${basedir}/${app.config}"/>
+			<arg value="-source-path"/>
+			<arg value="${basedir}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${lib.outputfolder}/${lib.outputfile}"/>
 			<arg value="-include-libraries" />

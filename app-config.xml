@@ -1,0 +1,37 @@
+<flex-config>
+   <!-- benchmark: output performance benchmark-->
+   <benchmark>true</benchmark>
+   
+   <compiler>
+      <!-- compiler.debug: generates a movie that is suitable for debugging-->
+      <debug>false</debug>
+      
+      <!-- compiler.define: define a global AS3 conditional compilation definition -->
+      <define>
+         <name>ECHO::version</name>
+         <value>'0.1.0a2'</value>
+      </define>
+
+      <!-- compiler.minimum-supported-version usage:
+      <minimum-supported-version>string</minimum-supported-version>
+      -->
+
+      <!-- compiler.show-actionscript-warnings: runs the AS3 compiler in a mode that detects legal but potentially incorrect code-->
+      <show-actionscript-warnings>true</show-actionscript-warnings>
+   </compiler>
+   
+   <!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
+   <link-report>bin/link-report.xml</link-report>
+   
+   <metadata>
+      <!-- metadata.creator: A creator's name to store in the SWF metadata-->
+      <creator>Collab</creator>
+      
+      <!-- metadata.description: The default description to store in the SWF metadata-->
+      <description>http://echo.collab.com</description>
+      
+      <!-- metadata.title: The default title to store in the SWF metadata-->
+      <title>Echo</title>
+   </metadata>
+   
+</flex-config>

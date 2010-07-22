@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.whiteboard.tools
 {
 	/**
-	 * Various drawing modes used by the whiteboard tools (<code>Pencil<code>,
+	 * Various drawing modes used by the whiteboard tools (<code>Pencil</code>,
 	 * <code>PaintBucket</code>, etc).
 	 * 
 	 * @see com.collab.echo.view.hub.whiteboard.tools.DrawingTool DrawingTool

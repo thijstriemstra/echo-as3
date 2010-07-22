@@ -4,7 +4,7 @@
 	<!-- import our build properties file -->
 	<property file="${basedir}/build.properties" />
 	
-	<taskdef resource="flexTasks.tasks" classpath="${basedir}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	
 	<target name="compile" description="series of tasks to create docs and swc">
 		<antcall target="cleanDir" description="clean the docs directory"/>

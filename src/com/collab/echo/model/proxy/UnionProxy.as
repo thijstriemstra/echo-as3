@@ -39,7 +39,7 @@ package com.collab.echo.model.proxy
 	/**
 	 * Presence <code>Proxy</code> for the Union platform.
 	 * 
-	 * <p><Manages connection and rooms. Users are managed in <code>BaseRoom</code>s.</p>
+	 * <p>Manages connection and rooms. Users are managed in <code>BaseRoom</code>s.</p>
 	 * 
 	 * @see com.collab.echo.view.rooms.BaseRoom BaseRoom
 	 * @author Thijs Triemstra

@@ -1,3 +1,4 @@
 /lib/*.swc
 /bin
 /bin-debug
+/doc/api

@@ -26,8 +26,6 @@ package com.collab.echo.util
 	public class URLUtils
 	{
 		/**
-		 * XXX: refactor.
-		 * 
 		 * Create HTML anchor for URL.
 		 *  
 		 * @param url
@@ -35,6 +33,7 @@ package com.collab.echo.util
 		 */		
 		public static function createHyperlink( url:String ):String
 		{
+			// XXX: refactor
 			if ( url.indexOf( "http://" ) > -1 )
 			{
 				return "<FONT COLOR='#0000FF'><U><A HREF='" + url + "' TARGET='_BLANK'>"+ url + "</A></U></FONT>";

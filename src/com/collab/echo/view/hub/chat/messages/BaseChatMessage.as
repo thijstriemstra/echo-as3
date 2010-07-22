@@ -42,7 +42,14 @@ package com.collab.echo.view.hub.chat.messages
 		// ====================================
 		
 		// XXX: no union specific references here.
+		/**
+		 * @private 
+		 */		
 		internal var _receiver						: IClient;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _sender						: IClient;
 		
 		// ====================================

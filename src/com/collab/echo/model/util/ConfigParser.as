@@ -25,7 +25,7 @@ package com.collab.echo.model.util
 	 * Helper class that parses the game's configuration XML and stores
 	 * the data in a <code>ConfigVO</code> object.
 	 * 
-	 * @see eu.collab.echo.model.vo.ConfigVO ConfigVO
+	 * @see com.collab.echo.model.vo.ConfigVO ConfigVO
 	 * @author Thijs Triemstra
 	 */	
 	public class ConfigParser
@@ -39,7 +39,6 @@ package com.collab.echo.model.util
 		 *  
 		 * @param data Configuration XML data
 		 * @return ConfigVO
-		 * @see com.collab.site.v2.model.vo.ConfigVO ConfigVO
 		 */		
 		public static function parse( data:Object ) : ConfigVO
 		{
@@ -88,7 +87,7 @@ package com.collab.echo.model.util
 		/**
 		 * @param data
 		 * @param key
-		 * @return 
+		 * @return
 		 */		
 		private static function getValue( data:Object, key:String ):String
 		{

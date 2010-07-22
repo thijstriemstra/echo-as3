@@ -34,7 +34,10 @@ package com.collab.echo.view.display.util
 	 */	
 	public class ContentLoader extends Loader
 	{
-		internal var url	: String;
+		/**
+		 * URL of the content item. 
+		 */		
+		protected var url	: String;
 
 		/**
 		 * Constructor.
@@ -61,6 +64,7 @@ package com.collab.echo.view.display.util
 		 * Listen for loader events.
 		 * 
 		 * @param dispatcher
+		 * @private
 		 */		
 		internal function configureListeners( dispatcher:IEventDispatcher ):void
 		{

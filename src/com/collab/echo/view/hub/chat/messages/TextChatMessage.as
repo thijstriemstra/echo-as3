@@ -132,12 +132,11 @@ package com.collab.echo.view.hub.chat.messages
 		// ====================================
 		
 		/**
-		 * XXX: probably needs to be determined outside the message.
-		 * 
 		 * @param msg
 		 */		
 		internal function parsePrivateMessage():void
 		{
+			// XXX: probably needs to be determined outside the message.
 			// check it's a private message
 			var msgsplit:Array = data.substr( 5 ).split( " : ", 2 );
 			var userName:String = msgsplit[ 0 ];
@@ -187,6 +186,8 @@ package com.collab.echo.view.hub.chat.messages
 		
 		/**
 		 * Look up the clientID and userName of a selected client.
+		 * 
+		 * @private
 		 */
 		internal function findUserName( userName:String ):Object
 		{

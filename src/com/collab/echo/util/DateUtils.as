@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.util
 {
 	/**
+	 * Utilities for manipulating dates.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class DateUtils
@@ -28,7 +30,7 @@ package com.collab.echo.util
 		// ====================================
 		
 		/**
-		 * Create a client-side timestamp.
+		 * Create a timestamp: (12:00:00)
 		 */
 		public static function createClientStamp():String
 		{

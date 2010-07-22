@@ -31,7 +31,7 @@ package com.collab.echo.model.proxy
     /**
      * A base <code>Proxy</code> for user presence.
 	 * 
-	 * <p>Note: should not de dependent on any third-party frameworks like Union.</p>
+	 * <p>Note: should not be dependent on any third-party frameworks like Union.</p>
 	 * 
 	 * @author Thijs Triemstra
      */
@@ -66,6 +66,9 @@ package com.collab.echo.model.proxy
 		// PUBLIC VARS
 		// ====================================
 		
+		/**
+		 * Creator chat messages. 
+		 */		
 		public var messageCreator					: ChatMessageCreator;
 		
 		// ====================================
@@ -91,12 +94,39 @@ package com.collab.echo.model.proxy
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var _users							: Vector.<UserVO>;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _hostUrl						: String;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _hostPort						: int;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _logging						: Boolean;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _rooms							: Vector.<BaseRoom>;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _ready							: Boolean;
+		
+		/**
+		 * @private 
+		 */		
 		internal var _room							: BaseRoom;
 		
 		// ====================================

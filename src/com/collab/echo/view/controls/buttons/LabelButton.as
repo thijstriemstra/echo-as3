@@ -48,14 +48,14 @@ package com.collab.echo.view.controls.buttons
 		protected var text					: TextField;
 		protected var font 					: Font;
 		
-		protected var _label				: String;
-		protected var _width				: Number;
-		protected var _height				: Number;
-		protected var _textColor			: uint;
-		protected var _backgroundColor		: uint;
-		protected var _fontSize				: int;
-		protected var _enabled				: Boolean;
-		protected var _bold					: Boolean;
+		private var _label					: String;
+		private var _width					: Number;
+		private var _height					: Number;
+		private var _textColor				: uint;
+		private var _backgroundColor		: uint;
+		private var _fontSize				: int;
+		private var _enabled				: Boolean;
+		private var _bold					: Boolean;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -114,6 +114,11 @@ package com.collab.echo.view.controls.buttons
 		public function get backgroundColor():uint
 		{
 			return _backgroundColor;
+		}
+		
+		public function get viewWidth():Number
+		{
+			return _width;
 		}
 		
 		/**

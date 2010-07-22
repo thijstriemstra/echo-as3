@@ -24,6 +24,8 @@ package com.collab.echo.view.display.util
 	public class SkinUtils
 	{
 		/**
+		 * Return a Class instance.
+		 * 
 		 * @param skinClass
 		 * @return 
 		 */		

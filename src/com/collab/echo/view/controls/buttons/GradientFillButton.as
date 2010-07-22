@@ -64,7 +64,7 @@ package com.collab.echo.view.controls.buttons
 		
 		override protected function drawBackground():void
 		{
-			var w:int = _width;
+			var w:int = viewWidth;
 			var h:int = 28;
 			var radius:int = 15;
 			var colors:Array = [ StyleDict.PURPLE1, StyleDict.RED1, StyleDict.YELLOW1 ];

@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.vo
 {
 	/**
-	 * Actionscript object version of the config.xml.
+	 * Actionscript object of the config.xml.
 	 * 
 	 * @author Thijs Triemstra
 	 */	

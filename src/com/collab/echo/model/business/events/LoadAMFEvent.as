@@ -40,28 +40,39 @@ package com.collab.echo.model.business.events
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var errorObject		: Object;
+		
+		/**
+		 * @private 
+		 */		
 		internal var resultObject		: Object;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get error():Object
 		{
 			return errorObject;
 		}
-		
 		public function set error( val:Object ):void
 		{
 			errorObject = val;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get result():Object
 		{
 			return resultObject;
 		}
-		
 		public function set result( val:Object ):void
 		{
 			resultObject = val;

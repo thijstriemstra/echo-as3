@@ -67,6 +67,9 @@ package com.collab.echo.model.proxy
 		// PUBLIC/PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override public function onRegister():void
 		{		
 			// retrieve the StartupMonitorProxy
@@ -160,6 +163,8 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Send the notifications when the resource has loaded.
+		 * 
+		 * @private
 		 */
 		internal function resourceLoaded():void
 		{

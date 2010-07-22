@@ -93,6 +93,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Instantiate and add child(ren) to display list.
+		 * 
+		 * @private
 		 */	
 		override protected function draw() : void
 		{
@@ -119,6 +121,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Position child(ren) on display list.
+		 * 
+		 * @private
 		 */
 		override protected function layout():void
 		{
@@ -133,6 +137,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Remove and redraw child(ren).
+		 * 
+		 * @private
 		 */		
 		override protected function invalidate():void
 		{

@@ -28,6 +28,8 @@ package com.collab.echo.view.controls.buttons
 	import flash.text.TextFormatAlign;
 
 	/**
+	 * XXX: refactor for BaseView.
+	 * 
 	 * Button with an icon and label.
 	 * 
 	 * @author Thijs Triemstra
@@ -53,11 +55,17 @@ package com.collab.echo.view.controls.buttons
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get icon()	: Bitmap
 		{
 			return _icon;
 		}
 		
+		/**
+		 * @param val
+		 */		
 		public function set title( val:String ):void
 		{
 			if ( val )
@@ -70,7 +78,7 @@ package com.collab.echo.view.controls.buttons
 		/**
 		 * Constructor. 
 		 * 
-		 * @param data
+		 * @param data Data used for the icon.
 		 */		
 		public function IconButton( data:BitmapData )
 		{

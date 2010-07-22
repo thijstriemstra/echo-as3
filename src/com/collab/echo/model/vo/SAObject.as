@@ -21,6 +21,8 @@ package com.collab.echo.model.vo
 	/**
 	 * SQLAlchemy properties.
 	 * 
+	 * <p>Mandatory for PyAMF Remoting backends.</p>
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class SAObject extends Object

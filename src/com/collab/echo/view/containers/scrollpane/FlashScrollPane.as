@@ -90,6 +90,9 @@ package com.collab.echo.view.containers.scrollpane
 		// PUBLIC METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override public function update():void
 		{
 			layoutChildren();

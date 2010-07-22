@@ -59,6 +59,7 @@ package com.collab.echo.controller.remoting
 		/** 
 		 * Execute the business logic.
 		 * 
+		 * @private
 		 * @param note
 		 */
 		override public function execute ( note:INotification ) : void

@@ -39,17 +39,31 @@ package com.collab.echo.view.controls.buttons
 		// CONSTANTS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal const SPEED	: Number = .3;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * Creates the button's text style.
+		 *  
+		 * @return 
+		 * 
+		 */		
 		public function get textFormat():TextFormat
 		{
 			return TextUtils.createTextFormat();
 		}
 		
+		/**
+		 * Creates the button's disabled text style.
+		 *  
+		 * @return 
+		 */		
 		public function get disabledTextFormat():TextFormat
 		{
 			return TextUtils.createTextFormat();
@@ -111,13 +125,6 @@ package com.collab.echo.view.controls.buttons
 		}
 		
 		/**
-		 * Show transition completed. 
-		 */		
-		public function showComplete():void
-		{
-		}
-		
-		/**
 		 * Resize button for name string. 
 		 */		
 		override protected function drawTextFormat():void
@@ -133,6 +140,18 @@ package com.collab.echo.view.controls.buttons
 		// INTERNAL METHODS
 		// ====================================
 		
+		/**
+		 * Show transition completed. 
+		 * 
+		 * @private
+		 */		
+		internal function showComplete():void
+		{
+		}
+		
+		/**
+		 * @private 
+		 */		
 		internal function hideComplete():void
 		{
 			visible = false;
@@ -140,6 +159,8 @@ package com.collab.echo.view.controls.buttons
 		
 		/**
 		 * Cleanup listeners. 
+		 * 
+		 * @private
 		 */		
 		internal function destroy():void
 		{

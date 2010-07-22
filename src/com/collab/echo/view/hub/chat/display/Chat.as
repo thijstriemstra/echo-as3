@@ -72,6 +72,9 @@ package com.collab.echo.view.hub.chat.display
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get playSound():Boolean
 		{
 			return _playSound;
@@ -81,6 +84,9 @@ package com.collab.echo.view.hub.chat.display
 			_playSound = val;
 		}
 
+		/**
+		 * @return 
+		 */		
 		public function get showTimestamp():Boolean
 		{
 			return _showTimestamp;
@@ -90,6 +96,9 @@ package com.collab.echo.view.hub.chat.display
 			_showTimestamp = val;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get welcomeMessage()		: String
 		{
 			return _welcomeMessage;
@@ -100,6 +109,9 @@ package com.collab.echo.view.hub.chat.display
 			invalidate();
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get sendLabel()				: String
 		{
 			return _sendLabel;
@@ -252,6 +264,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Instantiate and add child(ren) to display list.
+		 * 
+		 * @private
 		 */	
 		override protected function draw() : void
 		{
@@ -279,6 +293,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Position child(ren) on display list.
+		 * 
+		 * @private
 		 */
 		override protected function layout():void
 		{
@@ -297,6 +313,8 @@ package com.collab.echo.view.hub.chat.display
 		
 		/**
 		 * Remove and redraw child(ren).
+		 * 
+		 * @private
 		 */		
 		override protected function invalidate():void
 		{
@@ -311,6 +329,10 @@ package com.collab.echo.view.hub.chat.display
 		// EVENT HANDLERS
 		// ====================================
 		
+		/**
+		 * @param event
+		 * @private
+		 */		
 		protected function onHistoryUp( event:ChatEvent ):void
 		{
 			event.stopImmediatePropagation();
@@ -318,6 +340,10 @@ package com.collab.echo.view.hub.chat.display
 			trace( 'onHistoryUp: ' + event );
 		}
 		
+		/**
+		 * @param event
+		 * @private
+		 */		
 		protected function onHistoryDown( event:ChatEvent ):void
 		{
 			event.stopImmediatePropagation();
@@ -334,6 +360,7 @@ package com.collab.echo.view.hub.chat.display
 		 *  
 		 * @param welke
 		 * @return 
+		 * @private
 		 */		
 		internal function truncateChatField( welke:TextArea ):void
 		{
@@ -345,8 +372,11 @@ package com.collab.echo.view.hub.chat.display
 		}
 		
 		/**
-		 * Trim text
-		 */
+		 * Trim text.
+		 * 
+		 * @param welke
+		 * @private
+		 */		
 		internal function truncateTxt(welke:TextArea):void
 		{
 			var maxChars:Number = 15000;

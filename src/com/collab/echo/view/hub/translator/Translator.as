@@ -53,6 +53,8 @@ package com.collab.echo.view.hub.translator
 		
 		/**
 		 * Instantiate and add child(ren) to display list.
+		 * 
+		 * @private
 		 */	
 		override protected function draw() : void
 		{
@@ -64,6 +66,8 @@ package com.collab.echo.view.hub.translator
 		
 		/**
 		 * Position child(ren) on display list.
+		 * 
+		 * @private
 		 */
 		override protected function layout():void
 		{
@@ -74,6 +78,8 @@ package com.collab.echo.view.hub.translator
 		
 		/**
 		 * Remove and redraw child(ren).
+		 * 
+		 * @private
 		 */		
 		override protected function invalidate():void
 		{

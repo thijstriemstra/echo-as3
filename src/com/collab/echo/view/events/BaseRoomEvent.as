@@ -42,6 +42,9 @@ package com.collab.echo.view.events
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var _data 						: *;
 		
 		// ====================================

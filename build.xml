@@ -18,7 +18,7 @@
 	<target name="api-docs">
 		<exec executable="${asdoc.exe}" failonerror="true"
 			  dir="${app.src}">
-			<arg line="-load-config+=${basedir}/${app.config} -load-config+=${basedir}/${docs.config}"/>
+			<arg line="-load-config+='${basedir}/${app.config}' -load-config+='${basedir}/${docs.config}'"/>
 			<arg value="-main-title" />
 			<arg value="${docs.title}"/>
 			<arg value="-window-title" />
@@ -35,12 +35,12 @@
 
 	<target name="build-lib">
 		<exec executable="${compc.exe}" failonerror="true">
-			<arg line="-load-config+=${basedir}/${app.config}"/>
+			<arg line="-load-config+='${basedir}/${app.config}'"/>
 			<arg value="-source-path"/>
 			<arg value="${basedir}"/>
 			<arg value="-output" />
 			<arg value="${basedir}/${app.outputfolder}/${lib.outputfile}"/>
-			<arg line="-library-path+=${basedir}/${lib.path}" />
+			<arg line="-library-path+='${basedir}/${lib.path}'" />
 			<arg value="-source-path"/>
 			<arg value="${app.src}"/>
 			<arg line="-namespace ${lib.namespace} ${lib.manifest}" />

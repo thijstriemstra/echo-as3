@@ -64,6 +64,8 @@ package com.collab.echo.view.containers.panels
 		
 		/**
 		 * Instantiate and add child(ren) to display list.
+		 * 
+		 * @private
 		 */	
 		override protected function draw() : void
 		{
@@ -90,6 +92,8 @@ package com.collab.echo.view.containers.panels
 		
 		/**
 		 * Position child(ren) on display list.
+		 * 
+		 * @private
 		 */
 		override protected function layout():void
 		{
@@ -103,6 +107,8 @@ package com.collab.echo.view.containers.panels
 		
 		/**
 		 * Remove and redraw child(ren).
+		 * 
+		 * @private
 		 */		
 		override protected function invalidate():void
 		{

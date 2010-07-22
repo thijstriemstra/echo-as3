@@ -39,7 +39,8 @@ package com.collab.echo.model.proxy
 	/**
 	 * Presence <code>Proxy</code> for the Union platform.
 	 * 
-	 * <p>Manages connection and rooms. Users are managed in <code>BaseRoom</code>s.</p>
+	 * <p>Manages connection and rooms. Users are managed in <code>BaseRoom</code>
+	 * instances.</p>
 	 * 
 	 * @see com.collab.echo.view.rooms.BaseRoom BaseRoom
 	 * @author Thijs Triemstra
@@ -59,39 +60,54 @@ package com.collab.echo.model.proxy
 		// ACCESSOR/MUTATOR
 		// ====================================
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function get isReady():Boolean
 		{
 			return Reactor( reactor ).isReady();
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function get self():*
 		{
 			return Reactor( reactor ).self();
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get roomManager():RoomManager
 		{
 			return Reactor( reactor ).getRoomManager();
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get clientManager():ClientManager
 		{
 			return Reactor( reactor ).getClientManager();
 		}
 		
 		/**
-		 *
 		 * The ConnectionManager class manages all connections made by a
 		 * Reactor application to the Union Server.
 		 * 
 		 * @return 
-		 * 
 		 */		
 		public function get connectionManager():ConnectionManager
 		{
 			return Reactor( reactor ).getConnectionManager();
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get messageManager():MessageManager
 		{
 			return Reactor( reactor ).getMessageManager();
@@ -227,6 +243,7 @@ package com.collab.echo.model.proxy
 
 		/**
 		 * @param event
+		 * @private
 		 */		
 		override protected function onMessageComplete( event:ChatMessageEvent ):void
 		{
@@ -249,6 +266,8 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Handles a received message.
+		 * 
 		 * @param fromClient
 		 * @param toRoom
 		 * @param chatMessage

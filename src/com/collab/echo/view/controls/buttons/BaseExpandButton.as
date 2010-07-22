@@ -65,6 +65,10 @@ package com.collab.echo.view.controls.buttons
 		// EVENT HANDLERS
 		// ====================================
 		
+		/**
+		 * @private 
+		 * @param event
+		 */		
 		protected function onMouseClick( event:MouseEvent ):void
 		{
 			event.preventDefault();
@@ -73,7 +77,8 @@ package com.collab.echo.view.controls.buttons
 		}
 		
 		/**
-		* @param event
+		 * @param event
+		 * @private
 		*/		
 		override protected function onMouseOver( event:MouseEvent ):void
 		{
@@ -82,6 +87,7 @@ package com.collab.echo.view.controls.buttons
 		
 		/**
 		 * @param event
+		 * @private
 		 */		
 		override protected function onMouseOut( event:MouseEvent ):void
 		{
@@ -92,6 +98,9 @@ package com.collab.echo.view.controls.buttons
 		// INTERNAL METHODS
 		// ====================================
 		
+		/**
+		 * @param activate
+		 */		
 		internal function expand( activate:Boolean ):void
 		{
 			var type:String;

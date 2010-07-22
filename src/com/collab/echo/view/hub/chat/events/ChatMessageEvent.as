@@ -45,11 +45,13 @@ package com.collab.echo.view.hub.chat.events
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get data()				: BaseChatMessage
 		{
 			return _data;
 		}
-		
 		public function set data( val:BaseChatMessage ):void
 		{
 			_data = val;

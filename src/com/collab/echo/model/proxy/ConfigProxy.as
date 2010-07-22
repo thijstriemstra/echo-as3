@@ -87,6 +87,8 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Retrieve proxies and reset data property.
+		 * 
+		 * @private
 		 */		
 		override public function onRegister():void
 		{		
@@ -198,6 +200,8 @@ package com.collab.echo.model.proxy
 		
 		/**
 		 * Send the notifications when the resource has loaded.
+		 * 
+		 * @private
 		 */
 		internal function resourceLoaded():void
 		{

@@ -23,6 +23,8 @@ package com.collab.echo.view.controls
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.events.MenuItemClickEvent;
 	
+	import flash.geom.Point;
+	
 	/**
 	 * List of <code>MenuItem</code> instances.
 	 * 
@@ -62,16 +64,58 @@ package com.collab.echo.view.controls
 		/**
 		 * @private 
 		 */		
-		internal var label:String;
+		internal var label					: String;
+		
+		/**
+		 * @private 
+		 */		
+		internal var index					: int;
+		
+		/**
+		 * @private 
+		 */		
+		internal var item					: *;
+		
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		private var _offSet					: Point;
+		
+		/**
+		 * @private 
+		 */		
+		private var _horizontalGap			: int;
+		
+		/**
+		 * @private 
+		 */		
+		private var _verticalGap			: int;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		public function get horizontalGap():int
+		{
+			return _horizontalGap;
+		}
+		public function set horizontalGap( val:int ):void
+		{
+			if ( val )
+			{
+				_horizontalGap = val;
+				invalidate();
+			}
+		}
+		
 		/**
 		 * @return 
 		 */		
-		public function get dataProvider():Array
+		public function get dataProvider()	: Array
 		{
 			return items;
 		}
@@ -87,7 +131,7 @@ package com.collab.echo.view.controls
 		/**
 		 * @return 
 		 */		
-		public function get selectedIndex():int
+		public function get selectedIndex()	: int
 		{
 			return selectedMenuIndex;
 		}
@@ -95,7 +139,7 @@ package com.collab.echo.view.controls
 		/**
 		 * @return 
 		 */		
-		public function get selectedItem():MenuItem
+		public function get selectedItem()	: MenuItem
 		{
 			return selectedMenuItem;
 		}
@@ -105,8 +149,12 @@ package com.collab.echo.view.controls
 		 * 
 		 * @param itemType Type of menu item.
 		 * @param direction
+		 * @param offset
+		 * @param horizontalGap
+		 * @param verticalGap
 		 */		
-		public function Menu( itemType:Class=null, direction:String=MenuDirection.VERTICAL )
+		public function Menu( itemType:Class=null, direction:String=MenuDirection.VERTICAL,
+							  offset:Point=null, horizontalGap:int=0, verticalGap:int=0 )
 		{
 			if ( itemType == null )
 			{
@@ -118,7 +166,19 @@ package com.collab.echo.view.controls
 			}
 			
 			this.direction = direction;
-			selectedMenuIndex = -1;
+			this.selectedMenuIndex = -1;
+			
+			_horizontalGap = horizontalGap;
+			_verticalGap = verticalGap;
+			
+			if ( offset )
+			{
+				_offSet = offset;
+			}
+			else
+			{
+				_offSet = new Point();
+			}
 			
 			super();
 			show();
@@ -135,10 +195,11 @@ package com.collab.echo.view.controls
 		{
 			if ( items )
 			{
-				for ( var d:int=0; d<items.length; d++ )
+				index = 0;
+				for ( index; index<items.length; index++ )
 				{
-					label = String( items[ d ]).toLowerCase();
-					var item:* = new menuType( d, label );
+					label = String( items[ index ]).toLowerCase();
+					item = new menuType( index, label );
 					item.addEventListener( MenuItemClickEvent.CLICK,
 										   onItemClick, false, 0, true );
 					addChild( item );
@@ -153,22 +214,23 @@ package com.collab.echo.view.controls
 		{
 			if ( items )
 			{
-				for ( var d:int=0; d<items.length; d++ )
+				index = 0;
+				for ( index; index<items.length; index++ )
 				{
-					label = String( items[ d ]).toLowerCase();
-					var item:* = menuType( getChildByName( label ));
+					label = String( items[ index ]).toLowerCase();
+					item = menuType( getChildByName( label ));
 
 					if ( item )
 					{
 						if ( direction == MenuDirection.VERTICAL )
 						{
-							item.x = 0;
-							item.y = item.buttonHeight * d;
+							item.x = _offSet.x;
+							item.y = _offSet.y + (( item.buttonHeight + _verticalGap ) * index );
 						}
 						else if ( direction == MenuDirection.HORIZONTAL )
 						{
-							item.x = item.buttonWidth * d;
-							item.y = 0;
+							item.x = _offSet.x + (( item.buttonWidth + _horizontalGap ) * index );
+							item.y = _offSet.y;
 						}
 					}
 				}
@@ -182,10 +244,11 @@ package com.collab.echo.view.controls
 		{
 			if ( items )
 			{
-				for ( var d:int=0; d<items.length; d++ )
+				index = 0;
+				for ( index; index<items.length; index++ )
 				{
-					label = String( items[ d ]).toLowerCase();
-					var item:* = menuType( getChildByName( label ));
+					label = String( items[ index ]).toLowerCase();
+					item = menuType( getChildByName( label ));
 					
 					if ( item )
 					{

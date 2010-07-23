@@ -216,6 +216,8 @@ package com.collab.echo.view.controls.buttons
 			text.selectable = false;
 			text.border = debug;
 			text.multiline = false;
+			text.background = debug;
+			text.backgroundColor = StyleDict.GREY1;
 			text.borderColor = StyleDict.RED1;
 			text.wordWrap = false;
 			if ( font )

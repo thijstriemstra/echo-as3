@@ -50,6 +50,12 @@
 	<component id="LoadXMLDelegate" class="com.collab.echo.model.business.LoadXMLDelegate"/>
 	<component id="LocaleProxy" class="com.collab.echo.model.proxy.LocaleProxy"/>
 	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
+	<component id="Menu" class="com.collab.echo.view.controls.Menu"/>
+	<component id="MenuBar" class="com.collab.echo.view.controls.MenuBar"/>
+	<component id="MenuDirection" class="com.collab.echo.view.controls.menu.MenuDirection"/>
+	<component id="MenuItem" class="com.collab.echo.view.controls.menu.MenuItem"/>
+	<component id="MenuItemClickEvent" class="com.collab.echo.view.events.MenuItemClickEvent"/>
+	<component id="MenuPanel" class="com.collab.echo.view.containers.panels.MenuPanel"/>
 	<component id="MessageCreator" class="com.collab.echo.view.hub.chat.factory.MessageCreator"/>
 	<component id="ModelPrepCommand" class="com.collab.echo.controller.ModelPrepCommand"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>

@@ -43,6 +43,23 @@ package com.collab.echo.view.containers.panels
 		
 		protected var background			: Sprite;
 		protected var bar 					: MenuBar;
+		protected var menuItems				: Array;
+		
+		/**
+		 * @return 
+		 */		
+		public function get dataProvider():Array
+		{
+			return menuItems;
+		}
+		public function set dataProvider( val:Array ):void
+		{
+			if ( val )
+			{
+				menuItems = val;
+				invalidate()
+			}
+		}
 		
 		/**
 		 * Constructor.
@@ -67,12 +84,13 @@ package com.collab.echo.view.containers.panels
 		override protected function draw() : void
 		{
 			// background
-			background = DrawingUtils.drawFill( viewWidth, viewHeight - BAR_HEIGHT,
-												 0, StyleDict.GREEN1, 0 ); 
+			background = DrawingUtils.drawFill( viewWidth, viewHeight,
+												 0, StyleDict.GREEN1, 1 ); 
 			addChild( background );
 			
 			// bar
-			bar = new MenuBar( MenuItem );
+			bar = new MenuBar( viewWidth, 30, MenuItem );
+			bar.dataProvider = menuItems;
 			addChild( bar );
 		}
 		
@@ -85,7 +103,7 @@ package com.collab.echo.view.containers.panels
 		{
 			// background
 			background.x = 0;
-			background.y = BAR_HEIGHT;
+			background.y = 0;
 			
 			// bar
 			bar.x = 0;

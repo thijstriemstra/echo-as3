@@ -36,9 +36,8 @@ package com.collab.echo.view.controls.menu
 	 *
 	 * @langversion 3.0
 	 * @playerversion Flash 9.0.28.0
-	 *  
+	 *  ds
 	 *  @playerversion AIR 1.0
-	 *  @productversion Flash CS3
 	 */
 	[Event(name="MenuItemClickEvent_click", type="com.collab.echo.view.events.MenuItemClickEvent")]
 	
@@ -50,18 +49,15 @@ package com.collab.echo.view.controls.menu
 	public class MenuItem extends BaseView
 	{
 		// ====================================
-		// CONSTANTS
-		// ====================================
-		
-		public const UP_COLOR				: uint = StyleDict.GREY3;
-		public const SELECT_COLOR			: uint = StyleDict.BLACK;
-		
-		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
 		protected var button				: LabelButton;
 		protected var label					: String;
+		protected var upColor				: uint;
+		protected var selectColor			: uint;
+		protected var backgroundColor		: uint;
+		protected var backgroundAlpha		: int;
 		
 		// ====================================
 		// INTERNAL VARS
@@ -86,8 +82,7 @@ package com.collab.echo.view.controls.menu
 		 */		
 		public function get buttonHeight():Number
 		{
-			// XXX: 5?
-			return button.height - 5;
+			return button.height;
 		}
 		
 		/**
@@ -95,7 +90,14 @@ package com.collab.echo.view.controls.menu
 		 */		
 		public function get buttonWidth():Number
 		{
-			return button.width;
+			var w:Number = 0;
+			
+			if ( button )
+			{
+				w = button.width;
+			}
+			
+			return w;
 		}
 		
 		/**
@@ -122,9 +124,14 @@ package com.collab.echo.view.controls.menu
 		 */		
 		public function MenuItem( index:int=0, label:String=null )
 		{
-			this.label = label.toUpperCase();
-			name = label;
-			itemIndex = index;
+			this.label = label;
+			this.name = label;
+			this.itemIndex = index;
+			
+			this.upColor = StyleDict.BLACK;
+			this.selectColor = StyleDict.GREY4;
+			this.backgroundColor = StyleDict.YELLOW1;
+			this.backgroundAlpha = 1;
 			
 			super();
 			show();
@@ -134,15 +141,21 @@ package com.collab.echo.view.controls.menu
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function draw():void
 		{
 			// button
-			button = new LabelButton( 0, 18, UP_COLOR, 0, 0 );
+			button = new LabelButton( 0, 15, upColor, backgroundColor, backgroundAlpha );
 			button.addEventListener( MouseEvent.CLICK, onItemClick, false, 0, true );
 			button.label = label;
 			addChild( button );
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function layout():void
 		{
 			// button
@@ -150,17 +163,20 @@ package com.collab.echo.view.controls.menu
 			button.y = 0;
 		}
 		
-		override public function toString():String
-		{
-			return "<MenuItem label='" + label + "' index='" + itemIndex + "'/>";
-		}
-		
+		/**
+		 * @private 
+		 * 
+		 */		
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( button );
 			
 			super.invalidate();
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		/**
 		 * Select the menu item. 
@@ -174,7 +190,16 @@ package com.collab.echo.view.controls.menu
 		 */		
 		public function deselect():void
 		{
-		}	
+		}
+		
+		/**
+		 * @private 
+		 * @return 
+		 */		
+		override public function toString():String
+		{
+			return "<MenuItem label='" + label + "' index='" + itemIndex + "'/>";
+		}
 		
 		// ====================================
 		// EVENT HANDLERS
@@ -182,7 +207,9 @@ package com.collab.echo.view.controls.menu
 		
 		/**
 		 * Invoked when the menu item was clicked.
+		 * 
 		 * @param event
+		 * @private
 		 */		
 		protected function onItemClick( event:MouseEvent ):void
 		{

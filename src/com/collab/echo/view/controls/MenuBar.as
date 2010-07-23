@@ -19,18 +19,68 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.controls
 {
 	import com.collab.echo.view.controls.menu.MenuDirection;
+	import com.collab.echo.view.display.util.DrawingUtils;
+	import com.collab.echo.view.display.util.StyleDict;
+	
+	import flash.display.Sprite;
+	import flash.geom.Point;
 
 	/**
 	 * @author Thijs Triemstra
 	 */	
 	public class MenuBar extends Menu
 	{
+		private var _background			: Sprite;
+		
 		/**
+		 * Constructor.
+		 * 
+		 * @param width
+		 * @param height
 		 * @param itemType
 		 */		
-		public function MenuBar( itemType:Class=null )
+		public function MenuBar( width:int=0, height:int=0, itemType:Class=null )
 		{
-			super( itemType, MenuDirection.HORIZONTAL );
+			super( itemType, MenuDirection.HORIZONTAL, new Point( 5, 5 ));
+			
+			viewWidth = width;
+			viewHeight = height;
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			// background
+			_background = new Sprite();
+			_background.graphics.beginFill( StyleDict.GREY1, 1 );
+			_background.graphics.drawRect( 0, 0, viewWidth, viewHeight );
+			_background.graphics.endFill();
+			addChild( _background );
+			
+			super.draw();
+		}
+		
+		/**
+		 */		
+		override protected function layout():void
+		{
+			super.layout();
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( _background );
+			
+			super.invalidate();
 		}
 		
 	}

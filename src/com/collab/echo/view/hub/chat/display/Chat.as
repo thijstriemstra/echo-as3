@@ -137,6 +137,7 @@ package com.collab.echo.view.hub.chat.display
 			_showTimestamp = true;
 			
 			this.messageHistory = [];
+			this.menuItems = [ "File", "Edit", "View" ];
 			
 			super( width, height );
 			show();
@@ -270,7 +271,7 @@ package com.collab.echo.view.hub.chat.display
 		 * 
 		 * @private
 		 */	
-		override protected function draw() : void
+		override protected function draw():void
 		{
 			super.draw();
 			
@@ -285,8 +286,9 @@ package com.collab.echo.view.hub.chat.display
 			addChild( inputField );
 			
 			// text
+			var h:int = viewHeight - ( inputField.height + bar.height );
 			textArea = new TextArea();
-			textArea.setSize( viewWidth, viewHeight - inputField.height ); 
+			textArea.setSize( viewWidth, h ); 
 			textArea.condenseWhite = true; 
 			textArea.editable = false;
 			addChild( textArea );
@@ -299,9 +301,11 @@ package com.collab.echo.view.hub.chat.display
 		 */
 		override protected function layout():void
 		{
+			super.layout();
+			
 			// textArea
 			textArea.x = 0;
-			textArea.y = 0;
+			textArea.y = bar.y + bar.height;
 			
 			// inputField
 			inputField.x = 0;

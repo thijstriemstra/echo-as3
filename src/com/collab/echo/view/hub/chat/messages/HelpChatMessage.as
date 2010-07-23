@@ -23,18 +23,19 @@ package com.collab.echo.view.hub.chat.messages
 	 */	
 	public class HelpChatMessage extends TextChatMessage
 	{
-		protected var fields	: Array = [ TextChatMessage, NicknameChatMessage,
-											MeChatMessage, ClearChatMessage,
-											TimeOnlineMessage, IPChatMessage,
-											KickMessage ];
+		protected var doc_fields	: Array;
+		
 		/**
 		 * Constructor.
 		 * 
 		 * @param type
 		 * @param data
+		 * @param doc
 		 */		
-		public function HelpChatMessage( type:String, data:String )
+		public function HelpChatMessage( type:String, data:String, doc:Array )
 		{
+			this.doc_fields = doc;
+			
 			super( type, data, null, false, true, false, true );
 		}
 		
@@ -51,7 +52,7 @@ package com.collab.echo.view.hub.chat.messages
 			
 			// XXX: localize
 			data = "<b>Command List</b><br>";
-			for each ( field in fields )
+			for each ( field in doc_fields )
 			{
 				data += field["DOC"] + "<br/>";
 			}

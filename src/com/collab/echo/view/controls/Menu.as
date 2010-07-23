@@ -99,6 +99,9 @@ package com.collab.echo.view.controls
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get horizontalGap():int
 		{
 			return _horizontalGap;
@@ -110,6 +113,14 @@ package com.collab.echo.view.controls
 				_horizontalGap = val;
 				invalidate();
 			}
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get verticalGap():int
+		{
+			return _verticalGap;
 		}
 		
 		/**
@@ -198,6 +209,7 @@ package com.collab.echo.view.controls
 				index = 0;
 				for ( index; index<items.length; index++ )
 				{
+					// XXX: switch to objects so all items are unique
 					label = String( items[ index ]).toLowerCase();
 					item = new menuType( index, label );
 					item.addEventListener( MenuItemClickEvent.CLICK,
@@ -212,6 +224,8 @@ package com.collab.echo.view.controls
 		 */		
 		override protected function layout():void
 		{
+			var newX:int = 0;
+			
 			if ( items )
 			{
 				index = 0;
@@ -224,13 +238,19 @@ package com.collab.echo.view.controls
 					{
 						if ( direction == MenuDirection.VERTICAL )
 						{
+							// position based on equal height for each item
 							item.x = _offSet.x;
 							item.y = _offSet.y + (( item.buttonHeight + _verticalGap ) * index );
 						}
 						else if ( direction == MenuDirection.HORIZONTAL )
 						{
-							item.x = _offSet.x + (( item.buttonWidth + _horizontalGap ) * index );
-							item.y = _offSet.y;
+							// position based on different width for each item
+							if ( item.width > 0 )
+							{
+								item.x = _offSet.x + newX;
+								item.y = _offSet.y;
+								newX += item.buttonWidth + _horizontalGap;
+							}
 						}
 					}
 				}

@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.containers.panels
 {
 	import com.collab.echo.view.controls.MenuBar;
-	import com.collab.echo.view.controls.menu.MenuItem;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
@@ -89,7 +88,7 @@ package com.collab.echo.view.containers.panels
 			addChild( background );
 			
 			// bar
-			bar = new MenuBar( viewWidth, 30, MenuItem );
+			bar = new MenuBar( viewWidth, 30 );
 			bar.dataProvider = menuItems;
 			addChild( bar );
 		}

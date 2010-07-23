@@ -36,8 +36,7 @@ package com.collab.echo.view.controls.menu
 	 *
 	 * @langversion 3.0
 	 * @playerversion Flash 9.0.28.0
-	 *  ds
-	 *  @playerversion AIR 1.0
+	 * @playerversion AIR 1.0
 	 */
 	[Event(name="MenuItemClickEvent_click", type="com.collab.echo.view.events.MenuItemClickEvent")]
 	
@@ -82,7 +81,14 @@ package com.collab.echo.view.controls.menu
 		 */		
 		public function get buttonHeight():Number
 		{
-			return button.height;
+			var h:Number = 0;
+			
+			if ( button )
+			{
+				h = button.height;
+			}
+			
+			return h;
 		}
 		
 		/**
@@ -94,7 +100,7 @@ package com.collab.echo.view.controls.menu
 			
 			if ( button )
 			{
-				w = button.width;
+				w = button.viewWidth;
 			}
 			
 			return w;
@@ -147,7 +153,8 @@ package com.collab.echo.view.controls.menu
 		override protected function draw():void
 		{
 			// button
-			button = new LabelButton( 0, 15, upColor, backgroundColor, backgroundAlpha );
+			button = new LabelButton( 0, 15, upColor, backgroundColor, backgroundAlpha,
+									  0, 0, 1 );
 			button.addEventListener( MouseEvent.CLICK, onItemClick, false, 0, true );
 			button.label = label;
 			addChild( button );
@@ -214,7 +221,6 @@ package com.collab.echo.view.controls.menu
 		protected function onItemClick( event:MouseEvent ):void
 		{
 			event.stopImmediatePropagation();
-
 			var evt:MenuItemClickEvent = new MenuItemClickEvent( MenuItemClickEvent.CLICK,
 																 itemIndex, label, true, true );
 			dispatchEvent( evt );

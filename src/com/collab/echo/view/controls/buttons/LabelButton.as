@@ -103,6 +103,9 @@ package com.collab.echo.view.controls.buttons
 			}
 		}
 		
+		/**
+		 * @param val
+		 */		
 		public function set backgroundColor( val:uint ):void
 		{
 			if (val)
@@ -116,9 +119,20 @@ package com.collab.echo.view.controls.buttons
 			return _backgroundColor;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get viewWidth():Number
 		{
 			return _width;
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get viewHeight():Number
+		{
+			return _height;
 		}
 		
 		/**
@@ -137,9 +151,9 @@ package com.collab.echo.view.controls.buttons
 		public function LabelButton( width:Number=0, fontSize:int=15,
 									 textUpColor:uint=StyleDict.WHITE,
 									 backgroundColor:uint=StyleDict.BLACK,
-									 backgroundAlpha:Number=1,
-									 cornerRadius:Number=0, padding:Number=1,
-									 alpha:Number=1, bold:Boolean=false, font:Font=null )
+									 backgroundAlpha:Number=1,cornerRadius:Number=0,
+									 padding:Number=1, alpha:Number=1,
+									 bold:Boolean=false, font:Font=null )
 		{
 			super();
 			

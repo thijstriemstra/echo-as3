@@ -137,7 +137,7 @@ package com.collab.echo.view.hub.chat.display
 			_showTimestamp = true;
 			
 			this.messageHistory = [];
-			this.menuItems = [ "File", "Edit", "View" ];
+			this.menuItems = [ "aaa", "bbb", "ccc" ];
 			
 			super( width, height );
 			show();

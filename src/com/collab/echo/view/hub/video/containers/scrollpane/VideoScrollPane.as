@@ -71,7 +71,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 * @param height
 		 * @param skin
 		 */		
-		public function VideoScrollPane( width:Number=0, height:Number=200, skin:Class=null )
+		public function VideoScrollPane( width:Number=10, height:Number=200, skin:Class=null )
 		{
 			_panelSkin = skin;
 			_panels = new Vector.<UserPanel>();

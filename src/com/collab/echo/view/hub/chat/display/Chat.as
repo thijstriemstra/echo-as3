@@ -20,7 +20,7 @@ package com.collab.echo.view.hub.chat.display
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.DateUtils;
-	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.containers.panels.MenuPanel;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
@@ -38,7 +38,7 @@ package com.collab.echo.view.hub.chat.display
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Chat extends BaseView implements IChatRoom
+	public class Chat extends MenuPanel implements IChatRoom
 	{
 		// ====================================
 		// CONSTANTS
@@ -64,6 +64,7 @@ package com.collab.echo.view.hub.chat.display
 		// PROTECTED VARS
 		// ====================================
 		
+		// XXX: find replacement for fl.controls		
 		protected var textArea						: TextArea;
 		protected var messageHistory				: Array;
 		protected var inputField					: ChatInputField;
@@ -273,7 +274,7 @@ package com.collab.echo.view.hub.chat.display
 			_background = DrawingUtils.drawFill( viewWidth, viewHeight,
 												0, StyleDict.GREEN1, 1 ); 
 			// XXX: for now
-			//addChild( _background );
+			addChild( _background );
 			
 			// inputField
 			inputField = new ChatInputField( _background.width );

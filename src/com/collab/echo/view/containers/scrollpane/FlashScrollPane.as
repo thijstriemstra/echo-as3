@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.containers.scrollpane
 {
+	import com.collab.echo.view.display.util.StyleDict;
+	
 	import fl.containers.ScrollPane;
 	import fl.controls.ScrollBarDirection;
 	import fl.controls.ScrollPolicy;
@@ -125,7 +127,7 @@ package com.collab.echo.view.containers.scrollpane
 		 */		
 		public function remove( child:DisplayObject ):void
 		{
-			if ( child && source.contains( child ))
+			if ( child && source && source.contains( child ))
 			{
 				var d:int = 0;
 				

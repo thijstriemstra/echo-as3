@@ -86,7 +86,7 @@ package com.collab.echo.view.containers.panels
 			
 			// background
 			background = DrawingUtils.drawFill( viewWidth, viewHeight,
-											    10, StyleDict.WHITE, .9 ); 
+											    10, StyleDict.YELLOW1, .9 ); 
 			addChild( background );
 		}
 		

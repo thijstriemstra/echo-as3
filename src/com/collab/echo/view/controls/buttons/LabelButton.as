@@ -199,15 +199,12 @@ package com.collab.echo.view.controls.buttons
 		protected function drawLabel():void
 		{
 			var debug:Boolean = false;
-			var fontName:String = "sans";
-			
-			if ( font )
-			{
-				fontName = font.fontName;
-			}
 			
 			var tf:TextFormat = new TextFormat();
-			tf.font = fontName;
+			if ( font )
+			{
+				tf.font = font.fontName;
+			}
 			tf.size = _fontSize;
 			tf.align = TextFormatAlign.LEFT;
 			tf.color = _textColor;
@@ -221,7 +218,10 @@ package com.collab.echo.view.controls.buttons
 			text.multiline = false;
 			text.borderColor = StyleDict.RED1;
 			text.wordWrap = false;
-			text.embedFonts = true;
+			if ( font )
+			{
+				text.embedFonts = true;
+			}
 			text.autoSize = TextFieldAutoSize.LEFT;
 			text.defaultTextFormat = tf;
 			text.textColor = _textColor;

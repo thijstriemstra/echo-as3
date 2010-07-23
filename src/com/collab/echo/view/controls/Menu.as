@@ -18,12 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.controls
 {
+	import com.collab.echo.view.controls.menu.MenuDirection;
 	import com.collab.echo.view.controls.menu.MenuItem;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.events.MenuItemClickEvent;
 	
 	/**
-	 * Vertical list of <code>MenuItem</code> instances.
+	 * List of <code>MenuItem</code> instances.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
@@ -33,15 +34,43 @@ package com.collab.echo.view.controls
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var items					: Array;
+		
+		/**
+		 * @private 
+		 */		
 		internal var selectedMenuIndex		: int;
+		
+		/**
+		 * @private 
+		 */		
 		internal var selectedMenuItem		: MenuItem;
+		
+		/**
+		 * @private 
+		 */		
 		internal var menuType				: Class;
+		
+		/**
+		 * @private 
+		 */		
+		internal var direction				: String;
+		
+		/**
+		 * @private 
+		 */		
+		internal var label:String;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get dataProvider():Array
 		{
 			return items;
@@ -55,11 +84,17 @@ package com.collab.echo.view.controls
 			}
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get selectedIndex():int
 		{
 			return selectedMenuIndex;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get selectedItem():MenuItem
 		{
 			return selectedMenuItem;
@@ -69,8 +104,9 @@ package com.collab.echo.view.controls
 		 * Constructor. 
 		 * 
 		 * @param itemType Type of menu item.
+		 * @param direction
 		 */		
-		public function Menu( itemType:Class=null )
+		public function Menu( itemType:Class=null, direction:String=MenuDirection.VERTICAL )
 		{
 			if ( itemType == null )
 			{
@@ -81,16 +117,22 @@ package com.collab.echo.view.controls
 				menuType = itemType;
 			}
 			
+			this.direction = direction;
 			selectedMenuIndex = -1;
 			
 			super();
 			show();
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
 		override protected function draw():void
 		{
-			var label:String;
-			
 			if ( items )
 			{
 				for ( var d:int=0; d<items.length; d++ )
@@ -104,30 +146,40 @@ package com.collab.echo.view.controls
 			}
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function layout():void
 		{
-			var label:String;
-			
 			if ( items )
 			{
 				for ( var d:int=0; d<items.length; d++ )
 				{
 					label = String( items[ d ]).toLowerCase();
 					var item:* = menuType( getChildByName( label ));
-	
+
 					if ( item )
 					{
-						item.x = 0;
-						item.y = item.buttonHeight * d;
+						if ( direction == MenuDirection.VERTICAL )
+						{
+							item.x = 0;
+							item.y = item.buttonHeight * d;
+						}
+						else if ( direction == MenuDirection.HORIZONTAL )
+						{
+							item.x = item.buttonWidth * d;
+							item.y = 0;
+						}
 					}
 				}
 			}
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function invalidate():void
 		{
-			var label:String;
-			
 			if ( items )
 			{
 				for ( var d:int=0; d<items.length; d++ )
@@ -150,6 +202,7 @@ package com.collab.echo.view.controls
 		// ====================================
 		
 		/**
+		 * @private
 		 * @param event
 		 */		
 		internal function onItemClick( event:MenuItemClickEvent ):void

@@ -67,23 +67,48 @@ package com.collab.echo.view.controls.menu
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var itemIndex				: int;
+		
+		/**
+		 * @private 
+		 */		
 		internal var selectedState			: Boolean;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get buttonHeight():Number
 		{
+			// XXX: 5?
 			return button.height - 5;
 		}
 		
+		/**
+		 * @return 
+		 */		
+		public function get buttonWidth():Number
+		{
+			return button.width;
+		}
+		
+		/**
+		 * @return 
+		 */		
 		public function get selected():Boolean
 		{
 			return selectedState;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get index():int
 		{
 			return itemIndex;

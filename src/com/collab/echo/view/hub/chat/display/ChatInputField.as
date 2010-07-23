@@ -18,15 +18,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.display
 {
+	import com.collab.echo.view.controls.buttons.LabelButton;
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	
-	import fl.controls.Button;
 	import fl.controls.TextInput;
 	
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
+	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.HISTORY_DOWN
+	 *
+	 * @langversion 3.0
+	 * @playerversion Flash 9.0.28.0
+	 *  
+	 * @playerversion AIR 1.0
+	 */
+	[Event(name="ChatEvent_historyDown", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
+
+	/**
+	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.HISTORY_UP
+	 *
+	 * @langversion 3.0
+	 * @playerversion Flash 9.0.28.0
+	 *  
+	 * @playerversion AIR 1.0
+	 */
+	[Event(name="ChatEvent_historyUp", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.SUBMIT
+	 *
+	 * @langversion 3.0
+	 * @playerversion Flash 9.0.28.0
+	 *  
+	 * @playerversion AIR 1.0
+	 */
+	[Event(name="ChatEvent_submit", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
 	
 	/**
 	 * Component with a text input field and send button.
@@ -36,11 +71,17 @@ package com.collab.echo.view.hub.chat.display
 	public class ChatInputField extends BaseView
 	{
 		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		private static const BUTTON_WIDTH	: int = 50;
+		
+		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
 		private var _textInput			: TextInput;
-		private var _submitButton		: Button;
+		private var _submitButton		: LabelButton;
 		private var _inputMessage		: String;
 		private var _buttonLabel		: String;
 		private var _event				: ChatEvent;
@@ -58,8 +99,11 @@ package com.collab.echo.view.hub.chat.display
 		}
 		public function set text( val:String ):void
 		{
-			_inputMessage = val;
-			invalidate();
+			if ( val )
+			{
+				_inputMessage = val;
+				invalidate();
+			}
 		}
 		
 		/**
@@ -71,8 +115,11 @@ package com.collab.echo.view.hub.chat.display
 		}
 		public function set buttonLabel( val:String ):void
 		{
-			_buttonLabel = val;
-			invalidate();
+			if ( val )
+			{
+				_buttonLabel = val;
+				invalidate();
+			}
 		}
 		
 		/**
@@ -88,7 +135,7 @@ package com.collab.echo.view.hub.chat.display
 		}
 		
 		// ====================================
-		// PUBLIC METHODS
+		// PROTECTED METHODS
 		// ====================================
 		
 		/**
@@ -104,18 +151,21 @@ package com.collab.echo.view.hub.chat.display
 			{
 				_textInput.text = _inputMessage;
 			}
-			_textInput.width = viewWidth - 50;
-			_textInput.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown, false, 0, true );
+			_textInput.width = viewWidth - BUTTON_WIDTH;
+			_textInput.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown,
+										 false, 0, true );
 			addChild( _textInput );
 			
 			// submit btn
-			_submitButton = new Button();
+			_submitButton = new LabelButton( BUTTON_WIDTH, 13, StyleDict.BLACK,
+											 StyleDict.WHITE );
+			_submitButton.width = BUTTON_WIDTH;
 			if ( _buttonLabel )
 			{
 				_submitButton.label = _buttonLabel;
 			}
-			_submitButton.width = 50;
-			_submitButton.addEventListener( MouseEvent.CLICK, onSubmitClick, false, 0, true );
+			_submitButton.addEventListener( MouseEvent.CLICK, onSubmitClick,
+											false, 0, true );
 			addChild( _submitButton );
 		}
 		
@@ -132,7 +182,7 @@ package com.collab.echo.view.hub.chat.display
 			
 			// submit btn
 			_submitButton.x = _textInput.width;
-			_submitButton.y = 0;
+			_submitButton.y = 3;
 		}
 		
 		/**

@@ -104,6 +104,10 @@ package com.collab.echo.view.mediators
 			
 			// listen for component events
 			panel.addEventListener( ChatEvent.SUBMIT, onSubmitChatMessage, false, 0, true );
+			
+			// XXX: localize
+			panel.welcomeMessage = "Hello!";
+			panel.sendLabel = "Submit";
         }
 		
 		// ====================================
@@ -312,18 +316,6 @@ package com.collab.echo.view.mediators
 		// ====================================
 		// EVENT HANDLERS
 		// ====================================
-		
-		/**
-		 * @param event
-		 */		
-		override protected function onCreationComplete( event:Event=null ):void
-		{
-			// XXX: localize
-			panel.welcomeMessage = "Hello!";
-			panel.sendLabel = "Submit";
-			
-			super.onCreationComplete( event );
-		}
 		
 		/**
 		 * Dispatched when a new chat message wants to be send.

@@ -16,22 +16,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.controls
+package com.collab.echo.view.controls.menu
 {
-	import com.collab.echo.view.controls.menu.MenuDirection;
-
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class MenuBar extends Menu
+	public class MenuDirection
 	{
-		/**
-		 * @param itemType
-		 */		
-		public function MenuBar( itemType:Class=null )
-		{
-			super( itemType, MenuDirection.HORIZONTAL );
-		}
+		// ====================================
+		// CONSTANTS
+		// ====================================
 		
+		/**
+		 * Horizontal menu. 
+		 */		
+		public static const HORIZONTAL		: String = "horizontal";
+		
+		/**
+		 * Vertical menu. 
+		 */		
+		public static const VERTICAL		: String = "vertical";
 	}
 }

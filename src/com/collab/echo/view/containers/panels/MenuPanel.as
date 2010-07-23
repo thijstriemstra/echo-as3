@@ -1,5 +1,5 @@
 /*
-Collab.nl application
+Echo project.
 
 Copyright (C) 2003-2010 Collab
 
@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.containers.panels
 {
 	import com.collab.echo.view.controls.MenuBar;
+	import com.collab.echo.view.controls.menu.MenuItem;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
@@ -30,6 +31,16 @@ package com.collab.echo.view.containers.panels
 	 */	
 	public class MenuPanel extends BaseView
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		private static const BAR_HEIGHT		: int = 50;
+		
+		// ====================================
+		// PROTECTED VARS
+		// ====================================
+		
 		protected var background			: Sprite;
 		protected var bar 					: MenuBar;
 		
@@ -44,6 +55,10 @@ package com.collab.echo.view.containers.panels
 			super( width, height );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
 		/**
 		 * Instantiate and add child(ren) to display list.
 		 * 
@@ -52,10 +67,13 @@ package com.collab.echo.view.containers.panels
 		override protected function draw() : void
 		{
 			// background
-			background = DrawingUtils.drawFill( viewWidth, viewHeight,
-												 0, StyleDict.GREEN1, 1 ); 
-			// XXX: for now
+			background = DrawingUtils.drawFill( viewWidth, viewHeight - BAR_HEIGHT,
+												 0, StyleDict.GREEN1, 0 ); 
 			addChild( background );
+			
+			// bar
+			bar = new MenuBar( MenuItem );
+			addChild( bar );
 		}
 		
 		/**
@@ -67,7 +85,11 @@ package com.collab.echo.view.containers.panels
 		{
 			// background
 			background.x = 0;
-			background.y = 0;
+			background.y = BAR_HEIGHT;
+			
+			// bar
+			bar.x = 0;
+			bar.y = 0;
 		}
 		
 		/**

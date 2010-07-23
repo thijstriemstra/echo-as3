@@ -127,8 +127,11 @@ package com.collab.echo.view.hub.display
 		 */		
 		public function set skin( val:Object ):void
 		{
-			_skin = val;
-			invalidate();
+			if ( val )
+			{
+				_skin = val;
+				invalidate();
+			}
 		}
 		public function get skin():Object
 		{
@@ -142,8 +145,11 @@ package com.collab.echo.view.hub.display
 		 */		
 		public function set paddingLeft( val:int ):void
 		{
-			_paddingLeft = val;
-			invalidate();
+			if ( val )
+			{
+				_paddingLeft = val;
+				invalidate();
+			}
 		}
 		public function get paddingLeft():int
 		{
@@ -157,8 +163,11 @@ package com.collab.echo.view.hub.display
 		 */		
 		public function set welcomeMessage( val:String ):void
 		{
-			_welcomeMessage = val;
-			invalidate();
+			if ( val )
+			{
+				_welcomeMessage = val;
+				invalidate();
+			}
 		}
 		public function get welcomeMessage():String
 		{
@@ -171,8 +180,11 @@ package com.collab.echo.view.hub.display
 		 */		
 		public function set sendLabel( val:String ):void
 		{
-			_sendLabel = val;
-			invalidate();
+			if ( val )
+			{
+				_sendLabel = val;
+				invalidate();
+			}
 		}
 		
 		/**

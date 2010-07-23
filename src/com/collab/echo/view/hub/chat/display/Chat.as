@@ -60,7 +60,7 @@ package com.collab.echo.view.hub.chat.display
 		// PROTECTED VARS
 		// ====================================
 		
-		// XXX: find replacement for fl.controls		
+		// XXX: find replacement for fl.controls
 		protected var textArea						: TextArea;
 		protected var messageHistory				: Array;
 		protected var inputField					: ChatInputField;
@@ -102,8 +102,11 @@ package com.collab.echo.view.hub.chat.display
 		}
 		public function set welcomeMessage( val:String ):void
 		{
-			_welcomeMessage = val;
-			invalidate();
+			if ( val )
+			{
+				_welcomeMessage = val;
+				invalidate();
+			}
 		}
 		
 		/**
@@ -115,8 +118,11 @@ package com.collab.echo.view.hub.chat.display
 		}
 		public function set sendLabel( val:String ):void
 		{
-			_sendLabel = val;
-			invalidate();
+			if ( val )
+			{
+				_sendLabel = val;
+				invalidate();
+			}
 		}
 		
 		/**
@@ -189,9 +195,9 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		public function addMessage( data:BaseChatMessage ):void
 		{
-			var chatMax			: Number = textArea.maxVerticalScrollPosition;
-			var addStamp		: String = "";
-			var text			: String = "";
+			var chatMax	: Number = textArea.maxVerticalScrollPosition;
+			var addStamp : String = "";
+			var text : String = "";
 			
 			// update history
 			updateHistory( data.message );
@@ -269,9 +275,11 @@ package com.collab.echo.view.hub.chat.display
 			super.draw();
 			
 			// inputField
-			inputField = new ChatInputField( viewWidth );
-			inputField.addEventListener( ChatEvent.HISTORY_DOWN, onHistoryDown, false, 0, true );
-			inputField.addEventListener( ChatEvent.HISTORY_UP, onHistoryUp, false, 0, true );
+			inputField = new ChatInputField( viewWidth, 50 );
+			inputField.addEventListener( ChatEvent.HISTORY_DOWN, onHistoryDown,
+										 false, 0, true );
+			inputField.addEventListener( ChatEvent.HISTORY_UP, onHistoryUp,
+										 false, 0, true );
 			inputField.text = _welcomeMessage;
 			inputField.buttonLabel = _sendLabel;
 			addChild( inputField );

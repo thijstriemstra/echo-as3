@@ -20,13 +20,18 @@ package com.collab.echo.view.containers.panels
 {
 	import com.collab.echo.view.controls.MenuBar;
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.display.util.DrawingUtils;
+	import com.collab.echo.view.display.util.StyleDict;
+	
+	import flash.display.Sprite;
 	
 	/**
 	 * @author Thijs Triemstra
 	 */	
 	public class MenuPanel extends BaseView
 	{
-		protected var menu : MenuBar;
+		protected var background			: Sprite;
+		protected var bar 					: MenuBar;
 		
 		/**
 		 * Constructor.
@@ -37,6 +42,45 @@ package com.collab.echo.view.containers.panels
 		public function MenuPanel( width:Number=0, height:Number=0 )
 		{
 			super( width, height );
+		}
+		
+		/**
+		 * Instantiate and add child(ren) to display list.
+		 * 
+		 * @private
+		 */	
+		override protected function draw() : void
+		{
+			// background
+			background = DrawingUtils.drawFill( viewWidth, viewHeight,
+												 0, StyleDict.GREEN1, 1 ); 
+			// XXX: for now
+			addChild( background );
+		}
+		
+		/**
+		 * Position child(ren) on display list.
+		 * 
+		 * @private
+		 */
+		override protected function layout():void
+		{
+			// background
+			background.x = 0;
+			background.y = 0;
+		}
+		
+		/**
+		 * Remove and redraw child(ren).
+		 * 
+		 * @private
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( background );
+			removeChildFromDisplayList( bar );
+			
+			super.invalidate();
 		}
 		
 	}

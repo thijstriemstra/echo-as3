@@ -21,15 +21,12 @@ package com.collab.echo.view.hub.chat.display
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.DateUtils;
 	import com.collab.echo.view.containers.panels.MenuPanel;
-	import com.collab.echo.view.display.util.DrawingUtils;
-	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.interfaces.IChatRoom;
 	
 	import fl.controls.TextArea;
 	
-	import flash.display.Sprite;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	
@@ -50,7 +47,6 @@ package com.collab.echo.view.hub.chat.display
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _background						: Sprite;
 		private var _welcomeMessage					: String;
 		private var _sendLabel						: String;
 		private var _playSound						: Boolean;
@@ -270,14 +266,10 @@ package com.collab.echo.view.hub.chat.display
 		 */	
 		override protected function draw() : void
 		{
-			// background
-			_background = DrawingUtils.drawFill( viewWidth, viewHeight,
-												0, StyleDict.GREEN1, 1 ); 
-			// XXX: for now
-			addChild( _background );
+			super.draw();
 			
 			// inputField
-			inputField = new ChatInputField( _background.width );
+			inputField = new ChatInputField( viewWidth );
 			inputField.addEventListener( ChatEvent.HISTORY_DOWN, onHistoryDown, false, 0, true );
 			inputField.addEventListener( ChatEvent.HISTORY_UP, onHistoryUp, false, 0, true );
 			inputField.text = _welcomeMessage;
@@ -299,10 +291,6 @@ package com.collab.echo.view.hub.chat.display
 		 */
 		override protected function layout():void
 		{
-			// background
-			_background.x = 0;
-			_background.y = 0;
-			
 			// textArea
 			textArea.x = 0;
 			textArea.y = 0;
@@ -319,7 +307,6 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		override protected function invalidate():void
 		{
-			removeChildFromDisplayList( _background );
 			removeChildFromDisplayList( inputField );
 			removeChildFromDisplayList( textArea );
 			

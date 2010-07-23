@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.containers.scrollpane
 {
-	import com.collab.echo.view.display.util.StyleDict;
-	
 	import fl.containers.ScrollPane;
 	import fl.controls.ScrollBarDirection;
 	import fl.controls.ScrollPolicy;
@@ -30,8 +28,6 @@ package com.collab.echo.view.containers.scrollpane
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.utils.getQualifiedClassName;
-	
-	import org.osflash.thunderbolt.Logger;
 	
 	/**
 	 * Customizable <code>fl.containers.ScrollPane</code> with a <code>children</code> list.
@@ -200,7 +196,7 @@ package com.collab.echo.view.containers.scrollpane
 		 */		
 		protected function onLoadComplete( event:Event ):void
 		{
-			Logger.debug( "ScrollPane Load complete" );
+			trace( "ScrollPane Load complete" );
 		}
 		
 		/**
@@ -227,7 +223,7 @@ package com.collab.echo.view.containers.scrollpane
 			switch ( event.direction )
 			{
 				case ScrollBarDirection.HORIZONTAL:
-					Logger.debug( "horizontal scroll: " +  event.position + " of " +
+					trace( "horizontal scroll: " +  event.position + " of " +
 								  event.currentTarget.maxHorizontalScrollPosition);
 					break;
 				
@@ -239,8 +235,8 @@ package com.collab.echo.view.containers.scrollpane
 					}
 					else
 					{
-						Logger.debug( "vertical scroll: " + event.position + " of " +
-								      event.currentTarget.maxVerticalScrollPosition );
+						trace( "vertical scroll: " + event.position + " of " +
+								event.currentTarget.maxVerticalScrollPosition );
 					}
 					break;
 			}

@@ -137,6 +137,7 @@ package com.collab.echo.view.hub.chat.display
 			_showTimestamp = true;
 			
 			this.messageHistory = [];
+			// XXX: move elsewhere
 			this.menuItems = [ "aaa", "bbb", "ccc" ];
 			
 			super( width, height );
@@ -196,9 +197,8 @@ package com.collab.echo.view.hub.chat.display
 		 */		
 		public function addMessage( data:BaseChatMessage ):void
 		{
-			var chatMax	: Number = textArea.maxVerticalScrollPosition;
-			var addStamp : String = "";
-			var text : String = "";
+			var addStamp:String = "";
+			var text:String = "";
 			
 			// update history
 			updateHistory( data.message );
@@ -262,8 +262,6 @@ package com.collab.echo.view.hub.chat.display
 				// add message to history
 				messageHistory.push( msg );
 			}
-			
-			//chatMC.currentHistory = chatMC.messageHistory.length;
 		}
 		
 		/**

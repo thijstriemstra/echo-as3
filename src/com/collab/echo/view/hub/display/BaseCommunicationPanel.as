@@ -50,7 +50,7 @@ package com.collab.echo.view.hub.display
 	 * 
 	 * @see com.collab.echo.view.containers.scrollpane.FlashScrollPane FlashScrollPane
 	 * @see com.collab.echo.view.hub.chat.display.Chat Chat
-	 * @see com.collab.echo.view.hub.translator.Translator Translator
+	 * @see com.collab.echo.view.hub.translator.display.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
 	 * @see com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane VideoScrollPane
 	 * @see com.collab.echo.view.controls.buttons.BaseExpandButton BaseExpandButton
@@ -339,7 +339,7 @@ package com.collab.echo.view.hub.display
 			
 			// whiteboard
 			whiteboard = _skin.whiteboard;
-			whiteboard.setSize( 200, 520 );
+			whiteboard.setSize( 300, 520 );
 			pane.add( whiteboard );
 			
 			// translator

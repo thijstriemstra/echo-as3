@@ -18,6 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
+	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.display.util.DrawingUtils;
+	import com.collab.echo.view.display.util.StyleDict;
+	
 	import flash.display.Sprite;
 	
 	/**
@@ -25,14 +29,56 @@ package com.collab.echo.view.hub.whiteboard.display
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Canvas extends Sprite
+	public class Canvas extends BaseView
 	{
+		private var _background	: Sprite;
+		
 		/**
-		 * Constructor. 
+		 * Constructor.
+		 *  
+		 * @param width
+		 * @param height
 		 */		
-		public function Canvas()
+		public function Canvas( width:int=0, height:int=0 )
 		{
-			super();
+			super( width, height );
+			show();
 		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			// background
+			_background = DrawingUtils.drawFill( viewWidth, viewHeight, 0,
+												 StyleDict.YELLOW1, 1 );
+			addChild( _background );
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function layout():void
+		{
+			// background
+			_background.x = 0;
+			_background.y = 0;
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( _background );
+			
+			super.invalidate();
+		}
+		
 	}
 }

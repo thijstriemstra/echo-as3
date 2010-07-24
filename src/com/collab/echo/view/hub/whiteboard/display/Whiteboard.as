@@ -19,8 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.controls.buttons.LabelButton;
-	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.containers.panels.MenuPanel;
 	import com.collab.echo.view.hub.interfaces.IRoom;
 	
 	import flash.display.MovieClip;
@@ -30,16 +29,14 @@ package com.collab.echo.view.hub.whiteboard.display
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Whiteboard extends BaseView implements IRoom
+	public class Whiteboard extends MenuPanel implements IRoom
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PROTECTED VARS
 		// ====================================
 		
-		internal var participants		: Vector.<UserVO>;
-		//internal var colorPicker		: Colorpicker;
-		internal var canvas				: Canvas;
-		internal var undoButton			: LabelButton;
+		protected var participants			: Vector.<UserVO>;
+		protected var canvas				: Canvas;
 		
 		/**
 		 * Constructor.
@@ -51,6 +48,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			// init vars
 			participants = new Vector.<UserVO>();
+			
+			// XXX: move elsewhere
+			menuItems = [ "aaa", "bbb", "ccc" ];
 			
 			super( width, height );
 			show();
@@ -75,7 +75,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			//Logger.debug( "Whiteboard.addUser: " + client );
+			trace( "Whiteboard.addUser: " + client );
 			
 			//var user:Painter = new Painter();
 			//participants.push( user );
@@ -109,6 +109,44 @@ package com.collab.echo.view.hub.whiteboard.display
 		public function numClients( totalClients:int ):void
 		{
 			//Logger.debug( "Whiteboard.numClients: " + totalClients );
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			super.draw();
+			
+			// canvas
+			canvas = new Canvas( viewWidth, viewHeight - bar.height );
+			addChild( canvas );
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function layout():void
+		{
+			super.layout();
+			
+			// canvas
+			canvas.x = 0;
+			canvas.y = bar.y + bar.height;
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( canvas );
+			
+			super.invalidate();
 		}
 		
 		// ====================================
@@ -279,24 +317,6 @@ package com.collab.echo.view.hub.whiteboard.display
 					removeMovieClip(this);   
 				}
 			}*/
-		}
-		
-		// ====================================
-		// PROTECTED METHODS
-		// ====================================
-		
-		override protected function draw():void
-		{
-			// canvas
-			canvas = new Canvas();
-			addChild( canvas );
-		}
-		
-		override protected function invalidate():void
-		{
-			removeChildFromDisplayList( canvas );
-			
-			super.invalidate();
 		}
 		
 	}

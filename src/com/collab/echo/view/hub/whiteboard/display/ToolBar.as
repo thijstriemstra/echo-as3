@@ -25,6 +25,7 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import fl.controls.ColorPicker;
+	import fl.events.ColorPickerEvent;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -81,6 +82,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// color picker
 			colorPicker = new ColorPicker();
+			colorPicker.addEventListener( ColorPickerEvent.CHANGE, onChangeColor,
+										  false, 0, true );
 			addChild( colorPicker );
 			
 			// undo button
@@ -119,14 +122,25 @@ package com.collab.echo.view.hub.whiteboard.display
 			super.invalidate();
 		}
 		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
 		/**
 		 * @param event
 		 */		
 		private function undoAction( event:MouseEvent ):void
 		{
-			trace( "undo: " + event );
-			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.UNDO );
+			dispatchEvent( evt );
+		}
+		
+		/**
+		 * @param event
+		 */		
+		private function onChangeColor( event:ColorPickerEvent ):void
+		{
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_COLOR );
 			dispatchEvent( evt );
 		}
 		

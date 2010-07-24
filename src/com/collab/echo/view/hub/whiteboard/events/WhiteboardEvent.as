@@ -25,8 +25,13 @@ package com.collab.echo.view.hub.whiteboard.events
 	 */	
 	public class WhiteboardEvent extends Event
 	{
-		public static const NAME	: String = "WhiteboardEvent";
-		public static const UNDO	: String = NAME + "_undo";
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		public static const NAME			: String = "WhiteboardEvent";
+		public static const UNDO			: String = NAME + "_undo";
+		public static const CHANGE_COLOR	: String = NAME + "_changeColor";
 		
 		/**
 		 * Constructor.
@@ -36,6 +41,15 @@ package com.collab.echo.view.hub.whiteboard.events
 		public function WhiteboardEvent( type:String )
 		{
 			super( type, true, true );
+		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
+		override public function toString():String
+		{
+			return "<WhiteboardEvent type='" + type + "' />";
 		}
 		
 	}

@@ -20,9 +20,13 @@ package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.panels.MenuPanel;
+	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.display.util.TextUtils;
 	import com.collab.echo.view.hub.interfaces.IRoom;
+	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import flash.display.MovieClip;
+	import flash.text.TextField;
 	
 	/**
 	 * A shared whiteboard.
@@ -38,6 +42,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		protected var participants			: Vector.<UserVO>;
 		protected var canvas				: Canvas;
 		protected var toolbar				: ToolBar;
+		
+		private var _label					: TextField;
 		
 		/**
 		 * Constructor.
@@ -129,7 +135,13 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// toolbar
 			toolbar = new ToolBar( viewWidth );
+			toolbar.addEventListener( WhiteboardEvent.UNDO, onUndo, false, 0, true );
+			toolbar.addEventListener( WhiteboardEvent.CHANGE_COLOR, onChangeColor, false, 0, true );
 			addChild( toolbar );
+			
+			// label
+			_label = TextUtils.createTextField( null, "Whiteboard!", 15, StyleDict.BLACK );
+			addChild( _label );
 		}
 		
 		/**
@@ -145,7 +157,11 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// toolbar
 			toolbar.x = 0;
-			toolbar.y = 100;
+			toolbar.y = 270;
+			
+			// label
+			_label.x = 10;
+			_label.y = canvas.y + 15;
 		}
 		
 		/**
@@ -160,23 +176,38 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		// ====================================
-		// INTERNAL METHODS
+		// EVENT HANDLERS
 		// ====================================
 		
 		/**
-		 * Changes a user's color.
-		 */
-		internal function paintBar (clientID:String, newName:String):void
+		 * @param event
+		 */		
+		private function onUndo( event:WhiteboardEvent ):void
 		{
+			trace( "Whiteboard.onUndo: " + event );
+		}
+		
+		/**
+		 * Changes a user's color.
+		 * 
+		 * @param event
+		 */		
+		private function onChangeColor( event:WhiteboardEvent ):void
+		{
+			trace( "Whiteboard.onChangeColor: " + event );
+			
 			//var newKleur = new Color(client.getTargetMC().chat.video_accordion.video_mcs.content["clientVideo"+clientID].screen.colorBar);
 			//newKleur.setRGB(newName);
 		}
 		
+		// ====================================
+		// INTERNAL METHODS
+		// ====================================
+		
 		/**
 		 * Mouse event handler.
-		 * Checks for mouseDown. 
 		 */
-		internal function onMouseDown ():void
+		internal function onMouseDown():void
 		{
 			//var whiteBoard_hit	: MovieClip 	= getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc.hit_mc;
 			/*
@@ -191,7 +222,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		/**
 		 * Draw line and broadcast to user.
 		 */
-		internal function drawLine (): void
+		internal function drawLine(): void
 		{
 			/*
 			var hier 						= this;
@@ -245,9 +276,12 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 Display line for client.
-		 */
-		internal function displayLine (clientID:String, msg:String): void 
+		 * Display line for client.
+		 *  
+		 * @param clientID
+		 * @param msg
+		 */		
+		internal function displayLine(clientID:String, msg:String): void 
 		{
 			/*
 			var userCursor:MovieClip = getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc["cursor"+clientID];
@@ -281,8 +315,16 @@ package com.collab.echo.view.hub.whiteboard.display
 		
 		/**
 		 * Pull a line.
-		 */
-		internal function pullLine (x_cord:Number, y_cord:Number, line:MovieClip, userCursor:MovieClip, welke:Number, total:Number):void
+		 *  
+		 * @param x_cord
+		 * @param y_cord
+		 * @param line
+		 * @param userCursor
+		 * @param welke
+		 * @param total
+		 */		
+		internal function pullLine(x_cord:Number, y_cord:Number, line:MovieClip,
+								   userCursor:MovieClip, welke:Number, total:Number):void
 		{
 			/*
 			// draw line-part
@@ -311,8 +353,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		
 		/**
 		 * Delete a line.
-		 */
-		internal function killLine (clip:MovieClip, userCursor:MovieClip):void
+		 *  
+		 * @param clip
+		 * @param userCursor
+		 */		
+		internal function killLine( clip:MovieClip, userCursor:MovieClip ):void
 		{
 			//trace("i am killed "+ clip._name);
 			/*

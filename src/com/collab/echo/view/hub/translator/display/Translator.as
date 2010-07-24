@@ -66,7 +66,7 @@ package com.collab.echo.view.hub.translator.display
 			addChild( background );
 			
 			// label
-			label = TextUtils.createTextField( null, "Translator", 20, StyleDict.WHITE );
+			label = TextUtils.createTextField( null, "Translator!", 20, StyleDict.WHITE );
 			addChild( label );
 		}
 		

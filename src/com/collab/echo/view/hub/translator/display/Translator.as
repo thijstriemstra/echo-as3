@@ -21,14 +21,22 @@ package com.collab.echo.view.hub.translator.display
 	import com.collab.echo.view.containers.panels.MenuPanel;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.display.util.TextUtils;
 	
 	import flash.display.Sprite;
+	import flash.text.TextField;
 	
 	/**
 	 * @author Thijs Triemstra
 	 */	
 	public class Translator extends MenuPanel
 	{
+		// ====================================
+		// INTERNAL VARS
+		// ====================================
+		
+		internal var label	: TextField;
+		
 		/**
 		 * Constructor.
 		 *  
@@ -56,6 +64,10 @@ package com.collab.echo.view.hub.translator.display
 			background = DrawingUtils.drawFill( viewWidth, viewHeight,
 												0, StyleDict.RED1, 1 ); 
 			addChild( background );
+			
+			// label
+			label = TextUtils.createTextField( null, "Translator", 20, StyleDict.WHITE );
+			addChild( label );
 		}
 		
 		/**
@@ -68,6 +80,10 @@ package com.collab.echo.view.hub.translator.display
 			// background
 			background.x = 0;
 			background.y = 0;
+			
+			// label
+			label.x = 25;
+			label.y = 20;
 		}
 		
 		/**
@@ -78,6 +94,7 @@ package com.collab.echo.view.hub.translator.display
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( background );
+			removeChildFromDisplayList( label );
 			
 			super.invalidate();
 		}

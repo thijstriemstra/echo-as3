@@ -31,6 +31,10 @@ package com.collab.echo.view.hub.whiteboard.display
 	 */	
 	public class Canvas extends BaseView
 	{
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
 		private var _background	: Sprite;
 		
 		/**

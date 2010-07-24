@@ -30,6 +30,10 @@ package com.collab.echo.view.controls
 	 */	
 	public class MenuBar extends Menu
 	{
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
 		private var _background			: Sprite;
 		
 		/**

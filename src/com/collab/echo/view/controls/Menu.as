@@ -207,7 +207,7 @@ package com.collab.echo.view.controls
 			if ( items )
 			{
 				index = 0;
-				for ( index; index<items.length; index++ )
+				for ( index; index < items.length; index++ )
 				{
 					// XXX: switch to objects so all items are unique
 					label = String( items[ index ]).toLowerCase();
@@ -229,7 +229,7 @@ package com.collab.echo.view.controls
 			if ( items )
 			{
 				index = 0;
-				for ( index; index<items.length; index++ )
+				for ( index; index < items.length; index++ )
 				{
 					label = String( items[ index ]).toLowerCase();
 					item = menuType( getChildByName( label ));
@@ -238,13 +238,13 @@ package com.collab.echo.view.controls
 					{
 						if ( direction == MenuDirection.VERTICAL )
 						{
-							// position based on equal height for each item
+							// position based on equal height
 							item.x = _offSet.x;
 							item.y = _offSet.y + (( item.buttonHeight + _verticalGap ) * index );
 						}
 						else if ( direction == MenuDirection.HORIZONTAL )
 						{
-							// position based on different width for each item
+							// position based on variable width
 							if ( item.width > 0 )
 							{
 								item.x = _offSet.x + newX;

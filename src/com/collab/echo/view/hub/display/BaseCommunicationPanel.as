@@ -330,18 +330,17 @@ package com.collab.echo.view.hub.display
 			videoPane.setSize( viewWidth, 200 );
 			pane.add( videoPane );
 			
-			// whiteboard
-			whiteboard = _skin.whiteboard;
-			whiteboard.setSize( 200, 520 );
-			whiteboard.hide();
-			pane.add( whiteboard );
-			
 			// chat
 			chat = _skin.chat;
 			chat.welcomeMessage = _welcomeMessage;
 			chat.sendLabel = _sendLabel;
 			chat.setSize( 350, 385 );
 			pane.add( chat );
+			
+			// whiteboard
+			whiteboard = _skin.whiteboard;
+			whiteboard.setSize( 200, 520 );
+			pane.add( whiteboard );
 			
 			// translator
 			translator = _skin.translator;
@@ -372,17 +371,19 @@ package com.collab.echo.view.hub.display
 			videoPane.x = 0;
 			videoPane.y = 0;
 			
-			// whiteboard
-			whiteboard.x = 0;
-			whiteboard.y = videoPane.y + videoPane.height;
+			var compY:int = videoPane.y + videoPane.height;
 			
 			// chat
 			chat.x = 0;
-			chat.y = videoPane.y + videoPane.height;
+			chat.y = compY;
+			
+			// whiteboard
+			whiteboard.x = chat.x + chat.width;
+			whiteboard.y = compY;
 			
 			// translator
-			translator.x = chat.width;
-			translator.y = videoPane.y + videoPane.height;
+			translator.x = whiteboard.x + whiteboard.width;
+			translator.y = compY;
 		}
 		
 		/**

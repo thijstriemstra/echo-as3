@@ -44,6 +44,10 @@ package com.collab.echo.view.containers.panels
 		protected var bar 					: MenuBar;
 		protected var menuItems				: Array;
 		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
 		/**
 		 * @return 
 		 */		

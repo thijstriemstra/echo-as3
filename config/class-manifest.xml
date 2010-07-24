@@ -52,6 +52,7 @@
 	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
 	<component id="Menu" class="com.collab.echo.view.controls.Menu"/>
 	<component id="MenuBar" class="com.collab.echo.view.controls.MenuBar"/>
+	<component id="MenuBarItem" class="com.collab.echo.view.controls.menu.MenuBarItem"/>
 	<component id="MenuDirection" class="com.collab.echo.view.controls.menu.MenuDirection"/>
 	<component id="MenuItem" class="com.collab.echo.view.controls.menu.MenuItem"/>
 	<component id="MenuItemClickEvent" class="com.collab.echo.view.events.MenuItemClickEvent"/>
@@ -84,7 +85,7 @@
 	<component id="TextChatMessage" class="com.collab.echo.view.hub.chat.messages.TextChatMessage"/>
 	<component id="TextUtils" class="com.collab.echo.view.display.util.TextUtils"/>
 	<component id="TimeOnlineMessage" class="com.collab.echo.view.hub.chat.messages.TimeOnlineMessage"/>
-	<component id="Translator" class="com.collab.echo.view.hub.translator.Translator"/>
+	<component id="Translator" class="com.collab.echo.view.hub.translator.display.Translator"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
 	<component id="UnionProxy" class="com.collab.echo.model.proxy.UnionProxy"/>
 	<component id="UnionRoom" class="com.collab.echo.view.rooms.UnionRoom"/>

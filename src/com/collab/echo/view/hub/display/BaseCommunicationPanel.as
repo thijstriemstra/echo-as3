@@ -26,7 +26,7 @@ package com.collab.echo.view.hub.display
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
-	import com.collab.echo.view.hub.translator.Translator;
+	import com.collab.echo.view.hub.translator.display.Translator;
 	import com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane;
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 	import com.greensock.TweenLite;

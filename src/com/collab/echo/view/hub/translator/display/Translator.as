@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.translator
+package com.collab.echo.view.hub.translator.display
 {
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;

@@ -37,6 +37,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		
 		protected var participants			: Vector.<UserVO>;
 		protected var canvas				: Canvas;
+		protected var toolbar				: ToolBar;
 		
 		/**
 		 * Constructor.
@@ -125,6 +126,10 @@ package com.collab.echo.view.hub.whiteboard.display
 			// canvas
 			canvas = new Canvas( viewWidth, viewHeight - bar.height );
 			addChild( canvas );
+			
+			// toolbar
+			toolbar = new ToolBar( viewWidth );
+			addChild( toolbar );
 		}
 		
 		/**
@@ -137,6 +142,10 @@ package com.collab.echo.view.hub.whiteboard.display
 			// canvas
 			canvas.x = 0;
 			canvas.y = bar.y + bar.height;
+			
+			// toolbar
+			toolbar.x = 0;
+			toolbar.y = 100;
 		}
 		
 		/**
@@ -145,6 +154,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( canvas );
+			removeChildFromDisplayList( toolbar );
 			
 			super.invalidate();
 		}

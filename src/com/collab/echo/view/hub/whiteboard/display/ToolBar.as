@@ -19,22 +19,86 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.display.util.DrawingUtils;
+	import com.collab.echo.view.display.util.StyleDict;
+	
+	import fl.controls.ColorPicker;
+	
+	import flash.display.Sprite;
 	
 	/**
+	 * Toolbar containing a color picker.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class ToolBar extends BaseView
 	{
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		protected var background 		: Sprite;
+		
+		// XXX: find alternative for fl.controls
+		/**
+		 * 
+		 */		
+		protected var colorPicker		: ColorPicker;
+		
 		/**
 		 * Constructor.
 		 *  
 		 * @param width
 		 * @param height
 		 */		
-		public function ToolBar( width:Number=0, height:Number=0 )
+		public function ToolBar( width:Number=0, height:Number=40 )
 		{
 			super( width, height );
 			show();
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			// background
+			background = DrawingUtils.drawFill( viewWidth, viewHeight,
+												 0, StyleDict.GREY1 );
+			addChild( background );
+			
+			// color picker
+			colorPicker = new ColorPicker();
+			addChild( colorPicker );
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function layout():void
+		{
+			// background
+			background.x = 0;
+			background.y = 0;
+			
+			// color picker
+			colorPicker.x = 10;
+			colorPicker.y = 8;
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( background );
+			removeChildFromDisplayList( colorPicker );
+			
+			super.invalidate();
 		}
 		
 	}

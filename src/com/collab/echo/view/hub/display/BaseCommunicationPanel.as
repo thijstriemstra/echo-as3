@@ -339,7 +339,7 @@ package com.collab.echo.view.hub.display
 			
 			// whiteboard
 			whiteboard = _skin.whiteboard;
-			whiteboard.setSize( 300, 520 );
+			whiteboard.setSize( 300, 385 );
 			pane.add( whiteboard );
 			
 			// translator

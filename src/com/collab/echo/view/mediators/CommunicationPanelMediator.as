@@ -30,8 +30,6 @@ package com.collab.echo.view.mediators
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
-	import flash.events.Event;
-	
 	import net.user1.reactor.IClient;
 	import net.user1.reactor.RoomEvent;
 	
@@ -107,7 +105,7 @@ package com.collab.echo.view.mediators
 			
 			// XXX: localize
 			panel.welcomeMessage = "Hello!";
-			panel.sendLabel = "Submit";
+			panel.sendLabel = "Submit"; 
         }
 		
 		// ====================================

@@ -224,8 +224,15 @@ package com.collab.echo.view.display
 		 */		
 		protected function invalidate():void
 		{
-			removeChildFromDisplayList( titleField );
-			removeChildFromDisplayList( preloader );
+			if ( titleField )
+			{
+				removeChildFromDisplayList( titleField );
+			}
+			
+			if ( preloader )
+			{
+				removeChildFromDisplayList( preloader );
+			}
 			
 			draw();
 			layout();

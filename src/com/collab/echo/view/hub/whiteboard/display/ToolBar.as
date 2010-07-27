@@ -22,10 +22,9 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
+	import com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker;
+	import com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider;
 	
-	import fl.controls.ColorPicker;
-	import fl.controls.Slider;
-	import fl.controls.SliderDirection;
 	import fl.events.ColorPickerEvent;
 	import fl.events.SliderEvent;
 	
@@ -35,38 +34,28 @@ package com.collab.echo.view.hub.whiteboard.display
 	/**
 	 * Toolbar containing a color picker.
 	 * 
-	 * <p>TODO: find alternative for fl.controls.</p>
-	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class ToolBar extends BaseView
 	{
 		// ====================================
-		// CONSTANTS
-		// ====================================
-		
-		internal static const THICKNESS_MAX		: int = 10;
-		internal static const THICKNESS_MIN		: int = 1;
-		internal static const THICKNESS_DEFAULT	: int = THICKNESS_MIN;
-		
-		// ====================================
-		// PRIVATE VARS
+		// PROTECTED VARS
 		// ====================================
 		
 		/**
 		 * Toolbar background. 
 		 */		
-		protected var background 		: Sprite;
+		protected var background 				: Sprite;
 		
 		/**
 		 * Tool for selecting a line color.
 		 */		
-		protected var colorPicker		: ColorPicker;
+		protected var colorPicker				: FlashColorPicker;
 		
 		/**
-		 * 
+		 * Tool for selecting line thickness.
 		 */		
-		protected var thicknessPicker	: Slider;
+		protected var thickness					: ThicknessSlider;
 		
 		/**
 		 * Constructor.
@@ -95,24 +84,18 @@ package com.collab.echo.view.hub.whiteboard.display
 			addChild( background );
 			
 			// color picker
-			colorPicker = new ColorPicker();
+			// XXX: localize
+			colorPicker = new FlashColorPicker( "COLOR" );
 			colorPicker.addEventListener( ColorPickerEvent.CHANGE, onChangeColor,
 										  false, 0, true );
 			addChild( colorPicker );
 			
 			// thickness
-			thicknessPicker = new Slider();
-			thicknessPicker.direction = SliderDirection.HORIZONTAL;
-			thicknessPicker.minimum = THICKNESS_MIN;
-			thicknessPicker.maximum = THICKNESS_MAX;
-			thicknessPicker.value = THICKNESS_DEFAULT;
-			thicknessPicker.tickInterval = 1;
-			thicknessPicker.snapInterval = 1;
-			thicknessPicker.liveDragging = true;
-			thicknessPicker.setSize( 150, 50 );
-			thicknessPicker.addEventListener( SliderEvent.CHANGE, onChangeThickness,
-											  false, 0, true );
-			addChild( thicknessPicker );
+			// XXX: localize
+			thickness = new ThicknessSlider( 150, 50, "THICKNESS" );
+			thickness.addEventListener( SliderEvent.CHANGE, onChangeThickness,
+									    false, 0, true );
+			addChild( thickness );
 		}
 		
 		/**
@@ -125,12 +108,12 @@ package com.collab.echo.view.hub.whiteboard.display
 			background.y = 0;
 			
 			// color picker
-			colorPicker.x = 10;
+			colorPicker.x = 5;
 			colorPicker.y = 8;
 			
 			// thickness
-			thicknessPicker.x = colorPicker.x + colorPicker.width + 15;
-			thicknessPicker.y = 17;
+			thickness.x = colorPicker.x + colorPicker.width + 40;
+			thickness.y = 8;
 		}
 		
 		/**
@@ -140,7 +123,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			removeChildFromDisplayList( background );
 			removeChildFromDisplayList( colorPicker );
-			removeChildFromDisplayList( thicknessPicker );
+			removeChildFromDisplayList( thickness );
 			
 			super.invalidate();
 		}

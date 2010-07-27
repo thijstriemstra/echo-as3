@@ -57,6 +57,11 @@ package com.collab.echo.view.hub.whiteboard.tools
 		 */		
 		protected var label			: TextField;
 		
+		/**
+		 * Value field. 
+		 */		
+		protected var valueField	: TextField;
+		
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
@@ -65,6 +70,27 @@ package com.collab.echo.view.hub.whiteboard.tools
 		private var _minimum		: int;
 		private var _maximum		: int;
 		private var _value			: int;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * Value of the slider.
+		 *  
+		 * @return 
+		 */		
+		public function get value() : int
+		{
+			return _value;
+		}
+		public function set value( val:int ):void
+		{
+			if ( val )
+			{
+				slider.value = val;
+			}
+		}
 		
 		/**
 		 * Constructor.
@@ -117,6 +143,10 @@ package com.collab.echo.view.hub.whiteboard.tools
 			slider.addEventListener( SliderEvent.CHANGE, onChangeThickness,
 									 false, 0, true );
 			addChild( slider );
+			
+			// value field
+			valueField = TextUtils.createTextField( null, _value.toString() );
+			addChild( valueField );
 		}
 		
 		/**
@@ -131,6 +161,10 @@ package com.collab.echo.view.hub.whiteboard.tools
 			// slider
 			slider.x = label.x + label.width + 20;
 			slider.y = 5;
+			
+			// value field
+			valueField.x = slider.x + slider.width + 10;
+			valueField.y = 5;
 		}
 		
 		/**
@@ -140,6 +174,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 		{
 			removeChildFromDisplayList( label );
 			removeChildFromDisplayList( slider );
+			removeChildFromDisplayList( valueField );
 			
 			super.invalidate();
 		}
@@ -155,8 +190,13 @@ package com.collab.echo.view.hub.whiteboard.tools
 		{
 			event.stopImmediatePropagation();
 			
+			// update view
+			_value = event.value;
+			valueField.text = _value.toString();
+			
+			// notify others
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_THICKNESS );
-			evt.thickness = event.value;
+			evt.thickness = _value;
 			dispatchEvent( evt );
 		}
 		

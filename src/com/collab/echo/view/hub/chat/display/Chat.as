@@ -274,7 +274,7 @@ package com.collab.echo.view.hub.chat.display
 			super.draw();
 			
 			// inputField
-			inputField = new ChatInputField( viewWidth, 50 );
+			inputField = new ChatInputField( viewWidth );
 			inputField.addEventListener( ChatEvent.HISTORY_DOWN, onHistoryDown,
 										 false, 0, true );
 			inputField.addEventListener( ChatEvent.HISTORY_UP, onHistoryUp,

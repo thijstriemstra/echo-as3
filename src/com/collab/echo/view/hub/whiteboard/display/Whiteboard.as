@@ -26,6 +26,7 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.text.TextField;
 	
 	/**
@@ -59,6 +60,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		private var _label					: TextField;
+		private var _lineColor				: uint;
+		private var _lineThickness			: Number;
+		private var _totalLines				: Number;
 		
 		/**
 		 * Constructor.
@@ -145,10 +149,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			super.draw();
 			
-			// canvas
-			canvas = new Canvas( viewWidth, viewHeight - bar.height );
-			addChild( canvas );
-			
 			// toolbar
 			toolbar = new ToolBar( viewWidth );
 			toolbar.addEventListener( WhiteboardEvent.UNDO, onUndo, false, 0, true );
@@ -156,10 +156,17 @@ package com.collab.echo.view.hub.whiteboard.display
 									  false, 0, true );
 			toolbar.addEventListener( WhiteboardEvent.CHANGE_THICKNESS, onChangeThickness,
 									  false, 0, true );
+
+			// canvas
+			canvas = new Canvas( viewWidth, viewHeight - ( bar.height + toolbar.height ));
+			canvas.addEventListener( WhiteboardEvent.DRAW_LINE, onDrawLine,
+									 false, 0, true );
+			addChild( canvas );
 			addChild( toolbar );
 			
 			// label
-			_label = TextUtils.createTextField( null, "Whiteboard!", 15, StyleDict.BLACK );
+			_label = TextUtils.createTextField( null, "Whiteboard!", 15,
+												StyleDict.BLACK );
 			addChild( _label );
 		}
 		
@@ -176,7 +183,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// toolbar
 			toolbar.x = 0;
-			toolbar.y = 270;
+			toolbar.y = canvas.y + canvas.height;
 			
 			// label
 			_label.x = 10;
@@ -201,7 +208,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		/**
 		 * @param event
 		 */		
-		private function onUndo( event:WhiteboardEvent ):void
+		protected function onUndo( event:WhiteboardEvent ):void
 		{
 			event.stopImmediatePropagation();
 			
@@ -213,7 +220,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 * 
 		 * @param event
 		 */		
-		private function onChangeColor( event:WhiteboardEvent ):void
+		protected function onChangeColor( event:WhiteboardEvent ):void
 		{
 			event.stopImmediatePropagation();
 			
@@ -228,11 +235,25 @@ package com.collab.echo.view.hub.whiteboard.display
 		 * 
 		 * @param event
 		 */		
-		private function onChangeThickness( event:WhiteboardEvent ):void
+		protected function onChangeThickness( event:WhiteboardEvent ):void
 		{
 			event.stopImmediatePropagation();
 			
 			trace( "Whiteboard.onChangeThickness: " + event );
+		}
+		
+		/**
+		 * Changes a user's line thickness.
+		 * 
+		 * @param event
+		 */		
+		protected function onDrawLine( event:WhiteboardEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			trace( "Whiteboard.onDrawLine: " + event );
+			
+			drawLine( event.target as Canvas );
 		}
 		
 		// ====================================
@@ -240,74 +261,49 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
-		 * Mouse event handler.
+		 * Draw local line and broadcast to user.
+		 * 
+		 * @param target
 		 */
-		internal function onMouseDown():void
+		internal function drawLine( target:Canvas ): void
 		{
-			/*
-			var whiteBoard_hit	: MovieClip 	= whiteboard_mc.hit_mc;
+			_totalLines++;
 			
-			if (whiteBoard_hit.hitTest(_root._xmouse, _root._ymouse,true))
-			{
-				// start sending lines
-				drawLine();
-			}
-			*/
-		}
-		
-		/**
-		 * Draw line and broadcast to user.
-		 */
-		internal function drawLine(): void
-		{
-			/*
-			var hier 						= this;
-			var whiteBoard		: MovieClip = whiteboard_mc;
-			var line_color		: Number 	= whiteBoard.ink_color.selectedColor;  
-			var line_thickness	: Number 	= whiteBoard.thickness_txt.text;
+			//_root.lineStukjes = new String();
 			
-			// anti hacking measures  
-			if (line_thickness <= 5) {
-				getTargetMC().totalLines++;
-				
-				_root.lineStukjes = new String();
-				
-				var myLine = whiteBoard.createEmptyMovieClip("myLine"+getTargetMC().totalLines,
-															 whiteBoard.getNextHighestDepth());
-				
-				// myLine._alpha = 400;
-				myLine.lineStyle(line_thickness, line_color, 100);
-				myLine.moveTo(whiteBoard._xmouse, whiteBoard._ymouse);
-				
-				// LOCAL LINE
-				_root.onMouseMove = function () { 
-					// if line isnt too long
-					if (_root.lineStukjes.length <= 7000) {
-						//trace("drawing line");  
-						if (whiteboard_mc.hit_mc.hitTest(_root._xmouse, _root._ymouse,true)) {
-							// draw line on this client.
-							myLine.lineTo(whiteBoard._xmouse, whiteBoard._ymouse);
-							// add line-cords to string for other clients
-							_root.lineStukjes += String("%"+ whiteBoard._xmouse + "," + whiteBoard._ymouse);
-						}
+			var myLine:Sprite = new Sprite();
+			myLine.name = "myLine" + _totalLines;
+			myLine.graphics.lineStyle( _lineThickness, _lineColor, 1 );
+			myLine.graphics.moveTo( target.mouseX, target.mouseY );
+			
+			/*
+			_root.onMouseMove = function () { 
+				// if line isnt too long
+				if (_root.lineStukjes.length <= 7000) {
+					//trace("drawing line");  
+					if (whiteboard_mc.hit_mc.hitTest(_root._xmouse, _root._ymouse,true)) {
+						// draw line on this client.
+						myLine.lineTo(whiteBoard._xmouse, whiteBoard._ymouse);
+						// add line-cords to string for other clients
+						_root.lineStukjes += String("%"+ whiteBoard._xmouse + "," + whiteBoard._ymouse);
 					}
-				};
+				}
+			}
+			
+			_root.onMouseUp = function () {
+				// remove event handlers
+				delete _root.onMouseMove;
+				delete _root.onMouseUp;
+				//trace("Length line: " + _root.lineStukjes.length);
 				
-				_root.onMouseUp = function () {
-					// remove event handlers
-					delete _root.onMouseMove;
-					delete _root.onMouseUp;
-					//trace("Length line: " + _root.lineStukjes.length);
-					
-					// Send the message to the server.
-					var safeMsg:String = '<![CDATA[' + _root.totalLines + "?" + line_color + "?" + line_thickness + "?" + _root.lineStukjes +']]>';
-					trace(safeMsg.length);
-					//trace("safeMessage "+safeMsg);
-					hier.invokeOnRoom("displayLine", AppSettings.fnsid, false, safeMsg);
-					
-					// fade the line
-					myLine.killMe = setInterval(hier.killLine, 70000, myLine);
-				};
+				// Send the message to the server.
+				var safeMsg:String = '<![CDATA[' + _root.totalLines + "?" + line_color + "?" + line_thickness + "?" + _root.lineStukjes +']]>';
+				trace(safeMsg.length);
+				//trace("safeMessage "+safeMsg);
+				hier.invokeOnRoom("displayLine", AppSettings.fnsid, false, safeMsg);
+				
+				// fade the line
+				myLine.killMe = setInterval(hier.killLine, 70000, myLine);
 			}
 			*/
 		}

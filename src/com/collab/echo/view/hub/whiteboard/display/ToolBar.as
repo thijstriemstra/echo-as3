@@ -77,7 +77,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			// background
 			background = DrawingUtils.drawFill( viewWidth, viewHeight,
-												 0, StyleDict.GREY1 );
+												 0, StyleDict.GREY1, .5 );
 			addChild( background );
 			
 			// color picker

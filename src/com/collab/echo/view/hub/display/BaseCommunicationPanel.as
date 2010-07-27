@@ -334,12 +334,12 @@ package com.collab.echo.view.hub.display
 			chat = _skin.chat;
 			chat.welcomeMessage = _welcomeMessage;
 			chat.sendLabel = _sendLabel;
-			chat.setSize( 350, 385 );
+			chat.setSize( 350, 383 );
 			pane.add( chat );
 			
 			// whiteboard
 			whiteboard = _skin.whiteboard;
-			whiteboard.setSize( 300, 385 );
+			whiteboard.setSize( 300, 265 );
 			pane.add( whiteboard );
 			
 			// translator

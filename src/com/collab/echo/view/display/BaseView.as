@@ -73,14 +73,27 @@ package com.collab.echo.view.display
 		// INTERNAL VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal var preloader					: CirclePreloader;
+		
+		/**
+		 * @private 
+		 */		
 		internal var isLoading					: Boolean;
 		
+		// ====================================
+		// ACCESSOR/MUTATOR
+		// ====================================
+		
+		/**
+		 * @return 
+		 */		
 		public function get loading():Boolean
 		{
 			return isLoading;
 		}
-		
 		public function set loading( val:Boolean ):void
 		{
 			if ( preloader )

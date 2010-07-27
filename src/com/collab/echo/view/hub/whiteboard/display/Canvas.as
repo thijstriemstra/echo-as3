@@ -21,8 +21,10 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	
 	/**
 	 * Whiteboard canvas.
@@ -82,6 +84,21 @@ package com.collab.echo.view.hub.whiteboard.display
 			removeChildFromDisplayList( _background );
 			
 			super.invalidate();
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @param event
+		 */		
+		private function onMouseDown( event:MouseEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.DRAW_LINE );
+			dispatchEvent( evt );
 		}
 		
 	}

@@ -18,11 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.hub.whiteboard.tools.DrawingTool;
 	import com.collab.echo.view.hub.whiteboard.tools.Pencil;
-	
-	import net.user1.reactor.UserAccount;
 	
 	/**
 	 * A participant of the shared whiteboard.
@@ -31,7 +30,7 @@ package com.collab.echo.view.hub.whiteboard.display
 	 */	
 	public class Painter extends BaseView
 	{
-		internal var user	: UserAccount;
+		internal var user	: UserVO;
 		internal var tool	: DrawingTool;
 		
 		/**

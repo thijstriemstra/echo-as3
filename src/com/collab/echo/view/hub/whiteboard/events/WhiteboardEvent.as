@@ -33,6 +33,7 @@ package com.collab.echo.view.hub.whiteboard.events
 		public static const UNDO				: String = NAME + "_undo";
 		public static const CHANGE_COLOR		: String = NAME + "_changeColor";
 		public static const CHANGE_THICKNESS	: String = NAME + "_changeThickness";
+		public static const DRAW_LINE			: String = NAME + "_drawLine";
 		
 		// ====================================
 		// PRIVATE VARS

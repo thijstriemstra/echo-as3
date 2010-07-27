@@ -61,6 +61,7 @@ package com.collab.echo.model.proxy
 		public static const ROOM_CLIENT_REMOVE		: String = NAME + "_roomClientRemove";
 		public static const SEND_MESSAGE			: String = NAME + "_sendMessage";
 		public static const RECEIVE_MESSAGE			: String = NAME + "_receiveMessage";
+		public static const SEND_LINE				: String = NAME + "_sendLine";
 		
 		// ====================================
 		// PUBLIC VARS

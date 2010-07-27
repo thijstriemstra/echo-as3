@@ -22,7 +22,9 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
+	import com.greensock.TweenLite;
 	
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -36,12 +38,21 @@ package com.collab.echo.view.hub.whiteboard.display
 	public class Canvas extends BaseView
 	{
 		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		/**
+		 * In seconds. 
+		 */		
+		public static const FADE_TIME		: int = 70;
+		
+		private static const LINE_NAME		: String = "myLine";
+		
+		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
 		private var _background				: Sprite;
-		private var _localLine				: Shape;
-		
 		private var _totalLines				: Number;
 		private var _lineStukjes			: String;
 		
@@ -53,6 +64,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function Canvas( width:int=0, height:int=0 )
 		{
+			_totalLines = 0;
+			
 			super( width, height );
 			show();
 			
@@ -71,24 +84,63 @@ package com.collab.echo.view.hub.whiteboard.display
 		 * @param thickness
 		 * @param color
 		 */
-		public function drawLine( thickness:int=1,
-								  color:uint=StyleDict.BLACK ): void
+		public function createLine( thickness:int=1,
+								    color:uint=StyleDict.BLACK ): void
 		{
 			_totalLines++;
 			_lineStukjes = "";
 			
 			// create local line
-			_localLine = new Shape();
-			_localLine.name = "myLine" + _totalLines;
-			_localLine.graphics.lineStyle( thickness, color, 1 );
-			_localLine.graphics.moveTo( mouseX, mouseY );
-			addChild( _localLine );
+			var line:Shape = new Shape();
+			line.name = LINE_NAME + _totalLines;
+			line.graphics.lineStyle( thickness, color, 1 );
+			line.graphics.moveTo( mouseX, mouseY );
+			addChild( line );
 			
 			// listen for events
 			addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove, false, 0,
 							  true );
 			addEventListener( MouseEvent.MOUSE_UP, onMouseUp, false, 0,
 							  true );
+		}
+		
+		/**
+		 * Display line from remote client.
+		 *  
+		 * @param clientID
+		 * @param msg
+		 */		
+		public function displayLine( clientID:String, msg:String ): void 
+		{
+			/*
+			var userCursor:MovieClip = whiteboard_mc["cursor"+clientID];
+			userCursor.username = content["clientVideo"+clientID].screen.username
+			
+			var info:Array = msg.split("?");
+			var line_nr:Number = info[0];
+			var line_color:String = info[1];
+			var line_thickness:Number = info[2];
+			var cords:Array = info[3].split("%");
+			// remove empty arrayelements
+			cords.shift();
+			
+			var userBoard:MovieClip = whiteboard_mc;
+			var line = userBoard.createEmptyMovieClip("lijn"+line_nr, userBoard.getNextHighestDepth());
+			var startPoint:Array = cords[0].split(",");
+			
+			line.lineStyle(line_thickness, line_color, 100);
+			line.moveTo(startPoint[0], startPoint[1]);
+			
+			userCursor.swapDepths(line);
+			
+			for (var r=1; r<cords.length; r++)
+			{
+				var waardes = cords[r].split(",");
+				var x_cord:Number = waardes[0];
+				var y_cord:Number = waardes[1];
+				line["pull"+r] = setInterval(pullLine, (r*10), x_cord, y_cord, line, userCursor, r, cords.length-1);
+			}
+			*/
 		}
 		
 		// ====================================
@@ -122,9 +174,37 @@ package com.collab.echo.view.hub.whiteboard.display
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( _background );
-			removeChildFromDisplayList( _localLine );
 			
 			super.invalidate();
+		}
+		
+		/**
+		 * Fade a line.
+		 *  
+		 * @param line
+		 * @private
+		 */		
+		protected function fadeLine( line:DisplayObject ):void
+		{
+			if ( line )
+			{
+				TweenLite.to( line, 2, { alpha: 0, onComplete: killedLine,
+									 	 onCompleteParams: [ line ]});
+			}
+		}
+		
+		/**
+		 * Delete a line.
+		 * 
+		 * @param line
+		 * @private
+		 */		
+		protected function killedLine( line:DisplayObject ):void
+		{
+			if ( line )
+			{
+				removeChild( line );
+			}
 		}
 		
 		// ====================================
@@ -156,7 +236,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			// if line isn't too long
 			if ( _lineStukjes.length <= 7000 )
 			{
-				_localLine.graphics.lineTo( event.localX, event.localY );
+				var line:Shape = getChildByName( LINE_NAME + _totalLines ) as Shape;
+				line.graphics.lineTo( event.localX, event.localY );
 			
 				// add line-cords to string for other clients
 				_lineStukjes += String( "%" + event.localX + "," + event.localY );
@@ -175,58 +256,18 @@ package com.collab.echo.view.hub.whiteboard.display
 			removeEventListener( MouseEvent.MOUSE_MOVE, onMouseMove );
 			removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
 
-			//trace("Length line: " + _lineStukjes.length);
-			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
+			//evt.data = _totalLines + "?" + line_color + "?" + line_thickness + "?" + _lineStukjes;
 			dispatchEvent( evt );
 			
-			/*
 			// fade the line
-			_localLine.killMe = setInterval( killLine, 70000, _localLine );
-			*/
+			var line:DisplayObject = getChildByName( LINE_NAME + _totalLines );
+			TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
 		}
 		
 		// ====================================
 		// INTERNAL METHODS
 		// ====================================
-		
-		/**
-		 * Display line for client.
-		 *  
-		 * @param clientID
-		 * @param msg
-		 */		
-		internal function displayLine(clientID:String, msg:String): void 
-		{
-			/*
-			var userCursor:MovieClip = whiteboard_mc["cursor"+clientID];
-			userCursor.username = content["clientVideo"+clientID].screen.username
-			
-			var info:Array = msg.split("?");
-			var line_nr:Number = info[0];
-			var line_color:String = info[1];
-			var line_thickness:Number = info[2];
-			var cords:Array = info[3].split("%");
-			// remove empty arrayelements
-			cords.shift();
-			
-			var userBoard:MovieClip = whiteboard_mc;
-			var line = userBoard.createEmptyMovieClip("lijn"+line_nr, userBoard.getNextHighestDepth());
-			var startPoint:Array = cords[0].split(",");
-			
-			line.lineStyle(line_thickness, line_color, 100);
-			line.moveTo(startPoint[0], startPoint[1]);
-			
-			userCursor.swapDepths(line);
-			
-			for (var r=1; r<cords.length; r++) {
-			var waardes = cords[r].split(",");
-			var x_cord:Number = waardes[0];
-			var y_cord:Number = waardes[1];
-			line["pull"+r] = setInterval(pullLine, (r*10), x_cord, y_cord, line, userCursor, r, cords.length-1);
-			}
-			*/
-		}
 		
 		/**
 		 * Pull a line.
@@ -256,37 +297,11 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// if this is the last line-part
 			if (welke >= total) {
-			//trace("END " + welke + " : " + line._name);
-			// fade out cursor
-			userCursor.gotoAndPlay("close");
-			
-			// kill the line slow and painfully
-			line.killMe = setInterval(_root.sc.killLine, 70000, line, userCursor);
-			}
-			*/
-		}
-		
-		/**
-		 * Delete a line.
-		 *  
-		 * @param clip
-		 * @param userCursor
-		 */		
-		internal function killLine( clip:MovieClip, userCursor:MovieClip ):void
-		{
-			/*
-			trace("i am killed "+ clip._name);
-			
-			clearInterval(clip.killMe);
-			
-			clip.onEnterFrame = function () {
-			if (this._alpha > 0) {
-			this._alpha -= 2;
-			//trace("to go "  + this._alpha);
-			} else {
-			//trace("bye bye "  + this._name);
-			removeMovieClip(this);   
-			}
+				//trace("END " + welke + " : " + line._name);
+				// fade out cursor
+				userCursor.gotoAndPlay("close");
+				
+				line.killMe = setInterval(_root.sc.killLine, 70000, line, userCursor);
 			}
 			*/
 		}

@@ -342,11 +342,9 @@ package com.collab.echo.view.mediators
 			
 			trace(event);
 			
-			/*
-			var safeMsg:String = '<![CDATA[' + _totalLines + "?" + line_color + "?" + line_thickness + "?" + _lineStukjes +']]>';
-			trace(safeMsg.length);
-			invokeOnRoom("displayLine", AppSettings.fnsid, false, safeMsg);
-			*/
+			var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_LINE,
+														  event.color.toString(), false );
+			presence.sendMessage( msg );
 		}
 		
 		/**

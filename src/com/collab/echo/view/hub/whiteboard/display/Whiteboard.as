@@ -20,12 +20,8 @@ package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.panels.MenuPanel;
-	import com.collab.echo.view.display.util.StyleDict;
-	import com.collab.echo.view.display.util.TextUtils;
 	import com.collab.echo.view.hub.interfaces.IRoom;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
-	
-	import flash.text.TextField;
 	
 	/**
 	 * A shared whiteboard.
@@ -57,7 +53,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _label					: TextField;
 		private var _lineColor				: uint;
 		private var _lineThickness			: Number;
 		
@@ -98,7 +93,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			trace( "Whiteboard.addUser: " + client );
+			//trace( "Whiteboard.addUser: " + client );
 			
 			//var user:Painter = new Painter();
 			//participants.push( user );
@@ -160,11 +155,6 @@ package com.collab.echo.view.hub.whiteboard.display
 									 false, 0, true );
 			addChild( canvas );
 			addChild( toolbar );
-			
-			// label
-			_label = TextUtils.createTextField( null, "Whiteboard!", 15,
-												StyleDict.BLACK );
-			addChild( _label );
 		}
 		
 		/**
@@ -181,10 +171,6 @@ package com.collab.echo.view.hub.whiteboard.display
 			// toolbar
 			toolbar.x = 0;
 			toolbar.y = canvas.y + canvas.height;
-			
-			// label
-			_label.x = 10;
-			_label.y = canvas.y + 15;
 		}
 		
 		/**
@@ -210,6 +196,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			event.stopImmediatePropagation();
 			
 			trace( "Whiteboard.onUndo: " + event );
+			
+			// TODO
 		}
 		
 		/**
@@ -251,7 +239,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			trace( "Whiteboard.onDrawLine: " + event );
 			
-			canvas.drawLine( _lineThickness, _lineColor );
+			canvas.createLine( _lineThickness, _lineColor );
 		}
 		
 	}

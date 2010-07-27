@@ -18,14 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
-	import com.collab.echo.view.controls.buttons.LabelButton;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import fl.controls.ColorPicker;
+	import fl.controls.Slider;
+	import fl.controls.SliderDirection;
 	import fl.events.ColorPickerEvent;
+	import fl.events.SliderEvent;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -33,26 +35,38 @@ package com.collab.echo.view.hub.whiteboard.display
 	/**
 	 * Toolbar containing a color picker.
 	 * 
+	 * <p>TODO: find alternative for fl.controls.</p>
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class ToolBar extends BaseView
 	{
 		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		internal static const THICKNESS_MAX		: int = 10;
+		internal static const THICKNESS_MIN		: int = 1;
+		internal static const THICKNESS_DEFAULT	: int = THICKNESS_MIN;
+		
+		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
+		/**
+		 * Toolbar background. 
+		 */		
 		protected var background 		: Sprite;
 		
-		// XXX: find alternative for fl.controls
 		/**
-		 * 
+		 * Tool for selecting a line color.
 		 */		
 		protected var colorPicker		: ColorPicker;
 		
 		/**
 		 * 
 		 */		
-		protected var undoButton		: LabelButton;
+		protected var thicknessPicker	: Slider;
 		
 		/**
 		 * Constructor.
@@ -86,11 +100,19 @@ package com.collab.echo.view.hub.whiteboard.display
 										  false, 0, true );
 			addChild( colorPicker );
 			
-			// undo button
-			undoButton = new LabelButton( 50, 15, StyleDict.BLACK, 0, 0 );
-			undoButton.addEventListener( MouseEvent.CLICK, undoAction, false, 0, true );
-			undoButton.label = "Undo";
-			addChild( undoButton );
+			// thickness
+			thicknessPicker = new Slider();
+			thicknessPicker.direction = SliderDirection.HORIZONTAL;
+			thicknessPicker.minimum = THICKNESS_MIN;
+			thicknessPicker.maximum = THICKNESS_MAX;
+			thicknessPicker.value = THICKNESS_DEFAULT;
+			thicknessPicker.tickInterval = 1;
+			thicknessPicker.snapInterval = 1;
+			thicknessPicker.liveDragging = true;
+			thicknessPicker.setSize( 150, 50 );
+			thicknessPicker.addEventListener( SliderEvent.CHANGE, onChangeThickness,
+											  false, 0, true );
+			addChild( thicknessPicker );
 		}
 		
 		/**
@@ -106,9 +128,9 @@ package com.collab.echo.view.hub.whiteboard.display
 			colorPicker.x = 10;
 			colorPicker.y = 8;
 			
-			// undo button
-			undoButton.x = colorPicker.x + colorPicker.width + 5;
-			undoButton.y = 10;
+			// thickness
+			thicknessPicker.x = colorPicker.x + colorPicker.width + 15;
+			thicknessPicker.y = 17;
 		}
 		
 		/**
@@ -118,6 +140,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			removeChildFromDisplayList( background );
 			removeChildFromDisplayList( colorPicker );
+			removeChildFromDisplayList( thicknessPicker );
 			
 			super.invalidate();
 		}
@@ -131,6 +154,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		private function undoAction( event:MouseEvent ):void
 		{
+			event.stopImmediatePropagation();
+			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.UNDO );
 			dispatchEvent( evt );
 		}
@@ -140,7 +165,20 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		private function onChangeColor( event:ColorPickerEvent ):void
 		{
+			event.stopImmediatePropagation();
+			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_COLOR );
+			dispatchEvent( evt );
+		}
+		
+		/**
+		 * @param event
+		 */		
+		private function onChangeThickness( event:SliderEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_THICKNESS );
 			dispatchEvent( evt );
 		}
 		

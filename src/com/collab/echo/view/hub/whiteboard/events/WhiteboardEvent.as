@@ -29,9 +29,10 @@ package com.collab.echo.view.hub.whiteboard.events
 		// CONSTANTS
 		// ====================================
 		
-		public static const NAME			: String = "WhiteboardEvent";
-		public static const UNDO			: String = NAME + "_undo";
-		public static const CHANGE_COLOR	: String = NAME + "_changeColor";
+		public static const NAME				: String = "WhiteboardEvent";
+		public static const UNDO				: String = NAME + "_undo";
+		public static const CHANGE_COLOR		: String = NAME + "_changeColor";
+		public static const CHANGE_THICKNESS	: String = NAME + "_changeThickness";
 		
 		/**
 		 * Constructor.

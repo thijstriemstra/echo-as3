@@ -39,9 +39,24 @@ package com.collab.echo.view.hub.whiteboard.display
 		// PROTECTED VARS
 		// ====================================
 		
+		/**
+		 * 
+		 */		
 		protected var participants			: Vector.<UserVO>;
+		
+		/**
+		 * 
+		 */		
 		protected var canvas				: Canvas;
+		
+		/**
+		 * 
+		 */		
 		protected var toolbar				: ToolBar;
+		
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
 		
 		private var _label					: TextField;
 		
@@ -57,7 +72,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			participants = new Vector.<UserVO>();
 			
 			// XXX: move elsewhere
-			menuItems = [ "aaa", "bbb", "ccc" ];
+			menuItems = [ "Settings" ];
 			
 			super( width, height );
 			show();
@@ -88,7 +103,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			//participants.push( user );
 			
 			/*
-			var newCursor:MovieClip = timeLine.attachMovie("cursor", "cursor"+clientID, timeLine.getNextHighestDepth());
+			var newCursor:MovieClip = timeLine.attachMovie("cursor", "cursor"+clientID, 
+															timeLine.getNextHighestDepth());
 			
 			newCursor.username = username;
 			newCursor._visible = false;
@@ -104,7 +120,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			/*
 			// remove user cursor
-			removeMovieClip(client.getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteboard_accordion.whiteboard_mc["cursor"+clientID]);
+			removeMovieClip( whiteboard_mc["cursor"+clientID] );
 			*/
 		}
 		
@@ -136,7 +152,10 @@ package com.collab.echo.view.hub.whiteboard.display
 			// toolbar
 			toolbar = new ToolBar( viewWidth );
 			toolbar.addEventListener( WhiteboardEvent.UNDO, onUndo, false, 0, true );
-			toolbar.addEventListener( WhiteboardEvent.CHANGE_COLOR, onChangeColor, false, 0, true );
+			toolbar.addEventListener( WhiteboardEvent.CHANGE_COLOR, onChangeColor,
+									  false, 0, true );
+			toolbar.addEventListener( WhiteboardEvent.CHANGE_THICKNESS, onChangeThickness,
+									  false, 0, true );
 			addChild( toolbar );
 			
 			// label
@@ -184,6 +203,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		private function onUndo( event:WhiteboardEvent ):void
 		{
+			event.stopImmediatePropagation();
+			
 			trace( "Whiteboard.onUndo: " + event );
 		}
 		
@@ -194,10 +215,24 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		private function onChangeColor( event:WhiteboardEvent ):void
 		{
+			event.stopImmediatePropagation();
+			
 			trace( "Whiteboard.onChangeColor: " + event );
 			
-			//var newKleur = new Color(client.getTargetMC().chat.video_accordion.video_mcs.content["clientVideo"+clientID].screen.colorBar);
+			//var newKleur = new Color(content["clientVideo"+clientID].screen.colorBar);
 			//newKleur.setRGB(newName);
+		}
+		
+		/**
+		 * Changes a user's line thickness.
+		 * 
+		 * @param event
+		 */		
+		private function onChangeThickness( event:WhiteboardEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			trace( "Whiteboard.onChangeThickness: " + event );
 		}
 		
 		// ====================================
@@ -209,8 +244,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */
 		internal function onMouseDown():void
 		{
-			//var whiteBoard_hit	: MovieClip 	= getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc.hit_mc;
 			/*
+			var whiteBoard_hit	: MovieClip 	= whiteboard_mc.hit_mc;
+			
 			if (whiteBoard_hit.hitTest(_root._xmouse, _root._ymouse,true))
 			{
 				// start sending lines
@@ -226,7 +262,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			/*
 			var hier 						= this;
-			var whiteBoard		: MovieClip = getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc;
+			var whiteBoard		: MovieClip = whiteboard_mc;
 			var line_color		: Number 	= whiteBoard.ink_color.selectedColor;  
 			var line_thickness	: Number 	= whiteBoard.thickness_txt.text;
 			
@@ -236,7 +272,8 @@ package com.collab.echo.view.hub.whiteboard.display
 				
 				_root.lineStukjes = new String();
 				
-				var myLine = whiteBoard.createEmptyMovieClip("myLine"+getTargetMC().totalLines, whiteBoard.getNextHighestDepth());
+				var myLine = whiteBoard.createEmptyMovieClip("myLine"+getTargetMC().totalLines,
+															 whiteBoard.getNextHighestDepth());
 				
 				// myLine._alpha = 400;
 				myLine.lineStyle(line_thickness, line_color, 100);
@@ -247,7 +284,7 @@ package com.collab.echo.view.hub.whiteboard.display
 					// if line isnt too long
 					if (_root.lineStukjes.length <= 7000) {
 						//trace("drawing line");  
-						if (_root.chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc.hit_mc.hitTest(_root._xmouse, _root._ymouse,true)) {
+						if (whiteboard_mc.hit_mc.hitTest(_root._xmouse, _root._ymouse,true)) {
 							// draw line on this client.
 							myLine.lineTo(whiteBoard._xmouse, whiteBoard._ymouse);
 							// add line-cords to string for other clients
@@ -284,8 +321,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		internal function displayLine(clientID:String, msg:String): void 
 		{
 			/*
-			var userCursor:MovieClip = getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc["cursor"+clientID];
-			userCursor.username = getTargetMC().chat.video_mcs.content["clientVideo"+clientID].screen.username
+			var userCursor:MovieClip = whiteboard_mc["cursor"+clientID];
+			userCursor.username = content["clientVideo"+clientID].screen.username
 			
 			var info:Array = msg.split("?");
 			var line_nr:Number = info[0];
@@ -295,7 +332,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			// remove empty arrayelements
 			cords.shift();
 			
-			var userBoard:MovieClip = getTargetMC().chat.menu_accordion.panel_mc.chatPanel_mc.content.whiteBoard_accordion.whiteboard_mc;
+			var userBoard:MovieClip = whiteboard_mc;
 			var line = userBoard.createEmptyMovieClip("lijn"+line_nr, userBoard.getNextHighestDepth());
 			var startPoint:Array = cords[0].split(",");
 			
@@ -359,8 +396,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		internal function killLine( clip:MovieClip, userCursor:MovieClip ):void
 		{
-			//trace("i am killed "+ clip._name);
 			/*
+			trace("i am killed "+ clip._name);
+			
 			clearInterval(clip.killMe);
 			
 			clip.onEnterFrame = function () {
@@ -371,7 +409,8 @@ package com.collab.echo.view.hub.whiteboard.display
 					//trace("bye bye "  + this._name);
 					removeMovieClip(this);   
 				}
-			}*/
+			}
+			*/
 		}
 		
 	}

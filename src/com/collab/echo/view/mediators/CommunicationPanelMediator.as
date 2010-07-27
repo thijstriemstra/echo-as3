@@ -28,6 +28,7 @@ package com.collab.echo.view.mediators
 	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
+	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	import com.collab.echo.view.rooms.BaseRoom;
 	
 	import net.user1.reactor.IClient;
@@ -58,7 +59,7 @@ package com.collab.echo.view.mediators
 		// PROTECTED VARS
 		// ====================================
 		
-		protected var messageCreator		: ChatMessageCreator;
+		protected var chatManager			: ChatMessageCreator;
 		protected var user					: UserVO;
 		protected var roomEvent				: RoomEvent;
 		protected var joined				: Boolean;
@@ -97,11 +98,12 @@ package com.collab.echo.view.mediators
             super( NAME, viewComponent );
 			
 			// init vars
-			messageCreator = new ChatMessageCreator();
+			chatManager = new ChatMessageCreator();
 			joined = false;
 			
 			// listen for component events
 			panel.addEventListener( ChatEvent.SUBMIT, onSubmitChatMessage, false, 0, true );
+			panel.addEventListener( WhiteboardEvent.SEND_LINE, onSendLine, false, 0, true );
 			
 			// XXX: localize
 			panel.welcomeMessage = "Hello!";
@@ -324,9 +326,27 @@ package com.collab.echo.view.mediators
 		{
 			event.stopPropagation();
 			
-			var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
-															 event.data, true );
+			var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
+														  event.data, true );
 			presence.sendMessage( msg );
+		}
+		
+		/**
+		 * Dispatched when a new whiteboard line wants to be send.
+		 * 
+		 * @param event
+		 */		
+		protected function onSendLine( event:WhiteboardEvent ):void
+		{
+			event.stopPropagation();
+			
+			trace(event);
+			
+			/*
+			var safeMsg:String = '<![CDATA[' + _totalLines + "?" + line_color + "?" + line_thickness + "?" + _lineStukjes +']]>';
+			trace(safeMsg.length);
+			invokeOnRoom("displayLine", AppSettings.fnsid, false, safeMsg);
+			*/
 		}
 		
 		/**
@@ -369,7 +389,7 @@ package com.collab.echo.view.mediators
 				// - local user
 				if ( joined || user.client.isSelf() )
 				{
-					var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
+					var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
 																	 ChatMessageTypes.JOIN, true );
 					msg.sender = user.client;
 					msg.receiver = user.client;
@@ -393,7 +413,7 @@ package com.collab.echo.view.mediators
 				panel.removeOccupant( user );
 				
 				// show leave message
-				var msg:BaseChatMessage = messageCreator.create( presence, PresenceProxy.SEND_MESSAGE,
+				var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
 																 ChatMessageTypes.LEAVE, false );
 				msg.sender = user.client;
 				msg.receiver = user.client;

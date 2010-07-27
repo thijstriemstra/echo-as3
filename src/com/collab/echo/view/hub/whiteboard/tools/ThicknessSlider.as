@@ -160,7 +160,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 			
 			// slider
 			slider.x = label.x + label.width + 20;
-			slider.y = 5;
+			slider.y = 9;
 			
 			// value field
 			valueField.x = slider.x + slider.width + 10;
@@ -185,13 +185,15 @@ package com.collab.echo.view.hub.whiteboard.tools
 		
 		/**
 		 * @param event
+		 * @private
 		 */		
 		private function onChangeThickness( event:SliderEvent ):void
 		{
 			event.stopImmediatePropagation();
 			
-			// update view
 			_value = event.value;
+			
+			// update view
 			valueField.text = _value.toString();
 			
 			// notify others

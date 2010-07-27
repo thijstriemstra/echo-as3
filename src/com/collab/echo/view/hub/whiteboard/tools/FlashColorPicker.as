@@ -20,8 +20,10 @@ package com.collab.echo.view.hub.whiteboard.tools
 {
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.TextUtils;
+	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import fl.controls.ColorPicker;
+	import fl.events.ColorPickerEvent;
 	
 	import flash.text.TextField;
 	
@@ -80,6 +82,8 @@ package com.collab.echo.view.hub.whiteboard.tools
 			
 			// color picker
 			colorPicker = new ColorPicker();
+			colorPicker.addEventListener( ColorPickerEvent.CHANGE, onChangeColor,
+										  false, 0, true );
 			addChild( colorPicker );
 		}
 
@@ -106,6 +110,22 @@ package com.collab.echo.view.hub.whiteboard.tools
 			removeChildFromDisplayList( label );
 			
 			super.invalidate();
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @param event
+		 */		
+		private function onChangeColor( event:ColorPickerEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_COLOR );
+			evt.color = event.color;
+			dispatchEvent( evt );
 		}
 		
 	}

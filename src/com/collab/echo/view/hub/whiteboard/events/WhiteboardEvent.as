@@ -34,6 +34,45 @@ package com.collab.echo.view.hub.whiteboard.events
 		public static const CHANGE_COLOR		: String = NAME + "_changeColor";
 		public static const CHANGE_THICKNESS	: String = NAME + "_changeThickness";
 		
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		private var _color						: uint;
+		private var _thickness					: Number;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * Contains a value when <code>CHANGE_COLOR</code> is dispatched.
+		 * 
+		 * @return 
+		 */		
+		public function get color():uint
+		{
+			return _color;
+		}
+		public function set color( val:uint ):void
+		{
+			_color = val;
+		}
+		
+		/**
+		 * Contains a value when <code>CHANGE_THICKNESS</code> is dispatched.
+		 * 
+		 * @return 
+		 */		
+		public function get thickness():Number
+		{
+			return _thickness;
+		}
+		public function set thickness( val:Number ):void
+		{
+			_thickness = val;
+		}
+		
 		/**
 		 * Constructor.
 		 *  
@@ -50,7 +89,8 @@ package com.collab.echo.view.hub.whiteboard.events
 		
 		override public function toString():String
 		{
-			return "<WhiteboardEvent type='" + type + "' />";
+			return "<WhiteboardEvent type='" + type + "' color='" + _color +
+				   "' thickness='" + _thickness + "' />";
 		}
 		
 	}

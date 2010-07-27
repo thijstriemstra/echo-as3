@@ -20,9 +20,11 @@ package com.collab.echo.view.hub.whiteboard.tools
 {
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.TextUtils;
+	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import fl.controls.Slider;
 	import fl.controls.SliderDirection;
+	import fl.events.SliderEvent;
 	
 	import flash.text.TextField;
 	
@@ -44,6 +46,8 @@ package com.collab.echo.view.hub.whiteboard.tools
 		// ====================================
 		
 		/**
+		 * Thickness slider.
+		 * 
 		 * <p>TODO: find alternative for fl.controls.Slider</p>
 		 */		
 		protected var slider		: Slider;
@@ -99,7 +103,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 			// label
 			label = TextUtils.createTextField( null, _label );
 			addChild( label );
-			
+	
 			// slider
 			slider = new Slider();
 			slider.direction = SliderDirection.HORIZONTAL;
@@ -109,7 +113,9 @@ package com.collab.echo.view.hub.whiteboard.tools
 			slider.tickInterval = 1;
 			slider.snapInterval = 1;
 			slider.liveDragging = true;
-			slider.setSize( viewWidth, viewHeight );
+			slider.setSize( viewWidth - label.width, viewHeight );
+			slider.addEventListener( SliderEvent.CHANGE, onChangeThickness,
+									 false, 0, true );
 			addChild( slider );
 		}
 		
@@ -123,7 +129,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 			label.y = 5;
 			
 			// slider
-			slider.x = label.x + label.width + 10;
+			slider.x = label.x + label.width + 20;
 			slider.y = 5;
 		}
 		
@@ -136,6 +142,22 @@ package com.collab.echo.view.hub.whiteboard.tools
 			removeChildFromDisplayList( slider );
 			
 			super.invalidate();
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @param event
+		 */		
+		private function onChangeThickness( event:SliderEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_THICKNESS );
+			evt.thickness = event.value;
+			dispatchEvent( evt );
 		}
 		
 	}

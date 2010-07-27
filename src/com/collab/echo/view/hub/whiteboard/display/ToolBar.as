@@ -25,9 +25,6 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker;
 	import com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider;
 	
-	import fl.events.ColorPickerEvent;
-	import fl.events.SliderEvent;
-	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
@@ -86,15 +83,11 @@ package com.collab.echo.view.hub.whiteboard.display
 			// color picker
 			// XXX: localize
 			colorPicker = new FlashColorPicker( "COLOR" );
-			colorPicker.addEventListener( ColorPickerEvent.CHANGE, onChangeColor,
-										  false, 0, true );
 			addChild( colorPicker );
 			
 			// thickness
 			// XXX: localize
 			thickness = new ThicknessSlider( 150, 50, "THICKNESS" );
-			thickness.addEventListener( SliderEvent.CHANGE, onChangeThickness,
-									    false, 0, true );
 			addChild( thickness );
 		}
 		
@@ -140,28 +133,6 @@ package com.collab.echo.view.hub.whiteboard.display
 			event.stopImmediatePropagation();
 			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.UNDO );
-			dispatchEvent( evt );
-		}
-		
-		/**
-		 * @param event
-		 */		
-		private function onChangeColor( event:ColorPickerEvent ):void
-		{
-			event.stopImmediatePropagation();
-			
-			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_COLOR );
-			dispatchEvent( evt );
-		}
-		
-		/**
-		 * @param event
-		 */		
-		private function onChangeThickness( event:SliderEvent ):void
-		{
-			event.stopImmediatePropagation();
-			
-			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.CHANGE_THICKNESS );
 			dispatchEvent( evt );
 		}
 		

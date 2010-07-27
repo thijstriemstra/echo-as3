@@ -42,6 +42,7 @@ package com.collab.echo.view.hub.whiteboard.events
 		
 		private var _color						: uint;
 		private var _thickness					: Number;
+		private var _line						: String;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -73,6 +74,21 @@ package com.collab.echo.view.hub.whiteboard.events
 		public function set thickness( val:Number ):void
 		{
 			_thickness = val;
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get line():String
+		{
+			return _line;
+		}
+		public function set line( val:String ):void
+		{
+			if ( val )
+			{
+				_line = val;
+			}
 		}
 		
 		/**

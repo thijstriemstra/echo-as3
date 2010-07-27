@@ -62,6 +62,7 @@ package com.collab.echo.model.proxy
 		public static const SEND_MESSAGE			: String = NAME + "_sendMessage";
 		public static const RECEIVE_MESSAGE			: String = NAME + "_receiveMessage";
 		public static const SEND_LINE				: String = NAME + "_sendLine";
+		public static const RECEIVE_LINE			: String = NAME + "_receiveLine";
 		
 		// ====================================
 		// PUBLIC VARS
@@ -234,6 +235,16 @@ package com.collab.echo.model.proxy
 			this.message.addEventListener( ChatMessageEvent.LOAD_COMPLETE,
 										   onMessageComplete, false, 0, true );
 			this.message.load();	
+		}
+		
+		/**
+		 * Send a line to a room.
+		 * 
+		 * @param message
+		 */		
+		public function sendLine( message:String ):void
+		{
+			sendNotification( SEND_LINE, message );
 		}
 		
 		/**

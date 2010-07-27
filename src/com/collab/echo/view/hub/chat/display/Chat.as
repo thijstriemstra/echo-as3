@@ -283,7 +283,7 @@ package com.collab.echo.view.hub.chat.display
 			inputField.buttonLabel = _sendLabel;
 			addChild( inputField );
 			
-			// text
+			// textArea
 			var h:int = viewHeight - ( inputField.height + bar.height );
 			textArea = new TextArea();
 			textArea.setSize( viewWidth, h ); 

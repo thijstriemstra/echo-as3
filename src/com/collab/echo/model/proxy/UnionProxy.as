@@ -160,6 +160,20 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * @param message
+		 */		
+		override public function sendLine( message:String ):void
+		{
+			super.sendLine( message );
+			
+			trace('sendLine: ' + message );
+			
+			// send remotely
+			// XXX: remove hardcoded room name, target rooms[].id instead
+			roomManager.sendMessage( SEND_LINE, [ "collab.global" ],
+									 false, null, message );
+		}
+		/**
 		 * 
 		 * @param name
 		 * @return 
@@ -197,7 +211,8 @@ package com.collab.echo.model.proxy
 		 * @param attrValue
 		 * @return 
 		 */		
-		override public function getClientByAttribute( attrName:String, attrValue:String ):*
+		override public function getClientByAttribute( attrName:String,
+													   attrValue:String ):*
 		{
 			return clientManager.getClientByAttribute( attrName, attrValue );
 		}
@@ -286,6 +301,21 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
+		 * Dispatched when a remote line is received.
+		 * 
+		 * @param fromClient
+		 * @param toRoom
+		 * @param line
+		 */		
+		public function whiteBoardListener( fromClient:IClient, toRoom:Room,
+											line:String ):void
+		{
+			log( "UnionProxy.whiteBoardListener: " + line );
+			
+			sendNotification( RECEIVE_LINE, line );
+		}
+		
+		/**
 		 * Triggered when the connection is established and ready for use.
 		 *  
 		 * @param event
@@ -296,6 +326,7 @@ package com.collab.echo.model.proxy
 			
 			// listen for events
 			messageManager.addMessageListener( SEND_MESSAGE, centralChatListener );
+			messageManager.addMessageListener( SEND_LINE, whiteBoardListener );
 			
 			connectionReady();
 		}

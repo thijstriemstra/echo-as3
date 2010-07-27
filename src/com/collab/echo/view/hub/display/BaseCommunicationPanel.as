@@ -306,6 +306,16 @@ package com.collab.echo.view.hub.display
 		{
 			chat.addMessage( message );
 		}
+
+		/**
+		 * Add a new line to the <code>Whiteboard</code>.
+		 * 
+		 * @param message
+		 */		
+		public function addLine( line:String ):void
+		{
+			whiteboard.addLine( line );
+		}
 		
 		// ====================================
 		// PROTECTED METHODS

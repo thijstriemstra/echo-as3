@@ -139,7 +139,8 @@ package com.collab.echo.view.mediators
 						PresenceProxy.CONNECTION_SUCCESS,
 						PresenceProxy.CONNECTION_CLOSED,
 						PresenceProxy.DISCONNECTING,
-						PresenceProxy.RECEIVE_MESSAGE
+						PresenceProxy.RECEIVE_MESSAGE,
+						PresenceProxy.RECEIVE_LINE
 					];
         }
 		
@@ -168,6 +169,10 @@ package com.collab.echo.view.mediators
 				
 				case PresenceProxy.RECEIVE_MESSAGE:
 					panel.addMessage( BaseChatMessage( note.getBody() ));
+					break;
+				
+				case PresenceProxy.RECEIVE_LINE:
+					panel.addLine( String( note.getBody() ));
 					break;
 			}
         }
@@ -340,11 +345,7 @@ package com.collab.echo.view.mediators
 		{
 			event.stopPropagation();
 			
-			trace(event);
-			
-			var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_LINE,
-														  event.color.toString(), false );
-			presence.sendMessage( msg );
+			presence.sendLine( event.line );
 		}
 		
 		/**

@@ -25,7 +25,6 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.greensock.TweenLite;
 	
 	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -46,6 +45,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public static const FADE_TIME		: int = 70;
 		
+		/**
+		 * 
+		 */		
 		private static const LINE_NAME		: String = "myLine";
 		
 		// ====================================
@@ -102,45 +104,55 @@ package com.collab.echo.view.hub.whiteboard.display
 							  true );
 			addEventListener( MouseEvent.MOUSE_UP, onMouseUp, false, 0,
 							  true );
+			addEventListener( MouseEvent.MOUSE_OUT, onMouseUp, false, 0,
+							  true );
 		}
 		
 		/**
 		 * Display line from remote client.
 		 *  
-		 * @param clientID
-		 * @param msg
+		 * @param message
 		 */		
-		public function displayLine( clientID:String, msg:String ): void 
+		public function addLine( message:String ): void 
 		{
 			/*
-			var userCursor:MovieClip = whiteboard_mc["cursor"+clientID];
+			var userCursor:Sprite = whiteboard_mc["cursor"+clientID];
 			userCursor.username = content["clientVideo"+clientID].screen.username
+			*/
 			
-			var info:Array = msg.split("?");
-			var line_nr:Number = info[0];
-			var line_color:String = info[1];
-			var line_thickness:Number = info[2];
-			var cords:Array = info[3].split("%");
-			// remove empty arrayelements
+			var info:Array = message.split( "?" );
+			var line_nr:Number = info[ 0 ];
+			var cords:Array = info[ 1 ].split( "%" );
+			var line_thickness:Number = info[ 2 ];
+			var line_color:uint = info[ 3 ];
+			
+			// remove empty array elements
 			cords.shift();
 			
-			var userBoard:MovieClip = whiteboard_mc;
-			var line = userBoard.createEmptyMovieClip("lijn"+line_nr, userBoard.getNextHighestDepth());
-			var startPoint:Array = cords[0].split(",");
+			var line:Shape = new Shape();
+			var startPoint:Array = cords[ 0 ].split( "," );
 			
-			line.lineStyle(line_thickness, line_color, 100);
-			line.moveTo(startPoint[0], startPoint[1]);
+			// XXX: fix width and color
+			line.graphics.lineStyle( 1, StyleDict.BLACK, 1 );
+			line.graphics.moveTo( startPoint[ 0 ], startPoint[ 1 ]);
+			addChild( line );
 			
-			userCursor.swapDepths(line);
+			//userCursor.swapDepths( line );
 			
-			for (var r=1; r<cords.length; r++)
+			var waardes:Array
+			var r:int;
+			var x:Number;
+			var y:Number;
+			
+			for ( r = 1; r < cords.length; r++ )
 			{
-				var waardes = cords[r].split(",");
-				var x_cord:Number = waardes[0];
-				var y_cord:Number = waardes[1];
-				line["pull"+r] = setInterval(pullLine, (r*10), x_cord, y_cord, line, userCursor, r, cords.length-1);
+				waardes = cords[ r ].split( "," );
+				x = waardes[ 0 ];
+				y = waardes[ 1 ];
+				
+				TweenLite.delayedCall( r / 20, pullLine,
+									   [ x, y, line, r, cords.length - 1 ]);
 			}
-			*/
 		}
 		
 		// ====================================
@@ -207,6 +219,39 @@ package com.collab.echo.view.hub.whiteboard.display
 			}
 		}
 		
+		/**
+		 * Pull a line.
+		 *  
+		 * @param x
+		 * @param y
+		 * @param line
+		 * @param welke
+		 * @param total
+		 */		
+		protected function pullLine( x:Number, y:Number, line:Shape,
+								     welke:Number, total:Number ):void
+		{
+			// draw line-part
+			line.graphics.lineTo( x, y );
+			trace('pullLine: ' + line + ", x: " + x, ", y: " + y );
+			
+			// show and move the cursor
+			/*
+			userCursor.visible = true;
+			userCursor.x = x;
+			userCursor.y = y;
+			*/
+			
+			// if this is the last line-part
+			if (welke >= total)
+			{
+				// fade out cursor
+				//userCursor.gotoAndPlay("close");
+				
+				TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
+			}
+		}
+		
 		// ====================================
 		// EVENT HANDLERS
 		// ====================================
@@ -255,56 +300,16 @@ package com.collab.echo.view.hub.whiteboard.display
 			// remove event handlers
 			removeEventListener( MouseEvent.MOUSE_MOVE, onMouseMove );
 			removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-
+			removeEventListener( MouseEvent.MOUSE_OUT, onMouseUp );
+			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
-			//evt.data = _totalLines + "?" + line_color + "?" + line_thickness + "?" + _lineStukjes;
+			evt.line = _totalLines + "?" + _lineStukjes;
 			dispatchEvent( evt );
 			
-			// fade the line
+			// fade the line after x seconds
 			var line:DisplayObject = getChildByName( LINE_NAME + _totalLines );
 			TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
 		}
-		
-		// ====================================
-		// INTERNAL METHODS
-		// ====================================
-		
-		/**
-		 * Pull a line.
-		 *  
-		 * @param x_cord
-		 * @param y_cord
-		 * @param line
-		 * @param userCursor
-		 * @param welke
-		 * @param total
-		 */		
-		internal function pullLine(x_cord:Number, y_cord:Number, line:MovieClip,
-								   userCursor:MovieClip, welke:Number, total:Number):void
-		{
-			/*
-			// draw line-part
-			line.lineTo(x_cord, y_cord);
-			
-			// show and move the cursor
-			userCursor._visible = true;
-			userCursor._x = x_cord;
-			userCursor._y = y_cord;
-			var hier = this;
-			
-			// dont do this again
-			clearInterval(line["pull"+welke]);
-			
-			// if this is the last line-part
-			if (welke >= total) {
-				//trace("END " + welke + " : " + line._name);
-				// fade out cursor
-				userCursor.gotoAndPlay("close");
-				
-				line.killMe = setInterval(_root.sc.killLine, 70000, line, userCursor);
-			}
-			*/
-		}
-		
+
 	}
 }

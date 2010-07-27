@@ -56,6 +56,26 @@ package com.collab.echo.view.hub.whiteboard.display
 		private var _lineColor				: uint;
 		private var _lineThickness			: Number;
 		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get lineColor()		: uint
+		{
+			return _lineColor;
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get lineThickness()	: Number
+		{
+			return _lineThickness;
+		}
+		
 		/**
 		 * Constructor.
 		 * 
@@ -130,6 +150,15 @@ package com.collab.echo.view.hub.whiteboard.display
 			//Logger.debug( "Whiteboard.numClients: " + totalClients );
 		}
 		
+		/**
+		 * @param line
+		 */		
+		public function addLine( line:String ):void
+		{
+			trace('addLine: ' + line );
+			canvas.addLine( line );
+		}
+		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
@@ -153,6 +182,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			canvas = new Canvas( viewWidth, viewHeight - ( bar.height + toolbar.height ));
 			canvas.addEventListener( WhiteboardEvent.DRAW_LINE, onDrawLine,
 									 false, 0, true );
+			canvas.addEventListener( WhiteboardEvent.SEND_LINE, onSendLine,
+								     false, 0, true );
 			addChild( canvas );
 			addChild( toolbar );
 		}
@@ -240,6 +271,22 @@ package com.collab.echo.view.hub.whiteboard.display
 			trace( "Whiteboard.onDrawLine: " + event );
 			
 			canvas.createLine( _lineThickness, _lineColor );
+		}
+		
+		/**
+		 * Send a line to the server
+		 * 
+		 * @param event
+		 */		
+		protected function onSendLine( event:WhiteboardEvent ):void
+		{
+			event.stopImmediatePropagation();
+			
+			trace( "Whiteboard.onSendLine: " + event );
+			
+			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
+			evt.line = event.line + "?" + _lineThickness + "?" + _lineColor;
+			dispatchEvent( evt );
 		}
 		
 	}

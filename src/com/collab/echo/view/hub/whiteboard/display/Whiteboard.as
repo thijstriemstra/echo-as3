@@ -199,6 +199,9 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// toolbar
 			toolbar = new ToolBar( viewWidth );
+			// XXX: localize
+			toolbar.colorLabel = "COLOR";
+			toolbar.thicknessLabel =  "THICKNESS";
 			toolbar.addEventListener( WhiteboardEvent.UNDO, onUndo, false, 0, true );
 			toolbar.addEventListener( WhiteboardEvent.CHANGE_COLOR, onChangeColor,
 									  false, 0, true );

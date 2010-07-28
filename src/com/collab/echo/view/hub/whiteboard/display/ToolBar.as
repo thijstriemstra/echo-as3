@@ -50,6 +50,47 @@ package com.collab.echo.view.hub.whiteboard.display
 	public class ToolBar extends BaseView
 	{
 		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		private var _colorLabel					: String;
+		private var _thicknessLabel				: String;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get colorLabel():String
+		{
+			return _colorLabel;
+		}
+		public function set colorLabel( val:String ):void
+		{
+			if ( val )
+			{
+				_colorLabel = val;
+			}
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get thicknessLabel():String
+		{
+			return _thicknessLabel;
+		}
+		public function set thicknessLabel( val:String ):void
+		{
+			if ( val )
+			{
+				_thicknessLabel = val;
+			}
+		}
+		
+		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
@@ -95,13 +136,12 @@ package com.collab.echo.view.hub.whiteboard.display
 			addChild( background );
 			
 			// color picker
-			// XXX: localize
-			colorPicker = new FlashColorPicker( "COLOR" );
+			colorPicker = new FlashColorPicker( _colorLabel );
 			addChild( colorPicker );
 			
 			// thickness
 			// XXX: localize
-			thickness = new ThicknessSlider( 150, 50, "THICKNESS" );
+			thickness = new ThicknessSlider( 150, 50, _thicknessLabel );
 			addChild( thickness );
 		}
 		

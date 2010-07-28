@@ -420,6 +420,8 @@ package com.collab.echo.view.hub.display
 		/**
 		 * Invoked when the panel is expanded and collapsed.
 		 * 
+		 * <p>Expand and collapses the panel.</p>
+		 * 
 		 * @param event
 		 */		
 		protected function onExpandPanel( event:CommunicationPanelEvent ):void

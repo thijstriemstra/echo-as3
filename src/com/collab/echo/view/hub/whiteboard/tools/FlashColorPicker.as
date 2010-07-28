@@ -60,13 +60,33 @@ package com.collab.echo.view.hub.whiteboard.tools
 		/**
 		 * Label field. 
 		 */		
-		protected var label				: TextField;
+		protected var labelField		: TextField;
 		
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
 		private var _label				: String;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get label():String
+		{
+			return _label;
+		}
+		public function set label( val:String ):void
+		{
+			if ( val )
+			{
+				_label = val;
+				invalidate();
+			}
+		}
 		
 		/**
 		 * Constructor.
@@ -91,8 +111,8 @@ package com.collab.echo.view.hub.whiteboard.tools
 		override protected function draw():void
 		{
 			// label
-			label = TextUtils.createTextField( null, _label );
-			addChild( label );
+			labelField = TextUtils.createTextField( null, _label );
+			addChild( labelField );
 			
 			// color picker
 			colorPicker = new ColorPicker();
@@ -107,11 +127,11 @@ package com.collab.echo.view.hub.whiteboard.tools
 		override protected function layout():void
 		{
 			// label
-			label.x = 0
-			label.y = 5;
+			labelField.x = 0
+			labelField.y = 5;
 			
 			// color picker
-			colorPicker.x = label.x + label.width + 5;
+			colorPicker.x = labelField.x + labelField.width + 5;
 			colorPicker.y = 0;
 		}
 		
@@ -121,7 +141,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( colorPicker );
-			removeChildFromDisplayList( label );
+			removeChildFromDisplayList( labelField );
 			
 			super.invalidate();
 		}

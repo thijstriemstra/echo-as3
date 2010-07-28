@@ -69,7 +69,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 		/**
 		 * Label field. 
 		 */		
-		protected var label			: TextField;
+		protected var labelField			: TextField;
 		
 		/**
 		 * Value field. 
@@ -102,7 +102,24 @@ package com.collab.echo.view.hub.whiteboard.tools
 		{
 			if ( val )
 			{
-				slider.value = val;
+				_value = val;
+				slider.value = _value;
+			}
+		}
+		
+		/**
+		 * @return 
+		 */		
+		public function get label()	: String
+		{
+			return _label;
+		}
+		public function set label( val:String ):void
+		{
+			if ( val )
+			{
+				_label = val;
+				invalidate();
 			}
 		}
 		
@@ -141,8 +158,8 @@ package com.collab.echo.view.hub.whiteboard.tools
 		override protected function draw():void
 		{
 			// label
-			label = TextUtils.createTextField( null, _label );
-			addChild( label );
+			labelField = TextUtils.createTextField( null, _label );
+			addChild( labelField );
 	
 			// slider
 			slider = new Slider();
@@ -153,7 +170,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 			slider.tickInterval = 1;
 			slider.snapInterval = 1;
 			slider.liveDragging = true;
-			slider.setSize( viewWidth - label.width, viewHeight );
+			slider.setSize( viewWidth - labelField.width, viewHeight );
 			slider.addEventListener( SliderEvent.CHANGE, onChangeThickness,
 									 false, 0, true );
 			addChild( slider );
@@ -169,11 +186,11 @@ package com.collab.echo.view.hub.whiteboard.tools
 		override protected function layout():void
 		{
 			// label
-			label.x = 0
-			label.y = 5;
+			labelField.x = 0
+			labelField.y = 5;
 			
 			// slider
-			slider.x = label.x + label.width + 20;
+			slider.x = labelField.x + labelField.width + 20;
 			slider.y = 9;
 			
 			// value field
@@ -186,7 +203,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 		 */		
 		override protected function invalidate():void
 		{
-			removeChildFromDisplayList( label );
+			removeChildFromDisplayList( labelField );
 			removeChildFromDisplayList( slider );
 			removeChildFromDisplayList( valueField );
 			

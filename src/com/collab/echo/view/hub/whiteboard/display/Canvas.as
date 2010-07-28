@@ -21,6 +21,7 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	import com.greensock.TweenLite;
 	
@@ -159,7 +160,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 * Add painter.
+		 * Add painter to canvas.
 		 * 
 		 * @param painter
 		 */		
@@ -172,7 +173,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 * Remove painter.
+		 * Remove painter from canvas.
 		 * 
 		 * @param painter
 		 */		

@@ -22,6 +22,9 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.containers.panels.MenuPanel;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.interfaces.IRoom;
+	import com.collab.echo.view.hub.whiteboard.display.painter.LocalPainter;
+	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
+	import com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	/**
@@ -170,7 +173,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addLine( message:Object ):void
 		{
-			message.painter = findPainter( message.from );
+			message.painter = findPainterByClient( message.from );
 			
 			canvas.addLine( message );
 		}
@@ -305,7 +308,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 * @param client
 		 * @return 
 		 */		
-		internal function findPainter( client:* ):Painter
+		internal function findPainterByClient( client:* ):Painter
 		{
 			var user:Painter;
 			

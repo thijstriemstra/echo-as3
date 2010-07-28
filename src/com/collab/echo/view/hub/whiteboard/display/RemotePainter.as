@@ -19,44 +19,77 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.display.BaseView;
 	
 	/**
-	 * A participant of the shared whiteboard.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Painter extends BaseView
+	public class RemotePainter extends Painter
 	{
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _data	: UserVO;
+		private var _cursor		: UserCursor;
+		
+		/**
+		 * Constructor.
+		 *  
+		 * @param data
+		 */		
+		public function RemotePainter( data:UserVO=null )
+		{
+			super( data );
+		}
 		
 		// ====================================
-		// GETTER/SETTER
+		// PUBLIC METHODS
 		// ====================================
 		
 		/**
-		 * @return 
+		 * @private 
 		 */		
-		public function get data():UserVO
+		override public function show():void
 		{
-			return _data;
+			super.show();
+			
+			if ( _cursor )
+			{
+				_cursor.show();
+			}
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			// cursor
+			_cursor = new UserCursor( data.username );
+			addChild( _cursor );
 		}
 		
 		/**
-		 * Constructor. 
-		 * 
-		 * @param data
+		 * @private 
 		 */		
-		public function Painter( data:UserVO=null )
+		override protected function invalidate():void
 		{
-			_data = data;
+			removeChildFromDisplayList( _cursor );
 			
-			super();
-			show();
+			super.invalidate();
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function layout():void
+		{
+			// cursor
+			_cursor.x = 0;
+			_cursor.y = 0;
 		}
 		
 	}

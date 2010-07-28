@@ -41,13 +41,14 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
-		 * In seconds. 
+		 * Line fade-out time in seconds. 
 		 */		
 		public static const FADE_TIME		: int = 70;
 		
 		private static const LINE_NAME		: String = "myLine";
 		private static const CORDS_SEP		: String = "%";
 		private static const VARS_SEP		: String = "?";
+		private static const PAIR_SEP		: String = ",";
 		
 		// ====================================
 		// PRIVATE VARS
@@ -56,6 +57,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		private var _background				: Sprite;
 		private var _totalLines				: Number;
 		private var _lineParts				: String;
+		private var _painters				: Vector.<Painter>;
 		
 		/**
 		 * Constructor.
@@ -65,7 +67,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function Canvas( width:int=0, height:int=0 )
 		{
+			// init vars
 			_totalLines = 0;
+			_painters = new Vector.<Painter>();
 			
 			super( width, height );
 			show();
@@ -127,7 +131,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			var cords:Array = String( info[ 1 ] ).substr( 1 ).split( CORDS_SEP );
 			var line_thickness:Number = Number( info[ 2 ]);
 			var line_color:uint = uint( info[ 3 ]);
-			var startPoint:Array = cords[ 0 ].split( "," );
+			var startPoint:Array = cords[ 0 ].split( PAIR_SEP );
 			var line:Shape = new Shape();
 			
 			// draw initial point
@@ -135,6 +139,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			line.graphics.moveTo( startPoint[ 0 ], startPoint[ 1 ]);
 			addChild( line );
 			
+			// XXX: create separate layers for participants and lines
 			//userCursor.swapDepths( line );
 			
 			var frame:Number = 0;
@@ -146,7 +151,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			for each ( cord in cords )
 			{
 				// draw additional points
-				waardes = cord.split( "," );
+				waardes = cord.split( PAIR_SEP );
 				xPos = waardes[ 0 ];
 				yPos = waardes[ 1 ];
 				TweenLite.delayedCall( frame + 1, pullLine,
@@ -154,6 +159,28 @@ package com.collab.echo.view.hub.whiteboard.display
 									   true );
 				frame++;
 			}
+		}
+		
+		/**
+		 * @param painter
+		 */		
+		public function addPainter( painter:Painter ):void
+		{
+			trace('Canvas.addPainter: ' + painter);
+			
+			_painters.push( painter );
+			addChild( painter );
+		}
+		
+		/**
+		 * @param painter
+		 */		
+		public function removePainter( painter:Painter ):void
+		{
+			/*
+			// remove user cursor
+			removeMovieClip( whiteboard_mc["cursor"+clientID] );
+			*/
 		}
 		
 		// ====================================
@@ -235,8 +262,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			// draw line-part
 			line.graphics.lineTo( x, y );
 			
-			// show and move the cursor
 			/*
+			// show and move the cursor
 			userCursor.visible = true;
 			userCursor.x = x;
 			userCursor.y = y;
@@ -258,6 +285,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Start drawing a local line.
+		 * 
 		 * @param event
 		 * @private
 		 */		
@@ -288,6 +317,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
+		 * Stop drawing a local line.
+		 * 
 		 * @param event
 		 * @private
 		 */		
@@ -301,7 +332,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			removeEventListener( MouseEvent.MOUSE_OUT, onMouseUp );
 			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
-			evt.line = _totalLines + "?" + _lineParts;
+			evt.line = _totalLines + VARS_SEP + _lineParts;
 			dispatchEvent( evt );
 			
 			// fade the line after x seconds
@@ -326,7 +357,7 @@ package com.collab.echo.view.hub.whiteboard.display
 				line.graphics.lineTo( mouseX, mouseY );
 				
 				// add line-cords to string for other clients
-				_lineParts += String( CORDS_SEP + mouseX + "," + mouseY );
+				_lineParts += String( CORDS_SEP + mouseX + PAIR_SEP + mouseY );
 			}
 		}
 

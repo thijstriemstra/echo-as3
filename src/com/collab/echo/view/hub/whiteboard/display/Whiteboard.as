@@ -38,7 +38,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		/**
 		 * 
 		 */		
-		protected var participants			: Vector.<UserVO>;
+		protected var participants			: Vector.<Painter>;
 		
 		/**
 		 * 
@@ -86,7 +86,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		public function Whiteboard( width:int=0, height:int=0 )
 		{
 			// init vars
-			participants = new Vector.<UserVO>();
+			participants = new Vector.<Painter>();
 			_lineThickness = 1;
 			_lineColor = StyleDict.BLACK;
 			
@@ -109,6 +109,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		public function joinedRoom( client:UserVO ):void
 		{
 			//Logger.debug( "Whiteboard.joinedRoom: " + client );
+			
+			var user:Painter = new LocalPainter( client );
+			participants.push( user );
+			
+			canvas.addPainter( user );
 		}
 		
 		/**
@@ -118,16 +123,10 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			//trace( "Whiteboard.addUser: " + client );
 			
-			//var user:Painter = new Painter();
-			//participants.push( user );
+			var user:Painter = new RemotePainter( client );
+			participants.push( user );
 			
-			/*
-			var newCursor:MovieClip = timeLine.attachMovie("cursor", "cursor"+clientID, 
-															timeLine.getNextHighestDepth());
-			
-			newCursor.username = username;
-			newCursor._visible = false;
-			*/
+			canvas.addPainter( user );
 		}
 		
 		/**
@@ -136,11 +135,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		public function removeUser( client:UserVO ):void
 		{
 			//Logger.debug( "Whiteboard.removeUser: " + client );
-			
-			/*
-			// remove user cursor
-			removeMovieClip( whiteboard_mc["cursor"+clientID] );
-			*/
 		}
 		
 		/**

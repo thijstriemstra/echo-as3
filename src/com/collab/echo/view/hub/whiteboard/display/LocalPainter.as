@@ -19,45 +19,60 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.hub.whiteboard.tools.DrawingTool;
 	
 	/**
-	 * A participant of the shared whiteboard.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Painter extends BaseView
+	public class LocalPainter extends Painter
 	{
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _data	: UserVO;
-		
-		// ====================================
-		// GETTER/SETTER
-		// ====================================
+		private var _tool	: DrawingTool;
 		
 		/**
-		 * @return 
-		 */		
-		public function get data():UserVO
-		{
-			return _data;
-		}
-		
-		/**
-		 * Constructor. 
+		 * Constructor.
 		 * 
 		 * @param data
 		 */		
-		public function Painter( data:UserVO=null )
+		public function LocalPainter( data:UserVO=null )
 		{
-			_data = data;
-			
-			super();
-			show();
+			super( data );
 		}
 		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
+		
+		/**
+		 * @private 
+		 */		
+		override protected function draw():void
+		{
+			_tool = new DrawingTool();
+			addChild( _tool );
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function layout():void
+		{
+			_tool.x = 0;
+			_tool.y = 0;
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override protected function invalidate():void
+		{
+			removeChildFromDisplayList( _tool );
+			
+			super.invalidate();
+		}
+
 	}
 }

@@ -50,6 +50,7 @@
 	<component id="LoadAMFDelegate" class="com.collab.echo.model.business.LoadAMFDelegate"/>
 	<component id="LoadAMFEvent" class="com.collab.echo.model.business.events.LoadAMFEvent"/>
 	<component id="LoadXMLDelegate" class="com.collab.echo.model.business.LoadXMLDelegate"/>
+	<component id="LocalPainter" class="com.collab.echo.view.hub.whiteboard.display.LocalPainter"/>
 	<component id="LocaleProxy" class="com.collab.echo.model.proxy.LocaleProxy"/>
 	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
 	<component id="Menu" class="com.collab.echo.view.controls.Menu"/>
@@ -71,6 +72,7 @@
 	<component id="ProfileInfo" class="com.collab.echo.view.hub.video.form.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
+	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.RemotePainter"/>
 	<component id="RemotingCommand" class="com.collab.echo.controller.remoting.RemotingCommand"/>
 	<component id="ResourceVO" class="com.collab.echo.model.vo.ResourceVO"/>
 	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>
@@ -93,6 +95,7 @@
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
 	<component id="UnionProxy" class="com.collab.echo.model.proxy.UnionProxy"/>
 	<component id="UnionRoom" class="com.collab.echo.view.rooms.UnionRoom"/>
+	<component id="UserCursor" class="com.collab.echo.view.hub.whiteboard.display.UserCursor"/>
 	<component id="UserPanel" class="com.collab.echo.view.hub.video.containers.panels.UserPanel"/>
 	<component id="UserVO" class="com.collab.echo.model.vo.UserVO"/>
 	<component id="VideoScrollPane" class="com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane"/>

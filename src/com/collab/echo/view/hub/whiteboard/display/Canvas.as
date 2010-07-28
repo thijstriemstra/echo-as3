@@ -189,6 +189,65 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Fade a line.
+		 *  
+		 * @param line
+		 */		
+		protected function fadeLine( line:DisplayObject ):void
+		{
+			if ( line )
+			{
+				TweenLite.to( line, 2, { alpha: 0, onComplete: killedLine,
+					onCompleteParams: [ line ]});
+			}
+		}
+		
+		/**
+		 * Delete a line.
+		 * 
+		 * @param line
+		 */		
+		protected function killedLine( line:DisplayObject ):void
+		{
+			if ( line )
+			{
+				_lines.removeChild( line );
+			}
+		}
+		
+		/**
+		 * Pull a line.
+		 *  
+		 * @param x
+		 * @param y
+		 * @param line
+		 * @param painter
+		 * @param index
+		 * @param total
+		 */		
+		protected function pullLine( x:Number, y:Number, line:Shape,
+									 painter:Painter, index:Number,
+									 total:Number ):void
+		{
+			// draw line-part
+			line.graphics.lineTo( x, y );
+			
+			// move the painter
+			painter.x = x;
+			painter.y = y;
+			
+			// if this is the last line-part
+			if ( index >= total )
+			{
+				// fade out painter
+				painter.hide();
+				
+				// fade line
+				TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
+			}
+		}
+		
+		/**
 		 * @private 
 		 */		
 		override protected function draw():void
@@ -206,6 +265,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			
 			// painters
 			_painters = new Sprite();
+			_lines.mouseChildren = false;
+			_lines.mouseEnabled = false;
 			addChild( _painters );
 		}
 		
@@ -237,65 +298,6 @@ package com.collab.echo.view.hub.whiteboard.display
 			removeChildFromDisplayList( _painters );
 			
 			super.invalidate();
-		}
-		
-		/**
-		 * Fade a line.
-		 *  
-		 * @param line
-		 */		
-		protected function fadeLine( line:DisplayObject ):void
-		{
-			if ( line )
-			{
-				TweenLite.to( line, 2, { alpha: 0, onComplete: killedLine,
-									 	 onCompleteParams: [ line ]});
-			}
-		}
-		
-		/**
-		 * Delete a line.
-		 * 
-		 * @param line
-		 */		
-		protected function killedLine( line:DisplayObject ):void
-		{
-			if ( line )
-			{
-				_lines.removeChild( line );
-			}
-		}
-		
-		/**
-		 * Pull a line.
-		 *  
-		 * @param x
-		 * @param y
-		 * @param line
-		 * @param painter
-		 * @param index
-		 * @param total
-		 */		
-		protected function pullLine( x:Number, y:Number, line:Shape,
-								     painter:Painter, index:Number,
-									 total:Number ):void
-		{
-			// draw line-part
-			line.graphics.lineTo( x, y );
-			
-			// move the painter
-			painter.x = x;
-			painter.y = y;
-			
-			// if this is the last line-part
-			if ( index >= total )
-			{
-				// fade out painter
-				painter.hide();
-				
-				// fade line
-				TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
-			}
 		}
 		
 		// ====================================

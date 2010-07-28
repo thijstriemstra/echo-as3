@@ -41,6 +41,9 @@ package com.collab.echo.view.hub.chat.display
 		// CONSTANTS
 		// ====================================
 		
+		/**
+		 * 
+		 */		
 		public static const HISTORY_MAX_LENGTH		: int = 20;
 		
 		// ====================================
@@ -61,8 +64,19 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		
 		// XXX: find replacement for fl.controls
+		/**
+		 * 
+		 */		
 		protected var textArea						: TextArea;
+		
+		/**
+		 * 
+		 */		
 		protected var messageHistory				: Array;
+		
+		/**
+		 * 
+		 */		
 		protected var inputField					: ChatInputField;
 		
 		// ====================================

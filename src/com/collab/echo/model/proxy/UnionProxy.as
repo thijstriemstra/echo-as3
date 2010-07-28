@@ -303,14 +303,19 @@ package com.collab.echo.model.proxy
 		 * 
 		 * @param fromClient
 		 * @param toRoom
-		 * @param line
+		 * @param shape
 		 */		
 		public function whiteBoardListener( fromClient:IClient, toRoom:Room,
-											line:String ):void
+											shape:String ):void
 		{
-			log( "UnionProxy.whiteBoardListener: " + line );
+			log( "UnionProxy.whiteBoardListener: " + shape );
 			
-			sendNotification( RECEIVE_LINE, line );
+			// XXX: formalize this
+			var obj:Object = new Object();
+			obj.shape = shape;
+			obj.from = fromClient;
+			
+			sendNotification( RECEIVE_LINE, obj );
 		}
 		
 		/**

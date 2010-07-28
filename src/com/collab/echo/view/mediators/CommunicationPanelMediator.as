@@ -172,7 +172,7 @@ package com.collab.echo.view.mediators
 					break;
 				
 				case PresenceProxy.RECEIVE_LINE:
-					panel.addLine( String( note.getBody() ));
+					panel.addLine( note.getBody() );
 					break;
 			}
         }

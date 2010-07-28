@@ -102,30 +102,33 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
-		 * Joined the room.
-		 * 
 		 * @param client
 		 */		
 		public function joinedRoom( client:UserVO ):void
 		{
 			//Logger.debug( "Whiteboard.joinedRoom: " + client );
-			
-			var user:Painter = new LocalPainter( client );
-			participants.push( user );
-			
-			canvas.addPainter( user );
 		}
 		
 		/**
+		 * Client joined the room.
+		 * 
 		 * @param client
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			//trace( "Whiteboard.addUser: " + client );
+			var user:Painter;
 			
-			var user:Painter = new RemotePainter( client );
+			// add painter
+			if ( client.client.isSelf() )
+			{
+				user = new LocalPainter( client );
+			}
+			else
+			{
+				user = new RemotePainter( client );
+			}
+			 
 			participants.push( user );
-			
 			canvas.addPainter( user );
 		}
 		
@@ -134,7 +137,19 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
-			//Logger.debug( "Whiteboard.removeUser: " + client );
+			var user:Painter;
+			var x:int = 0;
+			
+			for each ( user in participants )
+			{
+				if ( user.data == client )
+				{
+					canvas.removePainter( user );
+					participants.splice( x, 1 );
+					break;
+				}
+				x++;
+			}
 		}
 		
 		/**
@@ -150,11 +165,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		/**
 		 * Add line from remote client.
 		 * 
-		 * @param line
+		 * @param message
 		 */		
-		public function addLine( line:String ):void
+		public function addLine( message:Object ):void
 		{
-			canvas.addLine( line );
+			canvas.addLine( message );
 		}
 		
 		// ====================================

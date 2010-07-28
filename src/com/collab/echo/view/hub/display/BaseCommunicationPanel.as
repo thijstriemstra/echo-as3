@@ -220,6 +220,20 @@ package com.collab.echo.view.hub.display
 		// ====================================
 		
 		/**
+		 * Notify the panel's components that a client joined the room.
+		 * 
+		 * @param client
+		 */		
+		public function joinedRoom( client:UserVO ):void
+		{
+			//Logger.debug( 'BaseCommunicationPanel.joinedRoom: ' + client );
+			
+			chat.joinedRoom( client );
+			videoPane.joinedRoom( client );
+			whiteboard.joinedRoom( client );
+		}
+		
+		/**
 		 * Add a new occupant to the panel's components.
 		 *  
 		 * @param client
@@ -284,20 +298,6 @@ package com.collab.echo.view.hub.display
 		}
 		
 		/**
-		 * Notify the panel's components that a client joined the room.
-		 * 
-		 * @param client
-		 */		
-		public function joinedRoom( client:UserVO ):void
-		{
-			//Logger.debug( 'BaseCommunicationPanel.joinedRoom: ' + client );
-			
-			chat.joinedRoom( client );
-			videoPane.joinedRoom( client );
-			whiteboard.joinedRoom( client );
-		}
-		
-		/**
 		 * Add a new message to the <code>Chat</code>.
 		 * 
 		 * @param message
@@ -312,9 +312,9 @@ package com.collab.echo.view.hub.display
 		 * 
 		 * @param message
 		 */		
-		public function addLine( line:String ):void
+		public function addLine( message:Object ):void
 		{
-			whiteboard.addLine( line );
+			whiteboard.addLine( message );
 		}
 		
 		// ====================================

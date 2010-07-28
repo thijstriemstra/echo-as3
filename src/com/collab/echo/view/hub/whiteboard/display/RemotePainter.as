@@ -58,6 +58,17 @@ package com.collab.echo.view.hub.whiteboard.display
 			}
 		}
 		
+		/**
+		 * @private 
+		 */		
+		override public function hide():void
+		{
+			if ( _cursor )
+			{
+				_cursor.hide();
+			}
+		}
+		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================

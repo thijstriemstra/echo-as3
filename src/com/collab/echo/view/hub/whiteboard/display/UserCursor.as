@@ -32,12 +32,18 @@ package com.collab.echo.view.hub.whiteboard.display
 	public class UserCursor extends BaseView
 	{
 		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		private static const FADE_TIME	: int = .5;
+		
+		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _cursor		: Shape;
-		private var _label		: TextField;
-		private var _username	: String;
+		private var _cursor				: Shape;
+		private var _label				: TextField;
+		private var _username			: String;
 		
 		/**
 		 * Constructor.
@@ -66,7 +72,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			super.show();
 			
-			TweenLite.to( this, 1, { alpha: 1 });
+			TweenLite.to( this, FADE_TIME, { alpha: 1 });
 		}
 		
 		/**
@@ -74,7 +80,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		override public function hide():void
 		{
-			TweenLite.to( this, 1, { alpha: 0 });
+			TweenLite.to( this, FADE_TIME, { alpha: 0 });
 		}
 		
 		// ====================================
@@ -94,7 +100,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			addChild( _cursor );
 			
 			// textfield
-			_label = TextUtils.createTextField( null, _username, 15 );
+			_label = TextUtils.createTextField( null, _username.toUpperCase(),
+												12 );
 			addChild( _label );
 		}
 		

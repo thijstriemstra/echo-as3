@@ -50,7 +50,7 @@
 	<component id="LoadAMFDelegate" class="com.collab.echo.model.business.LoadAMFDelegate"/>
 	<component id="LoadAMFEvent" class="com.collab.echo.model.business.events.LoadAMFEvent"/>
 	<component id="LoadXMLDelegate" class="com.collab.echo.model.business.LoadXMLDelegate"/>
-	<component id="LocalPainter" class="com.collab.echo.view.hub.whiteboard.display.LocalPainter"/>
+	<component id="LocalPainter" class="com.collab.echo.view.hub.whiteboard.display.painter.LocalPainter"/>
 	<component id="LocaleProxy" class="com.collab.echo.model.proxy.LocaleProxy"/>
 	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
 	<component id="Menu" class="com.collab.echo.view.controls.Menu"/>
@@ -64,7 +64,7 @@
 	<component id="ModelPrepCommand" class="com.collab.echo.controller.ModelPrepCommand"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>
 	<component id="PaintBucket" class="com.collab.echo.view.hub.whiteboard.tools.PaintBucket"/>
-	<component id="Painter" class="com.collab.echo.view.hub.whiteboard.display.Painter"/>
+	<component id="Painter" class="com.collab.echo.view.hub.whiteboard.display.painter.Painter"/>
 	<component id="Panel" class="com.collab.echo.view.containers.panels.Panel"/>
 	<component id="PathUtils" class="com.collab.echo.util.PathUtils"/>
 	<component id="Pencil" class="com.collab.echo.view.hub.whiteboard.tools.Pencil"/>
@@ -72,7 +72,7 @@
 	<component id="ProfileInfo" class="com.collab.echo.view.hub.video.form.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
-	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.RemotePainter"/>
+	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter"/>
 	<component id="RemotingCommand" class="com.collab.echo.controller.remoting.RemotingCommand"/>
 	<component id="ResourceVO" class="com.collab.echo.model.vo.ResourceVO"/>
 	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>

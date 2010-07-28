@@ -28,6 +28,20 @@ package com.collab.echo.view.hub.whiteboard.display
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.UNDO
+	 *
+	 * @langversion 3.0
+	 * @playerversion Flash 9.0.28.0
+	 *  
+	 * @playerversion AIR 1.0
+	 */
+	[Event(name="WhiteboardEvent_undo", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	
 	/**
 	 * Toolbar containing a color picker.
 	 * 

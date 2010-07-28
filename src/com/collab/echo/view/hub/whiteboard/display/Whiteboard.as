@@ -39,17 +39,17 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
-		 * 
+		 * The users currently using the whiteboard.
 		 */		
 		protected var participants			: Vector.<Painter>;
 		
 		/**
-		 * 
+		 * The canvas to draw on.
 		 */		
 		protected var canvas				: Canvas;
 		
 		/**
-		 * 
+		 * Toolbar containing color picker, etc.
 		 */		
 		protected var toolbar				: ToolBar;
 		
@@ -65,6 +65,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Line color for local client.
+		 * 
 		 * @return 
 		 */		
 		public function get lineColor()		: uint
@@ -73,6 +75,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
+		 * Line thickness for local client.
+		 * 
 		 * @return 
 		 */		
 		public function get lineThickness()	: Number
@@ -105,6 +109,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Local client joined the room.
+		 * 
 		 * @param client
 		 */		
 		public function joinedRoom( client:UserVO ):void
@@ -136,6 +142,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
+		 * Client left the room.
+		 * 
 		 * @param client
 		 */		
 		public function removeUser( client:UserVO ):void
@@ -157,7 +165,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 * Total clients in room updated.
+		 * The number of total clients in the room updated.
 		 * 
 		 * @param totalClients
 		 */		
@@ -167,7 +175,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 * Add line from remote client.
+		 * Add a line from remote client.
 		 * 
 		 * @param message
 		 */		
@@ -239,6 +247,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * User wants to undo an action.
+		 * 
 		 * @param event
 		 */		
 		protected function onUndo( event:WhiteboardEvent ):void
@@ -305,8 +315,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
+		 * Find a user by it's client property.
+		 * 
 		 * @param client
-		 * @return 
+		 * @return
+		 * @private 
 		 */		
 		internal function findPainterByClient( client:* ):Painter
 		{

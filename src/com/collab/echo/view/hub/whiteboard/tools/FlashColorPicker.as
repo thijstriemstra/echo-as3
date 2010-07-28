@@ -27,6 +27,20 @@ package com.collab.echo.view.hub.whiteboard.tools
 	
 	import flash.text.TextField;
 	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.CHANGE_COLOR
+	 *
+	 * @langversion 3.0
+	 * @playerversion Flash 9.0.28.0
+	 *  
+	 * @playerversion AIR 1.0
+	 */
+	[Event(name="WhiteboardEvent_changeColor", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	
 	/**
 	 * @author Thijs Triemstra
 	 */	

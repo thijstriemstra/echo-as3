@@ -21,6 +21,8 @@ package com.collab.echo.view.hub.whiteboard.events
 	import flash.events.Event;
 	
 	/**
+	 * Whiteboard event.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class WhiteboardEvent extends Event

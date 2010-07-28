@@ -166,8 +166,6 @@ package com.collab.echo.model.proxy
 		{
 			super.sendLine( message );
 			
-			trace('sendLine: ' + message );
-			
 			// send remotely
 			// XXX: remove hardcoded room name, target rooms[].id instead
 			roomManager.sendMessage( SEND_LINE, [ "collab.global" ],

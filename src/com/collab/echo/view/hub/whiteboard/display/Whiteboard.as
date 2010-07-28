@@ -20,6 +20,7 @@ package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.panels.MenuPanel;
+	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.interfaces.IRoom;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
@@ -86,6 +87,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			// init vars
 			participants = new Vector.<UserVO>();
+			_lineThickness = 1;
+			_lineColor = StyleDict.BLACK;
 			
 			// XXX: move elsewhere
 			menuItems = [ "Settings" ];
@@ -151,11 +154,12 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
+		 * Add line from remote client.
+		 * 
 		 * @param line
 		 */		
 		public function addLine( line:String ):void
 		{
-			trace('addLine: ' + line );
 			canvas.addLine( line );
 		}
 		
@@ -226,8 +230,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			event.stopImmediatePropagation();
 			
-			trace( "Whiteboard.onUndo: " + event );
-			
 			// TODO
 		}
 		
@@ -239,8 +241,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		protected function onChangeColor( event:WhiteboardEvent ):void
 		{
 			event.stopImmediatePropagation();
-			
-			trace( "Whiteboard.onChangeColor: " + event );
 			
 			_lineColor = event.color;
 		}
@@ -254,13 +254,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			event.stopImmediatePropagation();
 			
-			trace( "Whiteboard.onChangeThickness: " + event );
-			
 			_lineThickness = event.thickness;
 		}
 		
 		/**
-		 * Start drawing a line.
+		 * Start drawing a local line.
 		 * 
 		 * @param event
 		 */		
@@ -268,13 +266,11 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			event.stopImmediatePropagation();
 			
-			trace( "Whiteboard.onDrawLine: " + event );
-			
 			canvas.createLine( _lineThickness, _lineColor );
 		}
 		
 		/**
-		 * Send a line to the server
+		 * Send a local line to the server.
 		 * 
 		 * @param event
 		 */		
@@ -282,7 +278,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			event.stopImmediatePropagation();
 			
-			trace( "Whiteboard.onSendLine: " + event );
+			//trace( "Whiteboard.onSendLine: " + event );
 			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
 			evt.line = event.line + "?" + _lineThickness + "?" + _lineColor;

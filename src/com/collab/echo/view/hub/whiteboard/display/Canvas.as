@@ -45,10 +45,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public static const FADE_TIME		: int = 70;
 		
-		/**
-		 * 
-		 */		
 		private static const LINE_NAME		: String = "myLine";
+		private static const CORDS_SEP		: String = "%";
+		private static const VARS_SEP		: String = "?";
 		
 		// ====================================
 		// PRIVATE VARS
@@ -56,7 +55,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		
 		private var _background				: Sprite;
 		private var _totalLines				: Number;
-		private var _lineStukjes			: String;
+		private var _lineParts				: String;
 		
 		/**
 		 * Constructor.
@@ -81,7 +80,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		
 		/**
-		 * Draw local line and broadcast to user.
+		 * Draw local line and broadcast to other users.
 		 * 
 		 * @param thickness
 		 * @param color
@@ -90,7 +89,7 @@ package com.collab.echo.view.hub.whiteboard.display
 								    color:uint=StyleDict.BLACK ): void
 		{
 			_totalLines++;
-			_lineStukjes = "";
+			_lineParts = "";
 			
 			// create local line
 			var line:Shape = new Shape();
@@ -98,6 +97,9 @@ package com.collab.echo.view.hub.whiteboard.display
 			line.graphics.lineStyle( thickness, color, 1 );
 			line.graphics.moveTo( mouseX, mouseY );
 			addChild( line );
+			
+			// register initial point
+			registerLinePoint( mouseX, mouseY );
 			
 			// listen for events
 			addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove, false, 0,
@@ -109,7 +111,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		}
 		
 		/**
-		 * Display line from remote client.
+		 * Draw a line from a remote client.
 		 *  
 		 * @param message
 		 */		
@@ -120,38 +122,37 @@ package com.collab.echo.view.hub.whiteboard.display
 			userCursor.username = content["clientVideo"+clientID].screen.username
 			*/
 			
-			var info:Array = message.split( "?" );
+			var info:Array = message.split( VARS_SEP );
 			var line_nr:Number = info[ 0 ];
-			var cords:Array = info[ 1 ].split( "%" );
-			var line_thickness:Number = info[ 2 ];
-			var line_color:uint = info[ 3 ];
-			
-			// remove empty array elements
-			cords.shift();
-			
-			var line:Shape = new Shape();
+			var cords:Array = String( info[ 1 ] ).substr( 1 ).split( CORDS_SEP );
+			var line_thickness:Number = Number( info[ 2 ]);
+			var line_color:uint = uint( info[ 3 ]);
 			var startPoint:Array = cords[ 0 ].split( "," );
+			var line:Shape = new Shape();
 			
-			// XXX: fix width and color
-			line.graphics.lineStyle( 1, StyleDict.BLACK, 1 );
+			// draw initial point
+			line.graphics.lineStyle( line_thickness, line_color, 1 );
 			line.graphics.moveTo( startPoint[ 0 ], startPoint[ 1 ]);
 			addChild( line );
 			
 			//userCursor.swapDepths( line );
 			
-			var waardes:Array
-			var r:int;
-			var x:Number;
-			var y:Number;
+			var frame:Number = 0;
+			var cord:String;
+			var waardes:Array;
+			var xPos:Number;
+			var yPos:Number;
 			
-			for ( r = 1; r < cords.length; r++ )
+			for each ( cord in cords )
 			{
-				waardes = cords[ r ].split( "," );
-				x = waardes[ 0 ];
-				y = waardes[ 1 ];
-				
-				TweenLite.delayedCall( r / 20, pullLine,
-									   [ x, y, line, r, cords.length - 1 ]);
+				// draw additional points
+				waardes = cord.split( "," );
+				xPos = waardes[ 0 ];
+				yPos = waardes[ 1 ];
+				TweenLite.delayedCall( frame + 1, pullLine,
+									   [ xPos, yPos, line, frame, cords.length - 1 ],
+									   true );
+				frame++;
 			}
 		}
 		
@@ -233,7 +234,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			// draw line-part
 			line.graphics.lineTo( x, y );
-			trace('pullLine: ' + line + ", x: " + x, ", y: " + y );
 			
 			// show and move the cursor
 			/*
@@ -243,11 +243,12 @@ package com.collab.echo.view.hub.whiteboard.display
 			*/
 			
 			// if this is the last line-part
-			if (welke >= total)
+			if ( welke >= total )
 			{
 				// fade out cursor
 				//userCursor.gotoAndPlay("close");
 				
+				// fade line
 				TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
 			}
 		}
@@ -276,17 +277,14 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		protected function onMouseMove( event:MouseEvent ):void
 		{
+			var mouseX:int = event.localX;
+			var mouseY:int = event.localY;
+			
+			// register point
+			registerLinePoint( mouseX, mouseY );
+			
 			event.stopImmediatePropagation();
-			
-			// if line isn't too long
-			if ( _lineStukjes.length <= 7000 )
-			{
-				var line:Shape = getChildByName( LINE_NAME + _totalLines ) as Shape;
-				line.graphics.lineTo( event.localX, event.localY );
-			
-				// add line-cords to string for other clients
-				_lineStukjes += String( "%" + event.localX + "," + event.localY );
-			}
+			event.updateAfterEvent();
 		}
 		
 		/**
@@ -303,12 +301,33 @@ package com.collab.echo.view.hub.whiteboard.display
 			removeEventListener( MouseEvent.MOUSE_OUT, onMouseUp );
 			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
-			evt.line = _totalLines + "?" + _lineStukjes;
+			evt.line = _totalLines + "?" + _lineParts;
 			dispatchEvent( evt );
 			
 			// fade the line after x seconds
 			var line:DisplayObject = getChildByName( LINE_NAME + _totalLines );
 			TweenLite.delayedCall( FADE_TIME, fadeLine, [ line ]);
+		}
+		
+		// ====================================
+		// INTERNAL METHODS
+		// ====================================
+		
+		/**
+		 * @param mouseX
+		 * @param mouseY
+		 */		
+		internal function registerLinePoint( mouseX:int, mouseY:int ):void
+		{
+			// if line isn't too long
+			if ( _lineParts.length <= 7000 )
+			{
+				var line:Shape = getChildByName( LINE_NAME + _totalLines ) as Shape;
+				line.graphics.lineTo( mouseX, mouseY );
+				
+				// add line-cords to string for other clients
+				_lineParts += String( CORDS_SEP + mouseX + "," + mouseY );
+			}
 		}
 
 	}

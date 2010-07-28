@@ -56,10 +56,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		
 		private var _background				: Sprite;
 		private var _lines					: Sprite;
-		private var _paintersLayer			: Sprite;
+		private var _painters				: Sprite;
 		private var _totalLines				: Number;
 		private var _lineParts				: String;
-		private var _painters				: Vector.<Painter>;
 		
 		/**
 		 * Constructor.
@@ -71,7 +70,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			// init vars
 			_totalLines = 0;
-			_painters = new Vector.<Painter>();
 			
 			super( width, height );
 			show();
@@ -128,7 +126,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			var line_color:uint = uint( info[ 3 ]);
 			var startPoint:Array = cords[ 0 ].split( PAIR_SEP );
 			var line:Shape = new Shape();
-			var user:Painter = findPainter( message.from );
+			var user:Painter = message.painter;
 			var xPos:Number = startPoint[ 0 ];
 			var yPos:Number = startPoint[ 1 ];
 			var frame:Number = 0;
@@ -144,8 +142,6 @@ package com.collab.echo.view.hub.whiteboard.display
 			line.graphics.lineStyle( line_thickness, line_color, 1 );
 			line.graphics.moveTo( xPos, yPos );
 			_lines.addChild( line );
-			
-			// XXX: create separate layers for participants and lines
 			
 			// draw additional points
 			for each ( cord in cords )
@@ -169,8 +165,10 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addPainter( painter:Painter ):void
 		{
-			_painters.push( painter );
-			_paintersLayer.addChild( painter );
+			if ( _painters )
+			{
+				_painters.addChild( painter );
+			}
 		}
 		
 		/**
@@ -180,23 +178,9 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function removePainter( painter:Painter ):void
 		{
-			trace( 'Canvas.removePainter: ' + painter);
-			
-			var user:Painter;
-			var x:int = 0;
-			
-			for each ( user in _painters )
+			if ( _painters.contains( painter ))
 			{
-				if ( user == painter )
-				{
-					if ( _paintersLayer.contains( user ))
-					{
-						_paintersLayer.removeChild( user );
-					}
-					_painters.splice( x, 1 );
-					break;
-				}
-				x++;
+				_painters.removeChild( painter );
 			}
 		}
 		
@@ -221,8 +205,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			addChild( _lines );
 			
 			// painters
-			_paintersLayer = new Sprite();
-			addChild( _paintersLayer );
+			_painters = new Sprite();
+			addChild( _painters );
 		}
 		
 		/**
@@ -239,8 +223,8 @@ package com.collab.echo.view.hub.whiteboard.display
 			_lines.y = _background.y;
 			
 			// painters
-			_paintersLayer.x = _background.x;
-			_paintersLayer.y = _background.y;
+			_painters.x = _background.x;
+			_painters.y = _background.y;
 		}
 		
 		/**
@@ -250,7 +234,7 @@ package com.collab.echo.view.hub.whiteboard.display
 		{
 			removeChildFromDisplayList( _background );
 			removeChildFromDisplayList( _lines );
-			removeChildFromDisplayList( _paintersLayer );
+			removeChildFromDisplayList( _painters );
 			
 			super.invalidate();
 		}
@@ -361,7 +345,6 @@ package com.collab.echo.view.hub.whiteboard.display
 			// remove event handlers
 			removeEventListener( MouseEvent.MOUSE_MOVE, onMouseMove );
 			removeEventListener( MouseEvent.MOUSE_UP, onMouseUp );
-			removeEventListener( MouseEvent.MOUSE_OUT, onMouseUp );
 			
 			// notify others
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
@@ -376,26 +359,6 @@ package com.collab.echo.view.hub.whiteboard.display
 		// ====================================
 		// INTERNAL METHODS
 		// ====================================
-		
-		/**
-		 * @param client
-		 * @return 
-		 */		
-		internal function findPainter( client:* ):Painter
-		{
-			// XXX: probably move into the Whiteboard or higher
-			var user:Painter;
-			
-			for each ( user in _painters )
-			{
-				if ( user.data.client == client )
-				{
-					break;
-				}
-			}
-			
-			return user;
-		}
 		
 		/**
 		 * @param mouseX

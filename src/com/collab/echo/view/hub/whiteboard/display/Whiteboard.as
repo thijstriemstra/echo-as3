@@ -144,6 +144,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			{
 				if ( user.data == client )
 				{
+					// remove painter
 					canvas.removePainter( user );
 					participants.splice( x, 1 );
 					break;
@@ -169,6 +170,8 @@ package com.collab.echo.view.hub.whiteboard.display
 		 */		
 		public function addLine( message:Object ):void
 		{
+			message.painter = findPainter( message.from );
+			
 			canvas.addLine( message );
 		}
 		
@@ -292,6 +295,29 @@ package com.collab.echo.view.hub.whiteboard.display
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
 			evt.line = event.line + "?" + _lineThickness + "?" + _lineColor;
 			dispatchEvent( evt );
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @param client
+		 * @return 
+		 */		
+		internal function findPainter( client:* ):Painter
+		{
+			var user:Painter;
+			
+			for each ( user in participants )
+			{
+				if ( user.data.client == client )
+				{
+					break;
+				}
+			}
+			
+			return user;
 		}
 		
 	}

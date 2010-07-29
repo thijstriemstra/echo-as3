@@ -1,6 +1,6 @@
-Place the following libraries here:
+Place the following libraries in this folder:
 
- - Greensock Tweening
+ - TweenLite >= 11.36
  - PureMVC MultiCore >= 1.0.5
  - Reactor >= 1.0.0
  - ThunderBolt >= 2.2

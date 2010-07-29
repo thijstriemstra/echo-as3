@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>echo-as3</name>
+	<name>echo-as3-collab</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>[source path] User Interface</name>
-			<type>2</type>
-			<locationURI>FLASHPRO_APPCONFIG/Component%20Source/ActionScript%203.0/User%20Interface</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

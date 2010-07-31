@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.video.containers.panels
 {
-	import com.collab.echo.model.vo.ProfileInfoVO;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.site.common.model.vo.ProfileInfoVO;
+	import com.collab.site.common.model.vo.UserVO;
 	import com.collab.echo.view.containers.panels.Panel;
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;

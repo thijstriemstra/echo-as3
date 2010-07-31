@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.util
 {
-	import com.collab.echo.model.enum.ConfigKeyEnum;
-	import com.collab.echo.model.vo.ConfigVO;
+	import com.collab.site.common.model.enum.ConfigKeyEnum;
+	import com.collab.site.common.model.vo.ConfigVO;
 
 	/**
 	 * Helper class that parses the game's configuration XML and stores

@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.mediators
 {
-	import com.collab.echo.model.proxy.ConfigProxy;
-	import com.collab.echo.model.proxy.LocaleProxy;
-	import com.collab.echo.model.proxy.PresenceProxy;
+	import com.collab.site.common.model.proxy.ConfigProxy;
+	import com.collab.site.common.model.proxy.LocaleProxy;
+	import com.collab.site.common.model.proxy.PresenceProxy;
 	import com.collab.echo.view.display.BaseView;
 	
 	import flash.events.Event;

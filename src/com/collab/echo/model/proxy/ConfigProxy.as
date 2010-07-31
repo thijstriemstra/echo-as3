@@ -18,13 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
-	import com.collab.echo.model.business.LoadXMLDelegate;
-	import com.collab.echo.model.util.ConfigParser;
-	import com.collab.echo.model.vo.ConfigVO;
+	import com.collab.site.common.model.business.LoadXMLDelegate;
+	import com.collab.site.common.model.util.ConfigParser;
+	import com.collab.site.common.model.vo.ConfigVO;
 	
 	import org.osflash.thunderbolt.Logger;
 	import org.puremvc.as3.multicore.interfaces.IProxy;
 	import org.puremvc.as3.multicore.patterns.proxy.Proxy;
+	import com.collab.site.common.model.proxy.StartupMonitorProxy;
 	
     /**
      * A <code>Proxy</code> that loads and stores the application configuration

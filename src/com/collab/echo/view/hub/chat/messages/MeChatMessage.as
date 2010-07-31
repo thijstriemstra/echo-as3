@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.messages
 {
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.site.common.model.vo.UserVO;
 
 	/**
 	 * A public '[username] ...' chat message.

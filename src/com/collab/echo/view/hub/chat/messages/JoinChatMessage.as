@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.messages
 {
 	import com.collab.echo.Echo;
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.site.common.model.proxy.PresenceProxy;
+	import com.collab.site.common.model.vo.UserVO;
 	
 	import flash.system.Capabilities;
 

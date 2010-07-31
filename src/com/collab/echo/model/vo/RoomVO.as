@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.vo
 {
+	import com.collab.site.common.model.vo.SAObject;
+
 	/**
 	 * Room has a type and id.
 	 * 

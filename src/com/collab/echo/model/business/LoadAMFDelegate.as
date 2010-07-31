@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.business
 {
-	import com.collab.echo.model.business.events.LoadAMFEvent;
+	import com.collab.site.common.model.business.events.LoadAMFEvent;
 	import com.collab.echo.util.StringUtil;
 	
 	import flash.events.AsyncErrorEvent;

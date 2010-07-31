@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.mediators
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.RoomVO;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.site.common.model.proxy.PresenceProxy;
+	import com.collab.site.common.model.vo.RoomVO;
+	import com.collab.site.common.model.vo.UserVO;
 	import com.collab.echo.util.URLUtils;
 	import com.collab.echo.view.events.BaseRoomEvent;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;

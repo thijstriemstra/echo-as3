@@ -231,7 +231,7 @@ package com.collab.echo.view.hub.video.containers.panels
 		 */		
 		protected function onNameClick( event:MouseEvent ):void
 		{
-			profileInfo.show();
+			profileInfo.toggle();
 		}
 		
 		/**

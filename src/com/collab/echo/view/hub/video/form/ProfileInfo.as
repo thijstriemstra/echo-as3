@@ -24,6 +24,7 @@ package com.collab.echo.view.hub.video.form
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem;
 	import com.greensock.TweenLite;
+	import com.greensock.easing.Quad;
 	
 	import flash.display.Sprite;
 	
@@ -76,6 +77,23 @@ package com.collab.echo.view.hub.video.form
 		}
 		
 		/**
+		 * @return 
+		 */		
+		public function get open():Boolean
+		{
+			return _opened;
+		}
+		public function set open( val:Boolean ):void
+		{
+			if ( val )
+			{
+				_opened = !val;
+				toggle();
+			}
+		}
+		
+		
+		/**
 		 * Constructor.
 		 *  
 		 * @param width
@@ -97,6 +115,23 @@ package com.collab.echo.view.hub.video.form
 		// ====================================
 		
 		/**
+		 * Toggle vision. 
+		 */		
+		public function toggle():void
+		{
+			if ( _opened )
+			{
+				_opened = false;
+				hide();
+			}
+			else
+			{
+				_opened = true;
+				show();
+			}
+		}
+		
+		/**
 		 * @private 
 		 */		
 		override public function show():void
@@ -105,19 +140,18 @@ package com.collab.echo.view.hub.video.form
 			
 			if ( backgroundMask )
 			{
-				var h:int = 0;
-
-				if ( _opened )
-				{
-					h = viewHeight;
-					_opened = false;
-				}
-				else
-				{
-					_opened = true;
-				}
-				
-				TweenLite.to( backgroundMask, OPEN_SPEED, { y: h });
+				TweenLite.to( backgroundMask, OPEN_SPEED, { y: 0, ease: Quad.easeInOut });
+			}
+		}
+		
+		/**
+		 * @private 
+		 */		
+		override public function hide():void
+		{
+			if ( backgroundMask )
+			{
+				TweenLite.to( backgroundMask, OPEN_SPEED, { y: viewHeight, ease: Quad.easeIn });
 			}
 		}
 		

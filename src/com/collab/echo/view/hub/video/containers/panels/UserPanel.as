@@ -24,10 +24,13 @@ package com.collab.echo.view.hub.video.containers.panels
 	import com.collab.echo.view.display.util.DrawingUtils;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.display.util.TextUtils;
+	import com.collab.echo.view.hub.video.display.UserInfoBar;
+	import com.collab.echo.view.hub.video.display.UserNameBar;
 	import com.collab.echo.view.hub.video.form.ProfileInfo;
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
 	/**
@@ -57,9 +60,8 @@ package com.collab.echo.view.hub.video.containers.panels
 			
 		protected var panel				: Shape;
 		protected var icon				: Sprite;
-		protected var nameBar			: Sprite;
-		protected var infoBar			: Sprite;
-		protected var nameField			: TextField;
+		protected var nameBar			: UserNameBar;
+		protected var infoBar			: UserInfoBar;
 		protected var profileInfo		: ProfileInfo;
 		
 		// ====================================
@@ -81,44 +83,22 @@ package com.collab.echo.view.hub.video.containers.panels
 				
 				name = "userPanel" + _data.id;
 				invalidate();
-				
-				/*
-				// show rank icon
-				newVideo.screen.header_mc.gotoAndStop(rank);
-				
-				// admin or mod
-				if (_root.userMode == "guest")
-				{
-					newVideo.screen.header_mc.kick_icon._visible = false;
-				}
-				else
-				{
-					newVideo.screen.header_mc.kick_icon._visible = true;
-				}
-				
-				if ( isSelf() )
-				{
-					// Hide the pm button 
-					newVideo.screen.header_mc.pm_mc._visible = false;
-					newVideo.screen.header_mc.kick_icon._visible = false;
-				}
-				*/
 			}
 		}
 		
 		/**
 		 * @return 
 		 */		
-		public function get title():TextField
+		public function get title():UserNameBar
 		{
-			var value:String
+			var value:String;
 			
 			if ( _data )
 			{
 				value = _data.username;
 			}
-			return TextUtils.createTextField( null, value, 24,
-										      StyleDict.WHITE, false, true );
+			
+			return new UserNameBar( viewWidth, 30, value );
 		}
 		
 		/**
@@ -136,7 +116,8 @@ package com.collab.echo.view.hub.video.containers.panels
 				profileInfo.website = _data.website;
 			}
 			
-			return new ProfileInfo( viewWidth, viewHeight, profileInfo );
+			return new ProfileInfo( viewWidth,
+					viewHeight - ( nameBar.height + infoBar.height ), profileInfo );
 		}
 		
 		/**
@@ -182,15 +163,20 @@ package com.collab.echo.view.hub.video.containers.panels
 			addChild( panel );
 			
 			// icon
+			icon = DrawingUtils.drawFill( 30, 30, 5, StyleDict.GREY4 );
+			addChild( icon );
 			
+			// info
+			infoBar = new UserInfoBar( viewWidth, 30 );
+			addChild( infoBar );
 			
 			// name
-			nameField = title;
-			addChild( nameField );
+			nameBar = title;
+			nameBar.addEventListener( MouseEvent.CLICK, onClick, false, 0, true );
+			addChild( nameBar );
 			
 			// profile info
 			profileInfo = profile;
-			profileInfo.visible = false;
 			addChild( profileInfo );
 		}
 		
@@ -199,13 +185,21 @@ package com.collab.echo.view.hub.video.containers.panels
 		 */		
 		override protected function layout():void
 		{
-			// title 
-			nameField.x = 10;
-			nameField.y = 10;
+			// icon
+			icon.x = viewWidth / 2 - icon.width / 2;
+			icon.y = 45;
+			
+			// info
+			infoBar.x = 0;
+			infoBar.y = viewHeight - infoBar.height;
+			
+			// name 
+			nameBar.x = 0;
+			nameBar.y = infoBar.y - nameBar.height;
 			
 			// profile info
-			profileInfo.x = nameField.x;
-			profileInfo.y = nameField.y + nameField.height;
+			profileInfo.x = 0;
+			profileInfo.y = 0;
 		}
 		
 		/**
@@ -214,10 +208,25 @@ package com.collab.echo.view.hub.video.containers.panels
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( panel );
-			removeChildFromDisplayList( nameField );
+			removeChildFromDisplayList( nameBar );
+			removeChildFromDisplayList( infoBar );
+			removeChildFromDisplayList( icon );
 			removeChildFromDisplayList( profileInfo );
 			
 			super.invalidate();
+		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
+		/**
+		 * @private 
+		 * @param event
+		 */		
+		protected function onClick( event:MouseEvent ):void
+		{
+			profileInfo.show();
 		}
 		
 	}

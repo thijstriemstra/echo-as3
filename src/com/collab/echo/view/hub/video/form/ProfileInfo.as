@@ -20,9 +20,14 @@ package com.collab.echo.view.hub.video.form
 {
 	import com.collab.echo.model.vo.ProfileInfoVO;
 	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.view.display.util.DrawingUtils;
+	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem;
+	import com.greensock.TweenLite;
 	
 	import flash.display.DisplayObject;
+	import flash.display.Shape;
+	import flash.display.Sprite;
 	
 	/**
 	 * @author Thijs Triemstra
@@ -30,9 +35,17 @@ package com.collab.echo.view.hub.video.form
 	public class ProfileInfo extends BaseView
 	{
 		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		public static const	OPEN_SPEED	: Number = .4;
+		
+		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
+		protected var background		: Sprite;
+		protected var backgroundMask	: Sprite;
 		protected var locationField		: ProfileInfoFormItem;
 		protected var websiteField		: ProfileInfoFormItem;
 		protected var emailField		: ProfileInfoFormItem;
@@ -45,7 +58,8 @@ package com.collab.echo.view.hub.video.form
 		
 		private var _item				: ProfileInfoFormItem;
 		private var _data				: ProfileInfoVO;
-
+		private var _opened				: Boolean;
+		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
@@ -74,24 +88,35 @@ package com.collab.echo.view.hub.video.form
 									 data:ProfileInfoVO=null )
 		{
 			_data = data;
+			_opened = false;
 			
 			super( width, height );
 			show();
 		}
 		
-		// ====================================
-		// PUBLIC METHODS
-		// ====================================
-		
 		/**
-		 * @param child
-		 * @return 
+		 * @private 
 		 */		
-		override public function addChild( child:DisplayObject ):DisplayObject
+		override public function show():void
 		{
-			fields.push( child );
+			super.show();
 			
-			return super.addChild( child );
+			if ( backgroundMask )
+			{
+				var h:int = viewHeight;
+				
+				if ( _opened )
+				{
+					h = 0;
+					_opened = false;
+				}
+				else
+				{
+					_opened = true;
+				}
+				
+				TweenLite.to( backgroundMask, OPEN_SPEED, { height: h });
+			}
 		}
 		
 		// ====================================
@@ -103,6 +128,12 @@ package com.collab.echo.view.hub.video.form
 		 */		
 		override protected function draw():void
 		{
+			// background
+			background = DrawingUtils.drawFill( viewWidth, viewHeight, 0,
+												StyleDict.WHITE, .6 );
+			addChild( background );
+			
+			// form items
 			var formHeight:int = 70;
 			fields = new Vector.<ProfileInfoFormItem>();
 			
@@ -111,20 +142,27 @@ package com.collab.echo.view.hub.video.form
 			{
 				// location
 				locationField = createFormItem( viewWidth, formHeight, "Location", _data.location );
-				addChild( locationField );
+				background.addChild( locationField );
 				
 				// website
 				websiteField = createFormItem( viewWidth, formHeight, "Website", _data.website );
-				addChild( websiteField );
+				background.addChild( websiteField );
 				
 				// email
 				emailField = createFormItem( viewWidth, formHeight, "Email", _data.email );
-				addChild( emailField );
+				background.addChild( emailField );
 				
 				// age
 				ageField = createFormItem( viewWidth, formHeight, "Age", _data.age );
-				addChild( ageField );
+				background.addChild( ageField );
 			}
+			
+			// mask
+			backgroundMask = DrawingUtils.drawFill( viewWidth, viewHeight, 0, StyleDict.RED1 );
+			backgroundMask.mouseEnabled = false;
+			backgroundMask.height = 0;
+			addChild( backgroundMask );
+			background.mask = backgroundMask;
 		}
 		
 		/**
@@ -135,7 +173,15 @@ package com.collab.echo.view.hub.video.form
 			var prevItem:ProfileInfoFormItem;
 			var index:int;
 			
-			// position profile items
+			// background
+			background.x = 0;
+			background.y = 0;
+			
+			// mask
+			backgroundMask.x = 0;
+			backgroundMask.y = 0;
+			
+			// profile items
 			if ( fields )
 			{
 				for each ( _item in fields )
@@ -159,6 +205,7 @@ package com.collab.echo.view.hub.video.form
 		 */		
 		override protected function invalidate():void
 		{
+			// profile items
 			if ( fields )
 			{
 				for each ( _item in fields )
@@ -166,6 +213,9 @@ package com.collab.echo.view.hub.video.form
 					removeChildFromDisplayList( _item );
 				}
 			}
+			
+			removeChildFromDisplayList( backgroundMask );
+			removeChildFromDisplayList( background );
 			
 			super.invalidate();
 		}
@@ -175,6 +225,8 @@ package com.collab.echo.view.hub.video.form
 		// ====================================
 		
 		/**
+		 * Create and return a new form item.
+		 * 
 		 * @param width
 		 * @param height
 		 * @param label

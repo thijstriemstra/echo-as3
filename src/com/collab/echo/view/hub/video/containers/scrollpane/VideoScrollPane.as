@@ -97,7 +97,9 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 			// panel
 			_item = new _panelSkin();
 			_item.data = client;
-			_item.setSize( UserPanel.WIDTH, height );
+			// XXX: figure out how to measure the height of the scrollpane's
+			// scrollbar instead of hardcoding it here
+			_item.setSize( UserPanel.WIDTH, height - 15 );
 			add( _item );
 		}
 		

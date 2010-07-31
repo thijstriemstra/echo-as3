@@ -22,7 +22,6 @@ package com.collab.echo.view.hub.video.display
 	import com.collab.echo.view.display.util.StyleDict;
 	
 	import flash.display.Shape;
-	import flash.events.MouseEvent;
 	
 	/**
 	 * @author Thijs Triemstra

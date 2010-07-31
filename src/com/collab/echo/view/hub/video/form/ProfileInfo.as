@@ -25,8 +25,6 @@ package com.collab.echo.view.hub.video.form
 	import com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem;
 	import com.greensock.TweenLite;
 	
-	import flash.display.DisplayObject;
-	import flash.display.Shape;
 	import flash.display.Sprite;
 	
 	/**
@@ -94,6 +92,10 @@ package com.collab.echo.view.hub.video.form
 			show();
 		}
 		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
 		/**
 		 * @private 
 		 */		
@@ -103,11 +105,11 @@ package com.collab.echo.view.hub.video.form
 			
 			if ( backgroundMask )
 			{
-				var h:int = viewHeight;
-				
+				var h:int = 0;
+
 				if ( _opened )
 				{
-					h = 0;
+					h = viewHeight;
 					_opened = false;
 				}
 				else
@@ -115,7 +117,7 @@ package com.collab.echo.view.hub.video.form
 					_opened = true;
 				}
 				
-				TweenLite.to( backgroundMask, OPEN_SPEED, { height: h });
+				TweenLite.to( backgroundMask, OPEN_SPEED, { y: h });
 			}
 		}
 		
@@ -164,7 +166,6 @@ package com.collab.echo.view.hub.video.form
 			// mask
 			backgroundMask = DrawingUtils.drawFill( viewWidth, viewHeight, 0, StyleDict.RED1 );
 			backgroundMask.mouseEnabled = false;
-			backgroundMask.height = 0;
 			addChild( backgroundMask );
 			background.mask = backgroundMask;
 		}
@@ -183,7 +184,7 @@ package com.collab.echo.view.hub.video.form
 			
 			// mask
 			backgroundMask.x = 0;
-			backgroundMask.y = 0;
+			backgroundMask.y = viewHeight;
 			
 			// profile items
 			if ( fields )
@@ -209,7 +210,6 @@ package com.collab.echo.view.hub.video.form
 		 */		
 		override protected function invalidate():void
 		{
-			// profile items
 			if ( fields )
 			{
 				for each ( _item in fields )

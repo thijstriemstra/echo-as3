@@ -106,6 +106,7 @@ package com.collab.echo.view.hub.video.containers.panels
 		 */		
 		public function get profile():ProfileInfo
 		{
+			var h:Number = viewHeight - ( nameBar.height + infoBar.height );
 			var profileInfo:ProfileInfoVO = new ProfileInfoVO();
 			
 			if ( _data )
@@ -116,8 +117,7 @@ package com.collab.echo.view.hub.video.containers.panels
 				profileInfo.website = _data.website;
 			}
 			
-			return new ProfileInfo( viewWidth,
-					viewHeight - ( nameBar.height + infoBar.height ), profileInfo );
+			return new ProfileInfo( viewWidth, h, profileInfo );
 		}
 		
 		/**
@@ -162,18 +162,23 @@ package com.collab.echo.view.hub.video.containers.panels
 			}
 			addChild( panel );
 			
-			// icon
-			icon = DrawingUtils.drawFill( 30, 30, 5, StyleDict.GREY4 );
-			addChild( icon );
-			
 			// info
 			infoBar = new UserInfoBar( viewWidth, 30 );
 			addChild( infoBar );
 			
 			// name
 			nameBar = title;
-			nameBar.addEventListener( MouseEvent.CLICK, onClick, false, 0, true );
+			nameBar.addEventListener( MouseEvent.CLICK, onNameClick,
+									  false, 0, true );
 			addChild( nameBar );
+			
+			// icon
+			var h:Number =  viewHeight - ( infoBar.height + nameBar.height );
+			icon = DrawingUtils.drawFill( viewWidth, h, 0, StyleDict.GREY2 );
+			icon.buttonMode = true;
+			icon.addEventListener( MouseEvent.CLICK, onVideoClick,
+								   false, 0, true );
+			addChild( icon );
 			
 			// profile info
 			profileInfo = profile;
@@ -185,10 +190,6 @@ package com.collab.echo.view.hub.video.containers.panels
 		 */		
 		override protected function layout():void
 		{
-			// icon
-			icon.x = viewWidth / 2 - icon.width / 2;
-			icon.y = 45;
-			
 			// info
 			infoBar.x = 0;
 			infoBar.y = viewHeight - infoBar.height;
@@ -196,6 +197,10 @@ package com.collab.echo.view.hub.video.containers.panels
 			// name 
 			nameBar.x = 0;
 			nameBar.y = infoBar.y - nameBar.height;
+			
+			// icon
+			icon.x = 0;
+			icon.y = 0;
 			
 			// profile info
 			profileInfo.x = 0;
@@ -224,9 +229,17 @@ package com.collab.echo.view.hub.video.containers.panels
 		 * @private 
 		 * @param event
 		 */		
-		protected function onClick( event:MouseEvent ):void
+		protected function onNameClick( event:MouseEvent ):void
 		{
 			profileInfo.show();
+		}
+		
+		/**
+		 * @private 
+		 * @param event
+		 */		
+		protected function onVideoClick( event:MouseEvent ):void
+		{
 		}
 		
 	}

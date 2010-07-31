@@ -96,14 +96,14 @@ package com.collab.echo.view.hub.video.form.item
 		override protected function draw():void
 		{
 			// label
-			labelField = TextUtils.createTextField( null, _label, 12, StyleDict.WHITE,
+			labelField = TextUtils.createTextField( null, _label, 12, StyleDict.BLACK,
 													false, false );
 			labelField.border = false;
 			labelField.borderColor = StyleDict.RED1;
 			addChild( labelField );
 			
 			// value
-			valueField = TextUtils.createTextField( null, _value, 12, StyleDict.WHITE,
+			valueField = TextUtils.createTextField( null, _value, 12, StyleDict.BLACK,
 												    false, false );
 			valueField.selectable = true;
 			valueField.mouseEnabled = true;

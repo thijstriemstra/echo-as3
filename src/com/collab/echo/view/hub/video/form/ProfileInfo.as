@@ -143,18 +143,22 @@ package com.collab.echo.view.hub.video.form
 				// location
 				locationField = createFormItem( viewWidth, formHeight, "Location", _data.location );
 				background.addChild( locationField );
+				fields.push( locationField );
 				
 				// website
 				websiteField = createFormItem( viewWidth, formHeight, "Website", _data.website );
 				background.addChild( websiteField );
+				fields.push( websiteField );
 				
 				// email
 				emailField = createFormItem( viewWidth, formHeight, "Email", _data.email );
 				background.addChild( emailField );
+				fields.push( emailField );
 				
 				// age
 				ageField = createFormItem( viewWidth, formHeight, "Age", _data.age );
 				background.addChild( ageField );
+				fields.push( ageField );
 			}
 			
 			// mask

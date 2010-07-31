@@ -27,6 +27,7 @@ package com.collab.echo.view.hub.video.containers.panels
 	import com.collab.echo.view.hub.video.form.ProfileInfo;
 	
 	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.text.TextField;
 	
 	/**
@@ -37,7 +38,7 @@ package com.collab.echo.view.hub.video.containers.panels
 	public class UserPanel extends Panel
 	{
 		// ====================================
-		// STATIC VARS
+		// CONSTANTS
 		// ====================================
 		
 		internal static const COLOR1	: uint = 0xEFEFEF;
@@ -55,6 +56,9 @@ package com.collab.echo.view.hub.video.containers.panels
 		// ====================================
 			
 		protected var panel				: Shape;
+		protected var icon				: Sprite;
+		protected var nameBar			: Sprite;
+		protected var infoBar			: Sprite;
 		protected var nameField			: TextField;
 		protected var profileInfo		: ProfileInfo;
 		
@@ -154,6 +158,9 @@ package com.collab.echo.view.hub.video.containers.panels
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function draw():void
 		{
 			// background
@@ -174,15 +181,22 @@ package com.collab.echo.view.hub.video.containers.panels
 			}
 			addChild( panel );
 			
+			// icon
+			
+			
 			// name
 			nameField = title;
 			addChild( nameField );
 			
 			// profile info
 			profileInfo = profile;
+			profileInfo.visible = false;
 			addChild( profileInfo );
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function layout():void
 		{
 			// title 
@@ -194,6 +208,9 @@ package com.collab.echo.view.hub.video.containers.panels
 			profileInfo.y = nameField.y + nameField.height;
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( panel );

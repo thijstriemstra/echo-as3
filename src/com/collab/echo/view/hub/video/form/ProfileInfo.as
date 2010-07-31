@@ -50,6 +50,9 @@ package com.collab.echo.view.hub.video.form
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get data()		: ProfileInfoVO
 		{
 			return _data;
@@ -67,7 +70,8 @@ package com.collab.echo.view.hub.video.form
 		 * @param height
 		 * @param data
 		 */		
-		public function ProfileInfo( width:Number=0, height:Number=0, data:ProfileInfoVO=null )
+		public function ProfileInfo( width:Number=0, height:Number=0,
+									 data:ProfileInfoVO=null )
 		{
 			_data = data;
 			
@@ -76,14 +80,33 @@ package com.collab.echo.view.hub.video.form
 		}
 		
 		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
+		/**
+		 * @param child
+		 * @return 
+		 */		
+		override public function addChild( child:DisplayObject ):DisplayObject
+		{
+			fields.push( child );
+			
+			return super.addChild( child );
+		}
+		
+		// ====================================
 		// PROTECTED METHODS
 		// ====================================
 
+		/**
+		 * @private 
+		 */		
 		override protected function draw():void
 		{
 			var formHeight:int = 70;
 			fields = new Vector.<ProfileInfoFormItem>();
 			
+			// XXX: localize
 			if ( _data )
 			{
 				// location
@@ -105,21 +128,14 @@ package com.collab.echo.view.hub.video.form
 		}
 		
 		/**
-		 * @param child
-		 * @return 
+		 * @private 
 		 */		
-		override public function addChild( child:DisplayObject ):DisplayObject
-		{
-			fields.push( child );
-			
-			return super.addChild( child );
-		}
-		
 		override protected function layout():void
 		{
 			var prevItem:ProfileInfoFormItem;
 			var index:int;
 			
+			// position profile items
 			if ( fields )
 			{
 				for each ( _item in fields )
@@ -138,6 +154,9 @@ package com.collab.echo.view.hub.video.form
 			}
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function invalidate():void
 		{
 			if ( fields )
@@ -151,14 +170,18 @@ package com.collab.echo.view.hub.video.form
 			super.invalidate();
 		}
 		
+		// ====================================
+		// INTERNAL METHODS
+		// ====================================
+		
 		/**
 		 * @param width
-		 * @param wheight
+		 * @param height
 		 * @param label
 		 * @param value
 		 * @return 
 		 */		
-		internal function createFormItem( width:int=0, wheight:int=0,
+		internal function createFormItem( width:int=0, height:int=0,
 										  label:String="Label", value:String="Value" ):ProfileInfoFormItem
 		{
 			var field:ProfileInfoFormItem = new ProfileInfoFormItem( width, height );

@@ -229,9 +229,15 @@ package com.collab.echo.view.hub.video.form
 					{
 						prevItem = fields[ index - 1 ];
 						
-						// location
+						// position
 						_item.x = prevItem.x;
 						_item.y = prevItem.y + prevItem.height;
+					}
+					else
+					{
+						// position
+						_item.x = 10;
+						_item.y = 5;
 					}
 					
 					index++;

@@ -128,7 +128,7 @@ package com.collab.echo.view.hub.video.form.item
 			
 			// value
 			valueField.x = 0;
-			valueField.y = labelField.y + labelField.height;
+			valueField.y = labelField.y + labelField.height - 5;
 		}
 
 	}

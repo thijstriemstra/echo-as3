@@ -29,21 +29,24 @@ package com.collab.echo.util
 		// CONSTANTS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal static const DELIMITER:String					= "%s";
 		
 		// ====================================
 		// PUBLIC STATIC METHODS
 		// ====================================
-		
+
 		/**
-		 * Replace locale string using the '%s' delimiter.
+		 * Replace string using the <code>%s<code> delimiter.
 		 * 
-		 * <p>For example:</p>
-		 * <p>
-		 * <code>var test:String = LocaleKeyEnum.replace( YOUVE_FINISHED_LEVEL, 1 );
-		 * trace( test ); // prints: You've finished level 1!
-		 * </code>
-		 * </p>
+		 * @example The following code demonstrates replace:
+		 * 
+		 * <listing version="3.0">
+		 * var input:String = "You've finished level %s, %s!";
+		 * var output:String = LocaleKeyEnum.replace( input, 1, 'Ruby' );
+		 * trace( output ); // You've finished level 1, Ruby!</listing>
 		 * 
 		 * @param key
 		 * @param params

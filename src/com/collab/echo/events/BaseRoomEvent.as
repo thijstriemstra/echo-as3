@@ -16,21 +16,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.events
+package com.collab.echo.events
 {
 	import flash.events.Event;
 	
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class MenuItemClickEvent extends Event
+	public class BaseRoomEvent extends Event
 	{
 		// ====================================
 		// CONSTANTS
 		// ====================================
 		
-		internal static const NAME	: String = "MenuItemClickEvent_";
-		public static const CLICK 	: String = NAME + "click";
+		internal static const NAME				: String = "BaseRoomEvent";
+		
+		public static const JOIN_RESULT			: String = NAME + "_joinResult";
+		public static const SYNCHRONIZE			: String = NAME + "_synchronize";
+		public static const OCCUPANT_COUNT		: String = NAME + "_occupantCount";
+		public static const ADD_OCCUPANT		: String = NAME + "_addOccupant";
+		public static const REMOVE_OCCUPANT		: String = NAME + "_removeOccupant";
+		public static const ATTRIBUTE_UPDATE	: String = NAME + "_attributeUpdate";
 		
 		// ====================================
 		// INTERNAL VARS
@@ -39,49 +45,31 @@ package com.collab.echo.view.events
 		/**
 		 * @private 
 		 */		
-		internal var index	: int;
+		internal var _data 						: *;
+		
+		// ====================================
+		// ACCESSOR/MUTATOR
+		// ====================================
 		
 		/**
-		 * @private 
+		 * @return 
 		 */		
-		internal var label	: String;
-		
-		// ====================================
-		// GETTER/SETTER
-		// ====================================
-		
-		public function get itemIndex():int
+		public function get data()				: *
 		{
-			return index;
-		}
-		
-		public function get itemLabel():String
-		{
-			return label;
+			return _data;
 		}
 		
 		/**
 		 * Constructor.
 		 *  
 		 * @param type
-		 * @param index
-		 * @param label
-		 * @param bubbles
-		 * @param cancelable
+		 * @param data
 		 */		
-		public function MenuItemClickEvent( type:String, index:int, label:String,
-											bubbles:Boolean=false, cancelable:Boolean=false )
+		public function BaseRoomEvent( type:String, data:* )
 		{
-			super( type, bubbles, cancelable );
+			super( type, false, true );
 			
-			this.index = index;
-			this.label = label;
-		}
-		
-		override public function toString():String
-		{
-			return "<MenuItemClickEvent index='" + index +
-				   "' label='" + label + "' />";
+			_data = data;
 		}
 		
 	}

@@ -8,7 +8,7 @@
 	<component id="BaseExpandButton" class="com.collab.echo.view.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.view.mediators.BaseMediator"/>
 	<component id="BaseRoom" class="com.collab.echo.view.rooms.BaseRoom"/>
-	<component id="BaseRoomEvent" class="com.collab.echo.view.events.BaseRoomEvent"/>
+	<component id="BaseRoomEvent" class="com.collab.echo.events.BaseRoomEvent"/>
 	<component id="BaseView" class="com.collab.echo.view.display.BaseView"/>
 	<component id="Canvas" class="com.collab.echo.view.hub.whiteboard.display.Canvas"/>
 	<component id="Chat" class="com.collab.echo.view.hub.chat.display.Chat"/>
@@ -19,7 +19,7 @@
 	<component id="ChatMessageTypes" class="com.collab.echo.view.hub.chat.factory.ChatMessageTypes"/>
 	<component id="CirclePreloader" class="com.collab.echo.view.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>
-	<component id="CommunicationPanelEvent" class="com.collab.echo.view.events.CommunicationPanelEvent"/>
+	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.view.mediators.CommunicationPanelMediator"/>
 	<component id="ContentLoader" class="com.collab.echo.view.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
@@ -50,7 +50,7 @@
 	<component id="MenuBarItem" class="com.collab.echo.view.controls.menu.MenuBarItem"/>
 	<component id="MenuDirection" class="com.collab.echo.view.controls.menu.MenuDirection"/>
 	<component id="MenuItem" class="com.collab.echo.view.controls.menu.MenuItem"/>
-	<component id="MenuItemClickEvent" class="com.collab.echo.view.events.MenuItemClickEvent"/>
+	<component id="MenuItemClickEvent" class="com.collab.echo.events.MenuItemClickEvent"/>
 	<component id="MenuPanel" class="com.collab.echo.view.containers.panels.MenuPanel"/>
 	<component id="MessageCreator" class="com.collab.echo.view.hub.chat.factory.MessageCreator"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>

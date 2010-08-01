@@ -18,11 +18,45 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.rooms
 {
-	import com.collab.echo.view.events.BaseRoomEvent;
+	import com.collab.echo.events.BaseRoomEvent;
 	
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.JOIN_RESULT
+	 */
+	[Event(name="BaseRoomEvent_joinResult", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.OCCUPANT_COUNT
+	 */
+	[Event(name="BaseRoomEvent_occupantCount", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.ADD_OCCUPANT
+	 */
+	[Event(name="BaseRoomEvent_addOccupant", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.REMOVE_OCCUPANT
+	 */
+	[Event(name="BaseRoomEvent_removeOccupant", type="com.collab.echo.events.BaseRoomEvent")]
+
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.ATTRIBUTE_UPDATE
+	 */
+	[Event(name="BaseRoomEvent_attributeUpdate", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.SYNCHRONIZE
+	 */
+	[Event(name="BaseRoomEvent_synchronize", type="com.collab.echo.events.BaseRoomEvent")]
+	
 	/**
 	 * Base room.
 	 * 

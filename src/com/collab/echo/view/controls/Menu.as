@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.controls
 {
+	import com.collab.echo.events.MenuItemClickEvent;
 	import com.collab.echo.view.controls.menu.MenuDirection;
 	import com.collab.echo.view.controls.menu.MenuItem;
 	import com.collab.echo.view.display.BaseView;
-	import com.collab.echo.view.events.MenuItemClickEvent;
 	
 	import flash.geom.Point;
 	

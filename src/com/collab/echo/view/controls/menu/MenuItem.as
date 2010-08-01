@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.controls.menu
 {
+	import com.collab.echo.events.MenuItemClickEvent;
 	import com.collab.echo.view.controls.buttons.LabelButton;
 	import com.collab.echo.view.display.BaseView;
 	import com.collab.echo.view.display.util.StyleDict;
-	import com.collab.echo.view.events.MenuItemClickEvent;
 	
 	import flash.events.MouseEvent;
 	
@@ -32,11 +32,7 @@ package com.collab.echo.view.controls.menu
 	/**
 	 * Dispatched when the menu item is clicked.
 	 *
-	 * @eventType com.collab.echo.view.events.MenuItemClickEvent.CLICK
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 * @playerversion AIR 1.0
+	 * @eventType com.collab.echo.events.MenuItemClickEvent.CLICK
 	 */
 	[Event(name="MenuItemClickEvent_click", type="com.collab.echo.view.events.MenuItemClickEvent")]
 	

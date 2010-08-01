@@ -22,7 +22,6 @@
 	<component id="CommunicationPanelEvent" class="com.collab.echo.view.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.view.mediators.CommunicationPanelMediator"/>
 	<component id="ConfigKeyEnum" class="com.collab.echo.model.enum.ConfigKeyEnum"/>
-	<component id="ConfigVO" class="com.collab.echo.model.vo.ConfigVO"/>
 	<component id="ContentLoader" class="com.collab.echo.view.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.view.hub.whiteboard.tools.DrawingModes"/>
@@ -66,7 +65,6 @@
 	<component id="ProfileInfoFormItem" class="com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter"/>
-	<component id="ResourceVO" class="com.collab.echo.model.vo.ResourceVO"/>
 	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>
 	<component id="RoomVO" class="com.collab.echo.model.vo.RoomVO"/>
 	<component id="SAObject" class="com.collab.echo.model.vo.SAObject"/>

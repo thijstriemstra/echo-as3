@@ -33,12 +33,10 @@
 	<component id="FlashButton" class="com.collab.echo.view.controls.buttons.FlashButton"/>
 	<component id="FlashColorPicker" class="com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker"/>
 	<component id="FlashScrollPane" class="com.collab.echo.view.containers.scrollpane.FlashScrollPane"/>
-	<component id="GradientFillButton" class="com.collab.echo.view.controls.buttons.GradientFillButton"/>
 	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
 	<component id="IChatRoom" class="com.collab.echo.view.hub.interfaces.IChatRoom"/>
 	<component id="IPChatMessage" class="com.collab.echo.view.hub.chat.messages.IPChatMessage"/>
 	<component id="IRoom" class="com.collab.echo.view.hub.interfaces.IRoom"/>
-	<component id="IconButton" class="com.collab.echo.view.controls.buttons.IconButton"/>
 	<component id="JoinChatMessage" class="com.collab.echo.view.hub.chat.messages.JoinChatMessage"/>
 	<component id="KickMessage" class="com.collab.echo.view.hub.chat.messages.KickMessage"/>
 	<component id="LabelButton" class="com.collab.echo.view.controls.buttons.LabelButton"/>
@@ -70,7 +68,6 @@
 	<component id="ShapeTool" class="com.collab.echo.view.hub.whiteboard.tools.ShapeTool"/>
 	<component id="ShapeTypes" class="com.collab.echo.view.hub.whiteboard.tools.ShapeTypes"/>
 	<component id="SkinUtils" class="com.collab.echo.view.display.util.SkinUtils"/>
-	<component id="SolidFillButton" class="com.collab.echo.view.controls.buttons.SolidFillButton"/>
 	<component id="StringUtil" class="com.collab.echo.util.StringUtil"/>
 	<component id="StrokeTypes" class="com.collab.echo.view.hub.whiteboard.tools.StrokeTypes"/>
 	<component id="StyleDict" class="com.collab.echo.view.display.util.StyleDict"/>

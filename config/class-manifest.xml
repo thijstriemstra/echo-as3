@@ -3,7 +3,7 @@
 <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.view.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
-	<component id="BaseCommunicationPanel" class="com.collab.echo.view.hub.display.BaseCommunicationPanel"/>
+	<component id="BaseCommunicationPanel" class="com.collab.echo.view.containers.panels.BaseCommunicationPanel"/>
 	<component id="BaseCommunicationPanelSkin" class="com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin"/>
 	<component id="BaseExpandButton" class="com.collab.echo.view.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.view.mediators.BaseMediator"/>

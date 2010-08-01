@@ -23,11 +23,11 @@ package com.collab.echo.view.mediators
 	import com.collab.echo.model.vo.RoomVO;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.URLUtils;
+	import com.collab.echo.view.containers.panels.BaseCommunicationPanel;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.display.BaseCommunicationPanel;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	import com.collab.echo.view.rooms.BaseRoom;
 	

@@ -16,11 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.display
+package com.collab.echo.view.containers.panels
 {
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.containers.panels.Panel;
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.controls.buttons.BaseExpandButton;
 	import com.collab.echo.view.hub.chat.display.Chat;

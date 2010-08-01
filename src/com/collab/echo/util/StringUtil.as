@@ -45,7 +45,7 @@ package com.collab.echo.util
 		 * 
 		 * <listing version="3.0">
 		 * var input:String = "You've finished level %s, %s!";
-		 * var output:String = LocaleKeyEnum.replace( input, 1, 'Ruby' );
+		 * var output:String = StringUtil.replace( input, 1, 'Ruby' );
 		 * trace( output ); // You've finished level 1, Ruby!</listing>
 		 * 
 		 * @param key

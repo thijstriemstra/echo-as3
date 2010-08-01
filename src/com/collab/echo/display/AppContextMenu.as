@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.display
+package com.collab.echo.display
 {
 	import flash.system.Capabilities;
 	import flash.ui.ContextMenu;

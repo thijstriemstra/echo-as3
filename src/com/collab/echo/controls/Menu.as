@@ -16,12 +16,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.controls
+package com.collab.echo.controls
 {
+	import com.collab.echo.controls.menu.MenuDirection;
+	import com.collab.echo.controls.menu.MenuItem;
+	import com.collab.echo.display.BaseView;
 	import com.collab.echo.events.MenuItemClickEvent;
-	import com.collab.echo.view.controls.menu.MenuDirection;
-	import com.collab.echo.view.controls.menu.MenuItem;
-	import com.collab.echo.view.display.BaseView;
 	
 	import flash.geom.Point;
 	
@@ -164,7 +164,7 @@ package com.collab.echo.view.controls
 		 * @param horizontalGap
 		 * @param verticalGap
 		 */		
-		public function Menu( itemType:Class=null, direction:String=MenuDirection.VERTICAL,
+		public function Menu( itemType:Class=null, direction:String="vertical",
 							  offset:Point=null, horizontalGap:int=0, verticalGap:int=0 )
 		{
 			if ( itemType == null )

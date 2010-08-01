@@ -16,10 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.mediators
+package com.collab.echo.mediators
 {
+	import com.collab.echo.display.BaseView;
 	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.view.display.BaseView;
 	
 	import flash.events.Event;
 	

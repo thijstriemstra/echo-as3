@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.chat.display
 {
-	import com.collab.echo.view.controls.buttons.LabelButton;
-	import com.collab.echo.view.display.BaseView;
-	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.controls.buttons.LabelButton;
+	import com.collab.echo.display.BaseView;
+	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	
 	import fl.controls.TextInput;
@@ -35,31 +35,16 @@ package com.collab.echo.view.hub.chat.display
 	
 	/**
 	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.HISTORY_DOWN
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 *  
-	 * @playerversion AIR 1.0
 	 */
 	[Event(name="ChatEvent_historyDown", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
 
 	/**
 	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.HISTORY_UP
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 *  
-	 * @playerversion AIR 1.0
 	 */
 	[Event(name="ChatEvent_historyUp", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.view.hub.chat.events.ChatEvent.SUBMIT
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 *  
-	 * @playerversion AIR 1.0
 	 */
 	[Event(name="ChatEvent_submit", type="com.collab.echo.view.hub.chat.events.ChatEvent")]
 	

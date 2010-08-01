@@ -16,9 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.controls.buttons
+package com.collab.echo.controls.buttons
 {
-	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.display.util.StyleDict;
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;

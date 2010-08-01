@@ -16,10 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.display
+package com.collab.echo.display
 {
-	import com.collab.echo.view.display.util.StyleDict;
-	import com.collab.echo.view.display.util.TextUtils;
+	import com.collab.echo.display.util.StyleDict;
+	import com.collab.echo.display.util.TextUtils;
 	import com.collab.echo.view.preloaders.CirclePreloader;
 	
 	import flash.display.DisplayObject;

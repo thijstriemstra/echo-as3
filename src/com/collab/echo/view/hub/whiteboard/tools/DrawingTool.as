@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.tools
 {
-	import com.collab.echo.view.display.BaseView;
+	import com.collab.echo.display.BaseView;
 	
 	/**
 	 * A tool used to draw a shape, stroke or fill.
@@ -58,6 +58,10 @@ package com.collab.echo.view.hub.whiteboard.tools
 			super();
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<DrawingTool mode='" + mode + "' type='" + type + "' />";

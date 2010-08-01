@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.video.containers.scrollpane
 {
+	import com.collab.echo.display.util.DrawingUtils;
+	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
-	import com.collab.echo.view.display.util.DrawingUtils;
-	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.interfaces.IRoom;
 	import com.collab.echo.view.hub.video.containers.panels.UserPanel;
 	
@@ -148,6 +148,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 *  
 		 * @param arg0
 		 * @param arg1
+		 * @private
 		 */		
 		override public function setSize( arg0:Number, arg1:Number ):void
 		{
@@ -165,6 +166,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 * 
 		 * @param child
 		 * @return 
+		 * @private
 		 */		
 		override public function add( child:DisplayObject ):DisplayObject
 		{
@@ -193,7 +195,8 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		}
 		
 		/**
-		 * Position all <code>UserPanel</code> instances. 
+		 * Position all <code>UserPanel</code> instances.
+		 * @private
 		 */		
 		override public function layoutChildren():void
 		{
@@ -223,6 +226,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 * Remove a <code>UserPanel</code>.
 		 * 
 		 * @param child
+		 * @private
 		 */		
 		override public function remove( child:DisplayObject ):void
 		{
@@ -242,6 +246,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		
 		/**
 		 * Remove all <code>UserPanel</code> instances.
+		 * @private
 		 */		
 		override public function removeAll():void
 		{
@@ -261,6 +266,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 * Remove a <code>UserPanel</code> at a specified index.
 		 * 
 		 * @param index
+		 * @private
 		 */		
 		override public function removeAt( index:int ):void
 		{

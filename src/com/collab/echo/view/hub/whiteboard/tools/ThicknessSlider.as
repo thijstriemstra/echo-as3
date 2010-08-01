@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.tools
 {
-	import com.collab.echo.view.display.BaseView;
-	import com.collab.echo.view.display.util.TextUtils;
+	import com.collab.echo.display.BaseView;
+	import com.collab.echo.display.util.TextUtils;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	import fl.controls.Slider;
@@ -34,11 +34,6 @@ package com.collab.echo.view.hub.whiteboard.tools
 	
 	/**
 	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.CHANGE_THICKNESS
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 *  
-	 * @playerversion AIR 1.0
 	 */
 	[Event(name="WhiteboardEvent_changeThickness", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
 	
@@ -64,26 +59,26 @@ package com.collab.echo.view.hub.whiteboard.tools
 		 * 
 		 * <p>TODO: find alternative for fl.controls.Slider</p>
 		 */		
-		protected var slider		: Slider;
+		protected var slider					: Slider;
 		
 		/**
 		 * Label field. 
 		 */		
-		protected var labelField			: TextField;
+		protected var labelField				: TextField;
 		
 		/**
 		 * Value field. 
 		 */		
-		protected var valueField	: TextField;
+		protected var valueField				: TextField;
 		
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _label			: String;
-		private var _minimum		: int;
-		private var _maximum		: int;
-		private var _value			: int;
+		private var _label						: String;
+		private var _minimum					: int;
+		private var _maximum					: int;
+		private var _value						: int;
 		
 		// ====================================
 		// GETTER/SETTER

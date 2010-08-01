@@ -16,30 +16,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.controls.menu
+package com.collab.echo.controls.menu
 {
-	import com.collab.echo.view.display.util.StyleDict;
-
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class MenuBarItem extends MenuItem
+	public class MenuDirection
 	{
-		/**
-		 * Constructor.
-		 * 
-		 * @param index
-		 * @param label
-		 */		
-		public function MenuBarItem( index:int=0, label:String=null )
-		{
-			super( index, label );
-			
-			this.upColor = StyleDict.WHITE;
-			this.selectColor = StyleDict.GREY4;
-			this.backgroundColor = StyleDict.YELLOW1;
-			this.backgroundAlpha = 0;
-		}
+		// ====================================
+		// CONSTANTS
+		// ====================================
 		
+		/**
+		 * Horizontal menu. 
+		 */		
+		public static const HORIZONTAL		: String = "horizontal";
+		
+		/**
+		 * Vertical menu. 
+		 */		
+		public static const VERTICAL		: String = "vertical";
 	}
 }

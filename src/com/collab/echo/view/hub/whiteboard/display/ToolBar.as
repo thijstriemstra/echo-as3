@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
-	import com.collab.echo.view.display.BaseView;
-	import com.collab.echo.view.display.util.DrawingUtils;
-	import com.collab.echo.view.display.util.StyleDict;
+	import com.collab.echo.display.BaseView;
+	import com.collab.echo.display.util.DrawingUtils;
+	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	import com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker;
 	import com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider;
@@ -34,11 +34,6 @@ package com.collab.echo.view.hub.whiteboard.display
 	
 	/**
 	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.UNDO
-	 *
-	 * @langversion 3.0
-	 * @playerversion Flash 9.0.28.0
-	 *  
-	 * @playerversion AIR 1.0
 	 */
 	[Event(name="WhiteboardEvent_undo", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
 	

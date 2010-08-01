@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.containers.panels
 {
+	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
-	import com.collab.echo.view.controls.buttons.BaseExpandButton;
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
@@ -52,7 +52,7 @@ package com.collab.echo.view.containers.panels
 	 * @see com.collab.echo.view.hub.translator.display.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
 	 * @see com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane VideoScrollPane
-	 * @see com.collab.echo.view.controls.buttons.BaseExpandButton BaseExpandButton
+	 * @see com.collab.echo.controls.buttons.BaseExpandButton BaseExpandButton
 	 * 
 	 * @author Thijs Triemstra
 	 */	

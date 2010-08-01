@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
-	import com.collab.site.common.model.vo.UserVO;
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
 	
 	import net.user1.logger.Logger;
@@ -35,7 +35,6 @@ package com.collab.echo.model.proxy
 	import net.user1.reactor.XMLSocketConnection;
 	
 	import org.osflash.thunderbolt.Logger;
-	import com.collab.site.common.model.proxy.PresenceProxy;
 	
 	/**
 	 * Presence <code>Proxy</code> for the Union platform.

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
-	import com.collab.site.common.model.vo.UserVO;
+	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.containers.panels.MenuPanel;
 	import com.collab.echo.view.display.util.StyleDict;
 	import com.collab.echo.view.hub.interfaces.IRoom;

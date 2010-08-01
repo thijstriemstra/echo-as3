@@ -22,8 +22,6 @@
 	<component id="CommunicationPanelEvent" class="com.collab.echo.view.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.view.mediators.CommunicationPanelMediator"/>
 	<component id="ConfigKeyEnum" class="com.collab.echo.model.enum.ConfigKeyEnum"/>
-	<component id="ConfigParser" class="com.collab.echo.model.util.ConfigParser"/>
-	<component id="ConfigProxy" class="com.collab.echo.model.proxy.ConfigProxy"/>
 	<component id="ConfigVO" class="com.collab.echo.model.vo.ConfigVO"/>
 	<component id="ContentLoader" class="com.collab.echo.view.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
@@ -47,11 +45,7 @@
 	<component id="KickMessage" class="com.collab.echo.view.hub.chat.messages.KickMessage"/>
 	<component id="LabelButton" class="com.collab.echo.view.controls.buttons.LabelButton"/>
 	<component id="LeaveChatMessage" class="com.collab.echo.view.hub.chat.messages.LeaveChatMessage"/>
-	<component id="LoadAMFDelegate" class="com.collab.echo.model.business.LoadAMFDelegate"/>
-	<component id="LoadAMFEvent" class="com.collab.echo.model.business.events.LoadAMFEvent"/>
-	<component id="LoadXMLDelegate" class="com.collab.echo.model.business.LoadXMLDelegate"/>
 	<component id="LocalPainter" class="com.collab.echo.view.hub.whiteboard.display.painter.LocalPainter"/>
-	<component id="LocaleProxy" class="com.collab.echo.model.proxy.LocaleProxy"/>
 	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
 	<component id="Menu" class="com.collab.echo.view.controls.Menu"/>
 	<component id="MenuBar" class="com.collab.echo.view.controls.MenuBar"/>
@@ -61,7 +55,6 @@
 	<component id="MenuItemClickEvent" class="com.collab.echo.view.events.MenuItemClickEvent"/>
 	<component id="MenuPanel" class="com.collab.echo.view.containers.panels.MenuPanel"/>
 	<component id="MessageCreator" class="com.collab.echo.view.hub.chat.factory.MessageCreator"/>
-	<component id="ModelPrepCommand" class="com.collab.echo.controller.ModelPrepCommand"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>
 	<component id="PaintBucket" class="com.collab.echo.view.hub.whiteboard.tools.PaintBucket"/>
 	<component id="Painter" class="com.collab.echo.view.hub.whiteboard.display.painter.Painter"/>
@@ -73,7 +66,6 @@
 	<component id="ProfileInfoFormItem" class="com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter"/>
-	<component id="RemotingCommand" class="com.collab.echo.controller.remoting.RemotingCommand"/>
 	<component id="ResourceVO" class="com.collab.echo.model.vo.ResourceVO"/>
 	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>
 	<component id="RoomVO" class="com.collab.echo.model.vo.RoomVO"/>
@@ -82,7 +74,6 @@
 	<component id="ShapeTypes" class="com.collab.echo.view.hub.whiteboard.tools.ShapeTypes"/>
 	<component id="SkinUtils" class="com.collab.echo.view.display.util.SkinUtils"/>
 	<component id="SolidFillButton" class="com.collab.echo.view.controls.buttons.SolidFillButton"/>
-	<component id="StartupMonitorProxy" class="com.collab.echo.model.proxy.StartupMonitorProxy"/>
 	<component id="StringUtil" class="com.collab.echo.util.StringUtil"/>
 	<component id="StrokeTypes" class="com.collab.echo.view.hub.whiteboard.tools.StrokeTypes"/>
 	<component id="StyleDict" class="com.collab.echo.view.display.util.StyleDict"/>

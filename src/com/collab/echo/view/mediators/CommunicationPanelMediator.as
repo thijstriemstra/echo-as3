@@ -39,6 +39,8 @@ package com.collab.echo.view.mediators
     /**
      * A <code>Mediator</code> for interacting with the <code>BaseCommunicationPanel</code>
      * component.
+	 * 
+	 * <p>TODO: refactor this out of puremvc.</p>
      *  
      * @author Thijs Triemstra
      */	
@@ -122,9 +124,8 @@ package com.collab.echo.view.mediators
 			super.onRegister();
 			
 			// connect
-			presence.createConnection( config.config.presenceHost,
-									   config.config.presencePort,
-									   config.config.logging );
+			// XXX: don't harcode this here
+			presence.createConnection( "collab.dev", 9110, true );
 		}
 		
         /**

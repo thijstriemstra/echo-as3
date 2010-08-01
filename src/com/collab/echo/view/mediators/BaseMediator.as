@@ -20,8 +20,6 @@ package com.collab.echo.view.mediators
 {
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.view.display.BaseView;
-	import com.collab.site.common.model.proxy.ConfigProxy;
-	import com.collab.site.common.model.proxy.LocaleProxy;
 	
 	import flash.events.Event;
 	
@@ -38,16 +36,6 @@ package com.collab.echo.view.mediators
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
-		
-        /**
-         * Configuration data. 
-         */		
-        protected var config		: ConfigProxy;
-        
-		/**
-		 * Localization data. 
-		 */        
-		protected var locale		: LocaleProxy;
 		
 		/**
 		 * Presence data. 
@@ -77,8 +65,6 @@ package com.collab.echo.view.mediators
 		override public function onRegister():void
 		{
 			// retrieve the common proxies
-			config = facade.retrieveProxy( ConfigProxy.NAME ) as ConfigProxy;
-			locale = facade.retrieveProxy( LocaleProxy.NAME ) as LocaleProxy;
 			presence = facade.retrieveProxy( PresenceProxy.NAME ) as PresenceProxy;
 			
 			// listen for events

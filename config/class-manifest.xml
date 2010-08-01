@@ -21,7 +21,6 @@
 	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.view.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.view.mediators.CommunicationPanelMediator"/>
-	<component id="ConfigKeyEnum" class="com.collab.echo.model.enum.ConfigKeyEnum"/>
 	<component id="ContentLoader" class="com.collab.echo.view.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.view.hub.whiteboard.tools.DrawingModes"/>

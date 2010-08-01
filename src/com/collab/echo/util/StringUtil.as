@@ -39,7 +39,7 @@ package com.collab.echo.util
 		// ====================================
 
 		/**
-		 * Replace string using the <code>%s<code> delimiter.
+		 * Replace string using the <code>%s</code> delimiter.
 		 * 
 		 * @example The following code demonstrates replace:
 		 * 

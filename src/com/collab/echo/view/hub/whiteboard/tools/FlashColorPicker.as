@@ -20,7 +20,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 {
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.TextUtils;
-	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
+	import com.collab.echo.events.WhiteboardEvent;
 	
 	import fl.controls.ColorPicker;
 	import fl.events.ColorPickerEvent;
@@ -32,9 +32,9 @@ package com.collab.echo.view.hub.whiteboard.tools
 	// ====================================
 	
 	/**
-	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.CHANGE_COLOR
+	 * @eventType com.collab.echo.events.WhiteboardEvent.CHANGE_COLOR
 	 */
-	[Event(name="WhiteboardEvent_changeColor", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	[Event(name="WhiteboardEvent_changeColor", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * @author Thijs Triemstra

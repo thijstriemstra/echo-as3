@@ -20,7 +20,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 {
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.TextUtils;
-	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
+	import com.collab.echo.events.WhiteboardEvent;
 	
 	import fl.controls.Slider;
 	import fl.controls.SliderDirection;
@@ -33,9 +33,9 @@ package com.collab.echo.view.hub.whiteboard.tools
 	// ====================================
 	
 	/**
-	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.CHANGE_THICKNESS
+	 * @eventType com.collab.echo.events.WhiteboardEvent.CHANGE_THICKNESS
 	 */
-	[Event(name="WhiteboardEvent_changeThickness", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	[Event(name="WhiteboardEvent_changeThickness", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * @author Thijs Triemstra

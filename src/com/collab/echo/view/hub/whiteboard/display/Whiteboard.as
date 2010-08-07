@@ -20,12 +20,12 @@ package com.collab.echo.view.hub.whiteboard.display
 {
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.display.util.StyleDict;
+	import com.collab.echo.events.WhiteboardEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.interfaces.IRoom;
 	import com.collab.echo.view.hub.whiteboard.display.painter.LocalPainter;
 	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
 	import com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter;
-	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	
 	/**
 	 * A shared whiteboard.

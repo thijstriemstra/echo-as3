@@ -21,8 +21,8 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
+	import com.collab.echo.events.WhiteboardEvent;
 	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
-	import com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent;
 	import com.greensock.TweenLite;
 	
 	import flash.display.DisplayObject;
@@ -35,14 +35,14 @@ package com.collab.echo.view.hub.whiteboard.display
 	// ====================================
 	
 	/**
-	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.DRAW_LINE
+	 * @eventType com.collab.echo.events.WhiteboardEvent.DRAW_LINE
 	 */
-	[Event(name="WhiteboardEvent_drawLine", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	[Event(name="WhiteboardEvent_drawLine", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
-	 * @eventType com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent.SEND_LINE
+	 * @eventType com.collab.echo.events.WhiteboardEvent.SEND_LINE
 	 */
-	[Event(name="WhiteboardEvent_sendLine", type="com.collab.echo.view.hub.whiteboard.events.WhiteboardEvent")]
+	[Event(name="WhiteboardEvent_sendLine", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * Whiteboard canvas.

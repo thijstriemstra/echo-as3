@@ -34,7 +34,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 	/**
 	 * @eventType com.collab.echo.events.WhiteboardEvent.CHANGE_COLOR
 	 */
-	[Event(name="WhiteboardEvent_changeColor", type="com.collab.echo.events.WhiteboardEvent")]
+	[Event(name="changeColor", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * @author Thijs Triemstra

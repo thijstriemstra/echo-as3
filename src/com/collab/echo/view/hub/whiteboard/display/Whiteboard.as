@@ -27,6 +27,15 @@ package com.collab.echo.view.hub.whiteboard.display
 	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
 	import com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter;
 	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.events.WhiteboardEvent.SEND_LINE
+	 */
+	[Event(name="sendLine", type="com.collab.echo.events.WhiteboardEvent")]
+	
 	/**
 	 * A shared whiteboard.
 	 * 

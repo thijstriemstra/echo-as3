@@ -37,12 +37,12 @@ package com.collab.echo.view.hub.whiteboard.display
 	/**
 	 * @eventType com.collab.echo.events.WhiteboardEvent.DRAW_LINE
 	 */
-	[Event(name="WhiteboardEvent_drawLine", type="com.collab.echo.events.WhiteboardEvent")]
+	[Event(name="drawLine", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.WhiteboardEvent.SEND_LINE
 	 */
-	[Event(name="WhiteboardEvent_sendLine", type="com.collab.echo.events.WhiteboardEvent")]
+	[Event(name="sendLine", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * Whiteboard canvas.

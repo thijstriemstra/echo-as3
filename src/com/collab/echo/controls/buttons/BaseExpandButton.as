@@ -24,6 +24,20 @@ package com.collab.echo.controls.buttons
 	import flash.events.MouseEvent;
 	import flash.text.Font;
 
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.events.CommunicationPanelEvent.EXPAND
+	 */
+	[Event(name="expand", type="com.collab.echo.events.CommunicationPanelEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.CommunicationPanelEvent.COLLAPSE
+	 */
+	[Event(name="collapse", type="com.collab.echo.events.CommunicationPanelEvent")]
+	
 	/**
 	 * Expands the communication panel.
 	 * 

@@ -35,7 +35,7 @@ package com.collab.echo.view.hub.whiteboard.tools
 	/**
 	 * @eventType com.collab.echo.events.WhiteboardEvent.CHANGE_THICKNESS
 	 */
-	[Event(name="WhiteboardEvent_changeThickness", type="com.collab.echo.events.WhiteboardEvent")]
+	[Event(name="changeThickness", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * @author Thijs Triemstra

@@ -36,17 +36,17 @@ package com.collab.echo.view.hub.chat.display
 	/**
 	 * @eventType com.collab.echo.events.ChatEvent.HISTORY_DOWN
 	 */
-	[Event(name="ChatEvent_historyDown", type="com.collab.echo.events.ChatEvent")]
+	[Event(name="historyDown", type="com.collab.echo.events.ChatEvent")]
 
 	/**
 	 * @eventType com.collab.echo.events.ChatEvent.HISTORY_UP
 	 */
-	[Event(name="ChatEvent_historyUp", type="com.collab.echo.events.ChatEvent")]
+	[Event(name="historyUp", type="com.collab.echo.events.ChatEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.ChatEvent.SUBMIT
 	 */
-	[Event(name="ChatEvent_submit", type="com.collab.echo.events.ChatEvent")]
+	[Event(name="submit", type="com.collab.echo.events.ChatEvent")]
 	
 	/**
 	 * Component with a text input field and send button.

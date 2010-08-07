@@ -16,15 +16,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.display.skins
+package com.collab.echo.containers.panels.skins
 {
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
+	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.display.util.SkinUtils;
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.translator.display.Translator;
 	import com.collab.echo.view.hub.video.containers.panels.UserPanel;
-	import com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane;
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 
 	/**
@@ -34,13 +34,21 @@ package com.collab.echo.view.hub.display.skins
 	 */	
 	public class BaseCommunicationPanelSkin
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+
 		public static const PANE				: Class = FlashScrollPane;
-		public static const VIDEO_SCROLL_PANE	: Class = VideoScrollPane;
+		public static const USER_SCROLL_PANE	: Class = UserScrollPane;
 		public static const WHITEBOARD			: Class = Whiteboard;
 		public static const CHAT				: Class = Chat;
 		public static const TRANSLATOR			: Class = Translator;
 		public static const EXPAND_BUTTON		: Class = BaseExpandButton;
 		public static const USER_PANEL			: Class = UserPanel;
+		
+		// ====================================
+		// STATIC METHODS
+		// ====================================
 		
 		/**
 		 * @return 
@@ -49,7 +57,7 @@ package com.collab.echo.view.hub.display.skins
 		{
 			var obj:Object = new Object();
 			obj.pane = SkinUtils.getSkinClass( PANE );
-			obj.videoPane = SkinUtils.getSkinClass( VIDEO_SCROLL_PANE );
+			obj.userPane = SkinUtils.getSkinClass( USER_SCROLL_PANE );
 			obj.whiteboard = SkinUtils.getSkinClass( WHITEBOARD );
 			obj.chat = SkinUtils.getSkinClass( CHAT );
 			obj.translator = SkinUtils.getSkinClass( TRANSLATOR );

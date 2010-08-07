@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers.panels
 {
+	import com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
+	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.view.hub.translator.display.Translator;
-	import com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane;
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
@@ -36,14 +36,14 @@ package com.collab.echo.containers.panels
 	import org.osflash.thunderbolt.Logger;
 
 	/**
-	 * Communication hub view.
+	 * Communication hub.
 	 * 
 	 * <p>Internal <code>FlashScrollPane</code> contains:</p>
 	 * <p><ul>
-	 * <li><code>Whiteboard</code></li>
+	 * <li><code>UserScrollPane</code></li>
 	 * <li><code>Chat</code></li>
+	 * <li><code>Whiteboard</code></li>
 	 * <li><code>Translator</code></li>
-	 * <li><code>VideoScrollPane</code></li>
 	 * <li><code>BaseExpandButton</code></li>
 	 * </ul></p>
 	 * 
@@ -51,7 +51,7 @@ package com.collab.echo.containers.panels
 	 * @see com.collab.echo.view.hub.chat.display.Chat Chat
 	 * @see com.collab.echo.view.hub.translator.display.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
-	 * @see com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane VideoScrollPane
+	 * @see com.collab.echo.containers.scrollpane.UserScrollPane UserScrollPane
 	 * @see com.collab.echo.controls.buttons.BaseExpandButton BaseExpandButton
 	 * 
 	 * @author Thijs Triemstra
@@ -106,9 +106,9 @@ package com.collab.echo.containers.panels
 		protected var translator				: Translator;
 		
 		/**
-		 * The video pane component containing the video panels. 
+		 * The scrollpane component containing the user panels.
 		 */		
-		protected var videoPane					: VideoScrollPane;
+		protected var userPane					: UserScrollPane;
 		
 		/**
 		 * The button that expands the panel. 
@@ -228,7 +228,7 @@ package com.collab.echo.containers.panels
 			//Logger.debug( 'BaseCommunicationPanel.joinedRoom: ' + client );
 			
 			chat.joinedRoom( client );
-			videoPane.joinedRoom( client );
+			userPane.joinedRoom( client );
 			whiteboard.joinedRoom( client );
 		}
 		
@@ -245,7 +245,7 @@ package com.collab.echo.containers.panels
 			//Logger.debug( 'BaseCommunicationPanel.addOccupant: ' + client );
 			
 			// add occupant to components
-			videoPane.addUser( client );
+			userPane.addUser( client );
 			chat.addUser( client );
 			whiteboard.addUser( client );
 			
@@ -277,7 +277,7 @@ package com.collab.echo.containers.panels
 			//Logger.debug( 'BaseCommunicationPanel.removeOccupant: ' + client );
 			
 			// remove occupant from components
-			videoPane.removeUser( client );
+			userPane.removeUser( client );
 			whiteboard.removeUser( client );
 			chat.removeUser( client );
 			
@@ -292,7 +292,7 @@ package com.collab.echo.containers.panels
 		public function numClients( totalClients:int ):void
 		{
 			chat.numClients( totalClients );
-			videoPane.numClients( totalClients );
+			userPane.numClients( totalClients );
 			whiteboard.numClients( totalClients );
 		}
 		
@@ -333,11 +333,11 @@ package com.collab.echo.containers.panels
 			pane.addEventListener( ScrollEvent.SCROLL, scrollHandler, false, 0, true );
 			addChild( pane );
 			
-			// video pane
-			videoPane = _skin.videoPane;
-			videoPane.panelSkin = _skin.userPanel;
-			videoPane.setSize( viewWidth, 200 );
-			pane.add( videoPane );
+			// user pane
+			userPane = _skin.userPane;
+			userPane.panelSkin = _skin.userPanel;
+			userPane.setSize( viewWidth, 200 );
+			pane.add( userPane );
 			
 			// chat
 			chat = _skin.chat;
@@ -377,10 +377,10 @@ package com.collab.echo.containers.panels
 			expandButton.y = pane.height;
 			
 			// video pane
-			videoPane.x = 0;
-			videoPane.y = 0;
+			userPane.x = 0;
+			userPane.y = 0;
 			
-			var compY:int = videoPane.y + videoPane.height;
+			var compY:int = userPane.y + userPane.height;
 			
 			// chat
 			chat.x = 0;
@@ -405,7 +405,7 @@ package com.collab.echo.containers.panels
 			removeChildFromDisplayList( whiteboard );
 			removeChildFromDisplayList( chat );
 			removeChildFromDisplayList( translator );
-			removeChildFromDisplayList( videoPane );
+			removeChildFromDisplayList( userPane );
 			removeChildFromDisplayList( pane );
 			removeChildFromDisplayList( expandButton );
 			

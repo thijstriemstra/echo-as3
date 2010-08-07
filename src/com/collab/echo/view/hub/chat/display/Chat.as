@@ -32,7 +32,7 @@ package com.collab.echo.view.hub.chat.display
 	import flash.media.SoundChannel;
 	
 	/**
-	 * Chat.
+	 * Chat panel.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
@@ -43,7 +43,7 @@ package com.collab.echo.view.hub.chat.display
 		// ====================================
 		
 		/**
-		 * 
+		 * Max length of chat history.
 		 */		
 		public static const HISTORY_MAX_LENGTH		: int = 20;
 		

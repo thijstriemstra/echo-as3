@@ -4,7 +4,7 @@
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
 	<component id="BaseCommunicationPanel" class="com.collab.echo.containers.panels.BaseCommunicationPanel"/>
-	<component id="BaseCommunicationPanelSkin" class="com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin"/>
+	<component id="BaseCommunicationPanelSkin" class="com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.mediators.BaseMediator"/>
 	<component id="BaseRoom" class="com.collab.echo.view.rooms.BaseRoom"/>
@@ -84,8 +84,8 @@
 	<component id="UserInfoBar" class="com.collab.echo.view.hub.video.display.UserInfoBar"/>
 	<component id="UserNameBar" class="com.collab.echo.view.hub.video.display.UserNameBar"/>
 	<component id="UserPanel" class="com.collab.echo.view.hub.video.containers.panels.UserPanel"/>
+	<component id="UserScrollPane" class="com.collab.echo.containers.scrollpane.UserScrollPane"/>
 	<component id="UserVO" class="com.collab.echo.model.vo.UserVO"/>
-	<component id="VideoScrollPane" class="com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane"/>
 	<component id="ViewEvent" class="com.collab.echo.events.ViewEvent"/>
 	<component id="Whiteboard" class="com.collab.echo.view.hub.whiteboard.display.Whiteboard"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>

@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.video.containers.scrollpane
+package com.collab.echo.containers.scrollpane
 {
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.display.util.DrawingUtils;
@@ -31,9 +31,11 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 	import flash.display.Sprite;
 
 	/**
+	 * Scrollpane containing <code>UserPanel</code> instances.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class VideoScrollPane extends FlashScrollPane implements IRoom
+	public class UserScrollPane extends FlashScrollPane implements IRoom
 	{
 		// ====================================
 		// PRIVATE VARS
@@ -71,7 +73,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 * @param height
 		 * @param skin
 		 */		
-		public function VideoScrollPane( width:Number=10, height:Number=200, skin:Class=null )
+		public function UserScrollPane( width:Number=10, height:Number=200, skin:Class=null )
 		{
 			_panelSkin = skin;
 			_panels = new Vector.<UserPanel>();
@@ -92,7 +94,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 */		
 		public function addUser( client:UserVO ):void
 		{
-			//Logger.debug( "VideoScrollPane.addUser: " + client );
+			//Logger.debug( "UserScrollPane.addUser: " + client );
 			
 			// panel
 			_item = new _panelSkin();
@@ -110,7 +112,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 */		
 		public function removeUser( client:UserVO ):void
 		{
-			//Logger.debug( "VideoScrollPane.removeUser: " + client );
+			//Logger.debug( "UserScrollPane.removeUser: " + client );
 			
 			// remove by id
 			for each ( _item in _panels )
@@ -130,7 +132,7 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 */		
 		public function joinedRoom( client:UserVO ):void
 		{
-			//Logger.debug( "VideoScrollPane.joinedRoom: " + client );
+			//Logger.debug( "UserScrollPane.joinedRoom: " + client );
 		}
 		
 		/**
@@ -140,11 +142,11 @@ package com.collab.echo.view.hub.video.containers.scrollpane
 		 */		
 		public function numClients( totalClients:int ):void
 		{
-			//Logger.debug( "VideoScrollPane.numClients: " + totalClients );
+			//Logger.debug( "UserScrollPane.numClients: " + totalClients );
 		}
 		
 		/**
-		 * Set the size of this <code>FlashScrollPane</code>.
+		 * Set the size of this scrollpane.
 		 *  
 		 * @param arg0
 		 * @param arg1

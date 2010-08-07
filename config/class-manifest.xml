@@ -31,7 +31,7 @@
 	<component id="Eraser" class="com.collab.echo.view.hub.whiteboard.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.view.hub.whiteboard.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
-	<component id="FlashColorPicker" class="com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker"/>
+	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
 	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
 	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
 	<component id="IChatRoom" class="com.collab.echo.view.hub.interfaces.IChatRoom"/>
@@ -81,8 +81,8 @@
 	<component id="UnionProxy" class="com.collab.echo.model.proxy.UnionProxy"/>
 	<component id="UnionRoom" class="com.collab.echo.view.rooms.UnionRoom"/>
 	<component id="UserCursor" class="com.collab.echo.view.hub.whiteboard.display.UserCursor"/>
-	<component id="UserInfoBar" class="com.collab.echo.view.hub.video.display.UserInfoBar"/>
-	<component id="UserNameBar" class="com.collab.echo.view.hub.video.display.UserNameBar"/>
+	<component id="UserInfoBar" class="com.collab.echo.controls.UserInfoBar"/>
+	<component id="UserNameBar" class="com.collab.echo.controls.UserNameBar"/>
 	<component id="UserPanel" class="com.collab.echo.containers.panels.UserPanel"/>
 	<component id="UserScrollPane" class="com.collab.echo.containers.scrollpane.UserScrollPane"/>
 	<component id="UserVO" class="com.collab.echo.model.vo.UserVO"/>

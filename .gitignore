@@ -3,3 +3,4 @@
 /lib/*.swf
 /bin
 /bin-debug
+/GenerateManifest

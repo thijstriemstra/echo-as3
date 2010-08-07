@@ -16,20 +16,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.video.display
+package com.collab.echo.controls
 {
 	import com.collab.echo.display.BaseView;
-	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.display.util.TextUtils;
 	
-	import flash.display.Sprite;
-	import flash.text.TextField;
+	import flash.display.Shape;
 	
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class UserNameBar extends BaseView
+	public class UserInfoBar extends BaseView
 	{
 		// ====================================
 		// PROTECTED VARS
@@ -38,14 +35,7 @@ package com.collab.echo.view.hub.video.display
 		/**
 		 * 
 		 */		
-		protected var background		: Sprite;
-		protected var nameField			: TextField;
-		
-		// ====================================
-		// PRIVATE VARS
-		// ====================================
-		
-		private var _title				: String;
+		protected var background	: Shape;
 		
 		/**
 		 * Constructor.
@@ -53,10 +43,8 @@ package com.collab.echo.view.hub.video.display
 		 * @param width
 		 * @param height
 		 */		
-		public function UserNameBar( width:Number=0, height:Number=0, name:String=null )
+		public function UserInfoBar( width:Number=0, height:Number=0 )
 		{
-			_title = name;
-			
 			super( width, height );
 			show();
 		}
@@ -65,19 +53,75 @@ package com.collab.echo.view.hub.video.display
 		// PROTECTED METHODS
 		// ====================================
 		
+		/*
+		// show rank icon
+		newVideo.screen.header_mc.gotoAndStop(rank);
+		
+		// show trivia icon
+		if (trivia == "true")
+		{
+		newVideo.screen.header_mc.trivia_icon._visible = true;
+		}
+		else
+		{
+		newVideo.screen.header_mc.trivia_icon._visible = false;
+		}
+		
+		// admin or mod
+		if (_root.userMode == "guest")
+		{
+		newVideo.screen.header_mc.kick_icon._visible = false;
+		}
+		else
+		{
+		newVideo.screen.header_mc.kick_icon._visible = true;
+		}
+		
+		if ( isSelf() )
+		{
+		// Hide the pm button 
+		newVideo.screen.header_mc.pm_mc._visible = false;
+		newVideo.screen.header_mc.kick_icon._visible = false;
+		}
+		*/
+		
+		/*
+		// show rank icon
+		newVideo.screen.header_mc.gotoAndStop(rank);
+		
+		// admin or mod
+		if (_root.userMode == "guest")
+		{
+		newVideo.screen.header_mc.kick_icon._visible = false;
+		}
+		else
+		{
+		newVideo.screen.header_mc.kick_icon._visible = true;
+		}
+		
+		if ( isSelf() )
+		{
+		// Hide the pm button 
+		newVideo.screen.header_mc.pm_mc._visible = false;
+		newVideo.screen.header_mc.kick_icon._visible = false;
+		}
+		*/
+		
 		/**
 		 * @private 
 		 */		
 		override protected function draw():void
 		{
 			// background
-			background = DrawingUtils.drawFill( viewWidth, viewHeight, 0, StyleDict.WHITE );
-			background.buttonMode = true;
+			background = new Shape();
+			with ( background.graphics )
+			{
+				lineStyle( 1, StyleDict.GREY3, 1 );
+				beginFill( StyleDict.WHITE, 1 );
+				drawRect( 0, 0, viewWidth, viewHeight );
+				endFill();
+			}
 			addChild( background );
-			
-			// name
-			nameField = TextUtils.createTextField( null, _title, 15, StyleDict.BLACK, false, true );
-			addChild( nameField );
 		}
 		
 		/**
@@ -88,10 +132,6 @@ package com.collab.echo.view.hub.video.display
 			// background
 			background.x = 0;
 			background.y = 0;
-			
-			// name
-			nameField.x = viewWidth - ( nameField.width + 10 );
-			nameField.y = 5;
 		}
 		
 		/**
@@ -100,7 +140,6 @@ package com.collab.echo.view.hub.video.display
 		override protected function invalidate():void
 		{
 			removeChildFromDisplayList( background );
-			removeChildFromDisplayList( nameField );
 			
 			super.invalidate();
 		}

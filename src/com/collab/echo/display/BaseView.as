@@ -42,7 +42,7 @@ package com.collab.echo.display
 	[Event(name="creationComplete", type="com.collab.echo.events.ViewEvent")]
 	
 	/**
-	 * Dispatched when the creation of this view has completed.
+	 * Dispatched when this view is closed.
 	 *
 	 * @eventType com.collab.echo.events.ViewEvent.CLOSE_VIEW
 	 */

@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.whiteboard.display
 {
+	import com.collab.echo.controls.FlashColorPicker;
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
-	import com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker;
 	import com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider;
 	
 	import flash.display.Sprite;
@@ -35,7 +35,7 @@ package com.collab.echo.view.hub.whiteboard.display
 	/**
 	 * @eventType com.collab.echo.events.WhiteboardEvent.UNDO
 	 */
-	[Event(name="WhiteboardEvent_undo", type="com.collab.echo.events.WhiteboardEvent")]
+	[Event(name="undo", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
 	 * Toolbar containing a color picker.

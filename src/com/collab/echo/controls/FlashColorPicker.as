@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls
 {
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.TextUtils;
@@ -37,6 +37,8 @@ package com.collab.echo.view.hub.whiteboard.tools
 	[Event(name="changeColor", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
+	 * Whiteboard color picker.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class FlashColorPicker extends BaseView

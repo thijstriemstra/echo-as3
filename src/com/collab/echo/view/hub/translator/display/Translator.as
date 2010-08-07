@@ -61,11 +61,11 @@ package com.collab.echo.view.hub.translator.display
 		{
 			// background
 			background = DrawingUtils.drawFill( viewWidth, viewHeight,
-												0, StyleDict.RED1, 1 ); 
+												0, StyleDict.WHITE, 1 ); 
 			addChild( background );
 			
 			// label
-			label = TextUtils.createTextField( null, "Translator!", 20, StyleDict.WHITE );
+			label = TextUtils.createTextField( null, "Translator!", 12, StyleDict.BLACK );
 			addChild( label );
 		}
 		

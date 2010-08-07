@@ -17,7 +17,7 @@
 	<component id="ChatMessageCreator" class="com.collab.echo.view.hub.chat.factory.ChatMessageCreator"/>
 	<component id="ChatMessageEvent" class="com.collab.echo.view.hub.chat.events.ChatMessageEvent"/>
 	<component id="ChatMessageTypes" class="com.collab.echo.view.hub.chat.factory.ChatMessageTypes"/>
-	<component id="CirclePreloader" class="com.collab.echo.view.preloaders.CirclePreloader"/>
+	<component id="CirclePreloader" class="com.collab.echo.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.mediators.CommunicationPanelMediator"/>

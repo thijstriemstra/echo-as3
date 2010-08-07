@@ -20,7 +20,7 @@ package com.collab.echo.display
 {
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.display.util.TextUtils;
-	import com.collab.echo.view.preloaders.CirclePreloader;
+	import com.collab.echo.preloaders.CirclePreloader;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;

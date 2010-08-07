@@ -73,6 +73,8 @@ package com.collab.echo.controls.menu
 		// ====================================
 		
 		/**
+		 * Height of the internal button.
+		 * 
 		 * @return 
 		 */		
 		public function get buttonHeight():Number
@@ -88,6 +90,8 @@ package com.collab.echo.controls.menu
 		}
 		
 		/**
+		 * Width of the internal button.
+		 * 
 		 * @return 
 		 */		
 		public function get buttonWidth():Number
@@ -103,6 +107,8 @@ package com.collab.echo.controls.menu
 		}
 		
 		/**
+		 * Selection state of this item.
+		 * 
 		 * @return 
 		 */		
 		public function get selected():Boolean
@@ -111,6 +117,8 @@ package com.collab.echo.controls.menu
 		}
 		
 		/**
+		 * Index of this item.
+		 * 
 		 * @return 
 		 */		
 		public function get index():int
@@ -126,6 +134,7 @@ package com.collab.echo.controls.menu
 		 */		
 		public function MenuItem( index:int=0, label:String=null )
 		{
+			// init vars
 			this.label = label;
 			this.name = label;
 			this.itemIndex = index;
@@ -217,6 +226,7 @@ package com.collab.echo.controls.menu
 		protected function onItemClick( event:MouseEvent ):void
 		{
 			event.stopImmediatePropagation();
+			
 			var evt:MenuItemClickEvent = new MenuItemClickEvent( MenuItemClickEvent.CLICK,
 																 itemIndex, label, true, true );
 			dispatchEvent( evt );

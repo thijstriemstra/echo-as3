@@ -1,6 +1,6 @@
--e <?xml version="1.0"?>
+<?xml version="1.0"?>
 
--e <componentPackage>
+<componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
 	<component id="BaseCommunicationPanel" class="com.collab.echo.containers.panels.BaseCommunicationPanel"/>
@@ -89,4 +89,4 @@
 	<component id="ViewEvent" class="com.collab.echo.events.ViewEvent"/>
 	<component id="Whiteboard" class="com.collab.echo.view.hub.whiteboard.display.Whiteboard"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>
--e </componentPackage>
+</componentPackage>

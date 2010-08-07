@@ -192,6 +192,18 @@
                 ]]> 
             </description> 
         </package>
+        <package name="com.collab.echo.view.rooms"> 
+            <shortDescription> 
+                <![CDATA[ 
+                   The com.collab.echo.view.rooms package contains room classes.
+                ]]> 
+            </shortDescription> 
+            <description> 
+                <![CDATA[ 
+                   The com.collab.echo.view.rooms package contains room classes.
+                ]]> 
+            </description> 
+        </package>
         <package name="com.collab.echo.util"> 
             <shortDescription> 
                 <![CDATA[ 

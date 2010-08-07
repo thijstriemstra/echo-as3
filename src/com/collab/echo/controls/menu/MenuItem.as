@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls.menu
 {
+	import com.collab.echo.controls.Menu;
 	import com.collab.echo.controls.buttons.LabelButton;
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.StyleDict;
@@ -37,9 +38,19 @@ package com.collab.echo.controls.menu
 	[Event(name="click", type="com.collab.echo.events.MenuItemClickEvent")]
 	
 	/**
-	 * Menu item.
-	 *  
+	 * The MenuItem class defines the default item renderer for menu items
+	 * in any menu control. By default, the item renderer draws the text associated
+	 * with each menu item.
+	 * 
+	 * <p>You can override the default item renderer by creating a custom item
+	 * renderer.</p>
+	 * 
+	 * @see com.collab.echo.controls.Menu
+	 * @see com.collab.echo.controls.MenuBar
+	 * 
 	 * @author Thijs Triemstra
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class MenuItem extends BaseView
 	{
@@ -67,6 +78,11 @@ package com.collab.echo.controls.menu
 		 * @private 
 		 */		
 		internal var selectedState			: Boolean;
+		
+		/**
+		 * @private 
+		 */		
+		internal var owner					: Menu;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -124,6 +140,25 @@ package com.collab.echo.controls.menu
 		public function get index():int
 		{
 			return itemIndex;
+		}
+		
+		/**
+		 * Contains a reference to the associated Menu control.
+		 * 
+		 * <p>The default value is <code>null</code>.</p>
+		 * 
+		 * @return 
+		 */		
+		public function get menu():Menu
+		{
+			return owner;
+		}
+		public function set menu( val:Menu ):void
+		{
+			if ( val )
+			{
+				owner = val;
+			}
 		}
 		
 		/**

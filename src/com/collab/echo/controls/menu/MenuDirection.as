@@ -19,22 +19,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls.menu
 {
 	/**
+	 * The MenuDirection class contains constants for the valid values 
+	 * of the com.collab.echo.controls.Menu class <code>direction</code> property.
+	 * 
+	 * <p>These constants indicate in which direction the menu will expand.</p>
+	 *
+	 * @see com.collab.echo.controls.Menu Menu
+	 * 
 	 * @author Thijs Triemstra
-	 */	
-	public class MenuDirection
+	 * @langversion 3.0
+	 * @playerversion Flash 9
+	 */
+	public final class MenuDirection
 	{
 		// ====================================
 		// CONSTANTS
 		// ====================================
 		
 		/**
-		 * Horizontal menu. 
+		 * Indicates that the menu will expand in a horizontal direction.
+		 *  
+		 * @langversion 3.0
+		 * @playerversion Flash 9
 		 */		
 		public static const HORIZONTAL		: String = "horizontal";
 		
 		/**
-		 * Vertical menu. 
-		 */		
+		 * Indicates that the menu will expand in a vertical direction.
+		 *  
+		 * @langversion 3.0
+		 * @playerversion Flash 9
+		 */			
 		public static const VERTICAL		: String = "vertical";
 	}
 }

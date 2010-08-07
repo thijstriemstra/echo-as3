@@ -30,32 +30,32 @@ package com.collab.echo.view.rooms
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.JOIN_RESULT
 	 */
-	[Event(name="BaseRoomEvent_joinResult", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="joinResult", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.OCCUPANT_COUNT
 	 */
-	[Event(name="BaseRoomEvent_occupantCount", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="occupantCount", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.ADD_OCCUPANT
 	 */
-	[Event(name="BaseRoomEvent_addOccupant", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="addOccupant", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.REMOVE_OCCUPANT
 	 */
-	[Event(name="BaseRoomEvent_removeOccupant", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="removeOccupant", type="com.collab.echo.events.BaseRoomEvent")]
 
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.ATTRIBUTE_UPDATE
 	 */
-	[Event(name="BaseRoomEvent_attributeUpdate", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="attributeUpdate", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * @eventType com.collab.echo.events.BaseRoomEvent.SYNCHRONIZE
 	 */
-	[Event(name="BaseRoomEvent_synchronize", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="synchronize", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * Base room.

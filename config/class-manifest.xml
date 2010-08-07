@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+-e <?xml version="1.0"?>
 
-<componentPackage>
+-e <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
 	<component id="BaseCommunicationPanel" class="com.collab.echo.containers.panels.BaseCommunicationPanel"/>
@@ -34,9 +34,9 @@
 	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
 	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
 	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
-	<component id="IChatRoom" class="com.collab.echo.view.hub.interfaces.IChatRoom"/>
+	<component id="IChatRoom" class="com.collab.echo.core.IChatRoom"/>
 	<component id="IPChatMessage" class="com.collab.echo.view.hub.chat.messages.IPChatMessage"/>
-	<component id="IRoom" class="com.collab.echo.view.hub.interfaces.IRoom"/>
+	<component id="IRoom" class="com.collab.echo.core.IRoom"/>
 	<component id="JoinChatMessage" class="com.collab.echo.view.hub.chat.messages.JoinChatMessage"/>
 	<component id="KickMessage" class="com.collab.echo.view.hub.chat.messages.KickMessage"/>
 	<component id="LabelButton" class="com.collab.echo.controls.buttons.LabelButton"/>
@@ -58,8 +58,8 @@
 	<component id="PathUtils" class="com.collab.echo.util.PathUtils"/>
 	<component id="Pencil" class="com.collab.echo.view.hub.whiteboard.tools.Pencil"/>
 	<component id="PresenceProxy" class="com.collab.echo.model.proxy.PresenceProxy"/>
-	<component id="ProfileInfo" class="com.collab.echo.view.hub.video.form.ProfileInfo"/>
-	<component id="ProfileInfoFormItem" class="com.collab.echo.view.hub.video.form.item.ProfileInfoFormItem"/>
+	<component id="ProfileInfo" class="com.collab.echo.containers.ProfileInfo"/>
+	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter"/>
 	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>
@@ -89,4 +89,4 @@
 	<component id="ViewEvent" class="com.collab.echo.events.ViewEvent"/>
 	<component id="Whiteboard" class="com.collab.echo.view.hub.whiteboard.display.Whiteboard"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>
-</componentPackage>
+-e </componentPackage>

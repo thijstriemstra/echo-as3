@@ -28,7 +28,11 @@ package com.collab.echo.controls
 	/**
 	 * List of <code>MenuItem</code> instances.
 	 * 
+	 * @see com.collab.echo.controls.menu.MenuItem
+	 * 
 	 * @author Thijs Triemstra
+	 * @langversion 3.0
+     * @playerversion Flash 9
 	 */	
 	public class Menu extends BaseView
 	{
@@ -59,11 +63,6 @@ package com.collab.echo.controls
 		/**
 		 * @private 
 		 */		
-		internal var direction				: String;
-		
-		/**
-		 * @private 
-		 */		
 		internal var label					: String;
 		
 		/**
@@ -80,20 +79,10 @@ package com.collab.echo.controls
 		// PRIVATE VARS
 		// ====================================
 		
-		/**
-		 * @private 
-		 */		
 		private var _offSet					: Point;
-		
-		/**
-		 * @private 
-		 */		
 		private var _horizontalGap			: int;
-		
-		/**
-		 * @private 
-		 */		
 		private var _verticalGap			: int;
+		private var _direction				: String;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -156,6 +145,14 @@ package com.collab.echo.controls
 		}
 		
 		/**
+		 * @return 
+		 */		
+		public function get direction()		: String
+		{
+			return _direction;
+		}
+		
+		/**
 		 * Constructor. 
 		 * 
 		 * @param itemType Type of menu item.
@@ -176,9 +173,9 @@ package com.collab.echo.controls
 				menuType = itemType;
 			}
 			
-			this.direction = direction;
 			this.selectedMenuIndex = -1;
 			
+			_direction = direction;
 			_horizontalGap = horizontalGap;
 			_verticalGap = verticalGap;
 			
@@ -236,13 +233,13 @@ package com.collab.echo.controls
 
 					if ( item )
 					{
-						if ( direction == MenuDirection.VERTICAL )
+						if ( _direction == MenuDirection.VERTICAL )
 						{
 							// position based on equal height
 							item.x = _offSet.x;
 							item.y = _offSet.y + (( item.buttonHeight + _verticalGap ) * index );
 						}
-						else if ( direction == MenuDirection.HORIZONTAL )
+						else if ( _direction == MenuDirection.HORIZONTAL )
 						{
 							// position based on variable width
 							if ( item.width > 0 )

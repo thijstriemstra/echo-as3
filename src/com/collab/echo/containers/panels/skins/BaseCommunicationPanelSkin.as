@@ -28,14 +28,19 @@ package com.collab.echo.containers.panels.skins
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 
 	/**
-	 * Base skin for the <code>CommunicationPanel</code>.
+	 * Base skin for the BaseCommunicationPanel.
 	 * 
+	 * @see com.collab.echo.containers.panels.BaseCommunicationPanel
+	 *
+	 * @langversion 3.0
+     * @playerversion Flash 9
+     * 
 	 * @author Thijs Triemstra
 	 */	
 	public class BaseCommunicationPanelSkin
 	{
 		// ====================================
-		// CONSTANTS
+		// CLASS CONSTANTS
 		// ====================================
 
 		public static const PANE				: Class = FlashScrollPane;

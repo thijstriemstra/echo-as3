@@ -21,7 +21,18 @@ package com.collab.echo.controls.menu
 	import com.collab.echo.display.util.StyleDict;
 
 	/**
+	 * The MenuBarItem class defines the default item renderer for the top-level
+	 * menu bar of a MenuBar control.
+	 * 
+	 * By default, the item renderer draws the text associated with each item in
+	 * the top-level menu bar.
+	 * 
+	 * @see com.collab.echo.controls.MenuBar
+	 * @see com.collab.echo.controls.Menu
+	 * 
 	 * @author Thijs Triemstra
+	 * @langversion 3.0
+	 * @playerversion Flash 9
 	 */	
 	public class MenuBarItem extends MenuItem
 	{

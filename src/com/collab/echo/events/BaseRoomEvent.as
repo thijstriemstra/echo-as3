@@ -21,16 +21,31 @@ package com.collab.echo.events
 	import flash.events.Event;
 	
 	/**
+	 * A BaseRoom object dispatches a BaseRoomEvent object whenever a room's
+	 * attributes or occupants change.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseRoomEvent extends Event
 	{
 		// ====================================
-		// CONSTANTS
+		// CLASS CONSTANTS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal static const NAME				: String = "BaseRoomEvent";
 		
+		/**
+		 * The <code>BaseRoomEvent.JOIN_RESULT</code> constant defines the
+		 * value of the <code>type</code> property of a room event object.
+		 * 
+		 * <p>This event has the following properties:</p>
+		 */		
 		public static const JOIN_RESULT			: String = NAME + "_joinResult";
 		public static const SYNCHRONIZE			: String = NAME + "_synchronize";
 		public static const OCCUPANT_COUNT		: String = NAME + "_occupantCount";

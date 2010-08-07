@@ -27,7 +27,11 @@ package com.collab.echo.containers.panels
 	import flash.geom.Point;
 	
 	/**
+	 * A Panel container consists of a background and a modal overlay.
+	 * 
 	 * @author Thijs Triemstra
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Panel extends BaseView
 	{

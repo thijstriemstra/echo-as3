@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.interfaces
+package com.collab.echo.core
 {
 	import com.collab.echo.model.vo.UserVO;
 	

@@ -15,7 +15,7 @@
 		<mkdir dir="${basedir}/${app.outputfolder}"/>
 	</target>
 
-	<target name="api-docs">
+	<target name="api-docs" description="Generate API documentation">
 		<exec executable="${asdoc.exe}" failonerror="true"
 			  dir="${app.src}">
 			<arg line="-load-config+='${basedir}/${app.config}' -load-config+='${basedir}/${docs.config}'"/>
@@ -33,7 +33,7 @@
 		</exec>
 	</target>
 
-	<target name="build-lib">
+	<target name="build-lib" description="Build SWC library">
 		<exec executable="${compc.exe}" failonerror="true">
 			<arg line="-load-config+='${basedir}/${app.config}'"/>
 			<arg value="-source-path"/>
@@ -47,6 +47,14 @@
 			<arg line="-include-namespaces ${lib.namespace}"/>
 			<arg value="-link-report"/>
 			<arg value="${app.outputfolder}/link-report.xml"/>
+		</exec>
+	</target>
+    
+    <target name="update-manifest" description="Update class manifest">
+		<exec executable="sh" failonerror="true">
+			<arg line="${manifest.exe}"/>
+            <arg line="${app.src}"/>
+			<arg value="test.xml" />
 		</exec>
 	</target>
 

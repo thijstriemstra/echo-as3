@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.display.skins
 {
+	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.display.util.SkinUtils;
-	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.translator.display.Translator;
 	import com.collab.echo.view.hub.video.containers.panels.UserPanel;

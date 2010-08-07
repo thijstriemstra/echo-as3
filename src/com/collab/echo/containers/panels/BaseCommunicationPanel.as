@@ -16,12 +16,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.containers.panels
+package com.collab.echo.containers.panels
 {
+	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin;
@@ -47,7 +47,7 @@ package com.collab.echo.view.containers.panels
 	 * <li><code>BaseExpandButton</code></li>
 	 * </ul></p>
 	 * 
-	 * @see com.collab.echo.view.containers.scrollpane.FlashScrollPane FlashScrollPane
+	 * @see com.collab.echo.containers.scrollpane.FlashScrollPane FlashScrollPane
 	 * @see com.collab.echo.view.hub.chat.display.Chat Chat
 	 * @see com.collab.echo.view.hub.translator.display.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard

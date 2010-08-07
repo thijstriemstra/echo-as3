@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.view.hub.translator.display
 {
+	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.display.util.TextUtils;
-	import com.collab.echo.view.containers.panels.MenuPanel;
 	
 	import flash.text.TextField;
 	

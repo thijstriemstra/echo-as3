@@ -3,7 +3,7 @@
 <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
-	<component id="BaseCommunicationPanel" class="com.collab.echo.view.containers.panels.BaseCommunicationPanel"/>
+	<component id="BaseCommunicationPanel" class="com.collab.echo.containers.panels.BaseCommunicationPanel"/>
 	<component id="BaseCommunicationPanelSkin" class="com.collab.echo.view.hub.display.skins.BaseCommunicationPanelSkin"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.mediators.BaseMediator"/>
@@ -32,7 +32,7 @@
 	<component id="FillTypes" class="com.collab.echo.view.hub.whiteboard.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
 	<component id="FlashColorPicker" class="com.collab.echo.view.hub.whiteboard.tools.FlashColorPicker"/>
-	<component id="FlashScrollPane" class="com.collab.echo.view.containers.scrollpane.FlashScrollPane"/>
+	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
 	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
 	<component id="IChatRoom" class="com.collab.echo.view.hub.interfaces.IChatRoom"/>
 	<component id="IPChatMessage" class="com.collab.echo.view.hub.chat.messages.IPChatMessage"/>
@@ -49,12 +49,12 @@
 	<component id="MenuDirection" class="com.collab.echo.controls.menu.MenuDirection"/>
 	<component id="MenuItem" class="com.collab.echo.controls.menu.MenuItem"/>
 	<component id="MenuItemClickEvent" class="com.collab.echo.events.MenuItemClickEvent"/>
-	<component id="MenuPanel" class="com.collab.echo.view.containers.panels.MenuPanel"/>
+	<component id="MenuPanel" class="com.collab.echo.containers.panels.MenuPanel"/>
 	<component id="MessageCreator" class="com.collab.echo.view.hub.chat.factory.MessageCreator"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>
 	<component id="PaintBucket" class="com.collab.echo.view.hub.whiteboard.tools.PaintBucket"/>
 	<component id="Painter" class="com.collab.echo.view.hub.whiteboard.display.painter.Painter"/>
-	<component id="Panel" class="com.collab.echo.view.containers.panels.Panel"/>
+	<component id="Panel" class="com.collab.echo.containers.panels.Panel"/>
 	<component id="PathUtils" class="com.collab.echo.util.PathUtils"/>
 	<component id="Pencil" class="com.collab.echo.view.hub.whiteboard.tools.Pencil"/>
 	<component id="PresenceProxy" class="com.collab.echo.model.proxy.PresenceProxy"/>

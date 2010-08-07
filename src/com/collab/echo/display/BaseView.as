@@ -20,6 +20,7 @@ package com.collab.echo.display
 {
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.display.util.TextUtils;
+	import com.collab.echo.events.ViewEvent;
 	import com.collab.echo.preloaders.CirclePreloader;
 	
 	import flash.display.DisplayObject;
@@ -29,6 +30,24 @@ package com.collab.echo.display
 	import flash.text.TextFieldAutoSize;
 	import flash.utils.getQualifiedClassName;
 
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * Dispatched when the creation of this view has completed.
+	 *
+	 * @eventType com.collab.echo.events.ViewEvent.CREATION_COMPLETE
+	 */
+	[Event(name="creationComplete", type="com.collab.echo.events.ViewEvent")]
+	
+	/**
+	 * Dispatched when the creation of this view has completed.
+	 *
+	 * @eventType com.collab.echo.events.ViewEvent.CLOSE_VIEW
+	 */
+	[Event(name="closeView", type="com.collab.echo.events.ViewEvent")]
+	
 	/**
 	 * Common display class with shared view functionality.
 	 *  
@@ -36,20 +55,6 @@ package com.collab.echo.display
 	 */	
 	public class BaseView extends Sprite
 	{
-		// ====================================
-		// CONSTANTS
-		// ====================================
-		
-		/**
-		 * Dispatched when the creation of this view has completed.
-		 */		
-		public static const CREATION_COMPLETE	: String = "creationComplete";
-		
-		/**
-		 * Dispatched when this view is closed. 
-		 */		
-		public static const CLOSE_VIEW			: String = "closeView";
-		
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
@@ -142,7 +147,7 @@ package com.collab.echo.display
 			// UI
 			invalidate();
 			
-			dispatchEvent( new Event( CREATION_COMPLETE ));
+			dispatchEvent( new ViewEvent( ViewEvent.CREATION_COMPLETE ));
 		}
 		
 		/**

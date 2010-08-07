@@ -86,6 +86,7 @@
 	<component id="UserPanel" class="com.collab.echo.view.hub.video.containers.panels.UserPanel"/>
 	<component id="UserVO" class="com.collab.echo.model.vo.UserVO"/>
 	<component id="VideoScrollPane" class="com.collab.echo.view.hub.video.containers.scrollpane.VideoScrollPane"/>
+	<component id="ViewEvent" class="com.collab.echo.events.ViewEvent"/>
 	<component id="Whiteboard" class="com.collab.echo.view.hub.whiteboard.display.Whiteboard"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>
 </componentPackage>

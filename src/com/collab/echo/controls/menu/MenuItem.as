@@ -34,7 +34,7 @@ package com.collab.echo.controls.menu
 	 *
 	 * @eventType com.collab.echo.events.MenuItemClickEvent.CLICK
 	 */
-	[Event(name="MenuItemClickEvent_click", type="com.collab.echo.events.MenuItemClickEvent")]
+	[Event(name="click", type="com.collab.echo.events.MenuItemClickEvent")]
 	
 	/**
 	 * Menu item.

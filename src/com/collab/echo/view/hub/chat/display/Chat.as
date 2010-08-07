@@ -367,6 +367,8 @@ package com.collab.echo.view.hub.chat.display
 		// INTERNAL METHODS
 		// ====================================
 		
+		// XXX: refactor
+		
 		/**
 		 * Trim the chat text field.
 		 *  

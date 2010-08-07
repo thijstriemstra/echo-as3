@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.mediators
 {
 	import com.collab.echo.display.BaseView;
+	import com.collab.echo.events.ViewEvent;
 	import com.collab.echo.model.proxy.PresenceProxy;
 	
 	import flash.events.Event;
@@ -68,7 +69,7 @@ package com.collab.echo.mediators
 			presence = facade.retrieveProxy( PresenceProxy.NAME ) as PresenceProxy;
 			
 			// listen for events
-			viewComponent.addEventListener( BaseView.CREATION_COMPLETE, onCreationComplete,
+			viewComponent.addEventListener( ViewEvent.CREATION_COMPLETE, onCreationComplete,
 								       	    false, 0, true );
 		}
 		

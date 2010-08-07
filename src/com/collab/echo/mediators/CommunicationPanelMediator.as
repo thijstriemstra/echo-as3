@@ -20,11 +20,11 @@ package com.collab.echo.mediators
 {
 	import com.collab.echo.containers.panels.BaseCommunicationPanel;
 	import com.collab.echo.events.BaseRoomEvent;
+	import com.collab.echo.events.ChatEvent;
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.RoomVO;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.URLUtils;
-	import com.collab.echo.view.hub.chat.events.ChatEvent;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
 	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;

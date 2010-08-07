@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
+	import com.collab.echo.events.ChatMessageEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.hub.chat.events.ChatMessageEvent;
 	
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;

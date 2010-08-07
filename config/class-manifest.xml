@@ -12,10 +12,10 @@
 	<component id="BaseView" class="com.collab.echo.display.BaseView"/>
 	<component id="Canvas" class="com.collab.echo.view.hub.whiteboard.display.Canvas"/>
 	<component id="Chat" class="com.collab.echo.view.hub.chat.display.Chat"/>
-	<component id="ChatEvent" class="com.collab.echo.view.hub.chat.events.ChatEvent"/>
+	<component id="ChatEvent" class="com.collab.echo.events.ChatEvent"/>
 	<component id="ChatInputField" class="com.collab.echo.view.hub.chat.display.ChatInputField"/>
 	<component id="ChatMessageCreator" class="com.collab.echo.view.hub.chat.factory.ChatMessageCreator"/>
-	<component id="ChatMessageEvent" class="com.collab.echo.view.hub.chat.events.ChatMessageEvent"/>
+	<component id="ChatMessageEvent" class="com.collab.echo.events.ChatMessageEvent"/>
 	<component id="ChatMessageTypes" class="com.collab.echo.view.hub.chat.factory.ChatMessageTypes"/>
 	<component id="CirclePreloader" class="com.collab.echo.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>

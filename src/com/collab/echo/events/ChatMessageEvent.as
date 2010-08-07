@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.events
+package com.collab.echo.events
 {
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	
@@ -25,23 +25,21 @@ package com.collab.echo.view.hub.chat.events
 	/**
 	 * @author Thijs Triemstra
 	 */	
-	public class ChatEvent extends Event
+	public class ChatMessageEvent extends Event
 	{
 		// ====================================
 		// CONSTANTS
 		// ====================================
 		
-		public static const NAME				: String = "ChatEvent";
+		public static const NAME				: String = "ChatMessageEvent";
 		
-		public static const SUBMIT				: String = NAME + "_submit";
-		public static const HISTORY_UP			: String = NAME + "_historyUp";
-		public static const HISTORY_DOWN		: String = NAME + "_historyDown";
+		public static const LOAD_COMPLETE		: String = NAME + "_loadComplete";
 		
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _data						: String;
+		private var _data						: BaseChatMessage;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -50,11 +48,11 @@ package com.collab.echo.view.hub.chat.events
 		/**
 		 * @return 
 		 */		
-		public function get data()				: String
+		public function get data()				: BaseChatMessage
 		{
 			return _data;
 		}
-		public function set data( val:String ):void
+		public function set data( val:BaseChatMessage ):void
 		{
 			_data = val;
 		}
@@ -66,8 +64,7 @@ package com.collab.echo.view.hub.chat.events
 		 * @param bubbles
 		 * @param cancelable
 		 */		
-		public function ChatEvent( type:String, bubbles:Boolean=true,
-								   cancelable:Boolean=true )
+		public function ChatMessageEvent( type:String, bubbles:Boolean=false, cancelable:Boolean=false )
 		{
 			super( type, bubbles, cancelable );
 		}
@@ -78,7 +75,7 @@ package com.collab.echo.view.hub.chat.events
 		
 		override public function toString():String
 		{
-			return "<ChatEvent type='" + type + "' data='" + _data + "' />";
+			return "<ChatMessageEvent type='" + type + "' data='" + _data + "' />";
 		}
 		
 	}

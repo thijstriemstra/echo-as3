@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.display
+package com.collab.echo.controls
 {
 	import com.collab.echo.controls.buttons.LabelButton;
 	import com.collab.echo.display.BaseView;
@@ -53,7 +53,7 @@ package com.collab.echo.view.hub.chat.display
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class ChatInputField extends BaseView
+	public class ChatInput extends BaseView
 	{
 		// ====================================
 		// CONSTANTS
@@ -113,7 +113,7 @@ package com.collab.echo.view.hub.chat.display
 		 * @param width
 		 * @param height
 		 */		
-		public function ChatInputField( width:int, height:int=50 )
+		public function ChatInput( width:int, height:int=50 )
 		{
 			super( width, height );
 			show();

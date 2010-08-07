@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.view.hub.chat.display
 {
 	import com.collab.echo.containers.panels.MenuPanel;
+	import com.collab.echo.controls.ChatInput;
 	import com.collab.echo.events.ChatEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.DateUtils;
@@ -77,7 +78,7 @@ package com.collab.echo.view.hub.chat.display
 		/**
 		 * 
 		 */		
-		protected var inputField					: ChatInputField;
+		protected var inputField					: ChatInput;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -287,8 +288,8 @@ package com.collab.echo.view.hub.chat.display
 		{
 			super.draw();
 			
-			// inputField
-			inputField = new ChatInputField( viewWidth );
+			// input
+			inputField = new ChatInput( viewWidth );
 			inputField.addEventListener( ChatEvent.HISTORY_DOWN, onHistoryDown,
 										 false, 0, true );
 			inputField.addEventListener( ChatEvent.HISTORY_UP, onHistoryUp,

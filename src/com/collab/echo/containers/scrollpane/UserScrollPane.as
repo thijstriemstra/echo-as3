@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers.scrollpane
 {
+	import com.collab.echo.containers.panels.UserPanel;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.interfaces.IRoom;
-	import com.collab.echo.view.hub.video.containers.panels.UserPanel;
 	
 	import fl.controls.ScrollPolicy;
 	

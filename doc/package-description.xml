@@ -1,220 +1,232 @@
-<overviews> 
-    <packages> 
-        <package name="com.collab.echo"> 
-            <shortDescription> 
-                <![CDATA[ 
+<overviews>
+    <packages>
+        <package name="com.collab.echo">
+            <shortDescription>
+                <![CDATA[
                    This section describes the Echo packages.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    This section describes the Echo packages.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.controls"> 
-            <shortDescription> 
-                <![CDATA[ 
-                   The com.collab.echo.controls package contains the Echo user-interface controls. 
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+        <package name="com.collab.echo.controls">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.controls package contains the Echo user-interface controls.
-                ]]> 
-            </description> 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.controls package contains the Echo user-interface controls.
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.controls.buttons"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.controls.buttons">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.controls.buttons package contains the classes used by the button-based controls.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.controls.buttons package contains the classes used by the button-based controls.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.controls.menu"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.controls.menu">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.controls.menu package contains the classes used by the menu-based controls.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.controls.menu package contains the classes used by the menu-based controls.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.events"> 
-            <shortDescription> 
-                <![CDATA[ 
-                   The com.collab.echo.events package contains the classes that define Echo event objects. 
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+        <package name="com.collab.echo.events">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.events package contains the classes that define Echo event objects.
-                ]]> 
-            </description> 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.events package contains the classes that define Echo event objects.
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.containers"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.containers">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.containers package contains the container classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.containers package contains the container classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.containers.form"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.containers.form">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.containers.form package contains the form classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.containers.form package contains the form classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.containers.panels"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.containers.panels">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.containers.panels package contains the panel classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.containers.panels package contains the panel classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.containers.panels.skins"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.containers.panels.skins">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.containers.panels.skins package contains the panel skin classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.containers.panels.skins package contains the panel skin classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.containers.scrollpane"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.containers.scrollpane">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.containers.scrollpane package contains the scrollpane classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.containers.scrollpane package contains the scrollpane classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.display"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.core">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.display.util"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.display">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
+                ]]>
+            </description>
+        </package>
+        <package name="com.collab.echo.display.util">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.display.util package contains the utility classes that the Echo framework uses to build visual displays.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.display.util package contains the utility classes that the Echo framework uses to build visual displays.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.mediators"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.mediators">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.mediators package contains the mediator classes that the Echo framework uses to control views.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.mediators package contains the mediator classes that the Echo framework uses to control views.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.model.proxy"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.model.proxy">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.model.proxy package contains the proxy classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.model.proxy package contains the proxy classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.model.vo"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.model.vo">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.model.vo package contains the value object classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.model.vo package contains the value object classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.preloaders"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.preloaders">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.preloaders package contains the preloader classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.preloaders package contains the preloader classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.view.rooms"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.view.rooms">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.view.rooms package contains room classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.view.rooms package contains room classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-        <package name="com.collab.echo.util"> 
-            <shortDescription> 
-                <![CDATA[ 
+        <package name="com.collab.echo.util">
+            <shortDescription>
+                <![CDATA[
                    The com.collab.echo.util package contains various non-visual utility classes.
-                ]]> 
-            </shortDescription> 
-            <description> 
-                <![CDATA[ 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
                    The com.collab.echo.util package contains various non-visual utility classes.
-                ]]> 
-            </description> 
+                ]]>
+            </description>
         </package>
-    </packages> 
+    </packages>
 </overviews>

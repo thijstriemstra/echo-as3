@@ -10,6 +10,10 @@
    <examples-path>string</examples-path>
    -->
 
+   <main-title>Echo</main-title>
+
+   <window-title>Echo</window-title>
+
    <!-- footer: footer string to be displayed in the documentation.-->
    <footer>Copyright 2003-2010 Collab</footer>
 
@@ -18,5 +22,10 @@
    
    <!-- lenient: Report XHTML errors as warnings.-->
    <lenient>false</lenient>
-   
+
+   <package-description-file>../doc/package-description.xml</package-description-file>
+
+    <keep-xml>false</keep-xml>
+
+    <output>../bin/api</output>
 </flex-config>

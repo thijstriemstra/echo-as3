@@ -9,25 +9,19 @@
 	</target>
 
 	<target name="clean">
-		<delete dir="${basedir}/${docs.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
+		<delete dir="${basedir}/${docs.outputfolder}" failOnError="true"
+                includeEmptyDirs="true"/>
 		<mkdir dir="${basedir}/${docs.outputfolder}"/>
-		<delete dir="${basedir}/${app.outputfolder}" failOnError="true" includeEmptyDirs="true"/>
+		<delete dir="${basedir}/${app.outputfolder}" failOnError="true"
+                includeEmptyDirs="true"/>
 		<mkdir dir="${basedir}/${app.outputfolder}"/>
 	</target>
 
 	<target name="api-docs" description="Generate API documentation">
 		<exec executable="${asdoc.exe}" failonerror="true"
 			  dir="${app.src}">
-			<arg line="-load-config+='${basedir}/${app.config}' -load-config+='${basedir}/${docs.config}'"/>
-			<arg value="-main-title" />
-			<arg value="${docs.title}"/>
-			<arg value="-window-title" />
-			<arg value="${docs.title} - API Documentation"/>
-			<arg value="-package-description-file" />
-			<arg value="${basedir}/${docs.packages}"/>
-			<arg value="-output" />
-			<arg value="${basedir}/${docs.outputfolder}"/>
-			<arg value="-keep-xml"/>
+			<arg line="-load-config+='${basedir}/${docs.config}'"/>
+			<arg value="-load-config+=${basedir}/config/compiler-def.xml" />
 			<arg value="-external-library-path" />
 			<arg value="${basedir}/${lib.path}" />
 		</exec>
@@ -36,17 +30,7 @@
 	<target name="build-lib" description="Build SWC library">
 		<exec executable="${compc.exe}" failonerror="true">
 			<arg line="-load-config+='${basedir}/${app.config}'"/>
-			<arg value="-source-path"/>
-			<arg value="${basedir}"/>
-			<arg value="-output" />
-			<arg value="${basedir}/${app.outputfolder}/${lib.outputfile}"/>
-			<arg line="-library-path+='${basedir}/${lib.path}'" />
-			<arg value="-source-path"/>
-			<arg value="${app.src}"/>
-			<arg line="-namespace ${lib.namespace} ${lib.manifest}" />
-			<arg line="-include-namespaces ${lib.namespace}"/>
-			<arg value="-link-report"/>
-			<arg value="${app.outputfolder}/link-report.xml"/>
+            <arg value="-load-config+=${basedir}/config/compiler-def.xml" />
 		</exec>
 	</target>
     
@@ -56,7 +40,8 @@
             <arg line="${app.src}"/>
 			<arg value="test.xml" />
 		</exec>
-    	<move file="${app.src}/test.xml" tofile="${lib.manifest}" overwrite="true" />
+    	<move file="${app.src}/test.xml" tofile="${lib.manifest}"
+              overwrite="true" />
 	</target>
 
 </project>

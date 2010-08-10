@@ -122,7 +122,7 @@ package com.collab.echo.controls
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
-		
+		           
 		/**
 		 * Instantiate and add child(ren) to display list.
 		 * 

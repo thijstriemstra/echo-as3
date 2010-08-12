@@ -29,6 +29,8 @@ package com.collab.echo.view.rooms
 	import org.osflash.thunderbolt.Logger;
 	
 	/**
+	 * Union-specific room.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
 	public class UnionRoom extends BaseRoom
@@ -85,21 +87,9 @@ package com.collab.echo.view.rooms
 			updateLevels.roomMessages = true;
 		}
 		
-		/**
-		 * Join the <code>Room</code>.
-		 */		
-		override public function join():void
-		{
-			room.join( password, updateLevels );
-		}
-		
-		/**
-		 * Leave the <code>Room</code>.
-		 */		
-		override public function leave():void
-		{
-			room.leave();
-		}
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		/**
 		 * Create a new <code>Room</code>.
@@ -130,6 +120,26 @@ package com.collab.echo.view.rooms
 				join();
 			}
 		}
+		
+		/**
+		 * Join the <code>Room</code>.
+		 */		
+		override public function join():void
+		{
+			room.join( password, updateLevels );
+		}
+		
+		/**
+		 * Leave the <code>Room</code>.
+		 */		
+		override public function leave():void
+		{
+			room.leave();
+		}
+		
+		// ====================================
+		// PROTECTED METHODS
+		// ====================================
 		
 		/**
 		 * Add <code>RoomModule</code> objects.

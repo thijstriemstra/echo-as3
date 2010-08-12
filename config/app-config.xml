@@ -59,6 +59,6 @@
     <!-- target-player: specifies the version of the player the application is targeting.
          Features requiring a later version will not be compiled into the application. The minimum value
          supported is "9.0.0".-->
-    <target-player>10.0.0</target-player>
+    <target-player>10.1.0</target-player>
 
 </flex-config>

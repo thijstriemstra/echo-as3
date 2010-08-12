@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.rooms
+package com.collab.echo.core.rooms
 {
 	import com.collab.echo.events.BaseRoomEvent;
 	
@@ -61,6 +61,9 @@ package com.collab.echo.view.rooms
 	 * Base room.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseRoom extends EventDispatcher
 	{
@@ -70,6 +73,7 @@ package com.collab.echo.view.rooms
 		
 		private var _id			: String;
 		private var _engine		: *;
+		private var _data		: *;
 		private var _autoJoin	: Boolean;
 		private var _evt		: BaseRoomEvent;
 		
@@ -116,6 +120,21 @@ package com.collab.echo.view.rooms
 		}
 		
 		/**
+		 * The room's data object.
+		 * 
+		 * @param val
+		 * @return 
+		 */		
+		public function get data():*
+		{
+			return _data
+		}
+		public function set data( val:* ):void
+		{
+			_data = val;
+		}
+		
+		/**
 		 * Auto join room when it's created.
 		 *  
 		 * @return 
@@ -138,7 +157,7 @@ package com.collab.echo.view.rooms
 			_id = id;
 			_autoJoin = autoJoin;
 			
-			name =  getQualifiedClassName( this ).split("::")[1]
+			name =  getQualifiedClassName( this ).split( "::" )[ 1 ]
 		}
 		
 		// ====================================
@@ -148,8 +167,7 @@ package com.collab.echo.view.rooms
 		/**
 		 * Create a new <code>BaseRoom</code>.
 		 * 
-		 * @param engine
-		 * @return 
+		 * @param engine The parent multi-user engine for the new room.
 		 */		
 		public function create( engine:* ):void
 		{

@@ -87,5 +87,10 @@ package com.collab.echo.events
 			_data = data;
 		}
 		
+		override public function toString():String
+		{
+			return "<BaseRoomEvent type='" + type + "' data='" + _data + "' />";
+		}
+		
 	}
 }

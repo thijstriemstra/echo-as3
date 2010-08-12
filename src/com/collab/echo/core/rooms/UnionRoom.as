@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.rooms
+package com.collab.echo.core.rooms
 {
 	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.Room;
@@ -41,13 +41,13 @@ package com.collab.echo.view.rooms
 		
 		/**
 		 * Used to specify the room modules that should be attached to a
-		 * server-side room at creation time.
+		 * server-side Union room at creation time.
 		 */		
 		protected var modules					: RoomModules;
 		
 		/**
 		 * A data container describing the configuration settings for
-		 * this room.
+		 * this Union room.
 		 */		
 		protected var settings					: RoomSettings;
 		
@@ -59,7 +59,7 @@ package com.collab.echo.view.rooms
 		protected var updateLevels				: UpdateLevels;
 		
 		/**
-		 * A place for clients to engage in group communication.
+		 * A place for Union clients to engage in group communication.
 		 */		
 		protected var room						: Room;
 		
@@ -92,7 +92,7 @@ package com.collab.echo.view.rooms
 		// ====================================
 		
 		/**
-		 * Create a new <code>Room</code>.
+		 * Create a new Union room.
 		 * 
 		 * @param engine
 		 * @return 
@@ -126,6 +126,7 @@ package com.collab.echo.view.rooms
 		 */		
 		override public function join():void
 		{
+			// union specific join command
 			room.join( password, updateLevels );
 		}
 		
@@ -134,6 +135,7 @@ package com.collab.echo.view.rooms
 		 */		
 		override public function leave():void
 		{
+			// union specific leave command
 			room.leave();
 		}
 		

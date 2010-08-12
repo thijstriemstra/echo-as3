@@ -464,7 +464,7 @@ package com.collab.echo.mediators
 		/**
 		 * Cast the <code>viewComponent</code> to its actual type.
 		 *
-		 * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.hub.display.BaseCommunicationPanel
+		 * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.containers.panels.BaseCommunicationPanel
 		 */
 		protected function get panel():BaseCommunicationPanel
 		{

@@ -34,6 +34,8 @@ package com.collab.echo.containers.panels
 	
 	import fl.events.ScrollEvent;
 	
+	import flash.utils.getQualifiedClassName;
+	
 	import org.osflash.thunderbolt.Logger;
 
 	/**
@@ -80,13 +82,6 @@ package com.collab.echo.containers.panels
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
-
-		/**
-		 * The active users in the global room.
-         *
-         * // XXX: not sure if this is right here
-		 */
-		protected var data						: Vector.<UserVO>;
 
 		/**
 		 * The scroll pane where this panel's components are attached to.
@@ -211,11 +206,17 @@ package com.collab.echo.containers.panels
 				_skin = skin;
 			}
 
-			data = new Vector.<UserVO>();
 			_paddingLeft = paddingLeft;
 
 			show();
 		}
+		
+		override public function update( notification:String, ...args:Array ) : void
+        {
+            super.update( notification, args );
+			
+			trace( getQualifiedClassName( this ) + " : " + notification + " - " + data );
+        }
 
 		// ====================================
 		// PUBLIC METHODS
@@ -240,8 +241,10 @@ package com.collab.echo.containers.panels
 		 *
 		 * @param client
 		 */
-		public function addOccupant( client:UserVO ):UserVO
+		override protected function addOccupant():void //client:UserVO ):UserVO
 		{
+			var client:UserVO;
+			
 			// add the user to the data provider
 			data.push( client );
 
@@ -252,7 +255,7 @@ package com.collab.echo.containers.panels
 			chat.addUser( client );
 			whiteboard.addUser( client );
 
-			return client;
+			//return client;
 		}
 
 		/**
@@ -266,6 +269,7 @@ package com.collab.echo.containers.panels
 			var index:int = 0;
 
 			// find the user
+			/*
 			for each ( myGuy in data )
 			{
 				if ( myGuy == client )
@@ -276,7 +280,7 @@ package com.collab.echo.containers.panels
 				}
 				index++;
 			}
-
+			*/
 			//Logger.debug( 'BaseCommunicationPanel.removeOccupant: ' + client );
 
 			// remove occupant from components

@@ -383,7 +383,7 @@ package com.collab.echo.mediators
 			if ( user )
 			{
 				// update view
-				panel.addOccupant( user );
+				//panel.addOccupant( user );
 
 				// show join message for:
 				// - users that are added *after* the local user *joined*

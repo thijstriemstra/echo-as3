@@ -22,6 +22,7 @@ package com.collab.echo.containers.panels
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
+	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.display.Chat;
@@ -30,9 +31,9 @@ package com.collab.echo.containers.panels
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
-
+	
 	import fl.events.ScrollEvent;
-
+	
 	import org.osflash.thunderbolt.Logger;
 
 	/**
@@ -56,7 +57,7 @@ package com.collab.echo.containers.panels
 	 *
 	 * @author Thijs Triemstra
 	 */
-	public class BaseCommunicationPanel extends Panel
+	public class BaseCommunicationPanel extends ClientView
 	{
 		// ====================================
 		// CONSTANTS
@@ -199,7 +200,7 @@ package com.collab.echo.containers.panels
 		public function BaseCommunicationPanel( width:int, height:int, skin:Object=null,
 												paddingLeft:int=0 )
 		{
-			super( true, width, height );
+			super( width, height );
 
 			if ( skin == null )
 			{

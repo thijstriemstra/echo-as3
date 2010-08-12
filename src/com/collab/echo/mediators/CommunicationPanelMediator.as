@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.mediators
 {
     import com.collab.echo.containers.panels.BaseCommunicationPanel;
+    import com.collab.echo.core.rooms.BaseRoom;
     import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatEvent;
     import com.collab.echo.events.WhiteboardEvent;
@@ -29,11 +30,10 @@ package com.collab.echo.mediators
     import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
     import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
     import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-    import com.collab.echo.view.rooms.BaseRoom;
-
+    
     import net.user1.reactor.IClient;
     import net.user1.reactor.RoomEvent;
-
+    
     import org.puremvc.as3.multicore.interfaces.INotification;
 
     /**

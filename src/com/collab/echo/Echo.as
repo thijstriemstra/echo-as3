@@ -37,7 +37,7 @@ package com.collab.echo
 		 * Application name.
 		 */    	
 		public static const NAME									: String = "Echo";
-		public static const VERSION									: String = ECHO::version;
+		public static const VERSION									: String = "0.1a3";
 		
         // general
         public static const STARTUP									: String = "startup";

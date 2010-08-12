@@ -137,7 +137,7 @@ package com.collab.echo.view.hub.whiteboard.display
 			var user:Painter;
 			
 			// add painter
-			if ( client.client.isSelf() )
+			if ( client && client.client.isSelf() )
 			{
 				user = new LocalPainter( client );
 			}

@@ -20,6 +20,7 @@ package com.collab.echo.mediators
 {
     import com.collab.echo.containers.panels.BaseCommunicationPanel;
     import com.collab.echo.core.rooms.BaseRoom;
+    import com.collab.echo.events.BaseConnectionEvent;
     import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatEvent;
     import com.collab.echo.events.WhiteboardEvent;
@@ -126,7 +127,7 @@ package com.collab.echo.mediators
 
 			// connect
 			// XXX: don't harcode this here
-			presence.createConnection( "collab.dev", 9110, true );
+			//presence.createConnection( "collab.dev", 9110, true );
 		}
 
         /**
@@ -137,12 +138,12 @@ package com.collab.echo.mediators
         override public function listNotificationInterests():Array
         {
             return [
-						PresenceProxy.CONNECTING,
-						PresenceProxy.CONNECTION_SUCCESS,
-						PresenceProxy.CONNECTION_CLOSED,
-						PresenceProxy.DISCONNECTING,
-						PresenceProxy.RECEIVE_MESSAGE,
-						PresenceProxy.RECEIVE_LINE
+						BaseConnectionEvent.CONNECTING,
+						BaseConnectionEvent.CONNECTION_SUCCESS,
+						BaseConnectionEvent.CONNECTION_CLOSED,
+						BaseConnectionEvent.DISCONNECTING,
+						BaseRoomEvent.RECEIVE_MESSAGE,
+						BaseRoomEvent.RECEIVE_LINE
 					];
         }
 
@@ -157,23 +158,23 @@ package com.collab.echo.mediators
 
 			switch ( name )
 			{
-				case PresenceProxy.CONNECTING:
+				case BaseConnectionEvent.CONNECTING:
 					// TODO
 					break;
 
-				case PresenceProxy.CONNECTION_SUCCESS:
+				case BaseConnectionEvent.CONNECTION_SUCCESS:
 					createRooms();
 					break;
 
-				case PresenceProxy.CONNECTION_CLOSED:
+				case BaseConnectionEvent.CONNECTION_CLOSED:
 					// TODO
 					break;
 
-				case PresenceProxy.RECEIVE_MESSAGE:
+				case BaseRoomEvent.RECEIVE_MESSAGE:
 					panel.addMessage( BaseChatMessage( note.getBody() ));
 					break;
 
-				case PresenceProxy.RECEIVE_LINE:
+				case BaseRoomEvent.RECEIVE_LINE:
 					panel.addLine( note.getBody() );
 					break;
 			}
@@ -333,7 +334,7 @@ package com.collab.echo.mediators
 		{
 			event.stopPropagation();
 
-			var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
+			var msg:BaseChatMessage = chatManager.create( presence, BaseRoomEvent.SEND_MESSAGE,
 														  event.data, true );
 			presence.sendMessage( msg );
 		}
@@ -360,7 +361,7 @@ package com.collab.echo.mediators
 		{
 			var totalClients:int;
 
-			user = parseEvent( PresenceProxy.ROOM_CLIENT_COUNT, event );
+			user = parseEvent( BaseRoomEvent.OCCUPANT_COUNT, event );
 
 			if ( user )
 			{
@@ -378,7 +379,7 @@ package com.collab.echo.mediators
 		 */
 		protected function addOccupant( event:BaseRoomEvent ):void
 		{
-			var user:UserVO = parseEvent( PresenceProxy.ROOM_CLIENT_ADD, event );
+			var user:UserVO = parseEvent( BaseRoomEvent.ADD_OCCUPANT, event );
 
 			if ( user )
 			{
@@ -390,7 +391,7 @@ package com.collab.echo.mediators
 				// - local user
 				if ( joined || user.client.isSelf() )
 				{
-					var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
+					var msg:BaseChatMessage = chatManager.create( presence, BaseRoomEvent.SEND_MESSAGE,
 																	 ChatMessageTypes.JOIN, true );
 					msg.sender = user.client;
 					msg.receiver = user.client;
@@ -406,7 +407,7 @@ package com.collab.echo.mediators
 		 */
 		protected function removeOccupant( event:BaseRoomEvent ):void
 		{
-			user = parseEvent( PresenceProxy.ROOM_CLIENT_REMOVE, event );
+			user = parseEvent( BaseRoomEvent.REMOVE_OCCUPANT, event );
 
 			if ( user )
 			{
@@ -414,7 +415,7 @@ package com.collab.echo.mediators
 				panel.removeOccupant( user );
 
 				// show leave message
-				var msg:BaseChatMessage = chatManager.create( presence, PresenceProxy.SEND_MESSAGE,
+				var msg:BaseChatMessage = chatManager.create( presence, BaseRoomEvent.SEND_MESSAGE,
 																 ChatMessageTypes.LEAVE, false );
 				msg.sender = user.client;
 				msg.receiver = user.client;
@@ -433,7 +434,7 @@ package com.collab.echo.mediators
 			// so we use presence.self instead, this may change in
 			// a future version of union. We invoke the parseEvent
 			// anyway to get a notification etc
-			user = parseEvent( PresenceProxy.ROOM_JOINED, event );
+			user = parseEvent( BaseRoomEvent.JOIN_RESULT, event );
 			user = parseUser( presence.self );
 
 			if ( user )
@@ -458,7 +459,7 @@ package com.collab.echo.mediators
 		{
 			event.preventDefault();
 
-			sendNotification( PresenceProxy.ROOM_ATTRIBUTE_UPDATE, event );
+			sendNotification( BaseRoomEvent.ATTRIBUTE_UPDATE, event );
 		}
 
 		/**

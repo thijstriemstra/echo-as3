@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model.proxy
 {
     import com.collab.echo.core.rooms.BaseRoom;
+    import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatMessageEvent;
     import com.collab.echo.model.vo.UserVO;
     import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
@@ -46,24 +47,6 @@ package com.collab.echo.model.proxy
 		 */    
 		public static const NAME					: String = "PresenceProxy";
 
-		// Notifications
-		public static const CONNECTING				: String = NAME + "_connecting";
-		public static const CONNECTION_SUCCESS		: String = NAME + "_connectionSuccess";
-		public static const CONNECTION_CLOSED		: String = NAME + "_connectionClosed";
-		public static const DISCONNECTING			: String = NAME + "_disconnecting";
-		public static const ROOM_ADDED				: String = NAME + "_roomAdded";
-		public static const ROOM_REMOVED			: String = NAME + "_roomRemoved";
-		public static const ROOM_COUNT				: String = NAME + "_roomCount";
-		public static const ROOM_JOINED				: String = NAME + "_roomJoined";
-		public static const ROOM_ATTRIBUTE_UPDATE	: String = NAME + "_roomAttributeUpdate";
-		public static const ROOM_CLIENT_COUNT		: String = NAME + "_roomClientCount";
-		public static const ROOM_CLIENT_ADD			: String = NAME + "_roomClientAdd";
-		public static const ROOM_CLIENT_REMOVE		: String = NAME + "_roomClientRemove";
-		public static const SEND_MESSAGE			: String = NAME + "_sendMessage";
-		public static const RECEIVE_MESSAGE			: String = NAME + "_receiveMessage";
-		public static const SEND_LINE				: String = NAME + "_sendLine";
-		public static const RECEIVE_LINE			: String = NAME + "_receiveLine";
-		
 		// ====================================
 		// PUBLIC VARS
 		// ====================================
@@ -204,31 +187,13 @@ package com.collab.echo.model.proxy
 		// ====================================
 		
 		/**
-		 * Connect to the server.
-		 *  
-		 * @param host
-		 * @param port
-		 * @param logging
-		 */		
-		public function createConnection( host:String=null, port:int=80,
-										  logging:Boolean=true ):void
-		{
-			_hostPort = port;
-			_hostUrl = host;
-			_logging = logging;
-			
-			// notify others
-			sendNotification( CONNECTING );
-		}
-		
-		/**
 		 * Send a message to a room.
 		 * 
 		 * @param message
 		 */		
 		public function sendMessage( message:BaseChatMessage ):void
 		{
-			sendNotification( SEND_MESSAGE, message );
+			sendNotification( BaseRoomEvent.SEND_MESSAGE, message );
 			
 			// load the message (can be async)
 			this.message = message;
@@ -244,7 +209,7 @@ package com.collab.echo.model.proxy
 		 */		
 		public function sendLine( message:String ):void
 		{
-			sendNotification( SEND_LINE, message );
+			sendNotification( BaseRoomEvent.SEND_LINE, message );
 		}
 		
 		/**
@@ -253,14 +218,6 @@ package com.collab.echo.model.proxy
 		public function connectRTMP():void
 		{
 			Logger.debug( "TODO: Connect to RTMP server.." );
-		}
-		
-		/**
-		 * Disconnect connection to server. 
-		 */		
-		public function closeConnection():void
-		{
-			sendNotification( DISCONNECTING );
 		}
 		
 		/**
@@ -299,60 +256,8 @@ package com.collab.echo.model.proxy
 		}
 		
 		// ====================================
-		// PROTECTED METHODS
-		// ====================================
-		
-		/**
-		 * Triggered when the connection is established and ready for use.
-		 */		
-		protected function connectionReady():void
-		{
-			_ready = true;
-			
-			sendNotification( CONNECTION_SUCCESS );
-		}
-		
-		/**
-		 * Triggered when the connection is closed.
-		 */		
-		protected function connectionClosed():void
-		{
-			sendNotification( CONNECTION_CLOSED );
-		}
-		
-		// ====================================
 		// EVENT HANDLERS
 		// ====================================
-		
-		/**
-		 * Triggered when a new room is added.
-		 * 
-		 * @param data
-		 */		
-		protected function roomAdded( data:* ):void
-		{
-			sendNotification( ROOM_ADDED, data );
-		}
-		
-		/**
-		 * Triggered when a room has been removed.
-		 * 
-		 * @param data
-		 */		
-		protected function roomRemoved( data:* ):void
-		{
-			sendNotification( ROOM_REMOVED, data );
-		}
-		
-		/**
-		 * Triggered when the total number of rooms has changed.
-		 * 
-		 * @param data
-		 */		
-		protected function roomCount( data:* ):void
-		{
-			sendNotification( ROOM_COUNT, data );
-		}
 		
 		/**
 		 * @param event

@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
+	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.events.ChatMessageEvent;
 	import com.collab.echo.model.vo.UserVO;
 	
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;
 	import net.user1.reactor.ConnectionManager;
-	import net.user1.reactor.HTTPConnection;
 	import net.user1.reactor.IClient;
 	import net.user1.reactor.MessageManager;
 	import net.user1.reactor.Reactor;
@@ -32,7 +32,6 @@ package com.collab.echo.model.proxy
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomManager;
 	import net.user1.reactor.RoomManagerEvent;
-	import net.user1.reactor.XMLSocketConnection;
 	
 	import org.osflash.thunderbolt.Logger;
 	
@@ -130,36 +129,6 @@ package com.collab.echo.model.proxy
 		// ====================================
 
 		/**
-		 * Create the Reactor object and connect to the Union Server.
-		 *  
-		 * @param url
-		 * @param port
-		 * @param logging
-		 */		
-		override public function createConnection( url:String="localhost",
-												   port:int=80, logging:Boolean=true ):void
-		{
-			super.createConnection( url, port );
-			
-			log( "Connecting to Union server on " + url + ":" + port );
-			
-			// create reactor
-			reactor = new Reactor( "", logging );
-			reactor.getLog().setLevel( logLevel );
-			reactor.addEventListener( ReactorEvent.READY, unionConnectionReady );
-			reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
-			
-			// add fallover connections
-			connectionManager.addConnection( new XMLSocketConnection( url, 9110 ));
-			connectionManager.addConnection( new XMLSocketConnection( url, 80 ));
-			connectionManager.addConnection( new XMLSocketConnection( url, 443 ));
-			connectionManager.addConnection( new HTTPConnection( url, 80 ));
-			connectionManager.addConnection( new HTTPConnection( url, 443 ));
-			connectionManager.addConnection( new HTTPConnection( url, 9110 ));
-			reactor.connect();
-		}
-		
-		/**
 		 * @param message
 		 */		
 		override public function sendLine( message:String ):void
@@ -168,7 +137,7 @@ package com.collab.echo.model.proxy
 			
 			// send remotely
 			// XXX: remove hardcoded room name, target rooms[].id instead
-			roomManager.sendMessage( SEND_LINE, [ "collab.global" ],
+			roomManager.sendMessage( BaseRoomEvent.SEND_LINE, [ "collab.global" ],
 									 false, null, message );
 		}
 		/**
@@ -225,24 +194,6 @@ package com.collab.echo.model.proxy
 		}
 		
 		/**
-		 * Ask to be notified when a room with the qualifier
-		 * <code>roomQualifier</code> is updated on the server. 
-		 * 
-		 * @param roomQualifier
-		 */		
-		protected function watchForRooms( roomQualifier:String ):void
-		{
-			// watch for rooms.
-			roomManager.watchForRooms( roomQualifier );
-
-			// in response to this watchForRooms() call, the RoomManager will trigger 
-			// RoomManagerEvent.ROOM_ADDED and RoomManagerEvent.ROOM_REMOVED events.
-			roomManager.addEventListener( RoomManagerEvent.ROOM_ADDED, 		roomAddedListener );
-			roomManager.addEventListener( RoomManagerEvent.ROOM_REMOVED, 	roomRemovedListener );
-			roomManager.addEventListener( RoomManagerEvent.ROOM_COUNT, 		roomCountListener );
-		}
-		
-		/**
 		 * @param msg
 		 */		
 		protected function log( msg:* ):void
@@ -267,7 +218,7 @@ package com.collab.echo.model.proxy
 				// perform only locally
 				message.local = true;
 				message.sender = self;
-				sendNotification( RECEIVE_MESSAGE, message );
+				sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
 			}
 			else
 			{
@@ -289,13 +240,13 @@ package com.collab.echo.model.proxy
 											 chatMessage:String ):void
 		{
 			// XXX: implement toRoom in BaseChatMessage
-			message = messageCreator.create( this, RECEIVE_MESSAGE, chatMessage );
+			message = messageCreator.create( this, BaseRoomEvent.RECEIVE_MESSAGE, chatMessage );
 			message.sender = fromClient;
 			message.receiver = self;
 			
 			log( "UnionProxy.centralChatListener: " + message );
 			
-			sendNotification( RECEIVE_MESSAGE, message );
+			sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
 		}
 		
 		/**
@@ -315,73 +266,7 @@ package com.collab.echo.model.proxy
 			obj.shape = shape;
 			obj.from = fromClient;
 			
-			sendNotification( RECEIVE_LINE, obj );
-		}
-		
-		/**
-		 * Triggered when the connection is established and ready for use.
-		 *  
-		 * @param event
-		 */		
-		protected function unionConnectionReady( event:ReactorEvent ):void 
-		{
-			event.preventDefault();
-			
-			// listen for events
-			messageManager.addMessageListener( SEND_MESSAGE, centralChatListener );
-			messageManager.addMessageListener( SEND_LINE, whiteBoardListener );
-			
-			connectionReady();
-		}
-		
-		/**
-		 * Triggered when the connection is closed.
-		 *  
-		 * @param event
-		 */		
-		protected function unionConnectionClose( event:ReactorEvent ):void 
-		{
-			event.preventDefault();
-			
-			connectionClosed();
-		}
-		
-		/**
-		 * Event listener triggered when a room is added to the 
-         * room manager's room list.
-		 *	 
-		 * @param event
-		 */		
-		protected function roomAddedListener( event:RoomManagerEvent ):void
-		{
-			event.preventDefault();
-			
-			roomAdded( event );
-		}
-		
-		/**
-		 * Event listener triggered when a room is removed from the 
-         * room manager's room list.
-		 * 
-		 * @param event
-		 */		
-		protected function roomRemovedListener( event:RoomManagerEvent ):void
-		{
-			event.preventDefault();
-			
-			roomRemoved( event );
-		}
-		
-		/**
-		 * Event listener triggered when the number of rooms has changed.
-		 * 
-		 * @param event
-		 */		
-		protected function roomCountListener( event:RoomManagerEvent ):void
-		{
-			event.preventDefault();
-			
-			roomCount( event );
+			sendNotification( BaseRoomEvent.RECEIVE_LINE, obj );
 		}
 
 	}

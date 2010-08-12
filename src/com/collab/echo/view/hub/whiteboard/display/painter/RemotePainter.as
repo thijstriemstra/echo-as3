@@ -80,8 +80,11 @@ package com.collab.echo.view.hub.whiteboard.display.painter
 		override protected function draw():void
 		{
 			// cursor
-			_cursor = new UserCursor( data.username );
-			addChild( _cursor );
+			if ( data )
+			{
+				_cursor = new UserCursor( data.username );
+				addChild( _cursor );
+			}
 		}
 		
 		/**
@@ -100,8 +103,11 @@ package com.collab.echo.view.hub.whiteboard.display.painter
 		override protected function layout():void
 		{
 			// cursor
-			_cursor.x = 0;
-			_cursor.y = 0;
+			if ( _cursor )
+			{
+				_cursor.x = 0;
+				_cursor.y = 0;
+			}
 		}
 		
 	}

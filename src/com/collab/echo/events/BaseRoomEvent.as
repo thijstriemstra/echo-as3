@@ -40,6 +40,11 @@ package com.collab.echo.events
 		 */		
 		internal static const NAME				: String = "BaseRoomEvent";
 		
+		public static const SEND_MESSAGE		: String = NAME + "_sendMessage";
+		public static const RECEIVE_MESSAGE		: String = NAME + "_receiveMessage";
+		public static const SEND_LINE			: String = NAME + "_sendLine";
+		public static const RECEIVE_LINE		: String = NAME + "_receiveLine";
+		
 		/**
 		 * The <code>BaseRoomEvent.JOIN_RESULT</code> constant defines the
 		 * value of the <code>type</code> property of a room event object.

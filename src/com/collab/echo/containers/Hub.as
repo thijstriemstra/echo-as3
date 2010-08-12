@@ -38,16 +38,15 @@ package com.collab.echo.containers
 	/**
 	 * Communication hub.
 	 *
-	 * <p>Internal <code>FlashScrollPane</code> contains:</p>
+	 * <p>Contains following components:</p>
 	 * <p><ul>
-	 * <li><code>UserScrollPane</code></li>
-	 * <li><code>Chat</code></li>
-	 * <li><code>Whiteboard</code></li>
-	 * <li><code>Translator</code></li>
-	 * <li><code>BaseExpandButton</code></li>
+	 * <li>UserScrollPane</li>
+	 * <li>Chat</li>
+	 * <li>Whiteboard</li>
+	 * <li>Translator</li>
+	 * <li>BaseExpandButton</li>
 	 * </ul></p>
 	 *
-	 * @see com.collab.echo.containers.scrollpane.FlashScrollPane FlashScrollPane
 	 * @see com.collab.echo.containers.Chat Chat
 	 * @see com.collab.echo.containers.Translator Translator
 	 * @see com.collab.echo.containers.Whiteboard Whiteboard
@@ -55,7 +54,6 @@ package com.collab.echo.containers
 	 * @see com.collab.echo.controls.buttons.BaseExpandButton BaseExpandButton
 	 *
 	 * @author Thijs Triemstra
-	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */

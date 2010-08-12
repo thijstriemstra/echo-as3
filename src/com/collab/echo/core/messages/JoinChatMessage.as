@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.Echo;
 	import com.collab.echo.model.proxy.PresenceProxy;
 	import com.collab.echo.model.vo.UserVO;
 	
@@ -87,8 +86,8 @@ package com.collab.echo.core.messages
 				// set clientVars
 				for each ( clientVar in UserVO.fields )
 				{
-					// XXX: dont reference Echo
-					value = Echo.userCookie.data[ clientVar ];
+					// XXX: fix cookie
+					//value = Echo.userCookie.data[ clientVar ];
 					
 					// SO already contains the var
 					if ( value != null )
@@ -102,14 +101,14 @@ package com.collab.echo.core.messages
 				_sender.setAttribute( "rank", rank );
 				
 				// increment personal visitor counter
-				if ( Echo.userCookie.data.counter != null )
-				{
-					Echo.userCookie.data.counter++;
-				}
-				else
-				{
-					Echo.userCookie.data.counter = 0;
-				}
+				//if ( Echo.userCookie.data.counter != null )
+				//{
+				//	Echo.userCookie.data.counter++;
+				//}
+				//else
+				//{
+				//	Echo.userCookie.data.counter = 0;
+				//}
 				
 				// XXX: localize
 				message = "<b><FONT COLOR='#000000'>" + getWelcomeLine() + " " + username + "!</FONT></b><br>";

@@ -29,7 +29,6 @@
 	<component id="DrawingTool" class="com.collab.echo.controls.tools.DrawingTool"/>
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>
 	<component id="DrawingUtils" class="com.collab.echo.display.util.DrawingUtils"/>
-	<component id="Echo" class="com.collab.echo.Echo"/>
 	<component id="Eraser" class="com.collab.echo.controls.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>

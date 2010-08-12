@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers.panels
 {
+	import com.collab.echo.containers.Chat;
+	import com.collab.echo.containers.Translator;
 	import com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
@@ -25,9 +27,7 @@ package com.collab.echo.containers.panels
 	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.hub.chat.display.Chat;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.translator.display.Translator;
 	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
@@ -51,13 +51,16 @@ package com.collab.echo.containers.panels
 	 * </ul></p>
 	 *
 	 * @see com.collab.echo.containers.scrollpane.FlashScrollPane FlashScrollPane
-	 * @see com.collab.echo.view.hub.chat.display.Chat Chat
-	 * @see com.collab.echo.view.hub.translator.display.Translator Translator
+	 * @see com.collab.echo.containers.Chat Chat
+	 * @see com.collab.echo.containers.Translator Translator
 	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
 	 * @see com.collab.echo.containers.scrollpane.UserScrollPane UserScrollPane
 	 * @see com.collab.echo.controls.buttons.BaseExpandButton BaseExpandButton
 	 *
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */
 	public class BaseCommunicationPanel extends ClientView
 	{

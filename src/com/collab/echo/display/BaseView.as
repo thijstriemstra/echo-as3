@@ -52,6 +52,9 @@ package com.collab.echo.display
 	 * Common display class with shared view functionality.
 	 *  
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseView extends Sprite
 	{

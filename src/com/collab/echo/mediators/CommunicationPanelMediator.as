@@ -293,32 +293,6 @@ package com.collab.echo.mediators
 		// ====================================
 
 		/**
-		 * Dispatched when a new chat message wants to be send.
-		 *
-		 * @param event
-		 */
-		protected function onSubmitChatMessage( event:ChatEvent ):void
-		{
-			event.stopPropagation();
-
-			var msg:BaseChatMessage = chatManager.create( presence, BaseRoomEvent.SEND_MESSAGE,
-														  event.data, true );
-			presence.sendMessage( msg );
-		}
-
-		/**
-		 * Dispatched when a new whiteboard line wants to be send.
-		 *
-		 * @param event
-		 */
-		protected function onSendLine( event:WhiteboardEvent ):void
-		{
-			event.stopPropagation();
-
-			presence.sendLine( event.line );
-		}
-
-		/**
 		 * Dispatched when the number of occupants in a room changes while the
 		 * current client is in, or observing, the room.
 		 *

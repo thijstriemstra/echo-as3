@@ -5,13 +5,14 @@
 	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
 	<component id="BaseCommunicationPanel" class="com.collab.echo.containers.panels.BaseCommunicationPanel"/>
 	<component id="BaseCommunicationPanelSkin" class="com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin"/>
+	<component id="BaseConnectionEvent" class="com.collab.echo.events.BaseConnectionEvent"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.mediators.BaseMediator"/>
-	<component id="BaseRoom" class="com.collab.echo.view.rooms.BaseRoom"/>
+	<component id="BaseRoom" class="com.collab.echo.core.rooms.BaseRoom"/>
 	<component id="BaseRoomEvent" class="com.collab.echo.events.BaseRoomEvent"/>
 	<component id="BaseView" class="com.collab.echo.display.BaseView"/>
 	<component id="Canvas" class="com.collab.echo.view.hub.whiteboard.display.Canvas"/>
-	<component id="Chat" class="com.collab.echo.view.hub.chat.display.Chat"/>
+	<component id="Chat" class="com.collab.echo.containers.Chat"/>
 	<component id="ChatEvent" class="com.collab.echo.events.ChatEvent"/>
 	<component id="ChatInput" class="com.collab.echo.controls.ChatInput"/>
 	<component id="ChatMessageCreator" class="com.collab.echo.view.hub.chat.factory.ChatMessageCreator"/>
@@ -19,9 +20,12 @@
 	<component id="ChatMessageTypes" class="com.collab.echo.view.hub.chat.factory.ChatMessageTypes"/>
 	<component id="CirclePreloader" class="com.collab.echo.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>
+	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
+	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.mediators.CommunicationPanelMediator"/>
 	<component id="ContentLoader" class="com.collab.echo.display.util.ContentLoader"/>
+	<component id="DataOut" class="com.collab.echo.core.DataOut"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.view.hub.whiteboard.tools.DrawingModes"/>
 	<component id="DrawingTool" class="com.collab.echo.view.hub.whiteboard.tools.DrawingTool"/>
@@ -35,6 +39,8 @@
 	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
 	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
 	<component id="IChatRoom" class="com.collab.echo.core.IChatRoom"/>
+	<component id="IClient" class="com.collab.echo.core.IClient"/>
+	<component id="IClientManager" class="com.collab.echo.core.IClientManager"/>
 	<component id="IPChatMessage" class="com.collab.echo.view.hub.chat.messages.IPChatMessage"/>
 	<component id="IRoom" class="com.collab.echo.core.IRoom"/>
 	<component id="JoinChatMessage" class="com.collab.echo.view.hub.chat.messages.JoinChatMessage"/>
@@ -62,8 +68,7 @@
 	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter"/>
-	<component id="RoomTypes" class="com.collab.echo.view.rooms.RoomTypes"/>
-	<component id="RoomVO" class="com.collab.echo.model.vo.RoomVO"/>
+	<component id="RoomTypes" class="com.collab.echo.core.rooms.RoomTypes"/>
 	<component id="SAObject" class="com.collab.echo.model.vo.SAObject"/>
 	<component id="ShapeTool" class="com.collab.echo.view.hub.whiteboard.tools.ShapeTool"/>
 	<component id="ShapeTypes" class="com.collab.echo.view.hub.whiteboard.tools.ShapeTypes"/>
@@ -76,10 +81,10 @@
 	<component id="ThicknessSlider" class="com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider"/>
 	<component id="TimeOnlineMessage" class="com.collab.echo.view.hub.chat.messages.TimeOnlineMessage"/>
 	<component id="ToolBar" class="com.collab.echo.view.hub.whiteboard.display.ToolBar"/>
-	<component id="Translator" class="com.collab.echo.view.hub.translator.display.Translator"/>
+	<component id="Translator" class="com.collab.echo.containers.Translator"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
 	<component id="UnionProxy" class="com.collab.echo.model.proxy.UnionProxy"/>
-	<component id="UnionRoom" class="com.collab.echo.view.rooms.UnionRoom"/>
+	<component id="UnionRoom" class="com.collab.echo.core.rooms.UnionRoom"/>
 	<component id="UserCursor" class="com.collab.echo.view.hub.whiteboard.display.UserCursor"/>
 	<component id="UserInfoBar" class="com.collab.echo.controls.UserInfoBar"/>
 	<component id="UserNameBar" class="com.collab.echo.controls.UserNameBar"/>

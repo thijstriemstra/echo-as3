@@ -16,54 +16,48 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.messages
+package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
-
 	/**
-	 * Check the IP address for a client by username.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class IPChatMessage extends TextChatMessage
+	public class HelpChatMessage extends TextChatMessage
 	{
-		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
+		protected var doc_fields	: Array;
 		
 		/**
 		 * Constructor.
-		 *  
+		 * 
 		 * @param type
 		 * @param data
-		 * @param presence
+		 * @param doc
 		 */		
-		public function IPChatMessage( type:String, data:String, presence:PresenceProxy )
+		public function HelpChatMessage( type:String, data:String, doc:Array )
 		{
-			super( type, data, presence, false, true, false, true );
+			this.doc_fields = doc;
+			
+			super( type, data, null, false, true, false, true );
 		}
 		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * Compile list based on available commands. 
+		 */		
 		override protected function parseCommand():void
 		{
-			// the username
-			var username:String = data.substr( ChatMessageTypes.IP.length + 2 );
-			
-			// retrieve the IP address for the client by username
-			var ip:String = presence.getIPByUserName( username );
+			var field:Class;
 			
 			// XXX: localize
-			if ( ip == null )
+			data = "<b>Command List</b><br>";
+			for each ( field in doc_fields )
 			{
-				ip = "Username not found.";
+				data += field["DOC"] + "<br/>";
 			}
 			
-			data = "<b>IP address for " + username + ": "+ ip +" </b>";
-			
-			// get the users ip
-			execute( data );
+			execute( data.substr( 0, data.length -5 ));
 		}
 		
 		// ====================================
@@ -72,7 +66,8 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<IPChatMessage data='" + data + "' local='" + local + "' />";	
+			return "<HelpChatMessage type='" + type + "' data='" + data +
+				   "' local='" + local + "' append='" + append + "' />";		
 		}
 		
 	}

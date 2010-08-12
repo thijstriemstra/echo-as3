@@ -16,48 +16,53 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.messages
+package com.collab.echo.core.messages
 {
+	import com.collab.echo.model.proxy.PresenceProxy;
+
 	/**
+	 * Check the IP address for a client by username.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class HelpChatMessage extends TextChatMessage
+	public class IPChatMessage extends TextChatMessage
 	{
-		protected var doc_fields	: Array;
+		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
 		
 		/**
 		 * Constructor.
-		 * 
+		 *  
 		 * @param type
 		 * @param data
-		 * @param doc
+		 * @param presence
 		 */		
-		public function HelpChatMessage( type:String, data:String, doc:Array )
+		public function IPChatMessage( type:String, data:String, presence:PresenceProxy )
 		{
-			this.doc_fields = doc;
-			
-			super( type, data, null, false, true, false, true );
+			super( type, data, presence, false, true, false, true );
 		}
 		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
 		
-		/**
-		 * Compile list based on available commands. 
-		 */		
 		override protected function parseCommand():void
 		{
-			var field:Class;
+			// the username
+			var username:String = data.substr( ChatMessageTypes.IP.length + 2 );
+			
+			// retrieve the IP address for the client by username
+			var ip:String = presence.getIPByUserName( username );
 			
 			// XXX: localize
-			data = "<b>Command List</b><br>";
-			for each ( field in doc_fields )
+			if ( ip == null )
 			{
-				data += field["DOC"] + "<br/>";
+				ip = "Username not found.";
 			}
 			
-			execute( data.substr( 0, data.length -5 ));
+			data = "<b>IP address for " + username + ": "+ ip +" </b>";
+			
+			// get the users ip
+			execute( data );
 		}
 		
 		// ====================================
@@ -66,8 +71,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<HelpChatMessage type='" + type + "' data='" + data +
-				   "' local='" + local + "' append='" + append + "' />";		
+			return "<IPChatMessage data='" + data + "' local='" + local + "' />";	
 		}
 		
 	}

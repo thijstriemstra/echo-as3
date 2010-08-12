@@ -16,13 +16,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.factory
+package com.collab.echo.core.messages
 {
 	/**
 	 * The <code>ChatMessageTypes</code> class is an enumeration of constant values
 	 * representing different types for a chat message.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ChatMessageTypes
 	{
@@ -50,6 +53,5 @@ package com.collab.echo.view.hub.chat.factory
 		public static const publicTypes			: Array = [ TEXT, TIME_ONLINE, NICK,
 															PRIVATE_MESSAGE, ME,
 															CLEAR, HELP1, HELP2 ];
-												
 	}
 }

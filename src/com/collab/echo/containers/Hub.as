@@ -22,10 +22,10 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
+	import com.collab.echo.core.messages.BaseChatMessage;
 	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
 	
@@ -241,14 +241,16 @@ package com.collab.echo.containers
 		 *
 		 * @param client
 		 */
-		override protected function addOccupant():void //client:UserVO ):UserVO
+		override protected function addOccupant( args:Array=null ):void //client:UserVO ):UserVO
 		{
 			var client:UserVO;
+			
+			trace("!!!: " + args );
 			
 			// add the user to the data provider
 			data.push( client );
 
-			//Logger.debug( 'BaseCommunicationPanel.addOccupant: ' + client );
+			//Logger.debug( 'Hub.addOccupant: ' + client );
 
 			// add occupant to components
 			userPane.addUser( client );

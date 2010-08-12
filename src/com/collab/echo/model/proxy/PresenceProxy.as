@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.model.proxy
 {
+    import com.collab.echo.core.messages.BaseChatMessage;
+    import com.collab.echo.core.messages.ChatMessageCreator;
     import com.collab.echo.core.rooms.BaseRoom;
     import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatMessageEvent;
     import com.collab.echo.model.vo.UserVO;
-    import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
-    import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     
     import org.osflash.thunderbolt.Logger;
     import org.puremvc.as3.multicore.interfaces.IProxy;

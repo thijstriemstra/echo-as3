@@ -16,14 +16,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.messages
+package com.collab.echo.core.messages
 {
+	import com.collab.echo.model.vo.UserVO;
+	
 	/**
+	 * A public '[username] ...' chat message.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
-	public class ClearChatMessage extends TextChatMessage
+	public class MeChatMessage extends TextChatMessage
 	{
-		public static const DOC	: String = "/clear     ; clear the text in the chat window.";
+		public static const DOC	: String = "/me [message]";
 		
 		/**
 		 * Constructor.
@@ -31,9 +38,9 @@ package com.collab.echo.view.hub.chat.messages
 		 * @param type
 		 * @param data
 		 */		
-		public function ClearChatMessage( type:String, data:String )
+		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, null, false, true, false, false );
+			super( type, data, null, true, false, false, true );
 		}
 		
 		// ====================================
@@ -42,8 +49,32 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override protected function parseCommand():void
 		{
-			// XXX: localize
-			execute( "<b>Cleared chat.</b>" );
+			var bericht:String = data.substr( 4 );
+			
+			if ( bericht.length > 0 )
+			{
+				execute( bericht );
+			}
+		}
+		
+		/**
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
+		{
+			// XXX: this should come from a populated UserVO
+			var username:String = sender.getAttribute( UserVO.USERNAME );
+			
+			// Use the client id as a user name if the user hasn't set a name.
+			if ( username == null )
+			{
+				username = "user" + sender.getClientID();
+			}
+			
+			// add hyperlinks to msg	
+			//data = hiliteURLs( command );
+			
+			message = '<font color="#1B701F"><b>' + username + ' ' + command + '</b></font>';
 		}
 		
 		// ====================================
@@ -52,8 +83,7 @@ package com.collab.echo.view.hub.chat.messages
 		
 		override public function toString():String
 		{
-			return "<ClearChatMessage type='" + type + "' data='" + data +
-				   "' local='" + local + "' />";		
+			return "<MeChatMessage data='" + data + "' />";	
 		}
 		
 	}

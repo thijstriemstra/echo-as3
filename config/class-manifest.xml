@@ -2,7 +2,7 @@
 
 <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
-	<component id="BaseChatMessage" class="com.collab.echo.view.hub.chat.messages.BaseChatMessage"/>
+	<component id="BaseChatMessage" class="com.collab.echo.core.messages.BaseChatMessage"/>
 	<component id="BaseConnectionEvent" class="com.collab.echo.events.BaseConnectionEvent"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseMediator" class="com.collab.echo.mediators.BaseMediator"/>
@@ -13,11 +13,11 @@
 	<component id="Chat" class="com.collab.echo.containers.Chat"/>
 	<component id="ChatEvent" class="com.collab.echo.events.ChatEvent"/>
 	<component id="ChatInput" class="com.collab.echo.controls.ChatInput"/>
-	<component id="ChatMessageCreator" class="com.collab.echo.view.hub.chat.factory.ChatMessageCreator"/>
+	<component id="ChatMessageCreator" class="com.collab.echo.core.messages.ChatMessageCreator"/>
 	<component id="ChatMessageEvent" class="com.collab.echo.events.ChatMessageEvent"/>
-	<component id="ChatMessageTypes" class="com.collab.echo.view.hub.chat.factory.ChatMessageTypes"/>
+	<component id="ChatMessageTypes" class="com.collab.echo.core.messages.ChatMessageTypes"/>
 	<component id="CirclePreloader" class="com.collab.echo.preloaders.CirclePreloader"/>
-	<component id="ClearChatMessage" class="com.collab.echo.view.hub.chat.messages.ClearChatMessage"/>
+	<component id="ClearChatMessage" class="com.collab.echo.core.messages.ClearChatMessage"/>
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
@@ -35,20 +35,20 @@
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
 	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
 	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
-	<component id="HelpChatMessage" class="com.collab.echo.view.hub.chat.messages.HelpChatMessage"/>
+	<component id="HelpChatMessage" class="com.collab.echo.core.messages.HelpChatMessage"/>
 	<component id="Hub" class="com.collab.echo.containers.Hub"/>
 	<component id="HubSkin" class="com.collab.echo.containers.skins.HubSkin"/>
 	<component id="IChatRoom" class="com.collab.echo.core.IChatRoom"/>
 	<component id="IClient" class="com.collab.echo.core.IClient"/>
 	<component id="IClientManager" class="com.collab.echo.core.IClientManager"/>
-	<component id="IPChatMessage" class="com.collab.echo.view.hub.chat.messages.IPChatMessage"/>
+	<component id="IPChatMessage" class="com.collab.echo.core.messages.IPChatMessage"/>
 	<component id="IRoom" class="com.collab.echo.core.IRoom"/>
-	<component id="JoinChatMessage" class="com.collab.echo.view.hub.chat.messages.JoinChatMessage"/>
-	<component id="KickMessage" class="com.collab.echo.view.hub.chat.messages.KickMessage"/>
+	<component id="JoinChatMessage" class="com.collab.echo.core.messages.JoinChatMessage"/>
+	<component id="KickMessage" class="com.collab.echo.core.messages.KickMessage"/>
 	<component id="LabelButton" class="com.collab.echo.controls.buttons.LabelButton"/>
-	<component id="LeaveChatMessage" class="com.collab.echo.view.hub.chat.messages.LeaveChatMessage"/>
+	<component id="LeaveChatMessage" class="com.collab.echo.core.messages.LeaveChatMessage"/>
 	<component id="LocalPainter" class="com.collab.echo.controls.painter.LocalPainter"/>
-	<component id="MeChatMessage" class="com.collab.echo.view.hub.chat.messages.MeChatMessage"/>
+	<component id="MeChatMessage" class="com.collab.echo.core.messages.MeChatMessage"/>
 	<component id="Menu" class="com.collab.echo.controls.Menu"/>
 	<component id="MenuBar" class="com.collab.echo.controls.MenuBar"/>
 	<component id="MenuBarItem" class="com.collab.echo.controls.menu.MenuBarItem"/>
@@ -56,8 +56,8 @@
 	<component id="MenuItem" class="com.collab.echo.controls.menu.MenuItem"/>
 	<component id="MenuItemClickEvent" class="com.collab.echo.events.MenuItemClickEvent"/>
 	<component id="MenuPanel" class="com.collab.echo.containers.panels.MenuPanel"/>
-	<component id="MessageCreator" class="com.collab.echo.view.hub.chat.factory.MessageCreator"/>
-	<component id="NicknameChatMessage" class="com.collab.echo.view.hub.chat.messages.NicknameChatMessage"/>
+	<component id="MessageCreator" class="com.collab.echo.core.messages.MessageCreator"/>
+	<component id="NicknameChatMessage" class="com.collab.echo.core.messages.NicknameChatMessage"/>
 	<component id="PaintBucket" class="com.collab.echo.controls.tools.PaintBucket"/>
 	<component id="Painter" class="com.collab.echo.controls.painter.Painter"/>
 	<component id="Panel" class="com.collab.echo.containers.panels.Panel"/>
@@ -76,10 +76,10 @@
 	<component id="StringUtil" class="com.collab.echo.util.StringUtil"/>
 	<component id="StrokeTypes" class="com.collab.echo.controls.tools.StrokeTypes"/>
 	<component id="StyleDict" class="com.collab.echo.display.util.StyleDict"/>
-	<component id="TextChatMessage" class="com.collab.echo.view.hub.chat.messages.TextChatMessage"/>
+	<component id="TextChatMessage" class="com.collab.echo.core.messages.TextChatMessage"/>
 	<component id="TextUtils" class="com.collab.echo.display.util.TextUtils"/>
 	<component id="ThicknessSlider" class="com.collab.echo.controls.tools.ThicknessSlider"/>
-	<component id="TimeOnlineMessage" class="com.collab.echo.view.hub.chat.messages.TimeOnlineMessage"/>
+	<component id="TimeOnlineMessage" class="com.collab.echo.core.messages.TimeOnlineMessage"/>
 	<component id="ToolBar" class="com.collab.echo.controls.ToolBar"/>
 	<component id="Translator" class="com.collab.echo.containers.Translator"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>

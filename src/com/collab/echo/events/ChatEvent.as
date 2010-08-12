@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.events
 {
-	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	
 	import flash.events.Event;
 	
 	/**

@@ -21,10 +21,10 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ChatInput;
 	import com.collab.echo.core.IChatRoom;
+	import com.collab.echo.core.messages.BaseChatMessage;
 	import com.collab.echo.events.ChatEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.DateUtils;
-	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
 	
 	import fl.controls.TextArea;
 	

@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.chat.messages
+package com.collab.echo.core.messages
 {
 	import com.collab.echo.Echo;
 	import com.collab.echo.model.proxy.PresenceProxy;
@@ -25,7 +25,12 @@ package com.collab.echo.view.hub.chat.messages
 	import flash.system.Capabilities;
 
 	/**
+	 * Joined the chatroom.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class JoinChatMessage extends TextChatMessage
 	{
@@ -46,6 +51,9 @@ package com.collab.echo.view.hub.chat.messages
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			if ( _sender && _receiver )
@@ -54,6 +62,10 @@ package com.collab.echo.view.hub.chat.messages
 			}
 		}
 		
+		/**
+		 * @private 
+		 * @param command
+		 */		
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
@@ -75,6 +87,7 @@ package com.collab.echo.view.hub.chat.messages
 				// set clientVars
 				for each ( clientVar in UserVO.fields )
 				{
+					// XXX: dont reference Echo
 					value = Echo.userCookie.data[ clientVar ];
 					
 					// SO already contains the var

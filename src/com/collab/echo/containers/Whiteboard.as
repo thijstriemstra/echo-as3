@@ -16,16 +16,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.display
+package com.collab.echo.containers
 {
 	import com.collab.echo.containers.panels.MenuPanel;
+	import com.collab.echo.controls.Canvas;
+	import com.collab.echo.controls.ToolBar;
+	import com.collab.echo.controls.painter.LocalPainter;
+	import com.collab.echo.controls.painter.Painter;
+	import com.collab.echo.controls.painter.RemotePainter;
 	import com.collab.echo.core.IRoom;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.hub.whiteboard.display.painter.LocalPainter;
-	import com.collab.echo.view.hub.whiteboard.display.painter.Painter;
-	import com.collab.echo.view.hub.whiteboard.display.painter.RemotePainter;
 	
 	// ====================================
 	// EVENTS
@@ -40,6 +42,9 @@ package com.collab.echo.view.hub.whiteboard.display
 	 * A shared whiteboard.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 10
 	 */	
 	public class Whiteboard extends MenuPanel implements IRoom
 	{

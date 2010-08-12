@@ -16,19 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	/**
-	 * Tool used to paint an area of pixels.
+	 * Tool that can erase pixels.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class PaintBucket extends DrawingTool
+	public class Eraser extends DrawingTool
 	{
 		/**
 		 * Constructor. 
 		 */		
-		public function PaintBucket()
+		public function Eraser()
 		{
 			super();
 		}

@@ -20,12 +20,12 @@ package com.collab.echo.containers.panels.skins
 {
 	import com.collab.echo.containers.Chat;
 	import com.collab.echo.containers.Translator;
+	import com.collab.echo.containers.Whiteboard;
 	import com.collab.echo.containers.panels.UserPanel;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.display.util.SkinUtils;
-	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 
 	/**
 	 * Base skin for the BaseCommunicationPanel.

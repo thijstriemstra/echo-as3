@@ -16,30 +16,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	/**
-	 * Tool used to draw shapes.
-	 * 
-	 * @see com.collab.echo.view.hub.whiteboard.tools.ShapeTypes ShapeTypes
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class ShapeTool extends DrawingTool
+	public class ShapeTypes
 	{
-		public var strokeColor		: uint;
-		public var fillColor		: uint;
-		public var strokeThickness	: int;
-		public var strokeAlpha		: Number;
-		public var fillAlpha		: Number;
-		
-		/**
-		 * Constructor. 
-		 */		
-		public function ShapeTool()
-		{
-			super();
-		}
-		
+		public static const RECTANGLE	: String = "rectangle";
+		public static const CIRCLE		: String = "circle";
+		public static const STAR		: String = "star";
+		public static const TRIANGLE	: String = "triangle";
 	}
+	
 }

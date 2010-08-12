@@ -16,17 +16,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	/**
-	 * Various types of fills.
-	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class FillTypes
+	public class DrawingToolTypes
 	{
-		public static const SOLID		: String = "solid";
-		public static const GRADIENT	: String = "gradient";
-		public static const BITMAP		: String = "bitmap";
+		public static const SHAPER	: String = "shaper";
+		public static const PENCIL	: String = "pencil";
+		public static const BUCKET	: String = "bucket";
+		public static const ERASER	: String = "eraser";
 	}
 }

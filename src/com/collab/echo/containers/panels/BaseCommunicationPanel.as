@@ -20,6 +20,7 @@ package com.collab.echo.containers.panels
 {
 	import com.collab.echo.containers.Chat;
 	import com.collab.echo.containers.Translator;
+	import com.collab.echo.containers.Whiteboard;
 	import com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
@@ -28,7 +29,6 @@ package com.collab.echo.containers.panels
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
-	import com.collab.echo.view.hub.whiteboard.display.Whiteboard;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
 	
@@ -53,7 +53,7 @@ package com.collab.echo.containers.panels
 	 * @see com.collab.echo.containers.scrollpane.FlashScrollPane FlashScrollPane
 	 * @see com.collab.echo.containers.Chat Chat
 	 * @see com.collab.echo.containers.Translator Translator
-	 * @see com.collab.echo.view.hub.whiteboard.display.Whiteboard Whiteboard
+	 * @see com.collab.echo.containers.Whiteboard Whiteboard
 	 * @see com.collab.echo.containers.scrollpane.UserScrollPane UserScrollPane
 	 * @see com.collab.echo.controls.buttons.BaseExpandButton BaseExpandButton
 	 *

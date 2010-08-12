@@ -16,16 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	/**
+	 * Tool used to draw strokes.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class DrawingToolTypes
+	public class Pencil extends DrawingTool
 	{
-		public static const SHAPER	: String = "shaper";
-		public static const PENCIL	: String = "pencil";
-		public static const BUCKET	: String = "bucket";
-		public static const ERASER	: String = "eraser";
+		public function Pencil()
+		{
+			super( DrawingModes.STROKE, DrawingToolTypes.PENCIL );
+		}
+		
 	}
 }

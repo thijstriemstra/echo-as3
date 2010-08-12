@@ -16,18 +16,48 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.painter
 {
+	import com.collab.echo.display.BaseView;
+	import com.collab.echo.model.vo.UserVO;
+	
 	/**
-	 * Supported stroke types.
-	 *  
+	 * A participant of the shared whiteboard.
+	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class StrokeTypes
+	public class Painter extends BaseView
 	{
-		public static const SOLID		: String = "solid";
-		public static const DASHED		: String = "dashed";
-		public static const GRADIENT	: String = "gradient";
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
+		private var _data	: UserVO;
+		
+		// ====================================
+		// GETTER/SETTER
+		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get data():UserVO
+		{
+			return _data;
+		}
+		
+		/**
+		 * Constructor. 
+		 * 
+		 * @param data
+		 */		
+		public function Painter( data:UserVO=null )
+		{
+			_data = data;
+			
+			super();
+			show();
+		}
+		
 	}
-	
 }

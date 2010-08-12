@@ -16,14 +16,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.display
+package com.collab.echo.controls
 {
-	import com.collab.echo.controls.FlashColorPicker;
+	import com.collab.echo.controls.tools.ThicknessSlider;
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
-	import com.collab.echo.view.hub.whiteboard.tools.ThicknessSlider;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;

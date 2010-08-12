@@ -16,13 +16,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.display.painter
+package com.collab.echo.controls.painter
 {
+	import com.collab.echo.controls.UserCursor;
 	import com.collab.echo.model.vo.UserVO;
-	import com.collab.echo.view.hub.whiteboard.display.UserCursor;
 	
 	/**
+	 * Remote user of the whiteboard.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class RemotePainter extends Painter
 	{

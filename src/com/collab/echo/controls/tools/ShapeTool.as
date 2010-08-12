@@ -16,19 +16,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	/**
-	 * Tool that can erase pixels.
+	 * Tool used to draw shapes.
+	 * 
+	 * @see com.collab.echo.view.hub.whiteboard.tools.ShapeTypes ShapeTypes
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Eraser extends DrawingTool
+	public class ShapeTool extends DrawingTool
 	{
+		public var strokeColor		: uint;
+		public var fillColor		: uint;
+		public var strokeThickness	: int;
+		public var strokeAlpha		: Number;
+		public var fillAlpha		: Number;
+		
 		/**
 		 * Constructor. 
 		 */		
-		public function Eraser()
+		public function ShapeTool()
 		{
 			super();
 		}

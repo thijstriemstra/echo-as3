@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.tools
+package com.collab.echo.controls.tools
 {
 	import com.collab.echo.display.BaseView;
 	
@@ -28,12 +28,12 @@ package com.collab.echo.view.hub.whiteboard.tools
 	public class DrawingTool extends BaseView
 	{
 		/**
-		 * @see com.collab.echo.view.hub.whiteboard.tools.DrawingModes DrawingModes 
+		 * @see com.collab.echo.controls.tools.DrawingModes DrawingModes 
 		 */		
 		public var mode		: String;
 		
 		/**
-		 * @see com.collab.echo.view.hub.whiteboard.tools.DrawingToolTypes DrawingToolTypes
+		 * @see com.collab.echo.controls.tools.DrawingToolTypes DrawingToolTypes
 		 */		
 		public var type		: String;
 		

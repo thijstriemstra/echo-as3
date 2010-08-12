@@ -16,47 +16,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.view.hub.whiteboard.display.painter
+package com.collab.echo.controls.tools
 {
-	import com.collab.echo.display.BaseView;
-	import com.collab.echo.model.vo.UserVO;
-	
 	/**
-	 * A participant of the shared whiteboard.
+	 * Tool used to paint an area of pixels.
 	 * 
 	 * @author Thijs Triemstra
 	 */	
-	public class Painter extends BaseView
+	public class PaintBucket extends DrawingTool
 	{
-		// ====================================
-		// PRIVATE VARS
-		// ====================================
-		
-		private var _data	: UserVO;
-		
-		// ====================================
-		// GETTER/SETTER
-		// ====================================
-		
-		/**
-		 * @return 
-		 */		
-		public function get data():UserVO
-		{
-			return _data;
-		}
-		
 		/**
 		 * Constructor. 
-		 * 
-		 * @param data
 		 */		
-		public function Painter( data:UserVO=null )
+		public function PaintBucket()
 		{
-			_data = data;
-			
 			super();
-			show();
 		}
 		
 	}

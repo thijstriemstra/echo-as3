@@ -24,8 +24,6 @@ package com.collab.echo.mediators
     import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatEvent;
     import com.collab.echo.events.WhiteboardEvent;
-    import com.collab.echo.model.proxy.PresenceProxy;
-    import com.collab.echo.model.vo.RoomVO;
     import com.collab.echo.model.vo.UserVO;
     import com.collab.echo.util.URLUtils;
     import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
@@ -68,30 +66,6 @@ package com.collab.echo.mediators
 		protected var roomEvent				: RoomEvent;
 		protected var joined				: Boolean;
 
-		// ====================================
-		// PRIVATE VARS
-		// ====================================
-
-		private var _rooms					: Vector.<RoomVO>;
-
-		// ====================================
-		// ACCESSOR/MUTATOR
-		// ====================================
-
-		/**
-		 * Rooms.
-		 *
-		 * @return
-		 */
-		public function get rooms()			: Vector.<RoomVO>
-		{
-			return _rooms;
-		}
-		public function set rooms( val:Vector.<RoomVO> ):void
-		{
-			_rooms = val;
-		}
-
         /**
          * Constructor.
          *
@@ -104,14 +78,6 @@ package com.collab.echo.mediators
 			// init vars
 			chatManager = new ChatMessageCreator();
 			joined = false;
-
-			// listen for component events
-			panel.addEventListener( ChatEvent.SUBMIT, onSubmitChatMessage, false, 0, true );
-			panel.addEventListener( WhiteboardEvent.SEND_LINE, onSendLine, false, 0, true );
-
-			// XXX: localize
-			panel.welcomeMessage = "Hello!";
-			panel.sendLabel = "Submit";
         }
 
 		// ====================================
@@ -125,6 +91,7 @@ package com.collab.echo.mediators
 		{
 			super.onRegister();
 
+			
 			// connect
 			// XXX: don't harcode this here
 			//presence.createConnection( "collab.dev", 9110, true );

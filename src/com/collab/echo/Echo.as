@@ -1,5 +1,5 @@
 /*
-Collab.nl application
+Echo project.
 
 Copyright (C) 2003-2010 Collab
 
@@ -38,6 +38,7 @@ package com.collab.echo
 		 */    	
 		public static const NAME									: String = "Echo";
 		public static const VERSION									: String = ECHO::version;
+		
         // general
         public static const STARTUP									: String = "startup";
 	 	public static const LOG_OUTPUT								: String = "logOutput";

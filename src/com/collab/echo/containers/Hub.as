@@ -16,14 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.containers.panels
+package com.collab.echo.containers
 {
-	import com.collab.echo.containers.Chat;
-	import com.collab.echo.containers.Translator;
-	import com.collab.echo.containers.Whiteboard;
-	import com.collab.echo.containers.panels.skins.BaseCommunicationPanelSkin;
 	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
+	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
@@ -62,7 +59,7 @@ package com.collab.echo.containers.panels
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */
-	public class BaseCommunicationPanel extends ClientView
+	public class Hub extends ClientView
 	{
 		// ====================================
 		// CONSTANTS
@@ -195,14 +192,14 @@ package com.collab.echo.containers.panels
 		 * @param skin
 		 * @param paddingLeft
 		 */
-		public function BaseCommunicationPanel( width:int, height:int, skin:Object=null,
-												paddingLeft:int=0 )
+		public function Hub( width:int, height:int, skin:Object=null,
+							 paddingLeft:int=0 )
 		{
 			super( width, height );
 
 			if ( skin == null )
 			{
-				_skin = BaseCommunicationPanelSkin.getSkin();
+				_skin = HubSkin.getSkin();
 			}
 			else
 			{

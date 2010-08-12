@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.containers.panels.skins
+package com.collab.echo.containers.skins
 {
 	import com.collab.echo.containers.Chat;
 	import com.collab.echo.containers.Translator;
@@ -28,16 +28,16 @@ package com.collab.echo.containers.panels.skins
 	import com.collab.echo.display.util.SkinUtils;
 
 	/**
-	 * Base skin for the BaseCommunicationPanel.
+	 * Base skin for the Hub.
 	 * 
-	 * @see com.collab.echo.containers.panels.BaseCommunicationPanel
+	 * @see com.collab.echo.containers.Hub
 	 *
 	 * @langversion 3.0
      * @playerversion Flash 9
      * 
 	 * @author Thijs Triemstra
 	 */	
-	public class BaseCommunicationPanelSkin
+	public class HubSkin
 	{
 		// ====================================
 		// CLASS CONSTANTS

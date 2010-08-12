@@ -18,17 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.mediators
 {
-    import com.collab.echo.containers.panels.BaseCommunicationPanel;
+    import com.collab.echo.containers.Hub;
+    import com.collab.echo.core.messages.BaseChatMessage;
+    import com.collab.echo.core.messages.ChatMessageCreator;
+    import com.collab.echo.core.messages.ChatMessageTypes;
     import com.collab.echo.core.rooms.BaseRoom;
     import com.collab.echo.events.BaseConnectionEvent;
     import com.collab.echo.events.BaseRoomEvent;
-    import com.collab.echo.events.ChatEvent;
-    import com.collab.echo.events.WhiteboardEvent;
     import com.collab.echo.model.vo.UserVO;
     import com.collab.echo.util.URLUtils;
-    import com.collab.echo.view.hub.chat.factory.ChatMessageCreator;
-    import com.collab.echo.view.hub.chat.factory.ChatMessageTypes;
-    import com.collab.echo.view.hub.chat.messages.BaseChatMessage;
     
     import net.user1.reactor.IClient;
     import net.user1.reactor.RoomEvent;
@@ -39,9 +37,11 @@ package com.collab.echo.mediators
      * A <code>Mediator</code> for interacting with the <code>BaseCommunicationPanel</code>
      * component.
 	 *
-	 * <p>TODO: refactor this out of puremvc.</p>
+	 * <p>TODO: refactor all multi-user stuff out of this puremvc mediator.</p>
      *
      * @author Thijs Triemstra
+     * @langversion 3.0
+ 	 * @playerversion Flash 9
      */
     public class CommunicationPanelMediator extends BaseMediator
     {
@@ -71,7 +71,7 @@ package com.collab.echo.mediators
          *
          * @param viewComponent
          */
-        public function CommunicationPanelMediator( viewComponent:BaseCommunicationPanel )
+        public function CommunicationPanelMediator( viewComponent:Hub )
         {
             super( NAME, viewComponent );
 
@@ -94,7 +94,7 @@ package com.collab.echo.mediators
 			
 			// connect
 			// XXX: don't harcode this here
-			//presence.createConnection( "collab.dev", 9110, true );
+			//presence.createConnection( "localhost", 9110, true );
 		}
 
         /**
@@ -157,19 +157,18 @@ package com.collab.echo.mediators
 		protected function createRooms():void
 		{
 			var newRooms:Vector.<BaseRoom> = new Vector.<BaseRoom>();
-			var room:BaseRoom;
-			var item:RoomVO;
-
-			for each ( item in _rooms )
+			var item:BaseRoom;
+			
+			for each ( item in newRooms )
 			{
 				// create new room and listen for events
-				room = new item.type( item.id );
-				room.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
-				room.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
-				room.addEventListener( BaseRoomEvent.OCCUPANT_COUNT, numClients );
-				room.addEventListener( BaseRoomEvent.JOIN_RESULT, joinedRoom );
-				room.addEventListener( BaseRoomEvent.ATTRIBUTE_UPDATE, attributeUpdate );
-				newRooms.push( room );
+				//item = new item.type( item.id );
+				item.addEventListener( BaseRoomEvent.ADD_OCCUPANT, addOccupant );
+				item.addEventListener( BaseRoomEvent.REMOVE_OCCUPANT, removeOccupant );
+				item.addEventListener( BaseRoomEvent.OCCUPANT_COUNT, numClients );
+				item.addEventListener( BaseRoomEvent.JOIN_RESULT, joinedRoom );
+				item.addEventListener( BaseRoomEvent.ATTRIBUTE_UPDATE, attributeUpdate );
+				newRooms.push( item );
 			}
 
 			if ( presence )
@@ -406,11 +405,11 @@ package com.collab.echo.mediators
 		/**
 		 * Cast the <code>viewComponent</code> to its actual type.
 		 *
-		 * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.containers.panels.BaseCommunicationPanel
+		 * @return BaseCommunicationPanel the viewComponent cast to com.collab.echo.containers.Hub
 		 */
-		protected function get panel():BaseCommunicationPanel
+		protected function get panel():Hub
 		{
-			return viewComponent as BaseCommunicationPanel;
+			return viewComponent as Hub;
 		}
 
     }

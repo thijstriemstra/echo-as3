@@ -24,6 +24,9 @@ package com.collab.echo.events
 	
 	/**
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ChatMessageEvent extends Event
 	{

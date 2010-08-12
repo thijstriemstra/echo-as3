@@ -26,6 +26,9 @@ package com.collab.echo
      * A concrete <code>Facade</code> for the <code>Echo</code> framework.
      * 
      * @author Thijs Triemstra
+     * 
+     * @langversion 3.0
+ 	 * @playerversion Flash 9
      */
     public class Echo extends Facade
     {

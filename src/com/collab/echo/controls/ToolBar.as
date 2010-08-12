@@ -40,6 +40,9 @@ package com.collab.echo.controls
 	 * Toolbar containing a color picker.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ToolBar extends BaseView
 	{

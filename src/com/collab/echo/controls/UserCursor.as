@@ -28,6 +28,9 @@ package com.collab.echo.controls
 	
 	/**
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class UserCursor extends BaseView
 	{

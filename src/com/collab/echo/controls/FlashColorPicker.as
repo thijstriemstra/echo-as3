@@ -40,6 +40,9 @@ package com.collab.echo.controls
 	 * Whiteboard color picker.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class FlashColorPicker extends BaseView
 	{

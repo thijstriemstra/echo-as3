@@ -48,6 +48,9 @@ package com.collab.echo.controls
 	 * Whiteboard canvas.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Canvas extends BaseView
 	{

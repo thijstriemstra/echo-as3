@@ -22,6 +22,9 @@ package com.collab.echo.controls.tools
 	 * Tool that can erase pixels.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Eraser extends DrawingTool
 	{

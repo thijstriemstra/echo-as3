@@ -39,7 +39,7 @@ package com.collab.echo.containers
 	[Event(name="sendLine", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
-	 * A shared whiteboard.
+	 * Shared whiteboard.
 	 * 
 	 * @author Thijs Triemstra
 	 * 

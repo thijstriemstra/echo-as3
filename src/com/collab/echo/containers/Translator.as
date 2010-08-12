@@ -26,7 +26,12 @@ package com.collab.echo.containers
 	import flash.text.TextField;
 	
 	/**
+	 * Language translator component.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Translator extends MenuPanel
 	{

@@ -25,7 +25,14 @@ package com.collab.echo.containers.form
 	import flash.text.TextField;
 
 	/**
+	 * FormItem for the ProfileInfo component.
+	 * 
+	 * @see com.collab.echo.containers.ProfileInfo
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ProfileInfoFormItem extends BaseView
 	{

@@ -52,6 +52,9 @@ package com.collab.echo.controls
 	 * Component with a text input field and send button.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ChatInput extends BaseView
 	{

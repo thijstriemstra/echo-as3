@@ -26,7 +26,14 @@ package com.collab.echo.containers.panels
 	import flash.display.Sprite;
 	
 	/**
+	 * Panel containing a MenuBar.
+	 * 
+	 * @see com.collab.echo.controls.MenuBar
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class MenuPanel extends BaseView
 	{

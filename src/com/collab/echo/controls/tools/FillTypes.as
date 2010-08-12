@@ -22,6 +22,9 @@ package com.collab.echo.controls.tools
 	 * Various types of fills.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class FillTypes
 	{

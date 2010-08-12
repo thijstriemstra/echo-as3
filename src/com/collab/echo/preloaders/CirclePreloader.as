@@ -25,10 +25,19 @@ package com.collab.echo.preloaders
 	import flash.utils.Timer;
 	
 	/**
+	 * Circular, Apple-style, preloader animation.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class CirclePreloader extends Sprite
 	{
+		// ====================================
+		// PRIVATE VARS
+		// ====================================
+		
 		private var timer		: Timer;
 		private var slices		: int;
 		private var radius		: int;
@@ -48,6 +57,10 @@ package com.collab.echo.preloaders
 			draw();
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
+		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
 		
 		private function onAddedToStage(event:Event):void
 		{
@@ -71,6 +84,10 @@ package com.collab.echo.preloaders
 		{
 			rotation = (rotation + (360 / slices)) % 360;
 		}
+		
+		// ====================================
+		// PRIVATE METHODS
+		// ====================================
 		
 		private function draw():void
 		{

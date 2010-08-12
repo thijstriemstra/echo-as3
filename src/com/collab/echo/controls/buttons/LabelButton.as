@@ -33,6 +33,9 @@ package com.collab.echo.controls.buttons
 	 * Simple transparent button with a label.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */
 	public class LabelButton extends Sprite
 	{

@@ -21,7 +21,12 @@ package com.collab.echo.events
 	import flash.events.Event;
 	
 	/**
+	 * Menu item was clicked.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class MenuItemClickEvent extends Event
 	{
@@ -29,6 +34,9 @@ package com.collab.echo.events
 		// CONSTANTS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		internal static const NAME	: String = "MenuItemClickEvent_";
 		public static const CLICK 	: String = NAME + "click";
 		

@@ -41,8 +41,12 @@ package com.collab.echo.model.proxy
 	 * <p>Manages connection and rooms. Users are managed in <code>BaseRoom</code>
 	 * instances.</p>
 	 * 
-	 * @see com.collab.echo.view.rooms.BaseRoom BaseRoom
+	 * @see com.collab.echo.core.rooms.BaseRoom BaseRoom
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class UnionProxy extends PresenceProxy
 	{

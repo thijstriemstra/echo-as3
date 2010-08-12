@@ -24,6 +24,9 @@ package com.collab.echo.core
 	 * Interface for a chat room.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public interface IChatRoom extends IRoom
 	{

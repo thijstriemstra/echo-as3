@@ -35,6 +35,9 @@ package com.collab.echo.containers
 	 * Chat panel.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Chat extends MenuPanel implements IChatRoom
 	{

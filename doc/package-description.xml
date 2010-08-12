@@ -48,6 +48,18 @@
                 ]]>
             </description>
         </package>
+        <package name="com.collab.echo.controls.tools">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.controls.tools package contains the controls used by the whiteboard.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.controls.tools package contains the controls used by the whiteboard.
+                ]]>
+            </description>
+        </package>
         <package name="com.collab.echo.events">
             <shortDescription>
                 <![CDATA[
@@ -96,15 +108,15 @@
                 ]]>
             </description>
         </package>
-        <package name="com.collab.echo.containers.panels.skins">
+        <package name="com.collab.echo.containers.skins">
             <shortDescription>
                 <![CDATA[
-                   The com.collab.echo.containers.panels.skins package contains the panel skin classes.
+                   The com.collab.echo.containers.skins package contains the container skin classes.
                 ]]>
             </shortDescription>
             <description>
                 <![CDATA[
-                   The com.collab.echo.containers.panels.skins package contains the panel skin classes.
+                   The com.collab.echo.containers.skins package contains the container skin classes.
                 ]]>
             </description>
         </package>
@@ -129,6 +141,30 @@
             <description>
                 <![CDATA[
                    The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
+                ]]>
+            </description>
+        </package>
+        <package name="com.collab.echo.core.rooms">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.core.rooms package contains room classes.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.core.rooms package contains room classes.
+                ]]>
+            </description>
+        </package>
+        <package name="com.collab.echo.core.messages">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.core.messages package contains message classes.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.core.messages package contains message classes.
                 ]]>
             </description>
         </package>
@@ -201,18 +237,6 @@
             <description>
                 <![CDATA[
                    The com.collab.echo.preloaders package contains the preloader classes.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.view.rooms">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.view.rooms package contains room classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.view.rooms package contains room classes.
                 ]]>
             </description>
         </package>

@@ -25,6 +25,9 @@ package com.collab.echo.controls.painter
 	 * A participant of the shared whiteboard.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class Painter extends BaseView
 	{

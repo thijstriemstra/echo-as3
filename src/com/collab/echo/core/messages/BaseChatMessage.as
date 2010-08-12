@@ -25,9 +25,13 @@ package com.collab.echo.core.messages
 	import net.user1.reactor.IClient;
 
 	/**
-	 * ABSTRACT Class (should be subclassed and not instantiated).
+	 * Base class for chat message.
+	 * 
+	 * <p>Note: ABSTRACT Class (should be subclassed and not instantiated).</p>
 	 *  
 	 * @author Thijs Triemstra
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseChatMessage extends EventDispatcher
 	{

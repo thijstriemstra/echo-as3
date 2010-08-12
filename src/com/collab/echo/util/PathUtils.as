@@ -22,6 +22,9 @@ package com.collab.echo.util
 	 * Utilities for manipulating file paths.
 	 *  
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class PathUtils
 	{

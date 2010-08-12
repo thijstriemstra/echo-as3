@@ -29,7 +29,12 @@ package com.collab.echo.containers
 	import flash.display.Sprite;
 	
 	/**
+	 * User profile info component.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ProfileInfo extends BaseView
 	{

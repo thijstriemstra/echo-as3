@@ -42,6 +42,9 @@ package com.collab.echo.controls.buttons
 	 * Expands the communication panel.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseExpandButton extends LabelButton
 	{
@@ -53,8 +56,17 @@ package com.collab.echo.controls.buttons
 		
 		/**
 		 * Constructor.
-		 * 
-		 * @param font 
+		 *  
+		 * @param width
+		 * @param font
+		 * @param fontSize
+		 * @param textUpColor
+		 * @param backgroundColor
+		 * @param backgroundAlpha
+		 * @param cornerRadius
+		 * @param padding
+		 * @param alpha
+		 * @param bold
 		 */		
 		public function BaseExpandButton( width:Number=123, font:Font=null,
 										  fontSize:int=15,

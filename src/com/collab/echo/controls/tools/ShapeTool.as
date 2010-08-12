@@ -21,9 +21,12 @@ package com.collab.echo.controls.tools
 	/**
 	 * Tool used to draw shapes.
 	 * 
-	 * @see com.collab.echo.view.hub.whiteboard.tools.ShapeTypes ShapeTypes
+	 * @see com.collab.echo.tools.ShapeTypes ShapeTypes
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ShapeTool extends DrawingTool
 	{

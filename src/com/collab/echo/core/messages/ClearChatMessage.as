@@ -20,6 +20,9 @@ package com.collab.echo.core.messages
 {
 	/**
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class ClearChatMessage extends TextChatMessage
 	{

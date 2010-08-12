@@ -22,6 +22,9 @@ package com.collab.echo.util
 	 * URL utilities.
 	 * 
 	 * @author Tthijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class URLUtils
 	{

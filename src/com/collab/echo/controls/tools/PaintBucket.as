@@ -22,6 +22,9 @@ package com.collab.echo.controls.tools
 	 * Tool used to paint an area of pixels.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class PaintBucket extends DrawingTool
 	{

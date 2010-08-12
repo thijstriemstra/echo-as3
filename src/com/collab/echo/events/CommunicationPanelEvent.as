@@ -20,8 +20,13 @@ package com.collab.echo.events
 {
 	import flash.events.Event;
 	
+	// XXX: rename to HubEvent
+	
 	/**
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class CommunicationPanelEvent extends Event
 	{

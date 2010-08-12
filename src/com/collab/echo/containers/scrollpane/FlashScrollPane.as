@@ -33,6 +33,9 @@ package com.collab.echo.containers.scrollpane
 	 * Customizable <code>fl.containers.ScrollPane</code> with a <code>children</code> list.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class FlashScrollPane extends ScrollPane
 	{

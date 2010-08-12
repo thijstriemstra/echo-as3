@@ -22,6 +22,9 @@ package com.collab.echo.util
 	 * String utilities.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class StringUtil
 	{

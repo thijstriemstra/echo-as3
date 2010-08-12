@@ -24,6 +24,9 @@ package com.collab.echo.controls.tools
 	 * A tool used to draw a shape, stroke or fill.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class DrawingTool extends BaseView
 	{

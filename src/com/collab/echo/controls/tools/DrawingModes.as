@@ -25,6 +25,9 @@ package com.collab.echo.controls.tools
 	 * @see com.collab.echo.controls.tools.DrawingTool DrawingTool
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class DrawingModes
 	{

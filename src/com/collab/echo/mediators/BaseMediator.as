@@ -27,9 +27,12 @@ package com.collab.echo.mediators
 	import org.puremvc.as3.multicore.patterns.mediator.Mediator;
 
 	/**
-	 * Base <code>Mediator</code>.
+	 * Base Mediator.
 	 *  
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class BaseMediator extends Mediator implements IMediator
 	{

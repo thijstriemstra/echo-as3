@@ -23,6 +23,9 @@ package com.collab.echo.controls.painter
 	
 	/**
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class LocalPainter extends Painter
 	{

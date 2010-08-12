@@ -27,7 +27,12 @@ package com.collab.echo.controls
 	import flash.text.TextField;
 	
 	/**
+	 * Username bar.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class UserNameBar extends BaseView
 	{

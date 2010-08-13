@@ -21,13 +21,10 @@ package com.collab.echo.model.proxy
     import com.collab.echo.core.messages.BaseChatMessage;
     import com.collab.echo.core.messages.ChatMessageCreator;
     import com.collab.echo.core.rooms.BaseRoom;
-    import com.collab.echo.events.BaseRoomEvent;
     import com.collab.echo.events.ChatMessageEvent;
     import com.collab.echo.model.vo.UserVO;
     
     import org.osflash.thunderbolt.Logger;
-    import org.puremvc.as3.multicore.interfaces.IProxy;
-    import org.puremvc.as3.multicore.patterns.proxy.Proxy;
     
     /**
      * A base <code>Proxy</code> for user presence.
@@ -36,9 +33,9 @@ package com.collab.echo.model.proxy
 	 * 
 	 * @author Thijs Triemstra
 	 * @langversion 3.0
- 	 * @playerversion Flash 9
+ 	 * @playerversion Flash 10
      */
-    public class PresenceProxy extends Proxy implements IProxy
+    public class PresenceProxy
     {
 		// ====================================
 		// CONSTANTS
@@ -178,8 +175,6 @@ package com.collab.echo.model.proxy
 		 */		
 		public function PresenceProxy ( data:Object = null ) 
         {
-            super ( NAME, data );
-			
 			_ready = false;
 			messageCreator = new ChatMessageCreator();
         }
@@ -195,7 +190,7 @@ package com.collab.echo.model.proxy
 		 */		
 		public function sendMessage( message:BaseChatMessage ):void
 		{
-			sendNotification( BaseRoomEvent.SEND_MESSAGE, message );
+			//sendNotification( BaseRoomEvent.SEND_MESSAGE, message );
 			
 			// load the message (can be async)
 			this.message = message;
@@ -211,7 +206,7 @@ package com.collab.echo.model.proxy
 		 */		
 		public function sendLine( message:String ):void
 		{
-			sendNotification( BaseRoomEvent.SEND_LINE, message );
+			//sendNotification( BaseRoomEvent.SEND_LINE, message );
 		}
 		
 		/**

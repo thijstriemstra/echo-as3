@@ -222,7 +222,7 @@ package com.collab.echo.model.proxy
 				// perform only locally
 				message.local = true;
 				message.sender = self;
-				sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
+				//sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
 			}
 			else
 			{
@@ -250,7 +250,7 @@ package com.collab.echo.model.proxy
 			
 			log( "UnionProxy.centralChatListener: " + message );
 			
-			sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
+			//sendNotification( BaseRoomEvent.RECEIVE_MESSAGE, message );
 		}
 		
 		/**
@@ -270,7 +270,7 @@ package com.collab.echo.model.proxy
 			obj.shape = shape;
 			obj.from = fromClient;
 			
-			sendNotification( BaseRoomEvent.RECEIVE_LINE, obj );
+			//sendNotification( BaseRoomEvent.RECEIVE_LINE, obj );
 		}
 
 	}

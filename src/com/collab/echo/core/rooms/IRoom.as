@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
-	import com.collab.echo.model.vo.UserVO;
-	
 	/**
 	 * Interface for a room.
 	 * 

@@ -16,21 +16,42 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.model.vo
+package com.collab.echo.model
 {
 	/**
-	 * SQLAlchemy properties.
-	 * 
-	 * <p>Mandatory for PyAMF Remoting backends.</p>
-	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class SAObject extends Object
+	public class ProfileInfoVO extends SAObject
 	{
-		public var sa_key					: Array;
-		public var sa_lazy					: Array;
+		public var location	: String;
+		public var website	: String;
+		public var email	: String;
+		public var age		: String;
+		
+		/**
+		 * Constructor.
+		 *  
+		 * @param location
+		 * @param website
+		 * @param email
+		 * @param age
+		 */		
+		public function ProfileInfoVO( location:String=null, website:String=null,
+									email:String=null, age:String=null )
+		{
+			this.location = location;
+			this.website = website;
+			this.email = email;
+			this.age = age;
+		}
+		
+		public function toString():String
+		{
+			return "<ProfileInfoVO location='" + location + "'/>";
+		}
+		
 	}
 }

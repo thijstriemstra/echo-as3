@@ -22,7 +22,7 @@ package com.collab.echo.containers
 	import com.collab.echo.display.BaseView;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.model.vo.ProfileInfoVO;
+	import com.collab.echo.model.ProfileInfoVO;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
 	

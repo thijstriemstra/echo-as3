@@ -22,7 +22,7 @@ package com.collab.echo.containers.scrollpane
 	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	
 	import fl.controls.ScrollPolicy;
 	

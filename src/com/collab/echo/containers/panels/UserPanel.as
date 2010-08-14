@@ -23,8 +23,8 @@ package com.collab.echo.containers.panels
 	import com.collab.echo.controls.UserNameBar;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.model.vo.ProfileInfoVO;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.ProfileInfoVO;
+	import com.collab.echo.model.UserVO;
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;

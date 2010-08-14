@@ -28,7 +28,7 @@ package com.collab.echo.containers
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	
 	// ====================================
 	// EVENTS

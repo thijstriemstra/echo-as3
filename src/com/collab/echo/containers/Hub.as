@@ -27,7 +27,7 @@ package com.collab.echo.containers
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quad;
 	

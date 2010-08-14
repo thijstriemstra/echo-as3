@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls.painter
 {
 	import com.collab.echo.controls.UserCursor;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	
 	/**
 	 * Remote user of the whiteboard.

@@ -5,7 +5,6 @@
 	<component id="BaseChatMessage" class="com.collab.echo.core.messages.BaseChatMessage"/>
 	<component id="BaseConnectionEvent" class="com.collab.echo.events.BaseConnectionEvent"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
-	<component id="BaseMediator" class="com.collab.echo.mediators.BaseMediator"/>
 	<component id="BaseRoom" class="com.collab.echo.core.rooms.BaseRoom"/>
 	<component id="BaseRoomEvent" class="com.collab.echo.events.BaseRoomEvent"/>
 	<component id="BaseView" class="com.collab.echo.display.BaseView"/>
@@ -21,7 +20,6 @@
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
-	<component id="CommunicationPanelMediator" class="com.collab.echo.mediators.CommunicationPanelMediator"/>
 	<component id="ContentLoader" class="com.collab.echo.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.controls.tools.DrawingModes"/>

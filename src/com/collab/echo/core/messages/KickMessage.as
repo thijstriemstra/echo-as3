@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-
 	/**
 	 * @author Thijs Triemstra
 	 * 
@@ -37,7 +35,7 @@ package com.collab.echo.core.messages
 		 * @param data
 		 * @param presence
 		 */		
-		public function KickMessage( type:String, data:String, presence:PresenceProxy )
+		public function KickMessage( type:String, data:String, presence:* )
 		{
 			super( type, data, presence, false, true, true, true );
 		}

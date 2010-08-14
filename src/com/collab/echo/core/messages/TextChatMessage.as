@@ -19,8 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages
 {
 	import com.collab.echo.events.ChatMessageEvent;
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 
 	/**
 	 * Simple text chat message.
@@ -44,7 +43,7 @@ package com.collab.echo.core.messages
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function TextChatMessage( type:String=null, data:String=null, presence:PresenceProxy=null,
+		public function TextChatMessage( type:String=null, data:String=null, presence:*=null,
 										 includeSelf:Boolean=false, local:Boolean=false,
 										 privateMessage:Boolean=false, append:Boolean=true )
 		{

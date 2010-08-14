@@ -18,11 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	
 	/**
+	 * Message that is displayed when a remote user left the chat.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+     * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class LeaveChatMessage extends TextChatMessage
 	{
@@ -33,7 +37,7 @@ package com.collab.echo.core.messages
 		 * @param data
 		 * @param presence
 		 */		
-		public function LeaveChatMessage( type:String, data:String, presence:PresenceProxy )
+		public function LeaveChatMessage( type:String, data:String, presence:* )
 		{
 			super( type, data, presence, false, true, false, true );
 		}

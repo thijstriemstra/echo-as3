@@ -18,9 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.UserVO;
-
+	import com.collab.echo.model.UserVO;
+	
 	/**
 	 * Find out how long a user has spent online, by username.
 	 * 
@@ -38,7 +37,7 @@ package com.collab.echo.core.messages
 		 * @param presence
 		 */		
 		public function TimeOnlineMessage( type:String, data:String,
-										   presence:PresenceProxy )
+										   presence:* )
 		{
 			super( type, data, presence, false, true, false, true );
 		}

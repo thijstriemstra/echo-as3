@@ -18,8 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	import com.collab.echo.model.vo.UserVO;
+	import com.collab.echo.model.UserVO;
 	
 	import flash.system.Capabilities;
 
@@ -41,7 +40,7 @@ package com.collab.echo.core.messages
 		 * @param presence
 		 */		
 		public function JoinChatMessage( type:String, data:String,
-										 presence:PresenceProxy )
+										 presence:* )
 		{
 			super( type, data, presence, false, true, false, true );
 		}

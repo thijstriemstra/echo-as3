@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-
 	/**
 	 * Check the IP address for a client by username.
 	 * 
@@ -36,7 +34,7 @@ package com.collab.echo.core.messages
 		 * @param data
 		 * @param presence
 		 */		
-		public function IPChatMessage( type:String, data:String, presence:PresenceProxy )
+		public function IPChatMessage( type:String, data:String, presence:* )
 		{
 			super( type, data, presence, false, true, false, true );
 		}

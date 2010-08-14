@@ -23,7 +23,6 @@
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="CommunicationPanelMediator" class="com.collab.echo.mediators.CommunicationPanelMediator"/>
 	<component id="ContentLoader" class="com.collab.echo.display.util.ContentLoader"/>
-	<component id="DataOut" class="com.collab.echo.core.DataOut"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.controls.tools.DrawingModes"/>
 	<component id="DrawingTool" class="com.collab.echo.controls.tools.DrawingTool"/>

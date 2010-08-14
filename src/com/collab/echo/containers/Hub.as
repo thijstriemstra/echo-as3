@@ -22,7 +22,9 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
+	import com.collab.echo.core.IChatRoom;
 	import com.collab.echo.core.messages.BaseChatMessage;
+	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.vo.UserVO;
@@ -57,7 +59,7 @@ package com.collab.echo.containers
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */
-	public class Hub extends ClientView
+	public class Hub extends ClientView implements IChatRoom, IWhiteboardRoom
 	{
 		// ====================================
 		// CONSTANTS
@@ -109,6 +111,7 @@ package com.collab.echo.containers
 		/**
 		 * The button that expands the panel.
 		 */
+		 // XXX: move out of this component
 		protected var expandButton				: BaseExpandButton;
 
 		// ====================================
@@ -209,6 +212,14 @@ package com.collab.echo.containers
 			show();
 		}
 		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
+		/**
+		 * @param notification
+		 * @param args
+		 */		
 		override public function update( notification:String, ...args:Array ) : void
         {
             super.update( notification, args );
@@ -216,22 +227,16 @@ package com.collab.echo.containers
 			trace( getQualifiedClassName( this ) + " : " + notification + " - " + data );
         }
 
-		// ====================================
-		// PUBLIC METHODS
-		// ====================================
-
 		/**
 		 * Notify the panel's components that a client joined the room.
 		 *
-		 * @param client
+		 * @param args
 		 */
-		public function joinedRoom( client:UserVO ):void
+		override public function joinedRoom( args:Array=null ):void
 		{
-			//Logger.debug( 'BaseCommunicationPanel.joinedRoom: ' + client );
-
-			chat.joinedRoom( client );
-			userPane.joinedRoom( client );
-			whiteboard.joinedRoom( client );
+			chat.joinedRoom( args );
+			userPane.joinedRoom( args );
+			whiteboard.joinedRoom( args );
 		}
 
 		/**
@@ -239,11 +244,11 @@ package com.collab.echo.containers
 		 *
 		 * @param client
 		 */
-		override protected function addOccupant( args:Array=null ):void //client:UserVO ):UserVO
+		override public function addOccupant( args:Array=null ):void
 		{
 			var client:UserVO;
 			
-			trace("!!!: " + args );
+			trace("addOccupant: " + args );
 			
 			// add the user to the data provider
 			data.push( client );
@@ -251,11 +256,9 @@ package com.collab.echo.containers
 			//Logger.debug( 'Hub.addOccupant: ' + client );
 
 			// add occupant to components
-			userPane.addUser( client );
-			chat.addUser( client );
-			whiteboard.addUser( client );
-
-			//return client;
+			userPane.addOccupant( args );
+			chat.addOccupant( args );
+			whiteboard.addOccupant( args );
 		}
 
 		/**
@@ -263,7 +266,7 @@ package com.collab.echo.containers
 		 *
 		 * @param client
 		 */
-		public function removeOccupant( client:UserVO ):UserVO
+		override public function removeOccupant( args:Array=null ):void
 		{
 			var myGuy:UserVO;
 			var index:int = 0;
@@ -284,23 +287,21 @@ package com.collab.echo.containers
 			//Logger.debug( 'BaseCommunicationPanel.removeOccupant: ' + client );
 
 			// remove occupant from components
-			userPane.removeUser( client );
-			whiteboard.removeUser( client );
-			chat.removeUser( client );
-
-			return client;
+			userPane.removeOccupant( args );
+			whiteboard.removeOccupant( args );
+			chat.removeOccupant( args );
 		}
 
 		/**
 		 * Notify the panel's component that the clients in the room updated.
 		 *
-		 * @param totalClients
+		 * @param args
 		 */
-		public function numClients( totalClients:int ):void
+		override public function numClients( args:Array=null ):void
 		{
-			chat.numClients( totalClients );
-			userPane.numClients( totalClients );
-			whiteboard.numClients( totalClients );
+			chat.numClients( args );
+			userPane.numClients( args );
+			whiteboard.numClients( args );
 		}
 
 		/**

@@ -199,6 +199,8 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function joinResult( event:*=null ):void
 		{
+			event.preventDefault();
+			
 			_evt = new BaseRoomEvent( BaseRoomEvent.JOIN_RESULT, event );
 			dispatchEvent( _evt );
 		}
@@ -210,6 +212,8 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function occupantCount( event:*=null ):void
 		{
+			event.preventDefault();
+			
 			_evt = new BaseRoomEvent( BaseRoomEvent.OCCUPANT_COUNT, event );
 			dispatchEvent( _evt );
 		}
@@ -232,6 +236,8 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function removeOccupant( event:*=null ):void
 		{
+			event.preventDefault();
+			
 			_evt = new BaseRoomEvent( BaseRoomEvent.REMOVE_OCCUPANT, event );
 			dispatchEvent( _evt );
 		}
@@ -243,6 +249,8 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function attributeUpdate( event:*=null ):void
 		{
+			event.preventDefault();
+			
 			_evt = new BaseRoomEvent( BaseRoomEvent.ATTRIBUTE_UPDATE, event );
 			dispatchEvent( _evt );
 		}
@@ -256,6 +264,8 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function synchronize( event:*=null ):void
 		{
+			event.preventDefault();
+			
 			_evt = new BaseRoomEvent( BaseRoomEvent.SYNCHRONIZE, event );
 			dispatchEvent( _evt );
 		}

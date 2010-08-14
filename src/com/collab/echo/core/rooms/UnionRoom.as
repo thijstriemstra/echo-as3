@@ -32,6 +32,9 @@ package com.collab.echo.core.rooms
 	 * Union-specific room.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class UnionRoom extends BaseRoom
 	{
@@ -169,6 +172,7 @@ package com.collab.echo.core.rooms
 		 */		
 		protected function log( msg:* ):void
 		{
+			// XXX: don't use this logger
 			org.osflash.thunderbolt.Logger.debug( msg );
 		}
 		

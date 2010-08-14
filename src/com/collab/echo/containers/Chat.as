@@ -21,9 +21,9 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ChatInput;
 	import com.collab.echo.core.IChatRoom;
+	import com.collab.echo.core.IRoom;
 	import com.collab.echo.core.messages.BaseChatMessage;
 	import com.collab.echo.events.ChatEvent;
-	import com.collab.echo.model.vo.UserVO;
 	import com.collab.echo.util.DateUtils;
 	
 	import fl.controls.TextArea;
@@ -39,7 +39,7 @@ package com.collab.echo.containers
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class Chat extends MenuPanel implements IChatRoom
+	public class Chat extends MenuPanel implements IRoom, IChatRoom
 	{
 		// ====================================
 		// CONSTANTS
@@ -167,23 +167,23 @@ package com.collab.echo.containers
 		// ====================================
 		
 		/**
-		 * Add a new occupant to the <code>Room</code>.
+		 * Add a new occupant to the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function addUser( client:UserVO ):void
+		public function addOccupant( args:Array=null ):void
 		{
-			//Logger.debug( "Chat.addUser: " + client );
+			//Logger.debug( "Chat.addOccupant: " + args );
 		}
 		
 		/**
 		 * Remove an existing occupant from the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function removeUser( client:UserVO ):void
+		public function removeOccupant( args:Array=null ):void
 		{
-			//Logger.debug( "Chat.removeUser: " + client );
+			//Logger.debug( "Chat.removeOccupant: " + args );
 			
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
@@ -191,21 +191,21 @@ package com.collab.echo.containers
 		/**
 		 * Joined the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function joinedRoom( client:UserVO ):void
+		public function joinedRoom( args:Array=null ):void
 		{
-			//Logger.debug( "Chat.joinedRoom: " + client );
+			//Logger.debug( "Chat.joinedRoom: " + args );
 		}
 		
 		/**
 		 * Total clients in room updated.
 		 * 
-		 * @param totalClients
+		 * @param args
 		 */		
-		public function numClients( totalClients:int ):void
+		public function numClients( args:Array=null ):void
 		{
-			//Logger.debug( "Chat.numClients: " + totalClients );
+			//Logger.debug( "Chat.numClients: " + args );
 		}
 		
 		/**

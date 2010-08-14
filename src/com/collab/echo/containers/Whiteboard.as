@@ -25,6 +25,7 @@ package com.collab.echo.containers
 	import com.collab.echo.controls.painter.Painter;
 	import com.collab.echo.controls.painter.RemotePainter;
 	import com.collab.echo.core.IRoom;
+	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
 	import com.collab.echo.model.vo.UserVO;
@@ -46,7 +47,7 @@ package com.collab.echo.containers
 	 * @langversion 3.0
  	 * @playerversion Flash 10
 	 */	
-	public class Whiteboard extends MenuPanel implements IRoom
+	public class Whiteboard extends MenuPanel implements IWhiteboardRoom, IRoom
 	{
 		// ====================================
 		// PROTECTED VARS
@@ -125,9 +126,9 @@ package com.collab.echo.containers
 		/**
 		 * Local client joined the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function joinedRoom( client:UserVO ):void
+		public function joinedRoom( args:Array=null ):void
 		{
 			//Logger.debug( "Whiteboard.joinedRoom: " + client );
 		}
@@ -135,11 +136,12 @@ package com.collab.echo.containers
 		/**
 		 * Client joined the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function addUser( client:UserVO ):void
+		public function addOccupant( args:Array=null ):void
 		{
 			var user:Painter;
+			var client:UserVO;
 			
 			// add painter
 			if ( client && client.client.isSelf() )
@@ -158,16 +160,17 @@ package com.collab.echo.containers
 		/**
 		 * Client left the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function removeUser( client:UserVO ):void
+		public function removeOccupant( args:Array=null ):void
 		{
+			var client:UserVO;
 			var user:Painter;
 			var x:int = 0;
 			
 			for each ( user in participants )
 			{
-				if ( user.data == client )
+				if ( client && user.data == client )
 				{
 					// remove painter
 					canvas.removePainter( user );
@@ -181,9 +184,9 @@ package com.collab.echo.containers
 		/**
 		 * The number of total clients in the room updated.
 		 * 
-		 * @param totalClients
+		 * @param args
 		 */		
-		public function numClients( totalClients:int ):void
+		public function numClients( args:Array=null ):void
 		{
 			//Logger.debug( "Whiteboard.numClients: " + totalClients );
 		}

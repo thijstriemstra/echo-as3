@@ -28,7 +28,7 @@ package com.collab.echo.core
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public interface IChatRoom extends IRoom
+	public interface IChatRoom
 	{
 		/**
 		 * Add a message to the chat room.

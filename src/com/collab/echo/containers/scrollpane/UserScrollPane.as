@@ -30,10 +30,11 @@ package com.collab.echo.containers.scrollpane
 	import flash.display.Sprite;
 
 	/**
-	 * Scrollpane containing <code>UserPanel</code> instances.
+	 * Scrollpane containing UserPanel instances.
+	 * 
+	 * @see com.collab.echo.containers.panels.UserPanel
 	 * 
 	 * @author Thijs Triemstra
-	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 10
 	 */	
@@ -92,11 +93,13 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Add new user.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function addUser( client:UserVO ):void
+		public function addOccupant( args:Array=null ):void
 		{
-			//Logger.debug( "UserScrollPane.addUser: " + client );
+			var client:UserVO;
+			
+			//Logger.debug( "UserScrollPane.addOccupant: " + client );
 			
 			// panel
 			_item = new _panelSkin();
@@ -110,11 +113,13 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Remove existing user.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function removeUser( client:UserVO ):void
+		public function removeOccupant( args:Array=null ):void
 		{
-			//Logger.debug( "UserScrollPane.removeUser: " + client );
+			var client:UserVO;
+			
+			//Logger.debug( "UserScrollPane.removeOccupant: " + client );
 			
 			// remove by id
 			for each ( _item in _panels )
@@ -130,21 +135,21 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Joined the room.
 		 * 
-		 * @param client
+		 * @param args
 		 */		
-		public function joinedRoom( client:UserVO ):void
+		public function joinedRoom( args:Array=null ):void
 		{
-			//Logger.debug( "UserScrollPane.joinedRoom: " + client );
+			//Logger.debug( "UserScrollPane.joinedRoom: " + args );
 		}
 		
 		/**
 		 * Total clients in room updated.
 		 * 
-		 * @param totalClients
+		 * @param args
 		 */		
-		public function numClients( totalClients:int ):void
+		public function numClients( args:Array=null ):void
 		{
-			//Logger.debug( "UserScrollPane.numClients: " + totalClients );
+			//Logger.debug( "UserScrollPane.numClients: " + args );
 		}
 		
 		/**

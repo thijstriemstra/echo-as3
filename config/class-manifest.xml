@@ -37,11 +37,12 @@
 	<component id="HelpChatMessage" class="com.collab.echo.core.messages.HelpChatMessage"/>
 	<component id="Hub" class="com.collab.echo.containers.Hub"/>
 	<component id="HubSkin" class="com.collab.echo.containers.skins.HubSkin"/>
-	<component id="IChatRoom" class="com.collab.echo.core.IChatRoom"/>
+	<component id="IChatRoom" class="com.collab.echo.core.rooms.IChatRoom"/>
 	<component id="IClient" class="com.collab.echo.core.IClient"/>
 	<component id="IClientManager" class="com.collab.echo.core.IClientManager"/>
 	<component id="IPChatMessage" class="com.collab.echo.core.messages.IPChatMessage"/>
-	<component id="IRoom" class="com.collab.echo.core.IRoom"/>
+	<component id="IRoom" class="com.collab.echo.core.rooms.IRoom"/>
+	<component id="IWhiteboardRoom" class="com.collab.echo.core.rooms.IWhiteboardRoom"/>
 	<component id="JoinChatMessage" class="com.collab.echo.core.messages.JoinChatMessage"/>
 	<component id="KickMessage" class="com.collab.echo.core.messages.KickMessage"/>
 	<component id="LabelButton" class="com.collab.echo.controls.buttons.LabelButton"/>

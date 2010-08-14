@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.rooms
 {
 	/**
+	 * Interface for a whiteboard room.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0

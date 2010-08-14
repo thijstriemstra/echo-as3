@@ -24,7 +24,7 @@ package com.collab.echo.containers
 	import com.collab.echo.controls.painter.LocalPainter;
 	import com.collab.echo.controls.painter.Painter;
 	import com.collab.echo.controls.painter.RemotePainter;
-	import com.collab.echo.core.IRoom;
+	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;

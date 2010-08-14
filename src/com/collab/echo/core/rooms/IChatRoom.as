@@ -16,47 +16,26 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.core
+package com.collab.echo.core.rooms
 {
-	import com.collab.echo.model.vo.UserVO;
-	
+	import com.collab.echo.core.messages.BaseChatMessage;
+
 	/**
-	 * Interface for rooms.
+	 * Interface for a chat room.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public interface IRoom
+	public interface IChatRoom
 	{
 		/**
-		 * Adds a new occupant to the room.
+		 * Add a message to the chat room.
 		 * 
-		 * @param args
+		 * @param data
 		 */		
-		function addOccupant( args:Array=null ):void;
-		
-		/**
-		 * Removes an existing occupant from the room.
-		 * 
-		 * @param args
-		 */		
-		function removeOccupant( args:Array=null ):void;
-		
-		/**
-		 * Joined the room.
-		 * 
-		 * @param args
-		 */		
-		function joinedRoom( args:Array=null ):void;
-		
-		/**
-		 * Total clients in room updated.
-		 * 
-		 * @param args
-		 */		
-		function numClients( args:Array=null ):void;
+		function addMessage( data:BaseChatMessage ):void;
 	}
 	
 }

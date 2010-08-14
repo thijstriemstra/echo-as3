@@ -20,9 +20,9 @@ package com.collab.echo.containers
 {
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ChatInput;
-	import com.collab.echo.core.IChatRoom;
-	import com.collab.echo.core.IRoom;
 	import com.collab.echo.core.messages.BaseChatMessage;
+	import com.collab.echo.core.rooms.IChatRoom;
+	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.events.ChatEvent;
 	import com.collab.echo.util.DateUtils;
 	

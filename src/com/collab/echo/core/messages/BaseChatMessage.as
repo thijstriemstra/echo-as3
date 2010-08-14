@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages
 {
-	import com.collab.echo.model.proxy.PresenceProxy;
-	
 	import flash.events.EventDispatcher;
 	
 	import net.user1.reactor.IClient;
@@ -45,7 +43,7 @@ package com.collab.echo.core.messages
 		// INTERNAL VARS
 		// ====================================
 		
-		// XXX: no union specific references here.
+		// XXX: sender and receiver need to be refactored
 		/**
 		 * @private 
 		 */		
@@ -69,7 +67,7 @@ package com.collab.echo.core.messages
 		private var _append							: Boolean;
 		
 		// XXX:  this has to be refactored
-		private var _presence						: PresenceProxy;
+		private var _presence						: *;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -78,11 +76,11 @@ package com.collab.echo.core.messages
 		/**
 		 * @return 
 		 */		
-		public function get presence():PresenceProxy
+		public function get presence():*
 		{
 			return _presence;
 		}
-		public function set presence( val:PresenceProxy ):void
+		public function set presence( val:* ):void
 		{
 			if ( val )
 			{
@@ -226,7 +224,7 @@ package com.collab.echo.core.messages
 		 */		
 		public function BaseChatMessage( type:String=null,
 										 data:String=null,
-										 presence:PresenceProxy=null,
+										 presence:*=null,
 										 includeSelf:Boolean=false,
 										 local:Boolean=false,
 										 privateMessage:Boolean=false,

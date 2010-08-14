@@ -62,7 +62,6 @@
 	<component id="Panel" class="com.collab.echo.containers.panels.Panel"/>
 	<component id="PathUtils" class="com.collab.echo.util.PathUtils"/>
 	<component id="Pencil" class="com.collab.echo.controls.tools.Pencil"/>
-	<component id="PresenceProxy" class="com.collab.echo.model.proxy.PresenceProxy"/>
 	<component id="ProfileInfo" class="com.collab.echo.containers.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>
 	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
@@ -82,7 +81,6 @@
 	<component id="ToolBar" class="com.collab.echo.controls.ToolBar"/>
 	<component id="Translator" class="com.collab.echo.containers.Translator"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
-	<component id="UnionProxy" class="com.collab.echo.model.proxy.UnionProxy"/>
 	<component id="UnionRoom" class="com.collab.echo.core.rooms.UnionRoom"/>
 	<component id="UserCursor" class="com.collab.echo.controls.UserCursor"/>
 	<component id="UserInfoBar" class="com.collab.echo.controls.UserInfoBar"/>

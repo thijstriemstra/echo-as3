@@ -16,7 +16,7 @@
 	<component id="ChatMessageCreator" class="com.collab.echo.core.messages.ChatMessageCreator"/>
 	<component id="ChatMessageEvent" class="com.collab.echo.events.ChatMessageEvent"/>
 	<component id="ChatMessageTypes" class="com.collab.echo.core.messages.ChatMessageTypes"/>
-	<component id="CirclePreloader" class="com.collab.echo.preloaders.CirclePreloader"/>
+	<component id="CirclePreloader" class="com.collab.echo.controls.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.core.messages.ClearChatMessage"/>
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
@@ -64,10 +64,10 @@
 	<component id="Pencil" class="com.collab.echo.controls.tools.Pencil"/>
 	<component id="ProfileInfo" class="com.collab.echo.containers.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>
-	<component id="ProfileInfoVO" class="com.collab.echo.model.vo.ProfileInfoVO"/>
+	<component id="ProfileInfoVO" class="com.collab.echo.model.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.controls.painter.RemotePainter"/>
 	<component id="RoomTypes" class="com.collab.echo.core.rooms.RoomTypes"/>
-	<component id="SAObject" class="com.collab.echo.model.vo.SAObject"/>
+	<component id="SAObject" class="com.collab.echo.model.SAObject"/>
 	<component id="ShapeTool" class="com.collab.echo.controls.tools.ShapeTool"/>
 	<component id="ShapeTypes" class="com.collab.echo.controls.tools.ShapeTypes"/>
 	<component id="SkinUtils" class="com.collab.echo.display.util.SkinUtils"/>
@@ -87,7 +87,7 @@
 	<component id="UserNameBar" class="com.collab.echo.controls.UserNameBar"/>
 	<component id="UserPanel" class="com.collab.echo.containers.panels.UserPanel"/>
 	<component id="UserScrollPane" class="com.collab.echo.containers.scrollpane.UserScrollPane"/>
-	<component id="UserVO" class="com.collab.echo.model.vo.UserVO"/>
+	<component id="UserVO" class="com.collab.echo.model.UserVO"/>
 	<component id="ViewEvent" class="com.collab.echo.events.ViewEvent"/>
 	<component id="Whiteboard" class="com.collab.echo.containers.Whiteboard"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>

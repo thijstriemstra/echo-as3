@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.display
 {
+	import com.collab.echo.controls.preloaders.CirclePreloader;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.display.util.TextUtils;
 	import com.collab.echo.events.ViewEvent;
-	import com.collab.echo.preloaders.CirclePreloader;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;

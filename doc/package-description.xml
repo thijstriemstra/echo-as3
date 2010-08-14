@@ -48,6 +48,30 @@
                 ]]>
             </description>
         </package>
+        <package name="com.collab.echo.controls.preloaders">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.controls.preloaders package contains the preloader classes.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.controls.preloaders package contains the preloader classes.
+                ]]>
+            </description>
+        </package>
+        <package name="com.collab.echo.controls.painter">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.controls.painter package contains whiteboard related classes.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.controls.painter package contains whiteboard related classes.
+                ]]>
+            </description>
+        </package>
         <package name="com.collab.echo.controls.tools">
             <shortDescription>
                 <![CDATA[
@@ -192,51 +216,15 @@
                 ]]>
             </description>
         </package>
-        <package name="com.collab.echo.mediators">
+        <package name="com.collab.echo.model">
             <shortDescription>
                 <![CDATA[
-                   The com.collab.echo.mediators package contains the mediator classes that the Echo framework uses to control views.
+                   The com.collab.echo.model package contains the value object classes.
                 ]]>
             </shortDescription>
             <description>
                 <![CDATA[
-                   The com.collab.echo.mediators package contains the mediator classes that the Echo framework uses to control views.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.model.proxy">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.model.proxy package contains the proxy classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.model.proxy package contains the proxy classes.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.model.vo">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.model.vo package contains the value object classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.model.vo package contains the value object classes.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.preloaders">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.preloaders package contains the preloader classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.preloaders package contains the preloader classes.
+                   The com.collab.echo.model package contains the value object classes.
                 ]]>
             </description>
         </package>

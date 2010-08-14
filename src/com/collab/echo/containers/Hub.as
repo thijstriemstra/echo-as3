@@ -40,7 +40,7 @@ package com.collab.echo.containers
 	/**
 	 * Communication hub.
 	 *
-	 * <p>Contains following components:</p>
+	 * <p>Contains the following components:</p>
 	 * <p><ul>
 	 * <li>UserScrollPane</li>
 	 * <li>Chat</li>
@@ -155,7 +155,7 @@ package com.collab.echo.containers
 		}
 
 		/**
-		 * Welcome message for the <code>Chat</code>.
+		 * Welcome message for the chat component.
 		 *
 		 * @param val
 		 */
@@ -173,9 +173,14 @@ package com.collab.echo.containers
 		}
 
 		/**
-		 * Label for the <code>Chat</code>'s send button.
+		 * Label for the chat's send button.
+		 * 
 		 * @param val
 		 */
+		public function get sendLabel():String
+		{
+			return _sendLabel;
+		}
 		public function set sendLabel( val:String ):void
 		{
 			if ( val )

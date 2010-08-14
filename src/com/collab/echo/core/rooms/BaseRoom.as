@@ -75,6 +75,7 @@ package com.collab.echo.core.rooms
 		private var _engine		: *;
 		private var _data		: *;
 		private var _autoJoin	: Boolean;
+		private var _watch		: Boolean;
 		private var _evt		: BaseRoomEvent;
 		
 		// ====================================
@@ -96,7 +97,7 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
-		 * Unique qualifier for this room.
+		 * Unique qualifier for the room.
 		 *  
 		 * @return 
 		 */		
@@ -135,7 +136,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Auto join room when it's created.
+		 * Auto join the room when it's created.
 		 *  
 		 * @return 
 		 */		
@@ -145,19 +146,31 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * Watch the room after it's created.
+		 *  
+		 * @return 
+		 */		
+		public function get watch():Boolean
+		{
+			return _watch;
+		}
+		
+		/**
 		 * Constructor.
 		 *  
 		 * @param id
 		 * @param autoJoin
+		 * @param watch
 		 */		
-		public function BaseRoom( id:String, autoJoin:Boolean=false )
+		public function BaseRoom( id:String, autoJoin:Boolean=false, watch:Boolean=true )
 		{
 			super();
 			
 			_id = id;
 			_autoJoin = autoJoin;
+			_watch = watch;
 			
-			name =  getQualifiedClassName( this ).split( "::" )[ 1 ]
+			name = getQualifiedClassName( this ).split( "::" )[ 1 ]
 		}
 		
 		// ====================================

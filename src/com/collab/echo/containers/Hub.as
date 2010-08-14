@@ -62,7 +62,7 @@ package com.collab.echo.containers
 	public class Hub extends ClientView implements IChatRoom, IWhiteboardRoom
 	{
 		// ====================================
-		// CONSTANTS
+		// CLASS CONSTANTS
 		// ====================================
 
 		/**

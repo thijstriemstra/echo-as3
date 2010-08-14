@@ -65,6 +65,7 @@
 	<component id="ProfileInfoVO" class="com.collab.echo.model.ProfileInfoVO"/>
 	<component id="RemotePainter" class="com.collab.echo.controls.painter.RemotePainter"/>
 	<component id="RoomTypes" class="com.collab.echo.core.rooms.RoomTypes"/>
+	<component id="RoomUtils" class="com.collab.echo.util.RoomUtils"/>
 	<component id="SAObject" class="com.collab.echo.model.SAObject"/>
 	<component id="ShapeTool" class="com.collab.echo.controls.tools.ShapeTool"/>
 	<component id="ShapeTypes" class="com.collab.echo.controls.tools.ShapeTypes"/>

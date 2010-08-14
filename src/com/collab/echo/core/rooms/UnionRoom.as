@@ -71,11 +71,11 @@ package com.collab.echo.core.rooms
 		 * 
 		 * @param id
 		 * @param autoJoin
-		 * @param password
+		 * @param watch
 		 */		
-		public function UnionRoom( id:String, autoJoin:Boolean=false, password:String=null )
+		public function UnionRoom( id:String, autoJoin:Boolean=false, watch:Boolean=true )
 		{
-			super( id, autoJoin );
+			super( id, autoJoin, watch );
 			
 			this.password = password;
 			this.modules = new RoomModules();
@@ -140,6 +140,11 @@ package com.collab.echo.core.rooms
 		{
 			// union specific leave command
 			room.leave();
+		}
+		
+		override public function toString():String
+		{
+			return "<UnionRoom id='" + id + "' />";
 		}
 		
 		// ====================================

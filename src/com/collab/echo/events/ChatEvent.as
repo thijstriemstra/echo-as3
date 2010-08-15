@@ -21,6 +21,8 @@ package com.collab.echo.events
 	import flash.events.Event;
 	
 	/**
+	 * Chat event.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
@@ -74,7 +76,7 @@ package com.collab.echo.events
 		}
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 		
 		override public function toString():String

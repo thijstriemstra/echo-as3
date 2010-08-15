@@ -192,6 +192,18 @@
                 ]]>
             </description>
         </package>
+        <package name="com.collab.echo.core.messages.chat">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.core.messages.chat package contains chat message classes.
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.core.messages.chat package contains chat message classes.
+                ]]>
+            </description>
+        </package>
         <package name="com.collab.echo.display">
             <shortDescription>
                 <![CDATA[

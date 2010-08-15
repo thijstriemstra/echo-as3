@@ -167,6 +167,10 @@ package com.collab.echo.core.rooms
         	room.sendMessage( type, includeSelf, null, message );
         }
 
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<UnionRoom id='" + id + "' />";
@@ -190,8 +194,11 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Add <code>RoomModule</code> objects.
+		 * Add RoomModule objects.
 		 * 
+		 * @see net.user1.reactor.RoomModuleType
+		 * @see net.user1.reactor.RoomModules
+	     * 
 		 * @param moduleObjects
 		 */		
 		protected function addModules( ...moduleObjects:Array ):void

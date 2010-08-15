@@ -185,7 +185,7 @@ package com.collab.echo.core.rooms
 		{
 			// register listeners
 			registerListeners();
-
+        									   
 			super.joinResult( event );
 		}
 		

@@ -254,8 +254,6 @@ package com.collab.echo.containers
 		 */
 		override public function joinedRoom( args:Array=null ):void
 		{
-			trace(args);
-			
 			chat.joinedRoom( args );
 			userPane.joinedRoom( args );
 			whiteboard.joinedRoom( args );

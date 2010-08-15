@@ -63,8 +63,8 @@ package com.collab.echo.core.messages.chat
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
-			var username:String = _receiver.getAttribute( UserVO.USERNAME );
-			var clientID:String = _receiver.getClientID();
+			var username:String = _sender.getAttribute( UserVO.USERNAME );
+			var clientID:String = _sender.getClientID();
 			
 			// use the client id as a user name if the user hasn't set a name.
 			if ( username == null )

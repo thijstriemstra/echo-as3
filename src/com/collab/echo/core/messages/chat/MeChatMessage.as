@@ -59,7 +59,7 @@ package com.collab.echo.core.messages.chat
 		{
 			var bericht:String = data.substr( 4 );
 			
-			if ( bericht.length > 0 )
+			if ( _sender && bericht.length > 0 )
 			{
 				execute( bericht );
 			}
@@ -72,12 +72,12 @@ package com.collab.echo.core.messages.chat
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
-			var username:String = sender.getAttribute( UserVO.USERNAME );
+			var username:String = _sender.getAttribute( UserVO.USERNAME );
 			
 			// Use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
 			{
-				username = "user" + sender.getClientID();
+				username = "user" + _sender.getClientID();
 			}
 			
 			// add hyperlinks to msg	

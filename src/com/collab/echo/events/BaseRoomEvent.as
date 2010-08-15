@@ -58,6 +58,10 @@ package com.collab.echo.events
 		public static const REMOVE_OCCUPANT		: String = NAME + "_removeOccupant";
 		public static const ATTRIBUTE_UPDATE	: String = NAME + "_attributeUpdate";
 		
+		public static const ROOM_ADDED			: String = NAME + "_roomAdded";
+		public static const ROOM_REMOVED		: String = NAME + "_roomRemoved";
+		public static const ROOM_COUNT			: String = NAME + "_roomCount";
+		
 		// ====================================
 		// INTERNAL VARS
 		// ====================================

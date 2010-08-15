@@ -67,8 +67,8 @@ package com.collab.echo.core.messages.chat
 			// REQUIRES: username, clientId, abibility to setAttributes, rank
 			
 			// XXX: this should come from a populated UserVO
-			var username:String = _receiver.getAttribute( UserVO.USERNAME );
-			var clientID:String = _receiver.getClientID();
+			var username:String = _sender.getAttribute( UserVO.USERNAME );
+			var clientID:String = _sender.getClientID();
 			
 			// use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
@@ -76,8 +76,8 @@ package com.collab.echo.core.messages.chat
 				username = "user" + clientID;
 			}
 			
-			// XXX: not sure about this presence reference
-			if ( _receiver ) //== presence )
+			// local client
+			if ( _receiver == _sender )
 			{
 				var rank:String = "guest";
 				var clientVar:String;

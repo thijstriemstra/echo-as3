@@ -20,23 +20,43 @@ package com.collab.echo.net
 {
 	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.BaseRoom;
-	import com.collab.echo.events.BaseConnectionEvent;
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.model.UserVO;
 	import com.collab.echo.util.RoomUtils;
 	import com.collab.echo.util.StringUtil;
 	
+	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;
 	import net.user1.reactor.ConnectionManager;
 	import net.user1.reactor.IClient;
+	import net.user1.reactor.MessageManager;
 	import net.user1.reactor.Reactor;
 	import net.user1.reactor.ReactorEvent;
 	import net.user1.reactor.RoomManager;
 	import net.user1.reactor.RoomManagerEvent;
 	import net.user1.reactor.XMLSocketConnection;
 	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
 	/**
-	 * Union connection.
+	 * @eventType com.collab.echo.events.BaseRoomEvent.ROOM_REMOVED
+	 */
+	[Event(name="roomRemoved", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.ROOM_ADDED
+	 */
+	[Event(name="roomAdded", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseRoomEvent.ROOM_COUNT
+	 */
+	[Event(name="roomCount", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * Union server connection.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
@@ -50,7 +70,7 @@ package com.collab.echo.net
 		// ====================================
 		
         protected var reactor			: Reactor;
-        
+
         // ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
@@ -90,7 +110,7 @@ package com.collab.echo.net
 		 * 
 		 * @return 
 		 */		
-		override public function get messageManager():*
+		private function get messageManager():MessageManager
 		{
 			return reactor.getMessageManager();
 		}
@@ -103,6 +123,16 @@ package com.collab.echo.net
 		private function get clientManager():ClientManager
 		{
 			return reactor.getClientManager();
+		}
+		
+		/**
+		 * Reference to reactor.getLog().
+		 * 
+		 * @return 
+		 */		
+		private function get log():Logger
+		{
+			return reactor.getLog();
 		}
 		
 		/**
@@ -131,7 +161,7 @@ package com.collab.echo.net
             if ( url && port )
             {
             	// notify others
-				//notifyClient( BaseConnectionEvent.CONNECTING );
+				super.connect();
 			
                 trace( "Connecting to Union server on " + url + ":" + port );
 
@@ -141,7 +171,7 @@ package com.collab.echo.net
                 // logging
                 if ( logLevel )
                 {
-                	reactor.getLog().setLevel( logLevel );
+                	log.setLevel( logLevel );
                 }
                 
                 // reactor listeners
@@ -158,6 +188,27 @@ package com.collab.echo.net
         }
         
         /**
+		 * Create and watch rooms.
+		 * 
+		 * @param rooms
+		 */		
+		override public function createRooms( rooms:Vector.<BaseRoom> ):void
+		{
+			_rooms = rooms;
+			
+			var room:BaseRoom;
+			for each ( room in _rooms )
+			{
+				// create room
+				room.create( this );
+			}
+			
+			watchRooms();
+		}
+        
+        /**
+         * Create a new room.
+         * 
          * @param id
          * @param settings
          * @param attrs
@@ -176,7 +227,6 @@ package com.collab.echo.net
 		{
 			// watch for rooms
 			var ids:Vector.<BaseRoom> = new Vector.<BaseRoom>();
-			var _rooms:*;
 			for each ( var room:BaseRoom in _rooms )
 			{
 				if ( room.watch )
@@ -192,7 +242,7 @@ package com.collab.echo.net
 		}
         
         /**
-         * @private
+         * @inheritDoc 
          */        
         override public function addServerMessageListener( type:String, method:Function,
         												   forRoomIDs:Array=null ):Boolean
@@ -216,10 +266,7 @@ package com.collab.echo.net
         }
         
         /**
-         * @private 
-         * @param type
-         * @param method
-         * @return 
+         * @inheritDoc 
          */             
         override public function removeServerMessageListener( type:String, method:Function ):Boolean
         {
@@ -243,59 +290,9 @@ package com.collab.echo.net
          */		
         override public function sendServerMessage( message:ChatMessage, forRoomIDs:Array=null ) : void
         {
-        	// XXX: move elsewhere
-        	/*
-        	if ( forRoomIDs == null && _rooms )
-        	{
-        		forRoomIDs = RoomUtils.getRoomIDs( _rooms );
-        	}
-        	*/
-        	
-            // result
-			if ( message.local )
-			{
-				// perform only locally
-				message.local = true;
-				message.receiver = message.sender = self;
-
-				// XXX: type needs to be dynamic
-				//notifyClient( BaseRoomEvent.RECEIVE_MESSAGE, message );
-			}
-			else
-			{
-				// send remotely
-				roomManager.sendMessage( message.type, forRoomIDs,
-										 			  message.includeSelf, null,
-										 			  message.message );
-			}
-			
-			trace("ClientManager.sendServerMessage: " + message);
-        }
-        
-        /**
-         * @private
-         * @param type
-         * @param message		The name of the message to send.
-         * @param forRoomID		The room to which to send the message.
-         */		
-        override public function sendRoomMessage( type:String, message:String, forRoomID:String ) : void
-        {
-        	var msg:*;
-        	
-        	switch ( type )
-        	{
-        		case BaseRoomEvent.SEND_MESSAGE:
-        			//msg = _chatManager.create( type, message, true );
-        			break;
-        		
-        		case BaseRoomEvent.SEND_LINE:
-        			msg = message;
-					break;
-        	}
-			
-			trace('ClientManager.sendRoomMessage: ' + msg);
-												   
-            sendServerMessage( msg, [ forRoomID ]);
+			roomManager.sendMessage( message.type, forRoomIDs,
+									 			  message.includeSelf, null,
+									 			  message.message );
         }
         
         /**
@@ -397,9 +394,8 @@ package com.collab.echo.net
 		{
 			event.preventDefault();
 			
-			_conEvt = new BaseConnectionEvent( BaseConnectionEvent.ROOM_ADDED, event );
-			
-			//notifyClient( _conEvt.type, _conEvt );
+			_roomEvt = new BaseRoomEvent( BaseRoomEvent.ROOM_ADDED, event );
+			dispatchEvent( _roomEvt );
 		}
 		
 		/**
@@ -412,11 +408,8 @@ package com.collab.echo.net
 		{
 			event.preventDefault();
 			
-			_conEvt = new BaseConnectionEvent( BaseConnectionEvent.ROOM_REMOVED, event );
-			
-			//notifyClient( _conEvt.type, _conEvt );
-			
-			// XXX: cleanup corresponding baseroom instance
+			_roomEvt = new BaseRoomEvent( BaseRoomEvent.ROOM_REMOVED, event );
+			dispatchEvent( _roomEvt );
 		}
 		
 		/**
@@ -428,9 +421,8 @@ package com.collab.echo.net
 		{
 			event.preventDefault();
 			
-			_conEvt = new BaseConnectionEvent( BaseConnectionEvent.ROOM_COUNT, event );
-			
-			//notifyClient( _conEvt.type, _conEvt );
+			_roomEvt = new BaseRoomEvent( BaseRoomEvent.ROOM_COUNT, event );
+			dispatchEvent( _roomEvt );
 		}
 		
 	}

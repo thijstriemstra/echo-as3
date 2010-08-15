@@ -64,10 +64,12 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function parseCommand():void
 		{
-			// check it's a private message
-			parsePrivateMessage();
-			
-			execute( data );
+			if ( _sender && _receiver )
+			{
+				// check it's a private message
+				parsePrivateMessage();
+				execute( data );
+			}
 		}
 		
 		/**
@@ -76,22 +78,19 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			//Logger.debug( "TextChatMessage.execute: " + command + " (private: " +
-			//			  privateMessage + ", local: " + local + ")" );
-			
 			// XXX: this should come from a populated UserVO or something
-			var username:String = sender.getAttribute( UserVO.USERNAME );
+			var username:String = _sender.getAttribute( UserVO.USERNAME );
 			
 			// use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
 			{
-				username = "user" + sender.getClientID();
+				username = "user" + _sender.getClientID();
 			}
 			
 			// add hyperlinks to msg	
 			//data = hiliteURLs( command );
 			
-			if ( local )
+			if ( _sender == _receiver )
 			{
 				// local message
 				message = '<font color="#990000"><b>' + username + ': </b>' + command + '</font><br/>';
@@ -122,9 +121,9 @@ package com.collab.echo.core.messages.chat
 		override public function load():void
 		{
 			// XXX: addd logging
-			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
+			//var logMessage_pc:PendingCall = logMessage(username, msg, getTargetMC().ipaddress, 1); 
 			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
-			//Logger.debug( "TextChatMessage.load: " + this );
+			//trace( "TextChatMessage.load: " + this );
 			
 			// XXX: dispatch after async completed
 			var evt:ChatMessageEvent = new ChatMessageEvent( ChatMessageEvent.LOAD_COMPLETE );

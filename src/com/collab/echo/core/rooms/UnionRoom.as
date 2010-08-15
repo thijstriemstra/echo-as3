@@ -161,6 +161,21 @@ package com.collab.echo.core.rooms
         }
         
         /**
+		 * @param type
+		 * @param method
+		 */		
+		override public function removeMessageListener( type:String, method:Function ):void
+        {
+        	if ( room )
+        	{
+        		// union specific message listener command
+				room.removeMessageListener( type, method );
+        	}
+        	
+        	super.removeMessageListener( type, method );
+        }
+        
+        /**
          * Send a message to the room.
          * 
          * @param type
@@ -170,7 +185,10 @@ package com.collab.echo.core.rooms
         override public function sendMessage( type:String, message:String,
         									  includeSelf:Boolean=false ):void
         {
-        	room.sendMessage( type, includeSelf, null, message );
+        	if ( room )
+        	{
+        		room.sendMessage( type, includeSelf, null, message );
+        	}
         }
 
 		/**

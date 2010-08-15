@@ -21,8 +21,8 @@ package com.collab.echo.events
 	import flash.events.Event;
 	
 	/**
-	 * A BaseConnection object dispatches a BaseConnectionEvent object whenever a
-	 * server's rooms change.
+	 * A Connection object dispatches a BaseConnectionEvent object whenever the
+	 * connection status changes.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
@@ -44,9 +44,6 @@ package com.collab.echo.events
 		public static const CONNECTION_SUCCESS	: String = NAME + "_connectionSuccess";
 		public static const CONNECTION_CLOSED	: String = NAME + "_connectionClosed";
 		public static const DISCONNECTING		: String = NAME + "_disconnecting";
-		public static const ROOM_ADDED			: String = NAME + "_roomAdded";
-		public static const ROOM_REMOVED		: String = NAME + "_roomRemoved";
-		public static const ROOM_COUNT			: String = NAME + "_roomCount";
 		
 		// ====================================
 		// PRIVATE VARS
@@ -72,13 +69,17 @@ package com.collab.echo.events
 		 * @param type
 		 * @param data
 		 */		
-		public function BaseConnectionEvent( type:String, data:* )
+		public function BaseConnectionEvent( type:String, data:*=null )
 		{
 			super( type, false, true );
 			
 			_data = data;
 		}
 		
+		/**
+		 * @private
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<BaseConnectionEvent type='" + type + "' data='" + _data + "' />";

@@ -239,6 +239,15 @@ package com.collab.echo.core.rooms
         }
         
         /**
+		 * @param type
+		 * @param method
+		 */		
+		public function removeMessageListener( type:String, method:Function ):void
+        {
+        	_listeners[ type ] = null;
+        }
+        
+        /**
          * @param type
          * @param message
          * @param includeSelf

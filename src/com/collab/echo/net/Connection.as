@@ -19,9 +19,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.net
 {
 	import com.collab.echo.core.messages.chat.ChatMessage;
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.BaseConnectionEvent;
+	import com.collab.echo.events.BaseRoomEvent;
 	
 	import flash.errors.IllegalOperationError;
+	import flash.events.EventDispatcher;
+	
+	// ====================================
+	// EVENTS
+	// ====================================
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTING
+	 */
+	[Event(name="connecting", type="com.collab.echo.events.BaseConnectionEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTION_SUCCESS
+	 */
+	[Event(name="connectionSuccess", type="com.collab.echo.events.BaseConnectionEvent")]
+	
+	/**
+	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTION_CLOSED
+	 */
+	[Event(name="connectionClosed", type="com.collab.echo.events.BaseConnectionEvent")]
 	
 	/**
 	 * Server connection.
@@ -29,9 +51,9 @@ package com.collab.echo.net
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
- 	 * @playerversion Flash 9
+ 	 * @playerversion Flash 10
 	 */	
-	public class Connection
+	public class Connection extends EventDispatcher
 	{
 		// ====================================
 		// INTERNAL VARS
@@ -46,6 +68,16 @@ package com.collab.echo.net
 		 * @private 
 		 */		
 		internal var _conEvt				: BaseConnectionEvent;
+		
+		/**
+		 * @private 
+		 */		
+		internal var _roomEvt				: BaseRoomEvent;
+		
+		/**
+		 * @private 
+		 */		
+		internal var _rooms					: Vector.<BaseRoom>;
 		
 		// ====================================
 		// PRIVATE VARS
@@ -113,17 +145,6 @@ package com.collab.echo.net
 		}
 		
 		/**
-		 * Reference to message manager.
-		 * 
-		 * @return 
-		 */		
-		public function get messageManager():*
-		{
-			throw new IllegalOperationError("Implement messageManager in subclass");
-			return null;
-		}
-		
-		/**
          * Connection status.
          * 
          * <p>True if the connection to the presence server has been successfully
@@ -166,16 +187,21 @@ package com.collab.echo.net
             if ( _hostUrl && _hostPort )
             {
             	// notify others
-				//notifyClient( BaseConnectionEvent.CONNECTING );
-			
-                trace( "Connecting to server on " + _hostUrl + ":" + _hostPort );
-
-                // logging
-                if ( _logLevel )
-                {
-                	trace( "Log level: " + _logLevel.toUpperCase() );
-                }
+            	_conEvt = new BaseConnectionEvent( BaseConnectionEvent.CONNECTING );
+				dispatchEvent( _conEvt );
             }
+        }
+        
+        /**
+         * Create one or more rooms.
+         * 
+         * @param rooms
+         * @param BaseRoom
+         */        
+        public function createRooms( rooms:Vector.<BaseRoom> ):void
+        {
+        	throw new IllegalOperationError("Implement createRooms in subclass");
+			return null;
         }
         
         /**
@@ -183,6 +209,8 @@ package com.collab.echo.net
 		 */		
 		public function watchRooms():void
 		{
+			throw new IllegalOperationError("Implement watchRooms in subclass");
+			return null;
 		}
         
         /**
@@ -245,20 +273,6 @@ package com.collab.echo.net
         	throw new IllegalOperationError("Implement sendServerMessage in subclass");
 			return null;
         }
-        
-        /**
-         * Sends a message to clients in the room specified by <code>forRoomID</code>.
-         * 
-         * @param type
-         * @param message		The name of the message to send.
-         * @param forRoomID		The room to which to send the message.
-         */		
-        public function sendRoomMessage( type:String, message:String, forRoomID:String ) : void
-        {
-        	throw new IllegalOperationError("Implement sendRoomMessage in subclass");
-			return null;
-        }
-        
         /**
          * Create a new room.
          *  
@@ -321,8 +335,9 @@ package com.collab.echo.net
 		protected function connectionReady():void
 		{
 			_connected = true;
-
-			//notifyClient( BaseConnectionEvent.CONNECTION_SUCCESS );
+			
+			_conEvt = new BaseConnectionEvent( BaseConnectionEvent.CONNECTION_SUCCESS );
+			dispatchEvent( _conEvt );
 		}
 		
 		/**
@@ -332,7 +347,8 @@ package com.collab.echo.net
 		{
             _connected = false;
 
-			//notifyClient( BaseConnectionEvent.CONNECTION_CLOSED );
+			_conEvt = new BaseConnectionEvent( BaseConnectionEvent.CONNECTION_CLOSED );
+			dispatchEvent( _conEvt );
 		}
 
 	}

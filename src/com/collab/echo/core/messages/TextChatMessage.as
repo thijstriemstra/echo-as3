@@ -20,6 +20,8 @@ package com.collab.echo.core.messages
 {
 	import com.collab.echo.events.ChatMessageEvent;
 	import com.collab.echo.model.UserVO;
+	
+	import org.osflash.thunderbolt.Logger;
 
 	/**
 	 * Simple text chat message.
@@ -54,6 +56,9 @@ package com.collab.echo.core.messages
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			// check it's a private message
@@ -63,14 +68,13 @@ package com.collab.echo.core.messages
 		}
 		
 		/**
+		 * @private
 		 * @param command
 		 */		
 		override protected function execute( command:String ):void
 		{
-			/*
 			Logger.debug( "TextChatMessage.execute: " + command + " (private: " +
 						  privateMessage + ", local: " + local + ")" );
-			*/
 			
 			// XXX: this should come from a populated UserVO
 			var username:String = sender.getAttribute( UserVO.USERNAME );

@@ -43,11 +43,23 @@ package com.collab.echo.core.messages
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			// XXX: localize
 			execute( "<b>Cleared chat.</b>" );
 		}
+
+		/**
+		 * @private
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
+		{
+			message = command;
+		}		
 		
 		// ====================================
 		// PUBLIC METHODS

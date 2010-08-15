@@ -20,7 +20,7 @@ package com.collab.echo.containers
 {
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ChatInput;
-	import com.collab.echo.core.messages.chat.BaseChatMessage;
+	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.events.ChatEvent;
@@ -214,7 +214,7 @@ package com.collab.echo.containers
 		 * 
 		 * @param data
 		 */		
-		public function addMessage( data:BaseChatMessage ):void
+		public function addMessage( data:ChatMessage ):void
 		{
 			var addStamp:String = "";
 			var text:String = "";

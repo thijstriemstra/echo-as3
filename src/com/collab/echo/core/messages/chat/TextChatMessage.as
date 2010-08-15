@@ -29,7 +29,7 @@ package com.collab.echo.core.messages.chat
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class TextChatMessage extends BaseChatMessage
+	public class TextChatMessage extends ChatMessage
 	{
 		// ====================================
 		// CONSTANTS
@@ -132,6 +132,10 @@ package com.collab.echo.core.messages.chat
 			dispatchEvent( evt );
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<TextChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	

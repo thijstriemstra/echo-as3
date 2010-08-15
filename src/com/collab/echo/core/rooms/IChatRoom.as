@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
-	import com.collab.echo.core.messages.chat.BaseChatMessage;
+	import com.collab.echo.core.messages.chat.ChatMessage;
 
 	/**
 	 * Interface for a chat room.
@@ -35,7 +35,7 @@ package com.collab.echo.core.rooms
 		 * 
 		 * @param data
 		 */		
-		function addMessage( data:BaseChatMessage ):void;
+		function addMessage( data:ChatMessage ):void;
 	}
 	
 }

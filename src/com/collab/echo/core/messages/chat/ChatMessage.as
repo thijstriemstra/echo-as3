@@ -23,15 +23,13 @@ package com.collab.echo.core.messages.chat
 	import net.user1.reactor.IClient;
 
 	/**
-	 * Base class for chat message.
+	 * Abstract class for chat message.
 	 * 
-	 * <p>Note: ABSTRACT Class (should be subclassed and not instantiated).</p>
-	 *  
 	 * @author Thijs Triemstra
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class BaseChatMessage extends EventDispatcher
+	public class ChatMessage extends EventDispatcher
 	{
 		// ====================================
 		// PROTECTED VARS
@@ -222,13 +220,13 @@ package com.collab.echo.core.messages.chat
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function BaseChatMessage( type:String=null,
-										 data:String=null,
-										 presence:*=null,
-										 includeSelf:Boolean=false,
-										 local:Boolean=false,
-										 privateMessage:Boolean=false,
-										 append:Boolean=true )
+		public function ChatMessage( type:String=null,
+									 data:String=null,
+									 presence:*=null,
+									 includeSelf:Boolean=false,
+									 local:Boolean=false,
+									 privateMessage:Boolean=false,
+									 append:Boolean=true )
 		{
 			_type = type;
 			_message = data;
@@ -275,9 +273,13 @@ package com.collab.echo.core.messages.chat
 			// override in subclass
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
-			return "<BaseChatMessage data='" + data + "' local='" + _local +
+			return "<ChatMessage data='" + data + "' local='" + _local +
 				   "' append='" + append + "' />";	
 		}
 		

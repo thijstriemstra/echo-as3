@@ -70,9 +70,10 @@ package com.collab.echo.util
 			//+
 			//escape all >
 			//-
-			var escaped:String = "";
-			var ltPos:Number = msg.indexOf(">");
-			while (ltPos != -1) {
+			escaped = "";
+			ltPos = msg.indexOf(">");
+			while (ltPos != -1)
+			{
 				escaped = msg.substring(0, ltPos) + "&gt;" + msg.substring(ltPos+1,msg.length);
 				//trace ("escaped: "+escaped);
 				msg = escaped;

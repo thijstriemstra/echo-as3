@@ -2,7 +2,6 @@
 
 <componentPackage>
 	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
-	<component id="BaseChatMessage" class="com.collab.echo.core.messages.chat.BaseChatMessage"/>
 	<component id="BaseConnectionEvent" class="com.collab.echo.events.BaseConnectionEvent"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseRoom" class="com.collab.echo.core.rooms.BaseRoom"/>
@@ -12,6 +11,7 @@
 	<component id="Chat" class="com.collab.echo.containers.Chat"/>
 	<component id="ChatEvent" class="com.collab.echo.events.ChatEvent"/>
 	<component id="ChatInput" class="com.collab.echo.controls.ChatInput"/>
+	<component id="ChatMessage" class="com.collab.echo.core.messages.chat.ChatMessage"/>
 	<component id="ChatMessageCreator" class="com.collab.echo.core.messages.ChatMessageCreator"/>
 	<component id="ChatMessageEvent" class="com.collab.echo.events.ChatMessageEvent"/>
 	<component id="ChatMessageTypes" class="com.collab.echo.core.messages.ChatMessageTypes"/>

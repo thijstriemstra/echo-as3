@@ -22,7 +22,7 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
-	import com.collab.echo.core.messages.chat.BaseChatMessage;
+	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.ClientView;
@@ -330,7 +330,7 @@ package com.collab.echo.containers
 		 *
 		 * @param message
 		 */
-		public function addMessage( message:BaseChatMessage ):void
+		public function addMessage( message:ChatMessage ):void
 		{
 			trace("Hub.chat.addMessage: " + getQualifiedClassName( message ));
 			

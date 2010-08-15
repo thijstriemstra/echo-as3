@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.events
 {
-	import com.collab.echo.core.messages.chat.BaseChatMessage;
+	import com.collab.echo.core.messages.chat.ChatMessage;
 	
 	import flash.events.Event;
 	
@@ -37,14 +37,13 @@ package com.collab.echo.events
 		// ====================================
 		
 		public static const NAME				: String = "ChatMessageEvent";
-		
 		public static const LOAD_COMPLETE		: String = NAME + "_loadComplete";
 		
 		// ====================================
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _data						: BaseChatMessage;
+		private var _data						: ChatMessage;
 		
 		// ====================================
 		// GETTER/SETTER
@@ -53,11 +52,11 @@ package com.collab.echo.events
 		/**
 		 * @return 
 		 */		
-		public function get data()				: BaseChatMessage
+		public function get data()				: ChatMessage
 		{
 			return _data;
 		}
-		public function set data( val:BaseChatMessage ):void
+		public function set data( val:ChatMessage ):void
 		{
 			_data = val;
 		}
@@ -75,9 +74,13 @@ package com.collab.echo.events
 		}
 		
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PUBLIC METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<ChatMessageEvent type='" + type + "' data='" + _data + "' />";

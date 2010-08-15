@@ -43,12 +43,10 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function TimeOnlineMessage( type:String, data:String,
-										   presence:* )
+		public function TimeOnlineMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, false, true, false, true );
 		}
 		
 		// ====================================
@@ -71,7 +69,7 @@ package com.collab.echo.core.messages.chat
 			{
 				try
 				{
-					user = presence.getClientByAttribute( UserVO.USERNAME, username );
+					//user = presence.getClientByAttribute( UserVO.USERNAME, username );
 				}
 				catch ( e:TypeError )
 				{
@@ -85,7 +83,7 @@ package com.collab.echo.core.messages.chat
 						{
 							try
 							{
-								user = presence.getClientById( id );
+								//user = presence.getClientById( id );
 							}
 							catch ( e:TypeError ) {}
 						}

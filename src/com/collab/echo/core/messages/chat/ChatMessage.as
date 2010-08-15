@@ -64,27 +64,9 @@ package com.collab.echo.core.messages.chat
 		private var _local							: Boolean;
 		private var _append							: Boolean;
 		
-		// XXX:  this has to be refactored
-		private var _presence						: *;
-		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
-		
-		/**
-		 * @return 
-		 */		
-		public function get presence():*
-		{
-			return _presence;
-		}
-		public function set presence( val:* ):void
-		{
-			if ( val )
-			{
-				_presence = val;
-			}
-		}
 		
 		/**
 		 * @return 
@@ -150,11 +132,17 @@ package com.collab.echo.core.messages.chat
 			_local = val;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get type():String
 		{
 			return _type;
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get includeSelf():Boolean
 		{
 			return _includeSelf;
@@ -214,7 +202,6 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
-		 * @param presence
 		 * @param includeSelf
 		 * @param local
 		 * @param privateMessage
@@ -222,7 +209,6 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function ChatMessage( type:String=null,
 									 data:String=null,
-									 presence:*=null,
 									 includeSelf:Boolean=false,
 									 local:Boolean=false,
 									 privateMessage:Boolean=false,
@@ -230,7 +216,6 @@ package com.collab.echo.core.messages.chat
 		{
 			_type = type;
 			_message = data;
-			_presence = presence;
 			_privateMessage = privateMessage;
 			_includeSelf = includeSelf;
 			_local = local;

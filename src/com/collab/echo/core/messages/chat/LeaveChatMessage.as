@@ -21,7 +21,7 @@ package com.collab.echo.core.messages.chat
 	import com.collab.echo.model.UserVO;
 	
 	/**
-	 * Message that is displayed when a remote user left the chat.
+	 * Message that is displayed when a remote user leaves the chat.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
@@ -35,17 +35,19 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function LeaveChatMessage( type:String, data:String, presence:* )
+		public function LeaveChatMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, false, true, false, true );
 		}
 		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			if ( _sender && _receiver )
@@ -54,6 +56,10 @@ package com.collab.echo.core.messages.chat
 			}
 		}
 		
+		/**
+		 * @private 
+		 * @param command
+		 */		
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
@@ -83,6 +89,10 @@ package com.collab.echo.core.messages.chat
 			message = "<b>"+ username +" has left.</b>";
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<LeaveChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	

@@ -48,11 +48,11 @@ package com.collab.echo.core.messages.chat
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function TextChatMessage( type:String=null, data:String=null, presence:*=null,
+		public function TextChatMessage( type:String=null, data:String=null,
 										 includeSelf:Boolean=false, local:Boolean=false,
 										 privateMessage:Boolean=false, append:Boolean=true )
 		{
-			super( type, data, presence, includeSelf, local, privateMessage, append );
+			super( type, data, includeSelf, local, privateMessage, append );
 		}
 		
 		// ====================================

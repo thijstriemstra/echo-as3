@@ -37,12 +37,10 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function JoinChatMessage( type:String, data:String,
-										 presence:* )
+		public function JoinChatMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, false, true, false, true );
 		}
 		
 		// ====================================
@@ -66,6 +64,8 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
+			// REQUIRES: username, clientId, abibility to setAttributes, rank
+			
 			// XXX: this should come from a populated UserVO
 			var username:String = _receiver.getAttribute( UserVO.USERNAME );
 			var clientID:String = _receiver.getClientID();
@@ -77,7 +77,7 @@ package com.collab.echo.core.messages.chat
 			}
 			
 			// XXX: not sure about this presence reference
-			if ( _receiver == presence.self )
+			if ( _receiver ) //== presence )
 			{
 				var rank:String = "guest";
 				var clientVar:String;
@@ -133,6 +133,10 @@ package com.collab.echo.core.messages.chat
 			}
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<JoinChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	

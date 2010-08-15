@@ -230,6 +230,8 @@ package com.collab.echo.containers
         {
         	data = args;
 			
+			trace("Hub.update: " + notification);
+			
             switch ( notification )
             {
             	case BaseRoomEvent.RECEIVE_MESSAGE:
@@ -328,13 +330,13 @@ package com.collab.echo.containers
 		/**
 		 * Add a new message to the chat.
 		 *
-		 * @param message
+		 * @param data
 		 */
-		public function addMessage( message:ChatMessage ):void
+		public function addMessage( data:ChatMessage ):void
 		{
-			trace("Hub.chat.addMessage: " + getQualifiedClassName( message ));
-			
-			chat.addMessage( message );
+			trace("Hub.chat.addMessage: " + getQualifiedClassName( data ));
+
+			chat.addMessage( data );
 		}
 
 		/**

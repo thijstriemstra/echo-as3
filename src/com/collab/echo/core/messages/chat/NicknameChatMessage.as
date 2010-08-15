@@ -28,6 +28,11 @@ package com.collab.echo.core.messages.chat
 	 */	
 	public class NicknameChatMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/nick [nickname]   ; change your nickname.";
 		
 		/**
@@ -35,17 +40,19 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function NicknameChatMessage( type:String, data:String, presence:*=null )
+		public function NicknameChatMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, false, true, false, true );
 		}
 		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			var userName:String = data.substr( 6 );
@@ -53,7 +60,7 @@ package com.collab.echo.core.messages.chat
 			if ( userName.length > 0 )
 			{
 				// change name in panel
-				//this.getTargetMC().chat.menu_accordion.preferences_mc.username_txt.text = userNaam;
+				//username_txt.text = userNaam;
 				
 				// send change to union
 				//setName();
@@ -109,6 +116,10 @@ package com.collab.echo.core.messages.chat
 		// PUBLIC METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<NicknameChatMessage data='" + data + "' />";	

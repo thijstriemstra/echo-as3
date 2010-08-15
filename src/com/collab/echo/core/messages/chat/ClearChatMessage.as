@@ -41,7 +41,7 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function ClearChatMessage( type:String, data:String )
 		{
-			super( type, data, null, false, true, false, false );
+			super( type, data, false, true, false, false );
 		}
 		
 		// ====================================

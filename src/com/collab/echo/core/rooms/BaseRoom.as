@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.rooms
 {
 	import com.collab.echo.events.BaseRoomEvent;
+	import com.collab.echo.net.Connection;
 	
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
@@ -72,13 +73,13 @@ package com.collab.echo.core.rooms
 		// PRIVATE VARS
 		// ====================================
 		
-		private var _id			: String;
-		private var _engine		: *;
-		private var _data		: *;
-		private var _autoJoin	: Boolean;
-		private var _watch		: Boolean;
-		private var _evt		: BaseRoomEvent;
-		private var _listeners	: Dictionary;
+		private var _id					: String;
+		private var _connection			: Connection;
+		private var _autoJoin			: Boolean;
+		private var _watch				: Boolean;
+		private var _evt				: BaseRoomEvent;
+		private var _listeners			: Dictionary;
+		private var _data				: *;
 		
 		// ====================================
 		// PROTECTED VARS
@@ -87,12 +88,17 @@ package com.collab.echo.core.rooms
 		/**
 		 * Room class name. 
 		 */		
-		protected var name		: String;
+		protected var name				: String;
 		
 		/**
 		 * The optional string password used to enter the room.
 		 */		
-		protected var password	: String;
+		protected var password			: String;
+		
+		/**
+		 * 
+		 */		
+		protected var joinedRoom		: Boolean;
 		
 		// ====================================
 		// ACCESSOR/MUTATOR
@@ -117,17 +123,17 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Room's engine/connection to the server.
+		 * Room's connection to the server.
 		 *  
 		 * @return 
 		 */		
-		public function get engine():*
+		public function get connection():Connection
 		{
-			return _engine;
+			return _connection;
 		}
-		public function set engine( val:* ):void
+		public function set connection( val:Connection ):void
 		{
-			_engine = val;
+			_connection = val;
 		}
 		
 		/**
@@ -166,6 +172,16 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * Whether the local client joined the room.
+		 *  
+		 * @return 
+		 */		
+		public function get joined():Boolean
+		{
+			return joinedRoom;
+		}
+		
+		/**
 		 * Constructor.
 		 *  
 		 * @param id
@@ -180,6 +196,7 @@ package com.collab.echo.core.rooms
 			_autoJoin = autoJoin;
 			_watch = watch;
 			_listeners = new Dictionary();
+			joinedRoom = false;
 			
 			name = getQualifiedClassName( this ).split( "::" )[ 1 ]
 		}
@@ -191,11 +208,11 @@ package com.collab.echo.core.rooms
 		/**
 		 * Create a new room.
 		 * 
-		 * @param engine The parent multi-user engine for the new room.
+		 * @param connection The connection to the parent multi-user engine for the new room.
 		 */		
-		public function create( engine:* ):void
+		public function create( connection:Connection ):void
 		{
-			this.engine = engine;
+			this.connection = connection;
 		}
 		
 		/**

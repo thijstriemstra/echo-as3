@@ -42,11 +42,10 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function IPChatMessage( type:String, data:String, presence:* )
+		public function IPChatMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, false, true, false, true );
 		}
 		
 		// ====================================
@@ -66,7 +65,7 @@ package com.collab.echo.core.messages.chat
 			
 			try
 			{
-				ip = presence.getIPByUserName( username );
+				//ip = presence.getIPByUserName( username );
 			}
 			catch ( e:TypeError )
 			{

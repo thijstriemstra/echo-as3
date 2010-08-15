@@ -33,11 +33,10 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function KickMessage( type:String, data:String, presence:* )
+		public function KickMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, true, true );
+			super( type, data, false, true, true, true );
 		}
 		
 		override protected function parseCommand():void

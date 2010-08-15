@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
+	import com.collab.echo.net.Connection;
+	
 	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
@@ -96,15 +98,15 @@ package com.collab.echo.core.rooms
 		/**
 		 * Create a new Union room.
 		 * 
-		 * @param engine
+		 * @param connection	Connection with Reactor.
 		 * @return 
 		 */		
-		override public function create( engine:* ):void
+		override public function create( connection:Connection ):void
 		{
-			super.create( engine );
+			super.create( connection );
 			
 			// create the room
-			room = engine.getRoomManager().createRoom( id, settings, null, modules );
+			room = connection.createRoom( id, settings, null, modules );
 			
 			// listen for events
 			room.addEventListener( RoomEvent.JOIN_RESULT,		 joinResult );
@@ -120,6 +122,7 @@ package com.collab.echo.core.rooms
 			{
 				// join
 				log( "Auto-joining: " + id );
+				joinedRoom = false;
 				join();
 			}
 		}
@@ -152,11 +155,14 @@ package com.collab.echo.core.rooms
         	
         	if ( room )
         	{
+        		// union specific message listener command
 				room.addMessageListener( type, method );
         	}
         }
         
         /**
+         * Send a message to the room.
+         * 
          * @param type
          * @param message
          * @param includeSelf
@@ -187,6 +193,8 @@ package com.collab.echo.core.rooms
 		 */		
 		override protected function joinResult( event:*=null ):void
 		{
+			joinedRoom = true;
+			
 			// register listeners
 			registerListeners();
         									   

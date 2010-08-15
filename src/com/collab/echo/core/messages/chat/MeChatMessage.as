@@ -30,6 +30,11 @@ package com.collab.echo.core.messages.chat
 	 */	
 	public class MeChatMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/me [message]";
 		
 		/**
@@ -40,13 +45,16 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, null, true, false, false, true );
+			super( type, data, true, false, false, true );
 		}
 		
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
-		
+
+		/**
+		 * @private 
+		 */				
 		override protected function parseCommand():void
 		{
 			var bericht:String = data.substr( 4 );
@@ -59,6 +67,7 @@ package com.collab.echo.core.messages.chat
 		
 		/**
 		 * @param command
+		 * @private
 		 */		
 		override protected function execute( command:String ):void
 		{
@@ -81,6 +90,10 @@ package com.collab.echo.core.messages.chat
 		// PUBLIC METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<MeChatMessage data='" + data + "' />";	

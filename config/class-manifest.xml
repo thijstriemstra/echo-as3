@@ -18,8 +18,10 @@
 	<component id="CirclePreloader" class="com.collab.echo.controls.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.core.messages.chat.ClearChatMessage"/>
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
+	<component id="ClientUtils" class="com.collab.echo.util.ClientUtils"/>
 	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
+	<component id="Connection" class="com.collab.echo.net.Connection"/>
 	<component id="ContentLoader" class="com.collab.echo.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.controls.tools.DrawingModes"/>
@@ -80,6 +82,7 @@
 	<component id="ToolBar" class="com.collab.echo.controls.ToolBar"/>
 	<component id="Translator" class="com.collab.echo.containers.Translator"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
+	<component id="UnionConnection" class="com.collab.echo.net.UnionConnection"/>
 	<component id="UnionRoom" class="com.collab.echo.core.rooms.UnionRoom"/>
 	<component id="UserCursor" class="com.collab.echo.controls.UserCursor"/>
 	<component id="UserInfoBar" class="com.collab.echo.controls.UserInfoBar"/>

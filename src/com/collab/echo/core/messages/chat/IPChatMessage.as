@@ -16,8 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.core.messages
+package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.messages.ChatMessageTypes;
+	
 	/**
 	 * Find the IP address for a client, by username.
 	 * 

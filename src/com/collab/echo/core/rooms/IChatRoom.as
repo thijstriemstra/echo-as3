@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
-	import com.collab.echo.core.messages.BaseChatMessage;
+	import com.collab.echo.core.messages.chat.BaseChatMessage;
 
 	/**
 	 * Interface for a chat room.

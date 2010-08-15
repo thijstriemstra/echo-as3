@@ -16,30 +16,31 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.core.messages
+package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.model.UserVO;
 	
 	/**
-	 * Message that is displayed when a remote user left the chat.
+	 * A public '[username] ...' chat message.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
-     * @langversion 3.0
+	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class LeaveChatMessage extends TextChatMessage
+	public class MeChatMessage extends TextChatMessage
 	{
+		public static const DOC	: String = "/me [message]";
+		
 		/**
 		 * Constructor.
-		 *  
+		 * 
 		 * @param type
 		 * @param data
-		 * @param presence
 		 */		
-		public function LeaveChatMessage( type:String, data:String, presence:* )
+		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, presence, false, true, false, true );
+			super( type, data, null, true, false, false, true );
 		}
 		
 		// ====================================
@@ -48,44 +49,41 @@ package com.collab.echo.core.messages
 		
 		override protected function parseCommand():void
 		{
-			if ( _sender && _receiver )
+			var bericht:String = data.substr( 4 );
+			
+			if ( bericht.length > 0 )
 			{
-				execute( data );
+				execute( bericht );
 			}
 		}
 		
+		/**
+		 * @param command
+		 */		
 		override protected function execute( command:String ):void
 		{
 			// XXX: this should come from a populated UserVO
-			var username:String = _receiver.getAttribute( UserVO.USERNAME );
-			var clientID:String = _receiver.getClientID();
+			var username:String = sender.getAttribute( UserVO.USERNAME );
 			
-			// use the client id as a user name if the user hasn't set a name.
+			// Use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
 			{
-				username = "user" + clientID;
+				username = "user" + sender.getClientID();
 			}
 			
-			/*if ( appClient.rank == "admin" )
-			{
-				// XXX: localize
-				textArea.htmlText += addStamp + " <font color='#1D5EAB'><b>" + appClient.username + " has left.</b></font>";
-			}
-			else if ( appClient.rank == "moderator" )
-			{
-				textArea.htmlText += addStamp + " <font color='#1892AF'><b>" + appClient.username + " has left.</b></font>";
-			}
-			else
-			{
-			*/
+			// add hyperlinks to msg	
+			//data = hiliteURLs( command );
 			
-			// XXX: localize
-			message = "<b>"+ username +" has left.</b>";
+			message = '<font color="#1B701F"><b>' + username + ' ' + command + '</b></font>';
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		override public function toString():String
 		{
-			return "<LeaveChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	
+			return "<MeChatMessage data='" + data + "' />";	
 		}
 		
 	}

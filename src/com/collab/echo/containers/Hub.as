@@ -327,8 +327,7 @@ package com.collab.echo.containers
 		 */
 		public function addMessage( message:BaseChatMessage ):void
 		{
-			trace("Hub.chat.addMessage: " + getQualifiedClassName(message));
-			trace(message.message);
+			trace("Hub.chat.addMessage: " + getQualifiedClassName( message ));
 			
 			chat.addMessage( message );
 		}

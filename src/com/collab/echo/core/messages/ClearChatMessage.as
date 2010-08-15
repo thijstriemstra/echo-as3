@@ -26,6 +26,11 @@ package com.collab.echo.core.messages
 	 */	
 	public class ClearChatMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/clear     ; clear the text in the chat window.";
 		
 		/**

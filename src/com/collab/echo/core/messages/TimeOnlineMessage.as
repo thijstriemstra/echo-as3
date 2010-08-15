@@ -24,9 +24,17 @@ package com.collab.echo.core.messages
 	 * Find out how long a user has spent online, by username.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class TimeOnlineMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/timeOnline [nickname]  ; find out how long the user has been online.";
 		
 		/**
@@ -48,6 +56,8 @@ package com.collab.echo.core.messages
 		
 		/**
 		 * Find out how long user is online. 
+		 * 
+		 * @private
 		 */		
 		override protected function parseCommand():void
 		{
@@ -58,30 +68,42 @@ package com.collab.echo.core.messages
 			
 			if ( username )
 			{
-				user = presence.getClientByAttribute( UserVO.USERNAME, username );
-			}
-			
-			// if the username wasn't found
-			if ( user == null ) 
-			{
-				if ( username.length > 4 )
+				try
 				{
-					user = presence.getClientById( id );
+					user = presence.getClientByAttribute( UserVO.USERNAME, username );
 				}
-				
-				if ( user )
+				catch ( e:TypeError )
 				{
-					time = user.getConnectTime();
 				}
-				else
+				finally
 				{
-					// XXX: localize
-					data = " <b>Username not found.</b>";
+					// if the username wasn't found
+					if ( user == null ) 
+					{
+						if ( username.length > 4 )
+						{
+							try
+							{
+								user = presence.getClientById( id );
+							}
+							catch ( e:TypeError ) {}
+						}
+						
+						if ( user )
+						{
+							time = user.getConnectTime();
+						}
+						else
+						{
+							// XXX: localize
+							data = " <b>Username '" + username + "' not found.</b>";
+						}
+					}
+					else
+					{
+						time = user.getConnectTime();
+					}
 				}
-			}
-			else
-			{
-				time = user.getConnectTime();
 			}
 			
 			if ( time > 0 )
@@ -113,6 +135,15 @@ package com.collab.echo.core.messages
 			}
 			
 			execute( data );
+		}
+		
+		/**
+		 * @private
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
+		{
+			message = command;
 		}
 
 		// ====================================

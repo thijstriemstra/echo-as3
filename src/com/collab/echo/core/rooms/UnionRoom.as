@@ -77,7 +77,6 @@ package com.collab.echo.core.rooms
 		{
 			super( id, autoJoin, watch );
 			
-			this.password = password;
 			this.modules = new RoomModules();
 			
 			// specify that the rooms should not "die on empty"; otherwise,
@@ -119,6 +118,7 @@ package com.collab.echo.core.rooms
 			
 			if ( autoJoin )
 			{
+				// join
 				log( "Auto-joining: " + id );
 				join();
 			}
@@ -130,7 +130,7 @@ package com.collab.echo.core.rooms
 		override public function join():void
 		{
 			// union specific join command
-			room.join( password, updateLevels );
+			room.join( null, updateLevels );
 		}
 		
 		/**
@@ -143,7 +143,6 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * @private
 		 * @param type
 		 * @param method
 		 */		
@@ -155,23 +154,6 @@ package com.collab.echo.core.rooms
         	{
 				room.addMessageListener( type, method );
         	}
-        }
-        
-        /**
-         * 
-         */        
-        private function registerListeners():void
-        {
-        	var method:Function;
-        	var type:Object;
-        	
-        	for ( type in listeners )
-			{
-				method = listeners[ type ];
-				room.addMessageListener( type.toString(), method );
-				
-				log("* UnionRoom.addMessageListener: " + type + ", method: " + method );
-			}
         }
         
         /**
@@ -225,6 +207,23 @@ package com.collab.echo.core.rooms
 				}
 			}
 		}
+		
+		/**
+         * Register message listeners.
+         */        
+        protected function registerListeners():void
+        {
+        	var method:Function;
+        	var type:Object;
+        	
+        	for ( type in listeners )
+			{
+				method = listeners[ type ];
+				room.addMessageListener( type.toString(), method );
+				
+				log("addMessageListener: " + type + ", method: " + method );
+			}
+        }
 		
 		/**
 		 * Log a message.

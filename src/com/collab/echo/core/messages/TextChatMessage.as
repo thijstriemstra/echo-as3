@@ -20,8 +20,6 @@ package com.collab.echo.core.messages
 {
 	import com.collab.echo.events.ChatMessageEvent;
 	import com.collab.echo.model.UserVO;
-	
-	import org.osflash.thunderbolt.Logger;
 
 	/**
 	 * Simple text chat message.
@@ -33,6 +31,11 @@ package com.collab.echo.core.messages
 	 */	
 	public class TextChatMessage extends BaseChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/msg [nickname] : [string]     ; send someone a private message.";
 		
 		/**
@@ -73,10 +76,10 @@ package com.collab.echo.core.messages
 		 */		
 		override protected function execute( command:String ):void
 		{
-			Logger.debug( "TextChatMessage.execute: " + command + " (private: " +
-						  privateMessage + ", local: " + local + ")" );
+			//Logger.debug( "TextChatMessage.execute: " + command + " (private: " +
+			//			  privateMessage + ", local: " + local + ")" );
 			
-			// XXX: this should come from a populated UserVO
+			// XXX: this should come from a populated UserVO or something
 			var username:String = sender.getAttribute( UserVO.USERNAME );
 			
 			// use the client id as a user name if the user hasn't set a name.
@@ -100,11 +103,11 @@ package com.collab.echo.core.messages
 				// add tags for staff 
 				if (rank == "admin")
 				{
-				username = '<font color="#1D5EAB">'+username+'</font>';
+					username = '<font color="#1D5EAB">'+username+'</font>';
 				}
 				else if (rank == "moderator")
 				{
-				username = '<font color="#1892AF">'+username+'</font>';
+					username = '<font color="#1892AF">'+username+'</font>';
 				}
 				*/
 				
@@ -121,7 +124,6 @@ package com.collab.echo.core.messages
 			// XXX: addd logging
 			//var logMessage_pc:PendingCall = getTargetMC().mainService.logMessage(username, msg, getTargetMC().ipaddress, 1); 
 			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
-			
 			//Logger.debug( "TextChatMessage.load: " + this );
 			
 			// XXX: dispatch after async completed
@@ -214,13 +216,15 @@ package com.collab.echo.core.messages
 				}
 				
 				// find other name
-				if (clientName == userName.toLowerCase()) {
+				if (clientName == userName.toLowerCase())
+				{
 					foundIt.clientID = attrList[i].clientID;
 				}
 				/*
-				if (attrList[i].clientID == getClientID()) {
-				foundIt.myName = attrList[i].value;
-				foundIt.myID = attrList[i].clientID;
+				if (attrList[i].clientID == getClientID())
+				{
+					foundIt.myName = attrList[i].value;
+					foundIt.myID = attrList[i].clientID;
 				}
 				*/
 			}

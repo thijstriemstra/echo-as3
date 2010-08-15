@@ -230,6 +230,9 @@ package com.collab.echo.core.rooms
         {
         }
 		
+		/**
+		 * @private 
+		 */		
 		override public function toString():String
 		{
 			return "<BaseRoom id='" + id + "' />";

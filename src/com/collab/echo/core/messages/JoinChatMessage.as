@@ -23,7 +23,7 @@ package com.collab.echo.core.messages
 	import flash.system.Capabilities;
 
 	/**
-	 * Joined the chatroom.
+	 * Chat message displayed when joining the chatroom.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
@@ -76,6 +76,7 @@ package com.collab.echo.core.messages
 				username = "user" + clientID;
 			}
 			
+			// XXX: not sure about this presence reference
 			if ( _receiver == presence.self )
 			{
 				var rank:String = "guest";

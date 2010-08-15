@@ -19,12 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages
 {
 	/**
-	 * Check the IP address for a client by username.
+	 * Find the IP address for a client, by username.
 	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class IPChatMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
 		
 		/**
@@ -43,24 +51,46 @@ package com.collab.echo.core.messages
 		// PROTECTED METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			// the username
 			var username:String = data.substr( ChatMessageTypes.IP.length + 2 );
 			
 			// retrieve the IP address for the client by username
-			var ip:String = presence.getIPByUserName( username );
+			var ip:String;
 			
-			// XXX: localize
-			if ( ip == null )
+			try
 			{
-				ip = "Username not found.";
+				ip = presence.getIPByUserName( username );
+			}
+			catch ( e:TypeError )
+			{
+			}
+			finally
+			{
+				// XXX: localize
+				if ( ip == null )
+				{
+					ip = "Username not found.";
+				}
 			}
 			
 			data = "<b>IP address for " + username + ": "+ ip +" </b>";
 			
 			// get the users ip
 			execute( data );
+		}
+		
+		/**
+		 * @private
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
+		{
+			message = command;
 		}
 		
 		// ====================================

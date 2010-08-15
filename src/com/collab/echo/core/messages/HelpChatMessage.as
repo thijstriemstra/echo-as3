@@ -19,7 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages
 {
 	/**
+	 * Chat message displaying the available chat commands.
+	 * 
 	 * @author Thijs Triemstra
+	 * 
+	 * @langversion 3.0
+ 	 * @playerversion Flash 9
 	 */	
 	public class HelpChatMessage extends TextChatMessage
 	{
@@ -45,6 +50,8 @@ package com.collab.echo.core.messages
 		
 		/**
 		 * Compile list based on available commands. 
+		 * 
+		 * @private
 		 */		
 		override protected function parseCommand():void
 		{
@@ -57,7 +64,16 @@ package com.collab.echo.core.messages
 				data += field["DOC"] + "<br/>";
 			}
 			
-			execute( data.substr( 0, data.length -5 ));
+			execute( data.substr( 0, data.length - 5 ));
+		}
+		
+		/**
+		 * @private
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
+		{
+			message = command;
 		}
 		
 		// ====================================

@@ -201,6 +201,11 @@ package com.collab.echo.core.rooms
 		{
 		}
 		
+		override public function toString():String
+		{
+			return "<BaseRoom id='" + id + "' />";
+		}
+		
 		// ====================================
 		// EVENT HANDLERS
 		// ====================================

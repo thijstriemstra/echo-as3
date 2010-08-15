@@ -310,17 +310,17 @@ package com.collab.echo.containers
 		}
 
 		/**
-		 * Add a new message to the <code>Chat</code>.
+		 * Add a new message to the chat.
 		 *
 		 * @param message
 		 */
-		public function addMessage( message:BaseChatMessage ):void
+		override public function addMessage( message:BaseChatMessage ):void
 		{
 			chat.addMessage( message );
 		}
 
 		/**
-		 * Add a new line to the <code>Whiteboard</code>.
+		 * Add a new line to the whiteboard.
 		 *
 		 * @param message
 		 */

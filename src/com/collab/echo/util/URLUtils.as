@@ -71,7 +71,7 @@ package com.collab.echo.util
 			//escape all >
 			//-
 			var escaped:String = "";
-			var ltPos = msg.indexOf(">");
+			var ltPos:Number = msg.indexOf(">");
 			while (ltPos != -1) {
 				escaped = msg.substring(0, ltPos) + "&gt;" + msg.substring(ltPos+1,msg.length);
 				//trace ("escaped: "+escaped);
@@ -82,27 +82,31 @@ package com.collab.echo.util
 			//+
 			//highlight urls
 			//-
-			var url_begin = msg.indexOf("http:");
+			var url_begin:Number = msg.indexOf("http:");
 			if ( url_begin == -1 )
 				url_begin = msg.indexOf("www.");
 			
 			if ( url_begin == -1 )
 				return msg;
 			
-			var hilited = msg.substring(0, url_begin);
-			var url_end = msg.indexOf( " ", url_begin );
+			var hilited:String = msg.substring(0, url_begin);
+			var url_end:Number = msg.indexOf( " ", url_begin );
 			
-			var urlstr = "";
+			var urlstr:String = "";
 			if ( url_end == -1 )
+			{
 				urlstr = msg.substring(url_begin);
+			}
 			else
+			{
 				urlstr = msg.substring(url_begin, url_end);
+			}
 			
-			var urlref = urlstr;
+			var urlref:String = urlstr;
 			if ( urlstr.indexOf("www.") == 0 )
 				urlref = "http://" + urlstr;
 			
-			var trailer = "";
+			var trailer:String = "";
 			if ( url_end != -1 )
 				trailer = URLUtils.hiliteURLs( msg.substring(url_end) );
 			

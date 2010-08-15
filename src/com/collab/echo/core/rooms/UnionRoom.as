@@ -125,7 +125,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Join the <code>Room</code>.
+		 * Join the room.
 		 */		
 		override public function join():void
 		{
@@ -134,7 +134,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Leave the <code>Room</code>.
+		 * Leave the room.
 		 */		
 		override public function leave():void
 		{
@@ -142,6 +142,49 @@ package com.collab.echo.core.rooms
 			room.leave();
 		}
 		
+		/**
+		 * @private
+		 * @param type
+		 * @param method
+		 */		
+		override public function addMessageListener( type:String, method:Function ):void
+        {
+        	super.addMessageListener( type, method );
+        	
+        	if ( room )
+        	{
+				room.addMessageListener( type, method );
+        	}
+        }
+        
+        /**
+         * 
+         */        
+        private function registerListeners():void
+        {
+        	var method:Function;
+        	var type:Object;
+        	
+        	for ( type in listeners )
+			{
+				method = listeners[ type ];
+				room.addMessageListener( type.toString(), method );
+				
+				log("* UnionRoom.addMessageListener: " + type + ", method: " + method );
+			}
+        }
+        
+        /**
+         * @param type
+         * @param message
+         * @param includeSelf
+         */        
+        override public function sendMessage( type:String, message:String,
+        									  includeSelf:Boolean=false ):void
+        {
+        	room.sendMessage( type, includeSelf, null, message );
+        }
+
 		override public function toString():String
 		{
 			return "<UnionRoom id='" + id + "' />";
@@ -150,6 +193,19 @@ package com.collab.echo.core.rooms
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
+		
+		/**
+		 * Invoked when the room was joined.
+		 * 
+		 * @param event
+		 */		
+		override protected function joinResult( event:*=null ):void
+		{
+			// register listeners
+			registerListeners();
+
+			super.joinResult( event );
+		}
 		
 		/**
 		 * Add <code>RoomModule</code> objects.

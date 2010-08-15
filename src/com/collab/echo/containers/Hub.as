@@ -26,6 +26,7 @@ package com.collab.echo.containers
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
 	import com.collab.echo.display.ClientView;
+	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.UserVO;
 	import com.greensock.TweenLite;
@@ -68,7 +69,7 @@ package com.collab.echo.containers
 		/**
 		 * The initial width of the panel.
 		 */
-		public static const PANEL_WIDTH_MIN		: int = 140;
+		public static const PANEL_WIDTH_MIN		: int = 280; //140;
 
 		// ====================================
 		// PRIVATE VARS
@@ -227,9 +228,18 @@ package com.collab.echo.containers
 		 */		
 		override public function update( notification:String, ...args:Array ) : void
         {
-            super.update( notification, args );
+        	data = args;
 			
-			trace( getQualifiedClassName( this ) + " : " + notification + " - " + data );
+            switch ( notification )
+            {
+            	case BaseRoomEvent.RECEIVE_MESSAGE:
+            		// XXX: look into this hack
+            		addMessage( args[0][0] );
+            		break;
+            		
+            	default:
+            		super.update( notification, args );
+            }
         }
 
 		/**
@@ -251,6 +261,7 @@ package com.collab.echo.containers
 		 */
 		override public function addOccupant( args:Array=null ):void
 		{
+			// XXX: look into this
 			var client:UserVO;
 			
 			trace("addOccupant: " + args );
@@ -289,7 +300,7 @@ package com.collab.echo.containers
 				index++;
 			}
 			*/
-			//Logger.debug( 'BaseCommunicationPanel.removeOccupant: ' + client );
+			//Logger.debug( 'Hub.removeOccupant: ' + client );
 
 			// remove occupant from components
 			userPane.removeOccupant( args );
@@ -314,8 +325,11 @@ package com.collab.echo.containers
 		 *
 		 * @param message
 		 */
-		override public function addMessage( message:BaseChatMessage ):void
+		public function addMessage( message:BaseChatMessage ):void
 		{
+			trace("Hub.chat.addMessage: " + getQualifiedClassName(message));
+			trace(message.message);
+			
 			chat.addMessage( message );
 		}
 

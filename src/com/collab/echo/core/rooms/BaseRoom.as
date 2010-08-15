@@ -21,6 +21,7 @@ package com.collab.echo.core.rooms
 	import com.collab.echo.events.BaseRoomEvent;
 	
 	import flash.events.EventDispatcher;
+	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 
 	// ====================================
@@ -77,13 +78,14 @@ package com.collab.echo.core.rooms
 		private var _autoJoin	: Boolean;
 		private var _watch		: Boolean;
 		private var _evt		: BaseRoomEvent;
+		private var _listeners	: Dictionary;
 		
 		// ====================================
 		// PROTECTED VARS
 		// ====================================
 		
 		/**
-		 * <code>Room</code> class name. 
+		 * Room class name. 
 		 */		
 		protected var name		: String;
 		
@@ -95,6 +97,14 @@ package com.collab.echo.core.rooms
 		// ====================================
 		// ACCESSOR/MUTATOR
 		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get listeners():Dictionary
+		{
+			return _listeners;
+		}
 		
 		/**
 		 * Unique qualifier for the room.
@@ -169,6 +179,7 @@ package com.collab.echo.core.rooms
 			_id = id;
 			_autoJoin = autoJoin;
 			_watch = watch;
+			_listeners = new Dictionary();
 			
 			name = getQualifiedClassName( this ).split( "::" )[ 1 ]
 		}
@@ -178,7 +189,7 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
-		 * Create a new <code>BaseRoom</code>.
+		 * Create a new room.
 		 * 
 		 * @param engine The parent multi-user engine for the new room.
 		 */		
@@ -188,18 +199,36 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Join the <code>BaseRoom</code>.
+		 * Join the room.
 		 */		
 		public function join():void
 		{
 		}
 		
 		/**
-		 * Leave the <code>BaseRoom</code>. 
+		 * Leave the room.
 		 */		
 		public function leave():void
 		{
 		}
+		
+		/**
+		 * @param type
+		 * @param method
+		 */		
+		public function addMessageListener( type:String, method:Function ):void
+        {
+        	_listeners[ type ] = method;
+        }
+        
+        /**
+         * @param type
+         * @param message
+         * @param includeSelf
+         */        
+        public function sendMessage( type:String, message:String, includeSelf:Boolean=false ):void
+        {
+        }
 		
 		override public function toString():String
 		{
@@ -211,7 +240,7 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
-		 * Invoked when the <code>BaseRoom</code> was joined.
+		 * Invoked when the room was joined.
 		 * 
 		 * @param event
 		 */		
@@ -224,7 +253,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * The amount of occupants in the <code>Room</code> changed.
+		 * The amount of occupants in the room changed.
 		 * 
 		 * @param event
 		 */		
@@ -237,7 +266,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * A new occupant was added to the <code>Room</code>.
+		 * A new occupant was added to the room.
 		 * 
 		 * @param event
 		 */		
@@ -248,7 +277,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * An existing occupant was removed from the <code>Room</code>.
+		 * An existing occupant was removed from the room.
 		 * 
 		 * @param event
 		 */		

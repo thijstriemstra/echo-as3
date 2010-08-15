@@ -155,6 +155,7 @@ package com.collab.echo.containers
 			_showTimestamp = true;
 			
 			this.messageHistory = [];
+			
 			// XXX: move elsewhere
 			this.menuItems = [ "aaa", "bbb", "ccc" ];
 			
@@ -189,7 +190,7 @@ package com.collab.echo.containers
 		}
 		
 		/**
-		 * Joined the room.
+		 * Local client joined the room.
 		 * 
 		 * @param args
 		 */		
@@ -199,7 +200,7 @@ package com.collab.echo.containers
 		}
 		
 		/**
-		 * Total clients in room updated.
+		 * Total clients in room was updated.
 		 * 
 		 * @param args
 		 */		
@@ -209,7 +210,7 @@ package com.collab.echo.containers
 		}
 		
 		/**
-		 * Add a chat message to the <code>textArea</code>.
+		 * Add a chat message to the <code>textArea</code> component.
 		 * 
 		 * @param data
 		 */		
@@ -218,43 +219,46 @@ package com.collab.echo.containers
 			var addStamp:String = "";
 			var text:String = "";
 			
-			// update history
-			updateHistory( data.message );
-			
-			// play sound
-			if ( _playSound )
+			if ( data )
 			{
-				//_messageSound.play();
+				// update history
+				updateHistory( data.message );
+				
+				// play sound
+				if ( _playSound )
+				{
+					//_messageSound.play();
+				}
+				
+				// cutoff lines
+				if ( data.append )
+				{
+					truncateChatField( textArea );
+				}
+				
+				// add timestamp
+				if ( _showTimestamp )
+				{
+					addStamp = DateUtils.createClientStamp();
+				}
+				
+				// add text to chat
+				text = addStamp + " " + data.message;
+				
+				if ( data.append )
+				{
+					// append
+					textArea.htmlText += text;
+				}
+				else
+				{
+					// replace
+					textArea.htmlText = text;
+				}
+	
+				// scroll chat to bottom
+				textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 			}
-			
-			// cutoff lines
-			if ( data.append )
-			{
-				truncateChatField( textArea );
-			}
-			
-			// add timestamp
-			if ( _showTimestamp )
-			{
-				addStamp = DateUtils.createClientStamp();
-			}
-			
-			// add text to chat
-			text = addStamp + " " + data.message;
-			
-			if ( data.append )
-			{
-				// append
-				textArea.htmlText += text;
-			}
-			else
-			{
-				// replace
-				textArea.htmlText = text;
-			}
-
-			// scroll chat to bottom
-			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 
 		// ====================================

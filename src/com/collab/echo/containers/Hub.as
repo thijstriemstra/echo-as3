@@ -47,7 +47,7 @@ package com.collab.echo.containers
 	 * <li>Chat</li>
 	 * <li>Whiteboard</li>
 	 * <li>Translator</li>
-	 * <li>BaseExpandButton</li>
+	 * <li>BaseExpandButton (XXX: will be moved out of this view)</li>
 	 * </ul></p>
 	 *
 	 * @see com.collab.echo.containers.Chat Chat
@@ -236,9 +236,14 @@ package com.collab.echo.containers
             		// XXX: look into this hack
             		addMessage( args[0][0] );
             		break;
-            		
+            	
+            	case BaseRoomEvent.RECEIVE_LINE:
+            		addLine( args[0][0] );
+            		break;
+            	
             	default:
             		super.update( notification, args );
+            		break;
             }
         }
 
@@ -249,6 +254,8 @@ package com.collab.echo.containers
 		 */
 		override public function joinedRoom( args:Array=null ):void
 		{
+			trace(args);
+			
 			chat.joinedRoom( args );
 			userPane.joinedRoom( args );
 			whiteboard.joinedRoom( args );

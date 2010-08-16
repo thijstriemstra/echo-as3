@@ -20,6 +20,7 @@ package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.core.messages.ChatMessageTypes;
 	import com.collab.echo.model.UserVO;
+	import com.collab.echo.net.Connection;
 	
 	/**
 	 * Find out how long a user has spent online, by username.
@@ -38,14 +39,19 @@ package com.collab.echo.core.messages.chat
 		// XXX: localize
 		public static const DOC	: String = "/timeOnline [nickname]  ; find out how long the user has been online.";
 		
+		protected var connection : Connection;
+		
 		/**
 		 * Constructor.
 		 *  
 		 * @param type
 		 * @param data
+		 * @param connection
 		 */		
-		public function TimeOnlineMessage( type:String, data:String )
+		public function TimeOnlineMessage( type:String, data:String, connection:Connection )
 		{
+			this.connection = connection;
+			
 			super( type, data, false, true, false, true );
 		}
 		
@@ -65,11 +71,11 @@ package com.collab.echo.core.messages.chat
 			var time:Number;
 			var user:*;
 			
-			if ( username )
+			if ( _receiver && _sender && username )
 			{
 				try
 				{
-					//user = presence.getClientByAttribute( UserVO.USERNAME, username );
+					user = connection.getClientByAttribute( UserVO.USERNAME, username );
 				}
 				catch ( e:TypeError )
 				{
@@ -83,7 +89,7 @@ package com.collab.echo.core.messages.chat
 						{
 							try
 							{
-								//user = presence.getClientById( id );
+								user = connection.getClientById( id );
 							}
 							catch ( e:TypeError ) {}
 						}

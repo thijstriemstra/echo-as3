@@ -240,6 +240,18 @@
                 ]]>
             </description>
         </package>
+        <package name="com.collab.echo.net">
+            <shortDescription>
+                <![CDATA[
+                   The com.collab.echo.net package contains classes for sending and receiving from the network, such as socket connections. 
+                ]]>
+            </shortDescription>
+            <description>
+                <![CDATA[
+                   The com.collab.echo.net package contains classes for sending and receiving from the network, such as socket connections.
+                ]]>
+            </description>
+        </package>
         <package name="com.collab.echo.util">
             <shortDescription>
                 <![CDATA[

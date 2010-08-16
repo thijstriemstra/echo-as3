@@ -253,13 +253,13 @@ package com.collab.echo.containers
 		/**
 		 * Notify the panel's components that a client joined the room.
 		 *
-		 * @param args
+		 * @param client
 		 */
-		override public function joinedRoom( args:Array=null ):void
+		override public function joinedRoom( client:UserVO ):void
 		{
-			chat.joinedRoom( args );
-			userPane.joinedRoom( args );
-			whiteboard.joinedRoom( args );
+			chat.joinedRoom( client );
+			userPane.joinedRoom( client );
+			whiteboard.joinedRoom( client );
 		}
 
 		/**
@@ -267,22 +267,17 @@ package com.collab.echo.containers
 		 *
 		 * @param client
 		 */
-		override public function addOccupant( args:Array=null ):void
+		override public function addOccupant( client:UserVO ):void
 		{
-			// XXX: look into this
-			var client:UserVO;
-			
-			trace("addOccupant: " + args );
-			
 			// add the user to the data provider
 			data.push( client );
 
-			//Logger.debug( 'Hub.addOccupant: ' + client );
+			Logger.debug( 'Hub.addOccupant: ' + client );
 
 			// add occupant to components
-			userPane.addOccupant( args );
-			chat.addOccupant( args );
-			whiteboard.addOccupant( args );
+			userPane.addOccupant( client );
+			chat.addOccupant( client );
+			whiteboard.addOccupant( client );
 		}
 
 		/**
@@ -290,7 +285,7 @@ package com.collab.echo.containers
 		 *
 		 * @param client
 		 */
-		override public function removeOccupant( args:Array=null ):void
+		override public function removeOccupant( client:UserVO ):void
 		{
 			var myGuy:UserVO;
 			var index:int = 0;
@@ -311,21 +306,21 @@ package com.collab.echo.containers
 			//Logger.debug( 'Hub.removeOccupant: ' + client );
 
 			// remove occupant from components
-			userPane.removeOccupant( args );
-			whiteboard.removeOccupant( args );
-			chat.removeOccupant( args );
+			userPane.removeOccupant( client );
+			whiteboard.removeOccupant( client );
+			chat.removeOccupant( client );
 		}
 
 		/**
 		 * Notify the panel's component that the clients in the room updated.
 		 *
-		 * @param args
+		 * @param total
 		 */
-		override public function numClients( args:Array=null ):void
+		override public function numClients( total:int ):void
 		{
-			chat.numClients( args );
-			userPane.numClients( args );
-			whiteboard.numClients( args );
+			chat.numClients( total );
+			userPane.numClients( total );
+			whiteboard.numClients( total );
 		}
 
 		/**

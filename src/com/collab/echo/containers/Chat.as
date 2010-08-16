@@ -24,6 +24,7 @@ package com.collab.echo.containers
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.events.ChatEvent;
+	import com.collab.echo.model.UserVO;
 	import com.collab.echo.util.DateUtils;
 	
 	import fl.controls.TextArea;
@@ -170,21 +171,21 @@ package com.collab.echo.containers
 		/**
 		 * Add a new occupant to the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function addOccupant( args:Array=null ):void
+		public function addOccupant( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.addOccupant: " + args );
+			//Logger.debug( "Chat.addOccupant: " + client );
 		}
 		
 		/**
 		 * Remove an existing occupant from the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function removeOccupant( args:Array=null ):void
+		public function removeOccupant( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.removeOccupant: " + args );
+			//Logger.debug( "Chat.removeOccupant: " + client );
 			
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
@@ -192,21 +193,21 @@ package com.collab.echo.containers
 		/**
 		 * Local client joined the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function joinedRoom( args:Array=null ):void
+		public function joinedRoom( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.joinedRoom: " + args );
+			//Logger.debug( "Chat.joinedRoom: " + client );
 		}
 		
 		/**
 		 * Total clients in room was updated.
 		 * 
-		 * @param args
+		 * @param total
 		 */		
-		public function numClients( args:Array=null ):void
+		public function numClients( total:int ):void
 		{
-			//Logger.debug( "Chat.numClients: " + args );
+			//Logger.debug( "Chat.numClients: " + total );
 		}
 		
 		/**

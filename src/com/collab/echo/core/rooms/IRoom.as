@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
+	import com.collab.echo.model.UserVO;
+	
 	/**
 	 * Interface for a room.
 	 * 
@@ -31,30 +33,30 @@ package com.collab.echo.core.rooms
 		/**
 		 * Adds a new occupant to the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		function addOccupant( args:Array=null ):void;
+		function addOccupant( client:UserVO ):void;
 		
 		/**
-		 * Removes an existing occupant from the room.
-		 * 
-		 * @param args
-		 */		
-		function removeOccupant( args:Array=null ):void;
+		 * Remove an existing occupant from the room.
+		 *
+		 * @param client
+		 */
+		function removeOccupant( client:UserVO ):void
 		
 		/**
 		 * Joined the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		function joinedRoom( args:Array=null ):void;
+		function joinedRoom( client:UserVO ):void;
 		
 		/**
 		 * Total clients in room updated.
 		 * 
-		 * @param args
+		 * @param total
 		 */		
-		function numClients( args:Array=null ):void;
+		function numClients( total:int ):void;
 	}
 	
 }

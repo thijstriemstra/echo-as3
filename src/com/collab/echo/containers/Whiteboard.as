@@ -126,9 +126,9 @@ package com.collab.echo.containers
 		/**
 		 * Local client joined the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function joinedRoom( args:Array=null ):void
+		public function joinedRoom( client:UserVO ):void
 		{
 			//Logger.debug( "Whiteboard.joinedRoom: " + client );
 		}
@@ -136,12 +136,11 @@ package com.collab.echo.containers
 		/**
 		 * Client joined the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function addOccupant( args:Array=null ):void
+		public function addOccupant( client:UserVO ):void
 		{
 			var user:Painter;
-			var client:UserVO;
 			
 			// add painter
 			if ( client && client.client.isSelf() )
@@ -160,11 +159,10 @@ package com.collab.echo.containers
 		/**
 		 * Client left the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function removeOccupant( args:Array=null ):void
+		public function removeOccupant( client:UserVO ):void
 		{
-			var client:UserVO;
 			var user:Painter;
 			var x:int = 0;
 			
@@ -184,11 +182,11 @@ package com.collab.echo.containers
 		/**
 		 * The number of total clients in the room updated.
 		 * 
-		 * @param args
+		 * @param total
 		 */		
-		public function numClients( args:Array=null ):void
+		public function numClients( total:int ):void
 		{
-			//Logger.debug( "Whiteboard.numClients: " + totalClients );
+			//Logger.debug( "Whiteboard.numClients: " + total );
 		}
 		
 		/**

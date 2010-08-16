@@ -22,6 +22,7 @@ package com.collab.echo.net
 	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.BaseConnectionEvent;
 	import com.collab.echo.events.BaseRoomEvent;
+	import com.collab.echo.model.UserVO;
 	
 	import flash.errors.IllegalOperationError;
 	import flash.events.EventDispatcher;
@@ -196,12 +197,10 @@ package com.collab.echo.net
          * Create one or more rooms.
          * 
          * @param rooms
-         * @param BaseRoom
          */        
         public function createRooms( rooms:Vector.<BaseRoom> ):void
         {
         	throw new IllegalOperationError("Implement createRooms in subclass");
-			return null;
         }
         
         /**
@@ -210,6 +209,16 @@ package com.collab.echo.net
 		public function watchRooms():void
 		{
 			throw new IllegalOperationError("Implement watchRooms in subclass");
+		}
+		
+		/**
+		 * Parse user.
+		 * 
+		 * @param client
+		 */		
+		public function parseUser( client:* ):UserVO
+		{
+			throw new IllegalOperationError("Implement parseUser in subclass");
 			return null;
 		}
         
@@ -268,10 +277,9 @@ package com.collab.echo.net
          * @param message		The name of the message to send.
          * @param forRoomIDs	The room(s) to which to send the message.
          */		
-        public function sendServerMessage( message:ChatMessage, forRoomIDs:Array=null ) : void
+        public function sendServerMessage( message:ChatMessage, forRoomIDs:Array=null ):void
         {
         	throw new IllegalOperationError("Implement sendServerMessage in subclass");
-			return null;
         }
         /**
          * Create a new room.

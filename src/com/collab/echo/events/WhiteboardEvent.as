@@ -40,6 +40,7 @@ package com.collab.echo.events
 		public static const CHANGE_THICKNESS	: String = NAME + "_changeThickness";
 		public static const DRAW_LINE			: String = NAME + "_drawLine";
 		public static const SEND_LINE			: String = NAME + "_sendLine";
+		public static const RECEIVE_LINE		: String = NAME + "_receiveLine";
 		
 		// ====================================
 		// PRIVATE VARS

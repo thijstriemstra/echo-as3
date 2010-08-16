@@ -93,13 +93,11 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Add new user.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function addOccupant( args:Array=null ):void
+		public function addOccupant( client:UserVO ):void
 		{
-			var client:UserVO;
-			
-			//Logger.debug( "UserScrollPane.addOccupant: " + client );
+			trace( "UserScrollPane.addOccupant: " + client );
 			
 			// panel
 			_item = new _panelSkin();
@@ -113,12 +111,10 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Remove existing user.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function removeOccupant( args:Array=null ):void
+		public function removeOccupant( client:UserVO ):void
 		{
-			var client:UserVO;
-			
 			//Logger.debug( "UserScrollPane.removeOccupant: " + client );
 			
 			// remove by id
@@ -135,21 +131,21 @@ package com.collab.echo.containers.scrollpane
 		/**
 		 * Joined the room.
 		 * 
-		 * @param args
+		 * @param client
 		 */		
-		public function joinedRoom( args:Array=null ):void
+		public function joinedRoom( client:UserVO ):void
 		{
-			//Logger.debug( "UserScrollPane.joinedRoom: " + args );
+			//Logger.debug( "UserScrollPane.joinedRoom: " + client );
 		}
 		
 		/**
 		 * Total clients in room updated.
 		 * 
-		 * @param args
+		 * @param total
 		 */		
-		public function numClients( args:Array=null ):void
+		public function numClients( total:int ):void
 		{
-			//Logger.debug( "UserScrollPane.numClients: " + args );
+			//Logger.debug( "UserScrollPane.numClients: " + total );
 		}
 		
 		/**

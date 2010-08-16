@@ -178,7 +178,7 @@ package com.collab.echo.net
                 reactor.addEventListener( ReactorEvent.READY, unionConnectionReady );
                 reactor.addEventListener( ReactorEvent.CLOSE, unionConnectionClose );
                 
-                // XXX: xml connection
+                // XXX: replace XML socket connection
                 connectionManager.addConnection( new XMLSocketConnection( url, port ));
                 
                 // connect
@@ -187,6 +187,24 @@ package com.collab.echo.net
             }
         }
         
+        /**
+		 * Parse user.
+		 */		
+		override public function parseUser( client:* ):UserVO
+		{
+			var vo:UserVO = new UserVO( client.getClientID() );
+			vo.client = client;
+			vo.username = client.getAttribute( UserVO.USERNAME );
+			
+			// use the client id as a user name if the user hasn't set a name.
+			if ( vo.username == null )
+			{
+				vo.username = "user" + vo.id;
+			}
+			
+			return vo;
+		}
+		
         /**
 		 * Create and watch rooms.
 		 * 
@@ -207,7 +225,7 @@ package com.collab.echo.net
 		}
         
         /**
-         * Create a new room.
+         * Create a new union room.
          * 
          * @param id
          * @param settings

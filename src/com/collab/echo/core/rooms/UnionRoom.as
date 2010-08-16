@@ -28,8 +28,6 @@ package com.collab.echo.core.rooms
 	import net.user1.reactor.RoomSettings;
 	import net.user1.reactor.UpdateLevels;
 	
-	import org.osflash.thunderbolt.Logger;
-	
 	/**
 	 * Union-specific room.
 	 * 
@@ -108,7 +106,7 @@ package com.collab.echo.core.rooms
 			// create the room
 			room = connection.createRoom( id, settings, null, modules );
 			
-			// listen for events
+			// listen for union events that we'll turn into BaseRoomEvents
 			room.addEventListener( RoomEvent.JOIN_RESULT,		 joinResult );
 			room.addEventListener( RoomEvent.OCCUPANT_COUNT,	 occupantCount );
 			room.addEventListener( RoomEvent.ADD_OCCUPANT, 		 addOccupant );
@@ -116,19 +114,19 @@ package com.collab.echo.core.rooms
 			room.addEventListener( AttributeEvent.UPDATE, 		 attributeUpdate );
 			room.addEventListener( RoomEvent.SYNCHRONIZE,		 synchronize );
 			
-			log( "Creating new " + name + " called: " + id );
+			trace( "Creating new " + name + " called: " + id );
 			
 			if ( autoJoin )
 			{
 				// join
-				log( "Auto-joining: " + id );
+				trace( "Auto-joining: " + id );
 				joinedRoom = false;
 				join();
 			}
 		}
 		
 		/**
-		 * Join the room.
+		 * Join the union room.
 		 */		
 		override public function join():void
 		{
@@ -137,7 +135,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Leave the room.
+		 * Leave the union room.
 		 */		
 		override public function leave():void
 		{
@@ -146,6 +144,8 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * Add union specific room message listener.
+		 * 
 		 * @param type
 		 * @param method
 		 */		
@@ -161,6 +161,8 @@ package com.collab.echo.core.rooms
         }
         
         /**
+         * Remove union specific room message listener.
+         * 
 		 * @param type
 		 * @param method
 		 */		
@@ -176,7 +178,7 @@ package com.collab.echo.core.rooms
         }
         
         /**
-         * Send a message to the room.
+         * Send a message to a union room.
          * 
          * @param type
          * @param message
@@ -235,7 +237,7 @@ package com.collab.echo.core.rooms
 				if ( module.type == RoomModuleType.CLASS ||
 					 module.type == RoomModuleType.SCRIPT )
 				{
-					log( "Adding '" + module.type + "' RoomModule: '" + module.alias + "'" );
+					trace( "Adding '" + module.type + "' RoomModule: '" + module.alias + "'" );
 					modules.addModule( module.alias, module.type );
 				}
 			}
@@ -254,20 +256,9 @@ package com.collab.echo.core.rooms
 				method = listeners[ type ];
 				room.addMessageListener( type.toString(), method );
 				
-				log("addMessageListener: " + type + ", method: " + method );
+				trace("room.addMessageListener: " + type + ", method: " + method );
 			}
         }
-		
-		/**
-		 * Log a message.
-		 * 
-		 * @param msg
-		 */		
-		protected function log( msg:* ):void
-		{
-			// XXX: don't use this logger
-			org.osflash.thunderbolt.Logger.debug( msg );
-		}
 		
 	}
 }

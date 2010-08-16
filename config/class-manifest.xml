@@ -18,7 +18,6 @@
 	<component id="CirclePreloader" class="com.collab.echo.controls.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.core.messages.chat.ClearChatMessage"/>
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
-	<component id="ClientUtils" class="com.collab.echo.util.ClientUtils"/>
 	<component id="ClientView" class="com.collab.echo.display.ClientView"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="Connection" class="com.collab.echo.net.Connection"/>

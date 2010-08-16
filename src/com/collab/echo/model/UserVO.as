@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.model
 {
 	/**
+	 * Generic user object.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
@@ -26,7 +28,7 @@ package com.collab.echo.model
 	 */	
 	public class UserVO extends SAObject
 	{
-		// keys for union
+		// XXX: keys for union
 		public static const USERNAME	: String = "username";
 		public static const LOCATION	: String = "location";
 		public static const WEBSITE		: String = "website";

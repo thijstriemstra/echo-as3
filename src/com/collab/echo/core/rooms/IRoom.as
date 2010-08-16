@@ -57,6 +57,12 @@ package com.collab.echo.core.rooms
 		 * @param total
 		 */		
 		function numClients( total:int ):void;
+		
+		/**
+		 * @param client
+		 * @param attr
+		 */		
+		function clientAttributeUpdate( client:UserVO, attr:Object ):void;
 	}
 	
 }

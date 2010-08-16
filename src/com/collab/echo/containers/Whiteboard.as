@@ -134,6 +134,14 @@ package com.collab.echo.containers
 		}
 		
 		/**
+		 * @param client
+		 * @param attr
+		 */		
+		public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		{
+		}
+		
+		/**
 		 * Client joined the room.
 		 * 
 		 * @param client

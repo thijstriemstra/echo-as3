@@ -102,6 +102,7 @@ package com.collab.echo.containers.scrollpane
 			// panel
 			_item = new _panelSkin();
 			_item.data = client;
+			
 			// XXX: figure out how to measure the height of the scrollpane's
 			// scrollbar instead of hardcoding it here
 			_item.setSize( UserPanel.WIDTH, height - 15 );
@@ -146,6 +147,23 @@ package com.collab.echo.containers.scrollpane
 		public function numClients( total:int ):void
 		{
 			//Logger.debug( "UserScrollPane.numClients: " + total );
+		}
+		
+		/**
+		 * @param client
+		 * @param attr
+		 */		
+		public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		{
+			// update by id
+			for each ( _item in _panels )
+			{
+				if ( _item.data && _item.data.id == client.id )
+				{
+					_item.data = client;
+					break;
+				}
+			}
 		}
 		
 		/**

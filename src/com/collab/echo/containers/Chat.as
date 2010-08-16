@@ -190,6 +190,11 @@ package com.collab.echo.containers
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 		
+		public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		{
+			
+		}
+		
 		/**
 		 * Local client joined the room.
 		 * 

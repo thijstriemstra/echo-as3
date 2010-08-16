@@ -226,8 +226,8 @@ package com.collab.echo.containers.scrollpane
 			switch ( event.direction )
 			{
 				case ScrollBarDirection.HORIZONTAL:
-					trace( "horizontal scroll: " +  event.position + " of " +
-								  event.currentTarget.maxHorizontalScrollPosition);
+					//trace( "horizontal scroll: " +  event.position + " of " +
+					//			  event.currentTarget.maxHorizontalScrollPosition);
 					break;
 				
 				case ScrollBarDirection.VERTICAL:
@@ -238,8 +238,8 @@ package com.collab.echo.containers.scrollpane
 					}
 					else
 					{
-						trace( "vertical scroll: " + event.position + " of " +
-								event.currentTarget.maxVerticalScrollPosition );
+						//trace( "vertical scroll: " + event.position + " of " +
+						//		event.currentTarget.maxVerticalScrollPosition );
 					}
 					break;
 			}

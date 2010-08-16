@@ -20,7 +20,6 @@ package com.collab.echo.core.rooms
 {
 	import com.collab.echo.net.Connection;
 	
-	import net.user1.reactor.AttributeEvent;
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
 	import net.user1.reactor.RoomModuleType;
@@ -87,6 +86,7 @@ package com.collab.echo.core.rooms
 			
 			updateLevels = new UpdateLevels();
 			updateLevels.roomMessages = true;
+			updateLevels.sharedObserverAttributesRoom = true;
 		}
 		
 		// ====================================
@@ -107,12 +107,12 @@ package com.collab.echo.core.rooms
 			room = connection.createRoom( id, settings, null, modules );
 			
 			// listen for union events that we'll turn into BaseRoomEvents
-			room.addEventListener( RoomEvent.JOIN_RESULT,		 joinResult );
-			room.addEventListener( RoomEvent.OCCUPANT_COUNT,	 occupantCount );
-			room.addEventListener( RoomEvent.ADD_OCCUPANT, 		 addOccupant );
-			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, 	 removeOccupant );
-			room.addEventListener( AttributeEvent.UPDATE, 		 attributeUpdate );
-			room.addEventListener( RoomEvent.SYNCHRONIZE,		 synchronize );
+			room.addEventListener( RoomEvent.JOIN_RESULT,		 			joinResult );
+			room.addEventListener( RoomEvent.OCCUPANT_COUNT,	 			occupantCount );
+			room.addEventListener( RoomEvent.ADD_OCCUPANT, 		 			addOccupant );
+			room.addEventListener( RoomEvent.REMOVE_OCCUPANT, 	 			removeOccupant );
+			room.addEventListener( RoomEvent.UPDATE_CLIENT_ATTRIBUTE, 		clientAttributeUpdate );
+			room.addEventListener( RoomEvent.SYNCHRONIZE,		 			synchronize );
 			
 			trace( "Creating new " + name + " called: " + id );
 			
@@ -278,6 +278,24 @@ package com.collab.echo.core.rooms
 			registerListeners();
         									   
 			super.joinResult( event );
+		}
+		
+		/**
+		 * A client attribute was changed.
+		 * 
+		 * @param event
+		 */		
+		override protected function clientAttributeUpdate( event:*=null ):void
+		{
+			// XXX: any constants somewhere?
+			if ( event.getChangedAttr().name != "_PING" )
+			{
+				super.clientAttributeUpdate( event );
+			}
+			else
+			{
+				event.preventDefault();
+			}
 		}
 		
 		/**

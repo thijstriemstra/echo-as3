@@ -38,13 +38,13 @@ package com.collab.echo.events
 		/**
 		 * @private 
 		 */		
-		internal static const NAME				: String = "BaseRoomEvent";
+		internal static const NAME						: String = "BaseRoomEvent";
 		
 		// XXX: needs to go chat and whiteboard events
-		public static const SEND_MESSAGE		: String = NAME + "_sendMessage";
-		public static const RECEIVE_MESSAGE		: String = NAME + "_receiveMessage";
-		public static const SEND_LINE			: String = NAME + "_sendLine";
-		public static const RECEIVE_LINE		: String = NAME + "_receiveLine";
+		public static const SEND_MESSAGE				: String = NAME + "_sendMessage";
+		public static const RECEIVE_MESSAGE				: String = NAME + "_receiveMessage";
+		public static const SEND_LINE					: String = NAME + "_sendLine";
+		public static const RECEIVE_LINE				: String = NAME + "_receiveLine";
 		
 		/**
 		 * The <code>BaseRoomEvent.JOIN_RESULT</code> constant defines the
@@ -52,16 +52,16 @@ package com.collab.echo.events
 		 * 
 		 * <p>This event has the following properties:</p>
 		 */		
-		public static const JOIN_RESULT			: String = NAME + "_joinResult";
-		public static const SYNCHRONIZE			: String = NAME + "_synchronize";
-		public static const OCCUPANT_COUNT		: String = NAME + "_occupantCount";
-		public static const ADD_OCCUPANT		: String = NAME + "_addOccupant";
-		public static const REMOVE_OCCUPANT		: String = NAME + "_removeOccupant";
-		public static const ATTRIBUTE_UPDATE	: String = NAME + "_attributeUpdate";
+		public static const JOIN_RESULT					: String = NAME + "_joinResult";
+		public static const SYNCHRONIZE					: String = NAME + "_synchronize";
+		public static const OCCUPANT_COUNT				: String = NAME + "_occupantCount";
+		public static const ADD_OCCUPANT				: String = NAME + "_addOccupant";
+		public static const REMOVE_OCCUPANT				: String = NAME + "_removeOccupant";
+		public static const CLIENT_ATTRIBUTE_UPDATE		: String = NAME + "_clientAttributeUpdate";
 		
-		public static const ROOM_ADDED			: String = NAME + "_roomAdded";
-		public static const ROOM_REMOVED		: String = NAME + "_roomRemoved";
-		public static const ROOM_COUNT			: String = NAME + "_roomCount";
+		public static const ROOM_ADDED					: String = NAME + "_roomAdded";
+		public static const ROOM_REMOVED				: String = NAME + "_roomRemoved";
+		public static const ROOM_COUNT					: String = NAME + "_roomCount";
 		
 		// ====================================
 		// INTERNAL VARS
@@ -97,6 +97,10 @@ package com.collab.echo.events
 			_data = data;
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<BaseRoomEvent type='" + type + "' data='" + _data + "' />";

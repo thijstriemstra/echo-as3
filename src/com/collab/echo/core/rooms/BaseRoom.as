@@ -417,15 +417,15 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * A room attribute was changed.
+		 * A client attribute was changed.
 		 * 
 		 * @param event
 		 */		
-		protected function attributeUpdate( event:*=null ):void
+		protected function clientAttributeUpdate( event:*=null ):void
 		{
 			event.preventDefault();
 			
-			_evt = new BaseRoomEvent( BaseRoomEvent.ATTRIBUTE_UPDATE, event );
+			_evt = new BaseRoomEvent( BaseRoomEvent.CLIENT_ATTRIBUTE_UPDATE, event );
 			dispatchEvent( _evt );
 		}
 		

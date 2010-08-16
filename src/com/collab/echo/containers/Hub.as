@@ -321,6 +321,17 @@ package com.collab.echo.containers
 			userPane.numClients( total );
 			whiteboard.numClients( total );
 		}
+		
+		/**
+		 * @param client
+		 * @param attr
+		 */		
+		override public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		{
+			chat.clientAttributeUpdate( client, attr );
+			userPane.clientAttributeUpdate( client, attr );
+			whiteboard.clientAttributeUpdate( client, attr );
+		}
 
 		/**
 		 * Add a new message to the chat.

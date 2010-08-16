@@ -144,6 +144,26 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+         * @return 
+         */        
+        override public function getOccupants():Array
+        {
+        	return room.getOccupants();
+        }
+        
+        /**
+         * @param clientIDs
+         * @param attrName
+         * @param attrScope
+         * @return 
+         */        
+        override public function getAttributeForClients( clientIDs:Array, attrName:String,
+        												 attrScope:String=null):Array
+        {
+        	return connection.getAttributeForClients( clientIDs, attrName, attrScope );
+        }
+		
+		/**
 		 * Add union specific room message listener.
 		 * 
 		 * @param type
@@ -193,6 +213,45 @@ package com.collab.echo.core.rooms
         	}
         }
 
+		/**
+		 * @param name
+		 * @return 
+		 */		
+		override public function getIPByUserName( name:String ):String
+		{
+			return connection.getIPByUserName( name );
+		}
+		
+		/**
+		 * @param attrName
+		 * @param attrValue
+		 * @return 
+		 */		
+		override public function getClientByAttribute( attrName:String,
+													   attrValue:String ):*
+		{
+			return connection.getClientByAttribute( attrName, attrValue );
+		}
+		
+		/**
+		 * @param id
+		 * @return 
+		 */		
+		override public function getClientById( id:String ):*
+		{
+			return connection.getClientById( id );
+		}
+		
+		/**
+		 * Get own client id.
+		 * 
+		 * @return 
+		 */		
+		override public function getClientId():String
+		{
+			return connection.self.getClientID();
+		}
+		
 		/**
 		 * @private 
 		 * @return 

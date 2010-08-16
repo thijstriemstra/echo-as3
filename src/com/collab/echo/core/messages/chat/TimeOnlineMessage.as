@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.core.messages.ChatMessageTypes;
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.model.UserVO;
-	import com.collab.echo.net.Connection;
 	
 	/**
 	 * Find out how long a user has spent online, by username.
@@ -39,20 +39,16 @@ package com.collab.echo.core.messages.chat
 		// XXX: localize
 		public static const DOC	: String = "/timeOnline [nickname]  ; find out how long the user has been online.";
 		
-		protected var connection : Connection;
-		
 		/**
 		 * Constructor.
 		 *  
 		 * @param type
 		 * @param data
-		 * @param connection
+		 * @param room
 		 */		
-		public function TimeOnlineMessage( type:String, data:String, connection:Connection )
+		public function TimeOnlineMessage( type:String, data:String, room:BaseRoom )
 		{
-			this.connection = connection;
-			
-			super( type, data, false, true, false, true );
+			super( type, data, room, false, true, false, true );
 		}
 		
 		// ====================================
@@ -75,7 +71,7 @@ package com.collab.echo.core.messages.chat
 			{
 				try
 				{
-					user = connection.getClientByAttribute( UserVO.USERNAME, username );
+					user = room.getClientByAttribute( UserVO.USERNAME, username );
 				}
 				catch ( e:TypeError )
 				{
@@ -89,7 +85,7 @@ package com.collab.echo.core.messages.chat
 						{
 							try
 							{
-								user = connection.getClientById( id );
+								user = room.getClientById( id );
 							}
 							catch ( e:TypeError ) {}
 						}

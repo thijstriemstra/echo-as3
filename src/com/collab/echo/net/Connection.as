@@ -314,12 +314,23 @@ package com.collab.echo.net
 		 * @param attrValue
 		 * @return 
 		 */		
-		public function getClientByAttribute( attrName:String,
-													   attrValue:String ):*
+		public function getClientByAttribute( attrName:String, attrValue:String ):*
 		{
 			throw new IllegalOperationError("Implement getClientByAttribute in subclass");
 			return null;
 		}
+		
+		/**
+         * @param clientIDs
+         * @param attrName
+         * @param attrScope
+         * @return 
+         */        
+        public function getAttributeForClients(clientIDs:Array, attrName:String, attrScope:String):Array
+        {
+        	throw new IllegalOperationError("Implement getAttributeForClients in subclass");
+			return null;
+        }
 		
 		/**
 		 * Get client reference by id.

@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.core.messages.ChatMessageTypes;
-	import com.collab.echo.net.Connection;
+	import com.collab.echo.core.rooms.BaseRoom;
 	
 	/**
 	 * Find the IP address for a client, by username.
@@ -38,8 +38,6 @@ package com.collab.echo.core.messages.chat
 		// XXX: localize
 		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
 		
-		private var connection	: Connection;
-		
 		/**
 		 * Constructor.
 		 *  
@@ -47,11 +45,9 @@ package com.collab.echo.core.messages.chat
 		 * @param data
 		 * @param connection
 		 */		
-		public function IPChatMessage( type:String, data:String, connection:Connection )
+		public function IPChatMessage( type:String, data:String, room:BaseRoom )
 		{
-			this.connection = connection;
-			
-			super( type, data, false, true, false, true );
+			super( type, data, room, false, true, false, true );
 		}
 		
 		// ====================================
@@ -69,8 +65,7 @@ package com.collab.echo.core.messages.chat
 			if ( _sender && _receiver )
 			{
 				// retrieve the IP address for the client by username
-				var ip:String;
-				ip = connection.getIPByUserName( username );
+				var ip:String = room.getIPByUserName( username );
 				
 				// XXX: localize
 				if ( ip == null )
@@ -80,12 +75,15 @@ package com.collab.echo.core.messages.chat
 				
 				data = "<b>IP address for " + username + ": "+ ip +" </b>";
 				
-				// get the users ip
 				execute( data );
 			}
 		}
 		
-		override protected function execute(command:String):void
+		/**
+		 * @private 
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
 		{
 			message = command;
 		}

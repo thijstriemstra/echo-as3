@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
+	
 	import flash.events.EventDispatcher;
 	
 	import net.user1.reactor.IClient;
@@ -63,11 +65,20 @@ package com.collab.echo.core.messages.chat
 		private var _includeSelf					: Boolean;
 		private var _local							: Boolean;
 		private var _append							: Boolean;
+		private var _room							: BaseRoom;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
+		public function get room():BaseRoom
+		{
+			return _room;
+		}
+	
 		/**
 		 * @return 
 		 */		
@@ -202,6 +213,7 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
+		 * @param room
 		 * @param includeSelf
 		 * @param local
 		 * @param privateMessage
@@ -209,6 +221,7 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function ChatMessage( type:String=null,
 									 data:String=null,
+									 room:BaseRoom=null,
 									 includeSelf:Boolean=false,
 									 local:Boolean=false,
 									 privateMessage:Boolean=false,
@@ -216,6 +229,7 @@ package com.collab.echo.core.messages.chat
 		{
 			_type = type;
 			_message = data;
+			_room = room;
 			_privateMessage = privateMessage;
 			_includeSelf = includeSelf;
 			_local = local;

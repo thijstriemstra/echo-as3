@@ -230,9 +230,8 @@ package com.collab.echo.containers
         {
         	data = args;
 			
-			trace("Hub.update: " + notification);
+			//trace("Hub.update: " + notification);
 			
-			// XXX: needs to go elsewhere
             switch ( notification )
             {
             	case BaseRoomEvent.RECEIVE_MESSAGE:

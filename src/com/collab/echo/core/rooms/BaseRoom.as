@@ -21,6 +21,7 @@ package com.collab.echo.core.rooms
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.net.Connection;
 	
+	import flash.errors.IllegalOperationError;
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -123,6 +124,14 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * @return 
+		 */		
+		public function get self():*
+		{
+			return _connection.self;
+		}
+		
+		/**
 		 * Room's connection to the server.
 		 *  
 		 * @return 
@@ -216,14 +225,16 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Join the room.
+		 * Asks the server to place the current client in the server-side room represented by this
+		 * BaseRoom object.
 		 */		
 		public function join():void
 		{
 		}
 		
 		/**
-		 * Leave the room.
+		 * Asks the server to remove the current client from the server-side room represented by
+		 * this BaseRoom object.
 		 */		
 		public function leave():void
 		{
@@ -254,7 +265,94 @@ package com.collab.echo.core.rooms
          */        
         public function sendMessage( type:String, message:String, includeSelf:Boolean=false ):void
         {
+        	throw new IllegalOperationError("Implement sendMessage in subclass");
         }
+        
+        /**
+         * @return 
+         */        
+        public function getOccupants():Array
+        {
+        	throw new IllegalOperationError("Implement getOccupants in subclass");
+			return null;
+        }
+        
+        /**
+         * @param clientIDs
+         * @param attrName
+         * @param attrScope
+         * @return 
+         */        
+        public function getAttributeForClients( clientIDs:Array, attrName:String,
+        										attrScope:String=null ):Array
+        {
+        	throw new IllegalOperationError("Implement getAttributeForClients in subclass");
+			return null;
+        }
+        
+        /**
+         * Asks the server to set an attribute for this room.
+         *  
+         * @param attrName
+         * @param attrValue
+         * @param isShared
+         * @param isPersistent
+         * @param evaluate
+         */        
+        public function setAttribute( attrName:String, attrValue:String, isShared:Boolean = true,
+        							  isPersistent:Boolean = false, evaluate:Boolean = false ):void
+        {
+        	throw new IllegalOperationError("Implement setAttribute in subclass");
+        }
+        
+        /**
+         * Get a user's IP address by <code>name</code>.
+         * 
+		 * @param name
+		 * @return 
+		 */		
+		public function getIPByUserName( name:String ):String
+		{
+			throw new IllegalOperationError("Implement getIPByUserName in subclass");
+			return null;
+		}
+		
+		/**
+		 * Get user's client by attribute.
+		 * 
+		 * @param attrName
+		 * @param attrValue
+		 * @return 
+		 */		
+		public function getClientByAttribute( attrName:String,
+													   attrValue:String ):*
+		{
+			throw new IllegalOperationError("Implement getClientByAttribute in subclass");
+			return null;
+		}
+		
+		/**
+		 * Get client reference by id.
+		 * 
+		 * @param id
+		 * @return 
+		 */		
+		public function getClientById( id:String ):*
+		{
+			throw new IllegalOperationError("Implement getClientById in subclass");
+			return null;
+		}
+		
+		/**
+		 * Get own client id.
+		 * 
+		 * @return 
+		 */		
+		public function getClientId():String
+		{
+			throw new IllegalOperationError("Implement getClientId in subclass");
+			return null;
+		}
 		
 		/**
 		 * @private 

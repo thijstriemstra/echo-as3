@@ -40,7 +40,7 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function JoinChatMessage( type:String, data:String )
 		{
-			super( type, data, false, true, false, true );
+			super( type, data, null, false, true, false, true );
 		}
 		
 		// ====================================

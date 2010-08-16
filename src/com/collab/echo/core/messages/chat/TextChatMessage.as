@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.ChatMessageEvent;
 	import com.collab.echo.model.UserVO;
 
@@ -43,16 +44,18 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
+		 * @param room
 		 * @param includeSelf
 		 * @param local
 		 * @param privateMessage
 		 * @param append
 		 */		
 		public function TextChatMessage( type:String=null, data:String=null,
+										 room:BaseRoom=null,
 										 includeSelf:Boolean=false, local:Boolean=false,
 										 privateMessage:Boolean=false, append:Boolean=true )
 		{
-			super( type, data, includeSelf, local, privateMessage, append );
+			super( type, data, room, includeSelf, local, privateMessage, append );
 		}
 		
 		// ====================================

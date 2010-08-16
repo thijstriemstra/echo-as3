@@ -18,7 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
+	
 	/**
+	 * Kick a user.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
@@ -26,6 +30,11 @@ package com.collab.echo.core.messages.chat
 	 */	
 	public class KickMessage extends TextChatMessage
 	{
+		// ====================================
+		// CONSTANTS
+		// ====================================
+		
+		// XXX: localize
 		public static const DOC	: String = "/kick [nickname]   ; kick a user.";
 		
 		/**
@@ -33,12 +42,16 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
+		 * @param room
 		 */		
-		public function KickMessage( type:String, data:String )
+		public function KickMessage( type:String, data:String, room:BaseRoom )
 		{
-			super( type, data, false, true, true, true );
+			super( type, data, room, false, true, true, true );
 		}
 		
+		/**
+		 * @private 
+		 */		
 		override protected function parseCommand():void
 		{
 			// change the users nickname
@@ -46,6 +59,10 @@ package com.collab.echo.core.messages.chat
 			execute( userName );
 		}
 		
+		/**
+		 * @private 
+		 * @return 
+		 */		
 		override public function toString():String
 		{
 			return "<KickMessage data='" + data + "' />";	

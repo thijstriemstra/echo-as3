@@ -314,6 +314,7 @@ package com.collab.echo.net
         }
         
         /**
+         * @private
 		 * @param name
 		 * @return 
 		 */		
@@ -344,6 +345,7 @@ package com.collab.echo.net
 		}
 		
 		/**
+		 * @private
 		 * @param attrName
 		 * @param attrValue
 		 * @return 
@@ -355,6 +357,18 @@ package com.collab.echo.net
 		}
 		
 		/**
+         * @param clientIDs
+         * @param attrName
+         * @param attrScope
+         * @return 
+         */        
+        override public function getAttributeForClients(clientIDs:Array, attrName:String, attrScope:String):Array
+        {
+        	return clientManager.getAttributeForClients( clientIDs, attrName, attrScope );
+        }
+        
+		/**
+		 * @private
 		 * @param id
 		 * @return 
 		 */		

@@ -41,7 +41,7 @@ package com.collab.echo.core.messages.chat
 		{
 			this.doc_fields = doc;
 			
-			super( type, data, false, true, false, true );
+			super( type, data, null, false, true, false, true );
 		}
 		
 		// ====================================

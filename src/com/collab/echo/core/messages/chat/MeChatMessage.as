@@ -45,7 +45,7 @@ package com.collab.echo.core.messages.chat
 		 */		
 		public function MeChatMessage( type:String, data:String )
 		{
-			super( type, data, true, false, false, true );
+			super( type, data, null, true, false, false, true );
 		}
 		
 		// ====================================
@@ -73,8 +73,6 @@ package com.collab.echo.core.messages.chat
 		{
 			// XXX: this should come from a populated UserVO
 			var username:String = _sender.getAttribute( UserVO.USERNAME );
-			
-			// Use the client id as a user name if the user hasn't set a name.
 			if ( username == null )
 			{
 				username = "user" + _sender.getClientID();

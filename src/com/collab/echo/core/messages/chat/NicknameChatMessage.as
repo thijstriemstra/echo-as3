@@ -18,8 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
+	import com.collab.echo.model.UserVO;
+	
 	/**
-	 * Change the users nickname.
+	 * Change the user's nickname.
 	 * 
 	 * @author Thijs Triemstra
 	 * 
@@ -35,15 +38,18 @@ package com.collab.echo.core.messages.chat
 		// XXX: localize
 		public static const DOC	: String = "/nick [nickname]   ; change your nickname.";
 		
+		private var maxChars	: int = 200;
+		
 		/**
 		 * Constructor.
 		 * 
 		 * @param type
 		 * @param data
+		 * @param room
 		 */		
-		public function NicknameChatMessage( type:String, data:String )
+		public function NicknameChatMessage( type:String, data:String, room:BaseRoom )
 		{
-			super( type, data, false, true, false, true );
+			super( type, data, room, false, true, false, true );
 		}
 		
 		// ====================================
@@ -57,59 +63,47 @@ package com.collab.echo.core.messages.chat
 		{
 			var userName:String = data.substr( 6 );
 			
-			if ( userName.length > 0 )
+			if ( userName.length > 0 && _sender && _receiver )
 			{
-				// change name in panel
+				// XXX: change name in view
 				//username_txt.text = userNaam;
 				
 				// send change to union
-				//setName();
+				execute( userName );
 			}
-			
-			execute( userName );
 		}
 		
 		/**
 		 * Sets the username attribute for this client.
-		 */
-		public function setName ():void
+		 * 
+		 * @private 
+		 * @param command
+		 */		
+		override protected function execute( command:String ):void
 		{
-			/*
-			var clientList 						= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			var attrList 						= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			var preferences	: MovieClip 		= getTargetMC().chat.menu_accordion.preferences_mc;
-			var user_SO		: SharedObject 		= SharedObject.getLocal("collab");
-			var msg			: String 			= preferences.username_txt.text;
+			// XXX: move all of this to a command or something
 			
-			// check for duplicate usernames
-			for(var i = 0; i < attrList.length; i++) {
-				// if the username is the same but not my own
-				var exUserName = attrList[i].value.toLowerCase();
-				var exClientID = attrList[i].clientID;
-				
-				if (msg.toLowerCase() == exUserName && exClientID != getClientID()) {
-					msg = "";
-					break;
-				}
-				//trace("The value of 'username' for client " + attrList[i].clientID + " is: " + attrList[i].value); 
-			}
+			//var user_SOSharedObject = SharedObject.getLocal("collab");
+			var username:String = command;
+			
+			trace("NicknameChange.username: " + username );
 			
 			// set name
-			if (msg.length > 0 && msg.toLowerCase().indexOf("eliza") == -1 && msg.length <= preferences.username_txt.maxChars) {
-				setClientAttribute("username", 
-					msg, 
-					null, 
-					true, 
-					false, 
-					false);
+			if ( username.length > 0 && username.toLowerCase().indexOf( "eliza" ) == -1 &&
+				 username.length <= maxChars )
+			{
+				room.self.setAttribute( UserVO.USERNAME, username, null, true, true, false );
 				
-				user_SO.data.username = msg;						  
-				preferences.username = msg;
-			} else {
-				chatMC.chat_txt.text += addStamp + " <b>Nickname already being used.</b>";
-				chatMC.chat_txt.vPosition = chatMC.chat_txt.maxVPosition;
+				//user_SO.data.username = username;
+				//preferences.username = username;
+
+				// XXX: localize
+				message = "<b>Successfully updated nickname to '" + username + "'.</b>";
 			}
-			*/
+			else
+			{
+				message = "<b>Nickname '" + username + "' already being used.</b>";
+			}
 		}
 		
 		// ====================================

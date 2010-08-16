@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.core.messages.ChatMessageTypes;
+	import com.collab.echo.net.Connection;
 	
 	/**
 	 * Find the IP address for a client, by username.
@@ -37,14 +38,19 @@ package com.collab.echo.core.messages.chat
 		// XXX: localize
 		public static const DOC	: String = "/ip [nickname]   ; get user's IP address.";
 		
+		private var connection	: Connection;
+		
 		/**
 		 * Constructor.
 		 *  
 		 * @param type
 		 * @param data
+		 * @param connection
 		 */		
-		public function IPChatMessage( type:String, data:String )
+		public function IPChatMessage( type:String, data:String, connection:Connection )
 		{
+			this.connection = connection;
+			
 			super( type, data, false, true, false, true );
 		}
 		
@@ -60,36 +66,26 @@ package com.collab.echo.core.messages.chat
 			// the username
 			var username:String = data.substr( ChatMessageTypes.IP.length + 2 );
 			
-			// retrieve the IP address for the client by username
-			var ip:String;
-			
-			try
+			if ( _sender && _receiver )
 			{
-				//ip = presence.getIPByUserName( username );
-			}
-			catch ( e:TypeError )
-			{
-			}
-			finally
-			{
+				// retrieve the IP address for the client by username
+				var ip:String;
+				ip = connection.getIPByUserName( username );
+				
 				// XXX: localize
 				if ( ip == null )
 				{
 					ip = "Username not found.";
 				}
+				
+				data = "<b>IP address for " + username + ": "+ ip +" </b>";
+				
+				// get the users ip
+				execute( data );
 			}
-			
-			data = "<b>IP address for " + username + ": "+ ip +" </b>";
-			
-			// get the users ip
-			execute( data );
 		}
 		
-		/**
-		 * @private
-		 * @param command
-		 */		
-		override protected function execute( command:String ):void
+		override protected function execute(command:String):void
 		{
 			message = command;
 		}

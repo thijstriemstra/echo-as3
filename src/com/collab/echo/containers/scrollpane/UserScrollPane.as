@@ -97,7 +97,7 @@ package com.collab.echo.containers.scrollpane
 		 */		
 		public function addOccupant( client:UserVO ):void
 		{
-			trace( "UserScrollPane.addOccupant: " + client );
+			//trace( "UserScrollPane.addOccupant: " + client );
 			
 			// panel
 			_item = new _panelSkin();

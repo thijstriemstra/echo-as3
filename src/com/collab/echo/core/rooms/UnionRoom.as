@@ -256,7 +256,7 @@ package com.collab.echo.core.rooms
 				method = listeners[ type ];
 				room.addMessageListener( type.toString(), method );
 				
-				trace("room.addMessageListener: " + type + ", method: " + method );
+				trace("room.addMessageListener - " + id + ": " + type + ", method: " + method );
 			}
         }
 		

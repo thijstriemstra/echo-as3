@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.rooms
 {
 	import com.collab.echo.events.BaseRoomEvent;
+	import com.collab.echo.model.UserVO;
 	import com.collab.echo.net.Connection;
 	
 	import flash.errors.IllegalOperationError;
@@ -278,6 +279,15 @@ package com.collab.echo.core.rooms
         }
         
         /**
+         * @return 
+         */        
+        public function getOccupantIDs():Array
+        {
+        	throw new IllegalOperationError("Implement getOccupantIDs in subclass");
+			return null;
+        }
+        
+        /**
          * @param clientIDs
          * @param attrName
          * @param attrScope
@@ -304,6 +314,17 @@ package com.collab.echo.core.rooms
         {
         	throw new IllegalOperationError("Implement setAttribute in subclass");
         }
+        
+        /**
+		 * Parse user.
+		 * 
+		 * @param client
+		 */		
+		public function parseUser( client:* ):UserVO
+		{
+			throw new IllegalOperationError("Implement parseUser in subclass");
+			return null;
+		}
         
         /**
          * Get a user's IP address by <code>name</code>.
@@ -351,6 +372,17 @@ package com.collab.echo.core.rooms
 		public function getClientId():String
 		{
 			throw new IllegalOperationError("Implement getClientId in subclass");
+			return null;
+		}
+		
+		/**
+		 * Look up the clientID and userName of a selected client.
+		 * 
+		 * @param username.
+		 */
+		public function findUserName( userName:String ):Object
+		{
+			throw new IllegalOperationError("Implement findUserName in subclass");
 			return null;
 		}
 		

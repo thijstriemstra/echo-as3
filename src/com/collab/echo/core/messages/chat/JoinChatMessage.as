@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.model.UserVO;
 	
 	import flash.system.Capabilities;
@@ -37,10 +38,11 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
+		 * @param room
 		 */		
-		public function JoinChatMessage( type:String, data:String )
+		public function JoinChatMessage( type:String, data:String, room:BaseRoom )
 		{
-			super( type, data, null, false, true, false, true );
+			super( type, data, room, false, true, false, true );
 		}
 		
 		// ====================================
@@ -64,26 +66,18 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			// REQUIRES: username, clientId, abibility to setAttributes, rank
-			
-			// XXX: this should come from a populated UserVO
-			var username:String = _sender.getAttribute( UserVO.USERNAME );
-			var clientID:String = _sender.getClientID();
-			
-			// use the client id as a user name if the user hasn't set a name.
-			if ( username == null )
-			{
-				username = "user" + clientID;
-			}
+			var user:UserVO = room.parseUser( _sender );
+			var username:String = user.username;
+			var clientID:String = user.id;
 			
 			// local client
 			if ( _receiver == _sender )
 			{
-				var rank:String = "guest";
+				// XXX: move rank to parseUser
 				var clientVar:String;
 				var value:String;
 				
-				// set clientVars
+				// XXX: move this
 				for each ( clientVar in UserVO.fields )
 				{
 					// XXX: fix cookie
@@ -98,40 +92,45 @@ package com.collab.echo.core.messages.chat
 				}
 				
 				// set user rank
-				_sender.setAttribute( "rank", rank );
+				_sender.setAttribute( "rank", user.rank );
 				
-				// increment personal visitor counter
-				//if ( Echo.userCookie.data.counter != null )
-				//{
-				//	Echo.userCookie.data.counter++;
-				//}
-				//else
-				//{
-				//	Echo.userCookie.data.counter = 0;
-				//}
-				
-				// XXX: localize
-				message = "<b><FONT COLOR='#000000'>" + getWelcomeLine() + " " + username + "!</FONT></b><br>";
-				message += "<b><FONT COLOR='#4F4F4F'>Chat is now active...</FONT></b><br>";
-				message += "<b><FONT COLOR='#4F4F4F'>Type /help for options.</FONT></b><br>";
-			}
-			else
-			{
-				/*
-				if ( rank == "admin" )
+				// XXX: move elsewhere
+				/* increment personal visitor counter
+				if ( Echo.userCookie.data.counter != null )
 				{
-					coloredName = "<font color='#1D5EAB'>"+ coloredName +"</font>";
+					Echo.userCookie.data.counter++;
 				}
-				else if ( rank == "moderator")
+				else
 				{
-					coloredName = "<font color='#1892AF'>"+ coloredName +"</font>";
+					Echo.userCookie.data.counter = 0;
 				}
 				*/
 				
+				message = "<b><font color='#000000'>" + getWelcomeLine() + " " + username + "!</font></b><br>";
 				// XXX: localize
-				message = "<b>"+ username +" has joined.</b>";
+				message += "<b><font color='#4F4F4F'>Chat is now active...</font></b><br>";
+				message += "<b><font color='#4F4F4F'>Type /help for options.</font></b><br>";
+			}
+			else
+			{
+				// XXX: move ranks to constant
+				if ( user.rank == "admin" )
+				{
+					message = "<font color='#1D5EAB'>" + message + "</font>";
+				}
+				else if ( user.rank == "moderator")
+				{
+					message = "<font color='#1892AF'>" + message + "</font>";
+				}
+				
+				// XXX: localize
+				message = "<b>" + username + " has joined.</b>";
 			}
 		}
+		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
 		
 		/**
 		 * @private 
@@ -142,16 +141,20 @@ package com.collab.echo.core.messages.chat
 			return "<JoinChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	
 		}
 		
+		// ====================================
+		// PRIVATE METHODS
+		// ====================================
+		
 		/**
 		 * Create a welcome message depending on the computer locale.
 		 * 
 		 * @return
 		 */
-		internal function getWelcomeLine():String
+		private function getWelcomeLine():String
 		{
+			// XXX: localize
 			var welcome:String = "Welcome";
 			
-			// XXX: localize
 			switch ( Capabilities.language )
 			{
 				case "fr":

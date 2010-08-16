@@ -189,14 +189,16 @@ package com.collab.echo.net
         
         /**
 		 * Parse user.
+		 * 
+		 * @param client
 		 */		
 		override public function parseUser( client:* ):UserVO
 		{
 			var vo:UserVO = new UserVO( client.getClientID() );
-			vo.client = client;
 			vo.username = client.getAttribute( UserVO.USERNAME );
+			vo.client = client;
 			
-			// use the client id as a user name if the user hasn't set a name.
+			// generate generic username
 			if ( vo.username == null )
 			{
 				vo.username = "user" + vo.id;

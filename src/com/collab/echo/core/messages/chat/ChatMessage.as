@@ -21,8 +21,6 @@ package com.collab.echo.core.messages.chat
 	import com.collab.echo.core.rooms.BaseRoom;
 	
 	import flash.events.EventDispatcher;
-	
-	import net.user1.reactor.IClient;
 
 	/**
 	 * Abstract class for chat message.
@@ -37,6 +35,9 @@ package com.collab.echo.core.messages.chat
 		// PROTECTED VARS
 		// ====================================
 		
+		/**
+		 * 
+		 */		
 		protected var data							: String;
 		
 		// ====================================
@@ -47,12 +48,12 @@ package com.collab.echo.core.messages.chat
 		/**
 		 * @private 
 		 */		
-		internal var _receiver						: IClient;
+		internal var _receiver						: *;
 		
 		/**
 		 * @private 
 		 */		
-		internal var _sender						: IClient;
+		internal var _sender						: *;
 		
 		// ====================================
 		// PRIVATE VARS
@@ -72,21 +73,26 @@ package com.collab.echo.core.messages.chat
 		// ====================================
 		
 		/**
+		 * The target room for this message.
+		 * 
 		 * @return 
 		 */		
 		public function get room():BaseRoom
 		{
+			// XXX: make this rooms?
 			return _room;
 		}
 	
 		/**
+		 * The sending client.
+		 * 
 		 * @return 
 		 */		
-		public function get sender():IClient
+		public function get sender():*
 		{
 			return _sender;
 		}
-		public function set sender( val:IClient ):void
+		public function set sender( val:* ):void
 		{
 			if ( val )
 			{
@@ -102,13 +108,15 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * The receiving client.
+		 * 
 		 * @return 
 		 */		
-		public function get receiver():IClient
+		public function get receiver():*
 		{
 			return _receiver;
 		}
-		public function set receiver( val:IClient ):void
+		public function set receiver( val:* ):void
 		{
 			if ( val )
 			{
@@ -132,6 +140,8 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * Whether or not to send this message to the server.
+		 * 
 		 * @return 
 		 */		
 		public function get local():Boolean
@@ -144,6 +154,8 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * Message type.
+		 * 
 		 * @return 
 		 */		
 		public function get type():String
@@ -152,6 +164,9 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * Whether or not to include the own client when the server sends the message to the
+		 * room clients.
+		 * 
 		 * @return 
 		 */		
 		public function get includeSelf():Boolean
@@ -160,6 +175,9 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * This is a private message and only targeted at the <code>_receiver</code>
+		 * client.
+		 * 
 		 * @return 
 		 */		
 		public function get privateMessage():Boolean

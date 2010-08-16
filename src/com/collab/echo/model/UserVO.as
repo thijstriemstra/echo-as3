@@ -34,8 +34,9 @@ package com.collab.echo.model
 		public static const WEBSITE		: String = "website";
 		public static const EMAIL		: String = "email";
 		public static const AGE			: String = "age";
+		public static const RANK		: String = "rank";
 		
-		public static const fields		: Array = [ USERNAME, LOCATION, WEBSITE, EMAIL, AGE ];
+		public static const fields		: Array = [ USERNAME, LOCATION, WEBSITE, EMAIL, AGE, RANK ];
 		
 		// ====================================
 		// PUBLIC VARS
@@ -47,6 +48,7 @@ package com.collab.echo.model
 		public var website				: String;
 		public var email				: String;
 		public var age					: String;
+		public var rank					: String;
 		public var client				: *;
 		
 		
@@ -59,10 +61,11 @@ package com.collab.echo.model
 		 * @param website
 		 * @param email
 		 * @param age
+		 * @param rank
 		 * @param client
 		 */		
 		public function UserVO( id:String="1", username:String="User1", location:String=null, website:String=null,
-								email:String=null, age:String=null, client:*=null )
+								email:String=null, age:String=null, rank:String="guest", client:*=null )
 		{
 			this.id = id;
 			this.username = username;
@@ -70,12 +73,17 @@ package com.collab.echo.model
 			this.website = website;
 			this.email = email;
 			this.age = age;
+			this.rank = rank;
 			this.client = client;
 		}
 		
+		// ====================================
+		// PUBLIC METHODS
+		// ====================================
+		
 		public function toString():String
 		{
-			return "<UserVO id='" + id + "' username='" + username + "' location='" + location + "'/>";
+			return "<UserVO id='" + id + "' username='" + username + "' rank='" + rank + "'/>";
 		}
 		
 	}

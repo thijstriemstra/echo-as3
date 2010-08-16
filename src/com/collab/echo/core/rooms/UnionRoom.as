@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
+	import com.collab.echo.model.UserVO;
 	import com.collab.echo.net.Connection;
 	
 	import net.user1.reactor.Room;
@@ -144,12 +145,34 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * Get room occupants.
+		 * 
          * @return 
          */        
         override public function getOccupants():Array
         {
         	return room.getOccupants();
         }
+        
+        /**
+		 * Get room occupant ids.
+		 * 
+         * @return 
+         */        
+        override public function getOccupantIDs():Array
+        {
+        	return room.getOccupantIDs();
+        }
+        
+        /**
+		 * Parse client into user value object.
+		 * 
+		 * @param client
+		 */		
+		override public function parseUser( client:* ):UserVO
+		{
+			return connection.parseUser( client );
+		}
         
         /**
          * @param clientIDs
@@ -250,6 +273,69 @@ package com.collab.echo.core.rooms
 		override public function getClientId():String
 		{
 			return connection.self.getClientID();
+		}
+		
+		/**
+		 * Look up the clientID and userName of a selected client.
+		 * 
+		 * @param username.
+		 */
+		override public function findUserName( userName:String ):Object
+		{
+			var attr:Object;
+			var foundIt:Object = new Object();
+			var attrList:Array;
+			var clientName:String;
+			var clientList:Array = getOccupantIDs();
+			
+			if ( clientList && clientList.length > 0 )
+			{
+				// get all usernames
+				attrList = getAttributeForClients( clientList, UserVO.USERNAME );
+				
+				if ( attrList && attrList.length > 0 )
+				{
+					for each ( attr in attrList ) 
+					{
+						clientName = attr.value;
+						
+						// give user generic name
+						if ( clientName == null )
+						{
+							if ( attr.clientID )
+							{
+								// XXX: localize
+								clientName = "user" + attr.clientID;
+							}
+							else
+							{
+								// something's really wrong if it gets here..
+							}
+						}
+						else
+						{
+							clientName = clientName.toLowerCase();
+						}
+						
+						// find other name
+						if ( clientName == userName.toLowerCase() )
+						{
+							foundIt.clientID = attr.clientID;
+						}
+						break;
+					}
+				}
+			}
+			
+			// if the username wasnt found
+			if ( foundIt == null || foundIt.clientID == null )
+			{
+				return null;
+			} 
+			else 
+			{
+				return foundIt;
+			}
 		}
 		
 		/**

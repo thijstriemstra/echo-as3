@@ -20,7 +20,6 @@ package com.collab.echo.core.messages.chat
 {
 	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.ChatMessageEvent;
-	import com.collab.echo.model.UserVO;
 
 	/**
 	 * Simple text chat message.
@@ -40,7 +39,7 @@ package com.collab.echo.core.messages.chat
 		public static const DOC	: String = "/msg [nickname] : [string]     ; send someone a private message.";
 		
 		/**
-		 * Constructor.
+		 * Construct a new text chat message.
 		 *  
 		 * @param type
 		 * @param data
@@ -69,8 +68,6 @@ package com.collab.echo.core.messages.chat
 		{
 			if ( _sender && _receiver )
 			{
-				// check it's a private message
-				parsePrivateMessage();
 				execute( data );
 			}
 		}
@@ -81,28 +78,26 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			// XXX: this should come from a populated UserVO or something
-			var username:String = _sender.getAttribute( UserVO.USERNAME );
+			var username:String = room.parseUser( _sender ).username;
 			
-			// use the client id as a user name if the user hasn't set a name.
-			if ( username == null )
-			{
-				username = "user" + _sender.getClientID();
-			}
+			// check it's a private message
+			checkForPrivateMessage( username );
 			
-			// add hyperlinks to msg	
+			// XXX: add hyperlinks to msg	
 			//data = hiliteURLs( command );
 			
-			if ( _sender == _receiver )
+			if ( privateMessage )
+			{
+				message = data;
+			}
+			else if ( _sender == _receiver )
 			{
 				// local message
 				message = '<font color="#990000"><b>' + username + ': </b>' + command + '</font><br/>';
 			}
 			else
 			{
-				// remote message
-				/*
-				// add tags for staff 
+				/* XXX: add tags for staff 
 				if (rank == "admin")
 				{
 					username = '<font color="#1D5EAB">'+username+'</font>';
@@ -113,6 +108,7 @@ package com.collab.echo.core.messages.chat
 				}
 				*/
 				
+				// remote message
 				message = "<b>"+ username + ": </b>" + command;
 			}
 		}
@@ -124,10 +120,6 @@ package com.collab.echo.core.messages.chat
 		override public function load():void
 		{
 			// XXX: addd logging
-			//var logMessage_pc:PendingCall = logMessage(username, msg, getTargetMC().ipaddress, 1); 
-			//logMessage_pc.responder = new RelayResponder(this, "logMessage_Result", "onCategoryFault" );
-			//trace( "TextChatMessage.load: " + this );
-			
 			// XXX: dispatch after async completed
 			var evt:ChatMessageEvent = new ChatMessageEvent( ChatMessageEvent.LOAD_COMPLETE );
 			evt.data = this;
@@ -144,105 +136,58 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		// ====================================
-		// INTERNAL METHODS
+		// PRIVATE METHODS
 		// ====================================
 		
 		/**
-		 * @param msg
+		 * Check whether it's a private message and give it a receiver.
+		 * 
+		 * @param myName
 		 */		
-		internal function parsePrivateMessage():void
+		private function checkForPrivateMessage( myName:String ):void
 		{
-			// XXX: probably needs to be determined outside the message.
-			// check it's a private message
 			var msgsplit:Array = data.substr( 5 ).split( " : ", 2 );
 			var userName:String = msgsplit[ 0 ];
-			var message:String = msgsplit[ 1 ];
+			var msg:String = msgsplit[ 1 ];
+			var foundIt:Object;
 			
 			// if its not an empty message
-			if ( message && message.length > 0 )
+			if ( msg && msg.length > 0 )
 			{
 				privateMessage = true;
 			}
-			
-			// lookup username			
-			var foundIt:Boolean = findUserName( userName );
-			
-			/*
-			// if the username wasnt found
-			if ( foundIt.clientID == undefined )
-			{
-				textArea.htmlText += addStamp + " <b>Username not found.</b>";
-				inputField.text = bericht;
-			}
 			else
 			{
-				// if youre not sending it to yourself
-				if (foundIt.clientID != foundIt.myID)
+				// empty message
+				data = "<b>Please fill in a message.</b>";
+			}
+			
+			if ( privateMessage )
+			{
+				// lookup username			
+				foundIt = room.findUserName( userName );
+			
+				// if the username wasnt found
+				if ( foundIt == null )
 				{
-					// Invoke the function on the other client.
-					var safeMsg:String = '<![CDATA[<font color="#B1661D"><b>' + foundIt.myName + ' (private)</b>: ' + bericht + '</font>]]>';
-					//invokeOnClient("joinMessage", foundIt.clientID, safeMsg);
-					
-					// print message on own client
-					textArea.text += addStamp + " <font color='#990000'><b>" + foundIt.myName + ' ('+ userName +')</b>: ' + bericht + "</font>";
+					// XXX: localize
+					data = "<b>Username '" + userName + "' not found.</b>";
 				}
 				else
 				{
-					textArea.text += addStamp + " <b>Please don't send yourself private messages.</b>";
+					// if youre not sending it to yourself
+					if ( foundIt && foundIt.clientID != room.getClientId() )
+					{
+						data = '<font color="#B1661D"><b>' + myName + ' (private)</b>: ' + msg + '</font>';
+						
+						// XXX: print message on own client
+						//data = "<font color='#990000'><b>" + myName + ' ('+ userName +')</b>: ' + msg + "</font>";
+					}
+					else
+					{
+						data = "<b>You can't send yourself private messages.</b>";
+					}
 				}
-			
-			}
-			*/
-			
-			// empty message
-			//textArea.htmlText += addStamp + " <b>Please fill in a message.</b>";
-		
-			//textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
-		}
-		
-		/**
-		 * Look up the clientID and userName of a selected client.
-		 * 
-		 * @private
-		 */
-		internal function findUserName( userName:String ):Object
-		{
-			var foundIt:Object 		= new Object();
-			var clientList:Array=[];// 		= getRoomManager().getRoom(AppSettings.fnsid).getClientIDs();
-			var attrList:Array=[];// 		= getRemoteClientManager().getAttributeForClients(clientList,null, "username");
-			
-			for (var i:int = 0; i < attrList.length; i++) 
-			{
-				var clientName:String = attrList[i].value.toLowerCase();
-				
-				// give user generic name
-				if (clientName == null)
-				{
-					clientName = "user"+attrList[i].clientID;
-				}
-				
-				// find other name
-				if (clientName == userName.toLowerCase())
-				{
-					foundIt.clientID = attrList[i].clientID;
-				}
-				/*
-				if (attrList[i].clientID == getClientID())
-				{
-					foundIt.myName = attrList[i].value;
-					foundIt.myID = attrList[i].clientID;
-				}
-				*/
-			}
-			
-			// if the username wasnt found
-			if (foundIt.clientID == undefined)
-			{
-				return undefined;
-			} 
-			else 
-			{
-				return foundIt;
 			}
 		}
 		

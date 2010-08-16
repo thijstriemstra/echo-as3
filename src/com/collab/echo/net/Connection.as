@@ -281,6 +281,7 @@ package com.collab.echo.net
         {
         	throw new IllegalOperationError("Implement sendServerMessage in subclass");
         }
+        
         /**
          * Create a new room.
          *  

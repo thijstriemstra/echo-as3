@@ -36,9 +36,10 @@ package com.collab.echo.core.messages.chat
 		// ====================================
 		
 		// XXX: localize
-		public static const DOC	: String = "/nick [nickname]   ; change your nickname.";
+		public static const DOC			: String = "/nick [nickname]   ; change your nickname.";
 		
-		private var maxChars	: int = 200;
+		// XXX: move to, and get from, a central place
+		private var maxChars			: int = 200;
 		
 		/**
 		 * Constructor.
@@ -65,10 +66,6 @@ package com.collab.echo.core.messages.chat
 			
 			if ( userName.length > 0 && _sender && _receiver )
 			{
-				// XXX: change name in view
-				//username_txt.text = userNaam;
-				
-				// send change to union
 				execute( userName );
 			}
 		}
@@ -81,21 +78,23 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			// XXX: move all of this to a command or something
-			
-			//var user_SOSharedObject = SharedObject.getLocal("collab");
+			// XXX: perhaps move to room.self
+			//var user_SO:SharedObject = SharedObject.getLocal("collab");
 			var username:String = command;
 			
 			trace("NicknameChange.username: " + username );
 			
-			// set name
+			// XXX: eliza thing: reserved usernames
 			if ( username.length > 0 && username.toLowerCase().indexOf( "eliza" ) == -1 &&
 				 username.length <= maxChars )
 			{
-				room.self.setAttribute( UserVO.USERNAME, username, null, true, true, false );
-				
+				// XXX: change name in view
+				//username_txt.text = userNaam;
 				//user_SO.data.username = username;
 				//preferences.username = username;
+				
+				// update local username client attribute
+				room.self.setAttribute( UserVO.USERNAME, username, null, true, true, false );
 
 				// XXX: localize
 				message = "<b>Successfully updated nickname to '" + username + "'.</b>";

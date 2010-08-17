@@ -57,28 +57,13 @@ package com.collab.echo.net
 	public class Connection extends EventDispatcher
 	{
 		// ====================================
-		// INTERNAL VARS
+		// PROTECTED VARS
 		// ====================================
 		
-		/**
-		 * @private 
-		 */		
-		internal var _connected      		: Boolean;
-		
-		/**
-		 * @private 
-		 */		
-		internal var _conEvt				: BaseConnectionEvent;
-		
-		/**
-		 * @private 
-		 */		
-		internal var _roomEvt				: BaseRoomEvent;
-		
-		/**
-		 * @private 
-		 */		
-		internal var _rooms					: Vector.<BaseRoom>;
+		protected var _connected      		: Boolean;
+		protected var _conEvt				: BaseConnectionEvent;
+		protected var _roomEvt				: BaseRoomEvent;
+		protected var _rooms				: Vector.<BaseRoom>;
 		
 		// ====================================
 		// PRIVATE VARS

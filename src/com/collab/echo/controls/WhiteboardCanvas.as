@@ -19,9 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls
 {
 	import com.collab.cabin.core.UIComponent;
+	import com.collab.cabin.display.util.DrawingUtils;
+	import com.collab.cabin.display.util.StyleDict;
 	import com.collab.echo.controls.painter.Painter;
-	import com.collab.echo.display.util.DrawingUtils;
-	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
 	import com.greensock.TweenLite;
 	

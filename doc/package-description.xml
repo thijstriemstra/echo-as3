@@ -159,12 +159,12 @@
         <package name="com.collab.echo.core">
             <shortDescription>
                 <![CDATA[
-                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
+                   The com.collab.echo.core package contains the core classes that the Echo framework uses to build visual displays.
                 ]]>
             </shortDescription>
             <description>
                 <![CDATA[
-                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
+                   The com.collab.echo.core package contains the core classes that the Echo framework uses to build visual displays.
                 ]]>
             </description>
         </package>
@@ -204,30 +204,6 @@
                 ]]>
             </description>
         </package>
-        <package name="com.collab.echo.display">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.display package contains the core classes that the Echo framework uses to build visual displays.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.display.util">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.display.util package contains the utility classes that the Echo framework uses to build visual displays.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.display.util package contains the utility classes that the Echo framework uses to build visual displays.
-                ]]>
-            </description>
-        </package>
         <package name="com.collab.echo.model">
             <shortDescription>
                 <![CDATA[
@@ -255,12 +231,12 @@
         <package name="com.collab.echo.util">
             <shortDescription>
                 <![CDATA[
-                   The com.collab.echo.util package contains various non-visual utility classes.
+                   The com.collab.echo.util package contains various helper classes.
                 ]]>
             </shortDescription>
             <description>
                 <![CDATA[
-                   The com.collab.echo.util package contains various non-visual utility classes.
+                   The com.collab.echo.util package contains various helper classes.
                 ]]>
             </description>
         </package>

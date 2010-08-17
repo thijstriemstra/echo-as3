@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
 <componentPackage>
-	<component id="AppContextMenu" class="com.collab.echo.display.AppContextMenu"/>
 	<component id="BaseConnectionEvent" class="com.collab.echo.events.BaseConnectionEvent"/>
 	<component id="BaseExpandButton" class="com.collab.echo.controls.buttons.BaseExpandButton"/>
 	<component id="BaseRoom" class="com.collab.echo.core.rooms.BaseRoom"/>
@@ -18,12 +17,10 @@
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="Connection" class="com.collab.echo.net.Connection"/>
-	<component id="ContentLoader" class="com.collab.echo.display.util.ContentLoader"/>
 	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.controls.tools.DrawingModes"/>
 	<component id="DrawingTool" class="com.collab.echo.controls.tools.DrawingTool"/>
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>
-	<component id="DrawingUtils" class="com.collab.echo.display.util.DrawingUtils"/>
 	<component id="Eraser" class="com.collab.echo.controls.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
@@ -56,7 +53,6 @@
 	<component id="PaintBucket" class="com.collab.echo.controls.tools.PaintBucket"/>
 	<component id="Painter" class="com.collab.echo.controls.painter.Painter"/>
 	<component id="Panel" class="com.collab.echo.containers.panels.Panel"/>
-	<component id="PathUtils" class="com.collab.echo.util.PathUtils"/>
 	<component id="Pencil" class="com.collab.echo.controls.tools.Pencil"/>
 	<component id="ProfileInfo" class="com.collab.echo.containers.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>
@@ -68,17 +64,12 @@
 	<component id="SAObject" class="com.collab.echo.model.SAObject"/>
 	<component id="ShapeTool" class="com.collab.echo.controls.tools.ShapeTool"/>
 	<component id="ShapeTypes" class="com.collab.echo.controls.tools.ShapeTypes"/>
-	<component id="SkinUtils" class="com.collab.echo.display.util.SkinUtils"/>
-	<component id="StringUtil" class="com.collab.echo.util.StringUtil"/>
 	<component id="StrokeTypes" class="com.collab.echo.controls.tools.StrokeTypes"/>
-	<component id="StyleDict" class="com.collab.echo.display.util.StyleDict"/>
 	<component id="TextChatMessage" class="com.collab.echo.core.messages.chat.TextChatMessage"/>
-	<component id="TextUtils" class="com.collab.echo.display.util.TextUtils"/>
 	<component id="ThicknessSlider" class="com.collab.echo.controls.tools.ThicknessSlider"/>
 	<component id="TimeOnlineMessage" class="com.collab.echo.core.messages.chat.TimeOnlineMessage"/>
 	<component id="ToolBar" class="com.collab.echo.controls.ToolBar"/>
 	<component id="Translator" class="com.collab.echo.containers.Translator"/>
-	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
 	<component id="UnionConnection" class="com.collab.echo.net.UnionConnection"/>
 	<component id="UnionRoom" class="com.collab.echo.core.rooms.UnionRoom"/>
 	<component id="UserCursor" class="com.collab.echo.controls.UserCursor"/>

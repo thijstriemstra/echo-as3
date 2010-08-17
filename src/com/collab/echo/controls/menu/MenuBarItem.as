@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls.menu
 {
-	import com.collab.echo.display.util.StyleDict;
+	import com.collab.cabin.display.util.StyleDict;
 
 	/**
 	 * The MenuBarItem class defines the default item renderer for the top-level

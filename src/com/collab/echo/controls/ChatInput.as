@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls
 {
 	import com.collab.cabin.core.UIComponent;
+	import com.collab.cabin.display.util.StyleDict;
 	import com.collab.echo.controls.buttons.LabelButton;
-	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.ChatEvent;
 	
 	import fl.controls.TextInput;

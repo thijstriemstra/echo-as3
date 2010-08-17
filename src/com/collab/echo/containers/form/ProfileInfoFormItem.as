@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers.form
 {
 	import com.collab.cabin.core.UIComponent;
-	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.display.util.TextUtils;
+	import com.collab.cabin.display.util.StyleDict;
+	import com.collab.cabin.display.util.TextUtils;
 	
 	import flash.text.TextField;
 

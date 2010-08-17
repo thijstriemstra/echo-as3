@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers
 {
+	import com.collab.cabin.display.util.StyleDict;
 	import com.collab.echo.containers.panels.MenuPanel;
-	import com.collab.echo.controls.WhiteboardCanvas;
 	import com.collab.echo.controls.ToolBar;
+	import com.collab.echo.controls.WhiteboardCanvas;
 	import com.collab.echo.controls.painter.LocalPainter;
 	import com.collab.echo.controls.painter.Painter;
 	import com.collab.echo.controls.painter.RemotePainter;
 	import com.collab.echo.core.rooms.IRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
-	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
 	import com.collab.echo.model.UserVO;
 	

@@ -19,9 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls
 {
 	import com.collab.cabin.core.UIComponent;
-	import com.collab.echo.display.util.DrawingUtils;
-	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.display.util.TextUtils;
+	import com.collab.cabin.display.util.DrawingUtils;
+	import com.collab.cabin.display.util.StyleDict;
+	import com.collab.cabin.display.util.TextUtils;
 	
 	import flash.display.Sprite;
 	import flash.text.TextField;
@@ -61,8 +61,10 @@ package com.collab.echo.controls
 		 *  
 		 * @param width
 		 * @param height
+		 * @param name
 		 */		
-		public function UserNameBar( width:Number=0, height:Number=0, name:String=null )
+		public function UserNameBar( width:Number=0, height:Number=0,
+									 name:String=null )
 		{
 			_title = name;
 			
@@ -80,12 +82,14 @@ package com.collab.echo.controls
 		override protected function draw():void
 		{
 			// background
-			background = DrawingUtils.drawFill( viewWidth, viewHeight, 0, StyleDict.WHITE );
+			background = DrawingUtils.drawFill( viewWidth, viewHeight, 0,
+												StyleDict.WHITE );
 			background.buttonMode = true;
 			addChild( background );
 			
 			// name
-			nameField = TextUtils.createTextField( null, _title, 15, StyleDict.BLACK, false, true );
+			nameField = TextUtils.createTextField( null, _title, 15,
+												   StyleDict.BLACK, false, true );
 			addChild( nameField );
 		}
 		

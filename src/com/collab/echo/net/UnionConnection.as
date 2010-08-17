@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.net
 {
+	import com.collab.cabin.util.StringUtil;
 	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.model.UserVO;
 	import com.collab.echo.util.RoomUtils;
-	import com.collab.echo.util.StringUtil;
 	
 	import net.user1.logger.Logger;
 	import net.user1.reactor.ClientManager;

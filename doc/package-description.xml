@@ -36,30 +36,6 @@
                 ]]>
             </description>
         </package>
-        <package name="com.collab.echo.controls.menu">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.controls.menu package contains the classes used by the menu-based controls.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.controls.menu package contains the classes used by the menu-based controls.
-                ]]>
-            </description>
-        </package>
-        <package name="com.collab.echo.controls.preloaders">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.controls.preloaders package contains the preloader classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.controls.preloaders package contains the preloader classes.
-                ]]>
-            </description>
-        </package>
         <package name="com.collab.echo.controls.painter">
             <shortDescription>
                 <![CDATA[

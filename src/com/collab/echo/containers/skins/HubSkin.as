@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers.skins
 {
+	import com.collab.cabin.containers.scrollpane.FlashScrollPane;
 	import com.collab.cabin.display.util.SkinUtils;
 	import com.collab.echo.containers.Chat;
 	import com.collab.echo.containers.Translator;
 	import com.collab.echo.containers.Whiteboard;
 	import com.collab.echo.containers.panels.UserPanel;
-	import com.collab.echo.containers.scrollpane.FlashScrollPane;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
 

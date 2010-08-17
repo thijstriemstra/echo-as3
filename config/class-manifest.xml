@@ -25,7 +25,6 @@
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
 	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
-	<component id="FlashScrollPane" class="com.collab.echo.containers.scrollpane.FlashScrollPane"/>
 	<component id="HelpChatMessage" class="com.collab.echo.core.messages.chat.HelpChatMessage"/>
 	<component id="Hub" class="com.collab.echo.containers.Hub"/>
 	<component id="HubSkin" class="com.collab.echo.containers.skins.HubSkin"/>
@@ -52,7 +51,6 @@
 	<component id="NicknameChatMessage" class="com.collab.echo.core.messages.chat.NicknameChatMessage"/>
 	<component id="PaintBucket" class="com.collab.echo.controls.tools.PaintBucket"/>
 	<component id="Painter" class="com.collab.echo.controls.painter.Painter"/>
-	<component id="Panel" class="com.collab.echo.containers.panels.Panel"/>
 	<component id="Pencil" class="com.collab.echo.controls.tools.Pencil"/>
 	<component id="ProfileInfo" class="com.collab.echo.containers.ProfileInfo"/>
 	<component id="ProfileInfoFormItem" class="com.collab.echo.containers.form.ProfileInfoFormItem"/>

@@ -16,7 +16,6 @@
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
 	<component id="Connection" class="com.collab.echo.net.Connection"/>
-	<component id="DateUtils" class="com.collab.echo.util.DateUtils"/>
 	<component id="DrawingModes" class="com.collab.echo.controls.tools.DrawingModes"/>
 	<component id="DrawingTool" class="com.collab.echo.controls.tools.DrawingTool"/>
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>

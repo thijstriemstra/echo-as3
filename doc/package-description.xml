@@ -192,17 +192,5 @@
                 ]]>
             </description>
         </package>
-        <package name="com.collab.echo.util">
-            <shortDescription>
-                <![CDATA[
-                   The com.collab.echo.util package contains various helper classes.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   The com.collab.echo.util package contains various helper classes.
-                ]]>
-            </description>
-        </package>
     </packages>
 </overviews>

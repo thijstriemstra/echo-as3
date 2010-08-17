@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.core.messages.chat
 {
 	/**
+	 * Clears the text in the chat component.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0

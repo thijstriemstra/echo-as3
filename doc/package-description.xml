@@ -1,17 +1,5 @@
 <overviews>
     <packages>
-        <package name="com.collab.echo">
-            <shortDescription>
-                <![CDATA[
-                   This section describes the Echo packages.
-                ]]>
-            </shortDescription>
-            <description>
-                <![CDATA[
-                   This section describes the Echo packages.
-                ]]>
-            </description>
-        </package>
         <package name="com.collab.echo.controls">
             <shortDescription>
                 <![CDATA[

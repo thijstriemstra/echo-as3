@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls
 {
+	import com.collab.cabin.controls.Menu;
+	import com.collab.cabin.controls.menu.MenuBarItem;
+	import com.collab.cabin.controls.menu.MenuDirection;
 	import com.collab.cabin.display.util.StyleDict;
-	import com.collab.echo.controls.menu.MenuBarItem;
-	import com.collab.echo.controls.menu.MenuDirection;
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;

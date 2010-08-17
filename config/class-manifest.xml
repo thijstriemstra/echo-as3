@@ -23,7 +23,6 @@
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>
 	<component id="Eraser" class="com.collab.echo.controls.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
-	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
 	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
 	<component id="HelpChatMessage" class="com.collab.echo.core.messages.chat.HelpChatMessage"/>
 	<component id="Hub" class="com.collab.echo.containers.Hub"/>
@@ -36,16 +35,10 @@
 	<component id="IWhiteboardRoom" class="com.collab.echo.core.rooms.IWhiteboardRoom"/>
 	<component id="JoinChatMessage" class="com.collab.echo.core.messages.chat.JoinChatMessage"/>
 	<component id="KickMessage" class="com.collab.echo.core.messages.chat.KickMessage"/>
-	<component id="LabelButton" class="com.collab.echo.controls.buttons.LabelButton"/>
 	<component id="LeaveChatMessage" class="com.collab.echo.core.messages.chat.LeaveChatMessage"/>
 	<component id="LocalPainter" class="com.collab.echo.controls.painter.LocalPainter"/>
 	<component id="MeChatMessage" class="com.collab.echo.core.messages.chat.MeChatMessage"/>
-	<component id="Menu" class="com.collab.echo.controls.Menu"/>
 	<component id="MenuBar" class="com.collab.echo.controls.MenuBar"/>
-	<component id="MenuBarItem" class="com.collab.echo.controls.menu.MenuBarItem"/>
-	<component id="MenuDirection" class="com.collab.echo.controls.menu.MenuDirection"/>
-	<component id="MenuItem" class="com.collab.echo.controls.menu.MenuItem"/>
-	<component id="MenuItemClickEvent" class="com.collab.echo.events.MenuItemClickEvent"/>
 	<component id="MenuPanel" class="com.collab.echo.containers.panels.MenuPanel"/>
 	<component id="MessageCreator" class="com.collab.echo.core.messages.MessageCreator"/>
 	<component id="NicknameChatMessage" class="com.collab.echo.core.messages.chat.NicknameChatMessage"/>

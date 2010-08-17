@@ -12,7 +12,6 @@
 	<component id="ChatMessageCreator" class="com.collab.echo.core.messages.ChatMessageCreator"/>
 	<component id="ChatMessageEvent" class="com.collab.echo.events.ChatMessageEvent"/>
 	<component id="ChatMessageTypes" class="com.collab.echo.core.messages.ChatMessageTypes"/>
-	<component id="CirclePreloader" class="com.collab.echo.controls.preloaders.CirclePreloader"/>
 	<component id="ClearChatMessage" class="com.collab.echo.core.messages.chat.ClearChatMessage"/>
 	<component id="ClientManager" class="com.collab.echo.core.ClientManager"/>
 	<component id="CommunicationPanelEvent" class="com.collab.echo.events.CommunicationPanelEvent"/>
@@ -23,7 +22,6 @@
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>
 	<component id="Eraser" class="com.collab.echo.controls.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
-	<component id="FlashColorPicker" class="com.collab.echo.controls.FlashColorPicker"/>
 	<component id="HelpChatMessage" class="com.collab.echo.core.messages.chat.HelpChatMessage"/>
 	<component id="Hub" class="com.collab.echo.containers.Hub"/>
 	<component id="HubSkin" class="com.collab.echo.containers.skins.HubSkin"/>
@@ -71,5 +69,6 @@
 	<component id="UserVO" class="com.collab.echo.model.UserVO"/>
 	<component id="Whiteboard" class="com.collab.echo.containers.Whiteboard"/>
 	<component id="WhiteboardCanvas" class="com.collab.echo.controls.WhiteboardCanvas"/>
+	<component id="WhiteboardColorPicker" class="com.collab.echo.controls.WhiteboardColorPicker"/>
 	<component id="WhiteboardEvent" class="com.collab.echo.events.WhiteboardEvent"/>
 </componentPackage>

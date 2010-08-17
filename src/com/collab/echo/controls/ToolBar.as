@@ -99,7 +99,7 @@ package com.collab.echo.controls
 		/**
 		 * Tool for selecting a line color.
 		 */		
-		protected var colorPicker				: FlashColorPicker;
+		protected var colorPicker				: WhiteboardColorPicker;
 		
 		/**
 		 * Tool for selecting line thickness.
@@ -133,7 +133,7 @@ package com.collab.echo.controls
 			addChild( background );
 			
 			// color picker
-			colorPicker = new FlashColorPicker( _colorLabel );
+			colorPicker = new WhiteboardColorPicker( _colorLabel );
 			addChild( colorPicker );
 			
 			// thickness

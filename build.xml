@@ -9,9 +9,6 @@
 	</target>
 
 	<target name="clean">
-		<delete dir="${basedir}/${docs.outputfolder}" failOnError="true"
-                includeEmptyDirs="true"/>
-		<mkdir dir="${basedir}/${docs.outputfolder}"/>
 		<delete dir="${basedir}/${app.outputfolder}" failOnError="true"
                 includeEmptyDirs="true"/>
 		<mkdir dir="${basedir}/${app.outputfolder}"/>

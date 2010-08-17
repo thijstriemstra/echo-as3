@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls.tools
 {
-	import com.collab.echo.core.UIComponent;
+	import com.collab.cabin.core.UIComponent;
 	
 	/**
 	 * A tool used to draw a shape, stroke or fill.

@@ -24,7 +24,6 @@
 	<component id="DrawingTool" class="com.collab.echo.controls.tools.DrawingTool"/>
 	<component id="DrawingToolTypes" class="com.collab.echo.controls.tools.DrawingToolTypes"/>
 	<component id="DrawingUtils" class="com.collab.echo.display.util.DrawingUtils"/>
-	<component id="EchoEvent" class="com.collab.echo.events.EchoEvent"/>
 	<component id="Eraser" class="com.collab.echo.controls.tools.Eraser"/>
 	<component id="FillTypes" class="com.collab.echo.controls.tools.FillTypes"/>
 	<component id="FlashButton" class="com.collab.echo.controls.buttons.FlashButton"/>
@@ -79,7 +78,6 @@
 	<component id="TimeOnlineMessage" class="com.collab.echo.core.messages.chat.TimeOnlineMessage"/>
 	<component id="ToolBar" class="com.collab.echo.controls.ToolBar"/>
 	<component id="Translator" class="com.collab.echo.containers.Translator"/>
-	<component id="UIComponent" class="com.collab.echo.core.UIComponent"/>
 	<component id="URLUtils" class="com.collab.echo.util.URLUtils"/>
 	<component id="UnionConnection" class="com.collab.echo.net.UnionConnection"/>
 	<component id="UnionRoom" class="com.collab.echo.core.rooms.UnionRoom"/>

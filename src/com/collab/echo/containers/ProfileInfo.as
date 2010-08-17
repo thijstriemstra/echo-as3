@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers
 {
+	import com.collab.cabin.core.UIComponent;
 	import com.collab.echo.containers.form.ProfileInfoFormItem;
-	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.model.ProfileInfoVO;

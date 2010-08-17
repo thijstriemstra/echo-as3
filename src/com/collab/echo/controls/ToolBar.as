@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls
 {
+	import com.collab.cabin.core.UIComponent;
 	import com.collab.echo.controls.tools.ThicknessSlider;
-	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;

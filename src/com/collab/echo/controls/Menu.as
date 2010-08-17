@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls
 {
+	import com.collab.cabin.core.UIComponent;
 	import com.collab.echo.controls.menu.MenuDirection;
 	import com.collab.echo.controls.menu.MenuItem;
-	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.events.MenuItemClickEvent;
 	
 	import flash.geom.Point;

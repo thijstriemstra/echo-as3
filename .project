@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Collab 2.0</name>
+	<name>echo-as3</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,5 +14,11 @@
 	<natures>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources/>
+	<linkedResources>
+		<link>
+			<name>[source path] src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/cabin/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

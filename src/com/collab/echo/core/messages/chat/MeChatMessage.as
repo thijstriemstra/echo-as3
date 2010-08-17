@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.model.UserVO;
 	
 	/**
@@ -42,10 +43,11 @@ package com.collab.echo.core.messages.chat
 		 * 
 		 * @param type
 		 * @param data
+		 * @param room
 		 */		
-		public function MeChatMessage( type:String, data:String )
+		public function MeChatMessage( type:String, data:String, room:BaseRoom )
 		{
-			super( type, data, null, true, false, false, true );
+			super( type, data, room, true, false, false, true );
 		}
 		
 		// ====================================
@@ -71,15 +73,10 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			// XXX: this should come from a populated UserVO
-			var username:String = _sender.getAttribute( UserVO.USERNAME );
-			if ( username == null )
-			{
-				username = "user" + _sender.getClientID();
-			}
+			var username:String = room.parseUser( _sender ).username;
 			
 			// add hyperlinks to msg	
-			//data = hiliteURLs( command );
+			//data = URLUtils.hiliteURLs( command );
 			
 			message = '<font color="#1B701F"><b>' + username + ' ' + command + '</b></font>';
 		}

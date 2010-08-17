@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls.tools
 {
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	
 	/**
 	 * A tool used to draw a shape, stroke or fill.
@@ -28,7 +28,7 @@ package com.collab.echo.controls.tools
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class DrawingTool extends BaseView
+	public class DrawingTool extends UIComponent
 	{
 		/**
 		 * @see com.collab.echo.controls.tools.DrawingModes DrawingModes 

@@ -16,47 +16,42 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.collab.echo.display
+package com.collab.echo.core
 {
-	import com.collab.echo.controls.preloaders.CirclePreloader;
-	import com.collab.echo.display.util.StyleDict;
-	import com.collab.echo.display.util.TextUtils;
-	import com.collab.echo.events.ViewEvent;
+	import com.collab.echo.events.EchoEvent;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.utils.getQualifiedClassName;
 
 	// ====================================
 	// EVENTS
 	// ====================================
 	
 	/**
-	 * Dispatched when the creation of this view has completed.
+	 * Dispatched when the creation of the component has completed.
 	 *
-	 * @eventType com.collab.echo.events.ViewEvent.CREATION_COMPLETE
+	 * @eventType com.collab.echo.events.EchoEvent.CREATION_COMPLETE
 	 */
-	[Event(name="creationComplete", type="com.collab.echo.events.ViewEvent")]
+	[Event(name="creationComplete", type="com.collab.echo.events.EchoEvent")]
 	
 	/**
-	 * Dispatched when this view is closed.
+	 * Dispatched when the component is closed.
 	 *
-	 * @eventType com.collab.echo.events.ViewEvent.CLOSE_VIEW
+	 * @eventType com.collab.echo.events.EchoEvent.CLOSE_VIEW
 	 */
-	[Event(name="closeView", type="com.collab.echo.events.ViewEvent")]
+	[Event(name="closeView", type="com.collab.echo.events.EchoEvent")]
 	
 	/**
-	 * Common display class with shared view functionality.
+	 * The UIComponent class is the base class for all visual components, both
+	 * interactive and noninteractive.
 	 *  
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class BaseView extends Sprite
+	public class UIComponent extends Sprite
 	{
 		// ====================================
 		// PROTECTED VARS
@@ -72,19 +67,9 @@ package com.collab.echo.display
 		 */		
 		protected var viewHeight				: Number;
 		
-		/**
-		 * Title textfield, used for debugging. 
-		 */		
-		protected var titleField				: TextField;
-		
 		// ====================================
 		// INTERNAL VARS
 		// ====================================
-		
-		/**
-		 * @private 
-		 */		
-		internal var preloader					: CirclePreloader;
 		
 		/**
 		 * @private 
@@ -104,20 +89,16 @@ package com.collab.echo.display
 		}
 		public function set loading( val:Boolean ):void
 		{
-			if ( preloader )
-			{
-				isLoading = val;
-				preloader.visible = ( isLoading == true );
-			}
+			isLoading = val;
 		}
 		
 		/**
 		 * Constructor.
 		 * 
-		 * @param width Width of this view component
-		 * @param height Height of this view component
+		 * @param width 	Width of this UI component
+		 * @param height 	Height of this UI component
 		 */		
-		public function BaseView( width:Number=0, height:Number=0 )
+		public function UIComponent( width:Number=0, height:Number=0 )
 		{
 			super();
 			
@@ -132,9 +113,9 @@ package com.collab.echo.display
 			addEventListener( Event.ADDED_TO_STAGE, onAddedToStage,
 							  false, 0, true );
 		}
-		
+
 		// ====================================
-		// PUBLIC/PROTECTED METHODS
+		// PROTECTED METHODS
 		// ====================================
 		
 		/**
@@ -150,7 +131,7 @@ package com.collab.echo.display
 			// UI
 			invalidate();
 			
-			dispatchEvent( new ViewEvent( ViewEvent.CREATION_COMPLETE ));
+			dispatchEvent( new EchoEvent( EchoEvent.CREATION_COMPLETE ));
 		}
 		
 		/**
@@ -188,10 +169,22 @@ package com.collab.echo.display
 		}
 		
 		/**
-		 * Resize view.
+		 * Moves the component to the specified position.
 		 * 
-		 * @param width
-		 * @param height
+		 * @param xpos 	The x position to move the component
+		 * @param ypos 	The y position to move the component
+		 */
+		public function move( xpos:Number, ypos:Number ):void
+		{
+			x = Math.round( xpos );
+			y = Math.round( ypos );
+		}
+		
+		/**
+		 * Sets the size of the component.
+		 * 
+		 * @param width		The width of the component.
+		 * @param height 	The height of the component.
 		 */		
 		public function setSize( width:int, height:int ):void
 		{
@@ -206,18 +199,6 @@ package com.collab.echo.display
 		 */		
 		protected function draw():void
 		{
-			var text:String = getQualifiedClassName( this ).split( "::" )[ 1 ];
-			
-			// preloader
-			preloader = new CirclePreloader();
-			preloader.visible = true;
-			addChild( preloader );
-			
-			// title
-			titleField = TextUtils.createTextField( null, text, 30, StyleDict.RED1,
-															false, false );
-			titleField.autoSize = TextFieldAutoSize.LEFT;
-			addChild( titleField );
 		}
 		
 		/**
@@ -225,19 +206,6 @@ package com.collab.echo.display
 		 */		
 		protected function layout():void
 		{
-			// title
-			if ( titleField )
-			{
-				titleField.x = 150;
-				titleField.y = 7;
-			}
-			
-			// preloader
-			if ( preloader )
-			{
-				preloader.x = titleField.x + titleField.width + 30;
-				preloader.y = (titleField.y + titleField.height/2) + 2;
-			}
 		}
 		
 		/**
@@ -245,16 +213,6 @@ package com.collab.echo.display
 		 */		
 		protected function invalidate():void
 		{
-			if ( titleField )
-			{
-				removeChildFromDisplayList( titleField );
-			}
-			
-			if ( preloader )
-			{
-				removeChildFromDisplayList( preloader );
-			}
-			
 			draw();
 			layout();
 		}

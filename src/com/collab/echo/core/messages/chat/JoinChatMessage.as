@@ -73,7 +73,6 @@ package com.collab.echo.core.messages.chat
 			// local client
 			if ( _receiver == _sender )
 			{
-				// XXX: move rank to parseUser
 				var clientVar:String;
 				var value:String;
 				
@@ -114,6 +113,7 @@ package com.collab.echo.core.messages.chat
 			else
 			{
 				// XXX: move ranks to constant
+				// XXX: decorator/utility?
 				if ( user.rank == "admin" )
 				{
 					message = "<font color='#1D5EAB'>" + message + "</font>";

@@ -18,8 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.messages.ChatMessageTypes;
 	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.events.ChatMessageEvent;
+	import com.collab.echo.model.UserVO;
 
 	/**
 	 * Simple text chat message.
@@ -35,7 +37,7 @@ package com.collab.echo.core.messages.chat
 		// CONSTANTS
 		// ====================================
 		
-		// XXX: localize
+		// XXX: localize etc
 		public static const DOC	: String = "/msg [nickname] : [string]     ; send someone a private message.";
 		
 		/**
@@ -49,10 +51,13 @@ package com.collab.echo.core.messages.chat
 		 * @param privateMessage
 		 * @param append
 		 */		
-		public function TextChatMessage( type:String=null, data:String=null,
+		public function TextChatMessage( type:String=null,
+										 data:String=null,
 										 room:BaseRoom=null,
-										 includeSelf:Boolean=false, local:Boolean=false,
-										 privateMessage:Boolean=false, append:Boolean=true )
+										 includeSelf:Boolean=false,
+										 local:Boolean=false,
+										 privateMessage:Boolean=false,
+										 append:Boolean=true )
 		{
 			super( type, data, room, includeSelf, local, privateMessage, append );
 		}
@@ -68,6 +73,7 @@ package com.collab.echo.core.messages.chat
 		{
 			if ( _sender && _receiver )
 			{
+				trace("TextChatMessage.parseCommand()");
 				execute( data );
 			}
 		}
@@ -78,49 +84,52 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override protected function execute( command:String ):void
 		{
-			var username:String = room.parseUser( _sender ).username;
+			var user:UserVO = room.parseUser( _sender );
+			var username:String = user.username;
 			
-			// check it's a private message
-			checkForPrivateMessage( username );
+			//data = username;
 			
 			// XXX: add hyperlinks to msg	
-			//data = hiliteURLs( command );
-			
-			if ( privateMessage )
-			{
-				message = data;
-			}
-			else if ( _sender == _receiver )
+			//data = URLUtils.hiliteURLs( command );
+
+			if ( _sender == _receiver )
 			{
 				// local message
-				message = '<font color="#990000"><b>' + username + ': </b>' + command + '</font><br/>';
+				message = '<font color="#990000"><b>' + username + ': </b>' +
+						  command + '</font><br/>';
 			}
 			else
 			{
-				/* XXX: add tags for staff 
-				if (rank == "admin")
+				// add tags for staff
+				// XXX: move ranks to constant
+				// XXX: decorator?
+				if ( user.rank == "admin" )
 				{
-					username = '<font color="#1D5EAB">'+username+'</font>';
+					username = '<font color="#1D5EAB">' + username + '</font>';
 				}
-				else if (rank == "moderator")
+				else if ( user.rank == "moderator" )
 				{
-					username = '<font color="#1892AF">'+username+'</font>';
+					username = '<font color="#1892AF">' + username + '</font>';
 				}
-				*/
 				
 				// remote message
 				message = "<b>"+ username + ": </b>" + command;
 			}
+			
+			trace('exec: ' + this);
 		}
 		
 		// ====================================
 		// PUBLIC METHODS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		override public function load():void
 		{
-			// XXX: addd logging
-			// XXX: dispatch after async completed
+			// XXX: add logging
+			
 			var evt:ChatMessageEvent = new ChatMessageEvent( ChatMessageEvent.LOAD_COMPLETE );
 			evt.data = this;
 			dispatchEvent( evt );
@@ -132,63 +141,101 @@ package com.collab.echo.core.messages.chat
 		 */		
 		override public function toString():String
 		{
-			return "<TextChatMessage data='" + data + "' local='" + local + "' type='" + type + "' />";	
+			return "<TextChatMessage data='" + data + "' private='" + privateMessage +
+				   "', local='" + local + "' message='" + message + "' type='" + type + "' />";	
 		}
-		
-		// ====================================
-		// PRIVATE METHODS
-		// ====================================
 		
 		/**
 		 * Check whether it's a private message and give it a receiver.
 		 * 
-		 * @param myName
+		 * @return Private message parser result message.
 		 */		
-		private function checkForPrivateMessage( myName:String ):void
+		override public function checkForPrivateMessage():String
 		{
-			var msgsplit:Array = data.substr( 5 ).split( " : ", 2 );
-			var userName:String = msgsplit[ 0 ];
+			var msgsplit:Array = data.substr( ChatMessageTypes.PRIVATE_MESSAGE.length + 2
+											).split( " : ", 2 );
+			var parsedName:String = msgsplit[ 0 ];
 			var msg:String = msgsplit[ 1 ];
-			var foundIt:Object;
+			var id:String;
 			
-			// if its not an empty message
-			if ( msg && msg.length > 0 )
+			// XXX: check for messages with whitespace-only?
+			if ( msg && msg.length > 0 && msg != " " )
 			{
 				privateMessage = true;
 			}
 			else
 			{
+				privateMessage = false;
+				local = true;
+				
 				// empty message
-				data = "<b>Please fill in a message.</b>";
+				// XXX: localize
+				return "<b>Please provide a message.</b>";
 			}
 			
 			if ( privateMessage )
 			{
-				// lookup username			
-				foundIt = room.findUserName( userName );
-			
-				// if the username wasnt found
-				if ( foundIt == null )
+				trace("===================");
+				trace('remote: ' + parsedName);
+				//trace('local: ' + localName);
+				var localName:String = "thijs";
+				id = room.getClientIdByUsername( parsedName );
+				
+				if ( _sender != room.self )
 				{
-					// XXX: localize
-					data = "<b>Username '" + userName + "' not found.</b>";
-				}
-				else
-				{
-					// if youre not sending it to yourself
-					if ( foundIt && foundIt.clientID != room.getClientId() )
+					// message targeted at remote client
+					_receiver = room.getClientById( id );
+					trace("receiver: " + _receiver);
+					
+					if ( _receiver != undefined )
 					{
-						data = '<font color="#B1661D"><b>' + myName + ' (private)</b>: ' + msg + '</font>';
-						
-						// XXX: print message on own client
-						//data = "<font color='#990000'><b>" + myName + ' ('+ userName +')</b>: ' + msg + "</font>";
+						if ( _receiver != room.self )
+						{
+							msg = '<font color="#B1661D"><b>' + localName + ' (private)</b>: ' + msg + '</font>';
+						}
+						else
+						{
+							privateMessage = false;
+							local = true;
+							
+							msg = "<b>You can't send yourself private messages.</b>";
+						}
 					}
 					else
 					{
-						data = "<b>You can't send yourself private messages.</b>";
+						privateMessage = false;
+						local = true;
+						
+						// the remote username was not found
+						msg = "<b>Username '" + parsedName + "' not found.</b>";
+					}
+				}
+				else
+				{
+					privateMessage = false;
+					local = true;
+				
+					// message targeted at local client
+					if ( id == null )
+					{
+						// the remote username was not found
+						msg = "<b>Username '" + parsedName + "' not found.</b>";
+					}
+					else if ( id != room.getClientId() )
+					{
+						// show message for remote client on local client
+						msg = "<font color='#990000'><b>" + localName + ' ('+ parsedName +')</b>: ' + msg + "</font>";
+					}
+					else
+					{
+						msg = "<b>You can't send yourself private messages.</b>";
 					}
 				}
 			}
+			
+			trace('pm: ' + this);
+			
+			return msg;
 		}
 		
 	}

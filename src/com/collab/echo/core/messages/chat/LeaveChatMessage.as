@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.messages.chat
 {
+	import com.collab.echo.core.rooms.BaseRoom;
 	import com.collab.echo.model.UserVO;
 	
 	/**
@@ -35,10 +36,11 @@ package com.collab.echo.core.messages.chat
 		 *  
 		 * @param type
 		 * @param data
+		 * @param room
 		 */		
-		public function LeaveChatMessage( type:String, data:String )
+		public function LeaveChatMessage( type:String, data:String, room:BaseRoom )
 		{
-			super( type, data, null, false, true, false, true );
+			super( type, data, room, false, true, false, true );
 		}
 		
 		// ====================================

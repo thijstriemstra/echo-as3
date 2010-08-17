@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers
 {
 	import com.collab.echo.containers.panels.MenuPanel;
-	import com.collab.echo.controls.Canvas;
+	import com.collab.echo.controls.WhiteboardCanvas;
 	import com.collab.echo.controls.ToolBar;
 	import com.collab.echo.controls.painter.LocalPainter;
 	import com.collab.echo.controls.painter.Painter;
@@ -61,7 +61,7 @@ package com.collab.echo.containers
 		/**
 		 * The canvas to draw on.
 		 */		
-		protected var canvas				: Canvas;
+		protected var canvas				: WhiteboardCanvas;
 		
 		/**
 		 * Toolbar containing color picker, etc.
@@ -232,7 +232,7 @@ package com.collab.echo.containers
 									  false, 0, true );
 
 			// canvas
-			canvas = new Canvas( viewWidth, viewHeight - ( bar.height + toolbar.height ));
+			canvas = new WhiteboardCanvas( viewWidth, viewHeight - ( bar.height + toolbar.height ));
 			canvas.addEventListener( WhiteboardEvent.DRAW_LINE, onDrawLine,
 									 false, 0, true );
 			canvas.addEventListener( WhiteboardEvent.SEND_LINE, onSendLine,

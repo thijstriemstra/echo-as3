@@ -20,7 +20,7 @@ package com.collab.echo.controls.menu
 {
 	import com.collab.echo.controls.Menu;
 	import com.collab.echo.controls.buttons.LabelButton;
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.MenuItemClickEvent;
 	
@@ -52,7 +52,7 @@ package com.collab.echo.controls.menu
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class MenuItem extends BaseView
+	public class MenuItem extends UIComponent
 	{
 		// ====================================
 		// PROTECTED VARS

@@ -21,6 +21,7 @@ package com.collab.echo.core.rooms
 	import com.collab.echo.model.UserVO;
 	import com.collab.echo.net.Connection;
 	
+	import net.user1.reactor.IClient;
 	import net.user1.reactor.Room;
 	import net.user1.reactor.RoomEvent;
 	import net.user1.reactor.RoomModuleType;
@@ -262,7 +263,14 @@ package com.collab.echo.core.rooms
 		 */		
 		override public function getClientById( id:String ):*
 		{
-			return connection.getClientById( id );
+			var result:*;
+			
+			if ( id != null )
+			{
+				result = connection.getClientById( id );
+			}
+			
+			return result;
 		}
 		
 		/**
@@ -276,66 +284,79 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Look up the clientID and userName of a selected client.
+		 * Look up the clientID of a selected client by username
 		 * 
-		 * @param username.
+		 * @param username
+		 * @return 			The client id.
 		 */
-		override public function findUserName( userName:String ):Object
+		override public function getClientIdByUsername( userName:String ):String
 		{
 			var attr:Object;
-			var foundIt:Object = new Object();
+			var foundIt:String;
 			var attrList:Array;
 			var clientName:String;
 			var clientList:Array = getOccupantIDs();
 			
+			// check for users with a name
 			if ( clientList && clientList.length > 0 )
 			{
-				// get all usernames
 				attrList = getAttributeForClients( clientList, UserVO.USERNAME );
 				
 				if ( attrList && attrList.length > 0 )
 				{
 					for each ( attr in attrList ) 
 					{
+						// client from the list
 						clientName = attr.value;
 						
-						// give user generic name
-						if ( clientName == null )
-						{
-							if ( attr.clientID )
-							{
-								// XXX: localize
-								clientName = "user" + attr.clientID;
-							}
-							else
-							{
-								// something's really wrong if it gets here..
-							}
-						}
-						else
+						if ( clientName != null )
 						{
 							clientName = clientName.toLowerCase();
 						}
 						
-						// find other name
+						// compare to specified user
 						if ( clientName == userName.toLowerCase() )
 						{
-							foundIt.clientID = attr.clientID;
+							foundIt = attr.clientID;
+							break;
 						}
-						break;
 					}
 				}
 			}
 			
-			// if the username wasnt found
-			if ( foundIt == null || foundIt.clientID == null )
+			// check for anonymous users
+			if ( foundIt == null )
 			{
-				return null;
-			} 
-			else 
-			{
-				return foundIt;
+				foundIt = getAnonymousClientIdByUsername( userName );
 			}
+			
+			return foundIt;
+		}
+		
+		/**
+		 * Get anonymous user by name, eg. 'user123'.
+		 * 
+		 * @param name
+		 * @return 
+		 */		
+		public function getAnonymousClientIdByUsername( name:String ):String
+		{
+			// XXX: move to central constant
+			var user:String = "user";
+			var client:IClient;
+			var clientId:String;
+			
+			if ( name.substr( 0, user.length ) == user )
+			{
+				client = getClientById( name.substr( user.length ));
+			}
+			
+			if ( client )
+			{
+				clientId = client.getClientID();
+			}
+			
+			return clientId;
 		}
 		
 		/**
@@ -358,6 +379,7 @@ package com.collab.echo.core.rooms
 		 */		
 		override protected function joinResult( event:*=null ):void
 		{
+			// set join flag
 			joinedRoom = true;
 			
 			// register listeners
@@ -386,9 +408,6 @@ package com.collab.echo.core.rooms
 		
 		/**
 		 * Add RoomModule objects.
-		 * 
-		 * @see net.user1.reactor.RoomModuleType
-		 * @see net.user1.reactor.RoomModules
 	     * 
 		 * @param moduleObjects
 		 */		

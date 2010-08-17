@@ -32,15 +32,6 @@ package com.collab.echo.core.messages.chat
 	public class ChatMessage extends EventDispatcher
 	{
 		// ====================================
-		// PROTECTED VARS
-		// ====================================
-		
-		/**
-		 * 
-		 */		
-		protected var data							: String;
-		
-		// ====================================
 		// INTERNAL VARS
 		// ====================================
 		
@@ -67,10 +58,23 @@ package com.collab.echo.core.messages.chat
 		private var _local							: Boolean;
 		private var _append							: Boolean;
 		private var _room							: BaseRoom;
+		private var _data							: String;
 		
 		// ====================================
 		// GETTER/SETTER
 		// ====================================
+		
+		/**
+		 * @return 
+		 */		
+		public function get data():String
+		{
+			return _data;
+		}
+		public function set data( val:String ):void
+		{
+			_data = val;
+		}
 		
 		/**
 		 * The target room for this message.
@@ -161,6 +165,10 @@ package com.collab.echo.core.messages.chat
 		public function get type():String
 		{
 			return _type;
+		}
+		public function set type( val:String ):void
+		{
+			_type = val;
 		}
 		
 		/**
@@ -253,7 +261,7 @@ package com.collab.echo.core.messages.chat
 			_local = local;
 			_append = append;
 
-			this.data = data;
+			this._data = data;
 			
 			super();
 		}
@@ -291,12 +299,23 @@ package com.collab.echo.core.messages.chat
 		}
 		
 		/**
+		 * Check whether it's a private message and give it a receiver.
+		 * 
+		 * @return result
+		 */		
+		public function checkForPrivateMessage():String
+		{
+			// override
+			return null;
+		}
+		
+		/**
 		 * @private 
 		 * @return 
 		 */		
 		override public function toString():String
 		{
-			return "<ChatMessage data='" + data + "' local='" + _local +
+			return "<ChatMessage data='" + _data + "' local='" + _local +
 				   "' append='" + append + "' />";	
 		}
 		

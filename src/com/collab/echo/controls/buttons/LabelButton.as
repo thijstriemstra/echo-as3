@@ -22,6 +22,7 @@ package com.collab.echo.controls.buttons
 	
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.Font;
 	import flash.text.TextField;
@@ -64,11 +65,13 @@ package com.collab.echo.controls.buttons
 		// GETTER/SETTER
 		// ====================================
 		
+		/**
+		 * @return 
+		 */		
 		public function get enabled():Boolean
 		{
 			return _enabled;
 		}
-		
 		public function set enabled( val:Boolean ):void
 		{
 			if (val)
@@ -79,27 +82,32 @@ package com.collab.echo.controls.buttons
 			}
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get label():String
 		{
 			return _label;
 		}
-		
 		public function set label( val:String ):void
 		{
-			if (val)
+			if ( val )
 			{
 				_label = val;
 				invalidate();
 			}
 		}
 		
+		/**
+		 * @return 
+		 */		
 		public function get textColor() : uint
 		{
 			return _textColor;
 		}
 		public function set textColor( val:uint ):void
 		{
-			if (val)
+			if ( val )
 			{
 				_textColor = val;
 				invalidate();
@@ -111,7 +119,7 @@ package com.collab.echo.controls.buttons
 		 */		
 		public function set backgroundColor( val:uint ):void
 		{
-			if (val)
+			if ( val )
 			{
 				_backgroundColor = val;
 				invalidate();
@@ -150,6 +158,7 @@ package com.collab.echo.controls.buttons
 		 * @param padding
 		 * @param alpha
 		 * @param bold
+		 * @param font
 		 */		
 		public function LabelButton( width:Number=0, fontSize:int=15,
 									 textUpColor:uint=StyleDict.WHITE,
@@ -227,6 +236,8 @@ package com.collab.echo.controls.buttons
 			tf.color = _textColor;
 			
 			text = new TextField();
+			text.addEventListener( Event.ADDED_TO_STAGE, alignText,
+								   false, 0, true );
 			text.tabEnabled = false;
 			text.mouseEnabled = false;
 			text.mouseWheelEnabled = false;
@@ -245,6 +256,7 @@ package com.collab.echo.controls.buttons
 			text.defaultTextFormat = tf;
 			text.textColor = _textColor;
 			text.htmlText = _label;
+			
 			addChild( text );
 		}
 		
@@ -267,8 +279,11 @@ package com.collab.echo.controls.buttons
 		protected function layout() : void
 		{
 			// text
-			text.x = background.width / 2 - text.width / 2;
-			text.y = background.height / 2 - text.height / 2;
+			if ( text && background )
+			{
+				text.x = background.width / 2 - text.width / 2;
+				text.y = background.height / 2 - text.height / 2;
+			}
 		}
 		
 		/**
@@ -294,6 +309,10 @@ package com.collab.echo.controls.buttons
 			layout();
 		}
 		
+		// ====================================
+		// EVENT HANDLERS
+		// ====================================
+		
 		/**
 		 * @param event
 		 */		
@@ -306,6 +325,23 @@ package com.collab.echo.controls.buttons
 		 */		
 		protected function onMouseOut( event:MouseEvent ):void
 		{
+		}
+		
+		/**
+		 * Fix text align.
+		 *  
+		 * @param event
+		 */		
+		private function alignText( event:Event ):void
+		{
+			event.stopImmediatePropagation();
+			
+			if ( text.hasEventListener( event.type ))
+			{
+				text.removeEventListener( event.type, alignText );
+			}
+			
+			layout();
 		}
 		
 	}

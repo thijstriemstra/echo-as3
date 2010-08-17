@@ -22,10 +22,10 @@ package com.collab.echo.containers
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
+	import com.collab.echo.core.RoomUIComponent;
 	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
-	import com.collab.echo.display.ClientView;
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.UserVO;
@@ -39,7 +39,7 @@ package com.collab.echo.containers
 	import org.osflash.thunderbolt.Logger;
 
 	/**
-	 * Communication hub.
+	 * Communication hub component.
 	 *
 	 * <p>Contains the following components:</p>
 	 * <p><ul>
@@ -60,7 +60,7 @@ package com.collab.echo.containers
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */
-	public class Hub extends ClientView implements IChatRoom, IWhiteboardRoom
+	public class Hub extends RoomUIComponent implements IChatRoom, IWhiteboardRoom
 	{
 		// ====================================
 		// CLASS CONSTANTS
@@ -69,7 +69,7 @@ package com.collab.echo.containers
 		/**
 		 * The initial width of the panel.
 		 */
-		public static const PANEL_WIDTH_MIN		: int = 280; //140;
+		public static const PANEL_WIDTH_MIN		: int = 500; //140;
 
 		// ====================================
 		// PRIVATE VARS
@@ -234,7 +234,9 @@ package com.collab.echo.containers
 			
             switch ( notification )
             {
-            	case BaseRoomEvent.RECEIVE_MESSAGE:
+            	case BaseRoomEvent.RECEIVE_INTERNAL_MESSAGE:
+            	case BaseRoomEvent.RECEIVE_PRIVATE_MESSAGE:
+            	case BaseRoomEvent.RECEIVE_PUBLIC_MESSAGE:
             		// XXX: look into this hack
             		addMessage( args[0][0] );
             		break;

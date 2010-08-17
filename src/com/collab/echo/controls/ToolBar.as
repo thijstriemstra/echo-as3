@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls
 {
 	import com.collab.echo.controls.tools.ThicknessSlider;
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.WhiteboardEvent;
@@ -44,7 +44,7 @@ package com.collab.echo.controls
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class ToolBar extends BaseView
+	public class ToolBar extends UIComponent
 	{
 		// ====================================
 		// PRIVATE VARS

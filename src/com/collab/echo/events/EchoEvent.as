@@ -21,12 +21,15 @@ package com.collab.echo.events
 	import flash.events.Event;
 	
 	/**
+	 * The EchoEvent class represents the event object passed to the event
+     * listener for many Echo events.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class ViewEvent extends Event
+	public class EchoEvent extends Event
 	{
 		// ====================================
 		// CONSTANTS
@@ -36,6 +39,8 @@ package com.collab.echo.events
 		 * Dispatched when the creation of a view has completed.
 		 */		
 		public static const CREATION_COMPLETE	: String = "creationComplete";
+		
+		public static const PREINITIALIZE		: String = "preInitialize";
 		
 		/**
 		 * Dispatched when a view is closed. 
@@ -49,9 +54,10 @@ package com.collab.echo.events
 		 * @param bubbles
 		 * @param cancelable
 		 */		
-		public function ViewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function EchoEvent( type:String, bubbles:Boolean=false,
+								   cancelable:Boolean=false )
 		{
-			super(type, bubbles, cancelable);
+			super( type, bubbles, cancelable );
 		}
 		
 	}

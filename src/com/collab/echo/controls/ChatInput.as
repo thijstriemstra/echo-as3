@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls
 {
 	import com.collab.echo.controls.buttons.LabelButton;
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.events.ChatEvent;
 	
@@ -56,7 +56,7 @@ package com.collab.echo.controls
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class ChatInput extends BaseView
+	public class ChatInput extends UIComponent
 	{
 		// ====================================
 		// CONSTANTS
@@ -125,13 +125,13 @@ package com.collab.echo.controls
 		// ====================================
 		// PROTECTED METHODS
 		// ====================================
-		           
+		
 		/**
 		 * Instantiate and add child(ren) to display list.
 		 * 
 		 * @private
 		 */	
-		override protected function draw() : void
+		override protected function draw():void
 		{
 			// textInput
 			_textInput = new TextInput();

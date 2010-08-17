@@ -20,7 +20,7 @@ package com.collab.echo.controls
 {
 	import com.collab.echo.controls.menu.MenuDirection;
 	import com.collab.echo.controls.menu.MenuItem;
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.events.MenuItemClickEvent;
 	
 	import flash.geom.Point;
@@ -34,7 +34,7 @@ package com.collab.echo.controls
 	 * @langversion 3.0
      * @playerversion Flash 9
 	 */	
-	public class Menu extends BaseView
+	public class Menu extends UIComponent
 	{
 		// ====================================
 		// INTERNAL VARS

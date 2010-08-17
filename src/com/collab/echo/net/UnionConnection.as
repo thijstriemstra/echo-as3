@@ -201,6 +201,7 @@ package com.collab.echo.net
 			// generate generic username
 			if ( vo.username == null )
 			{
+				// XXX: get this from a constant
 				vo.username = "user" + vo.id;
 			}
 			
@@ -279,7 +280,7 @@ package com.collab.echo.net
         	
         	if ( result )
         	{
-        		//trace("addServerMessageListener - type: " + type + ", method: " + method );
+        		trace("addServerMessageListener - type: " + type + ", method: " + method );
         	}
         	
         	return result;

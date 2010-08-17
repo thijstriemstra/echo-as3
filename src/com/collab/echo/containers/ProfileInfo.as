@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers
 {
 	import com.collab.echo.containers.form.ProfileInfoFormItem;
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	import com.collab.echo.model.ProfileInfoVO;
@@ -36,7 +36,7 @@ package com.collab.echo.containers
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class ProfileInfo extends BaseView
+	public class ProfileInfo extends UIComponent
 	{
 		// ====================================
 		// CONSTANTS

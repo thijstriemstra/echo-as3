@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.controls.tools
 {
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.TextUtils;
 	import com.collab.echo.events.WhiteboardEvent;
 	
@@ -38,12 +38,14 @@ package com.collab.echo.controls.tools
 	[Event(name="changeThickness", type="com.collab.echo.events.WhiteboardEvent")]
 	
 	/**
+	 * Whiteboard line thickness selector.
+	 * 
 	 * @author Thijs Triemstra
 	 * 
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class ThicknessSlider extends BaseView
+	public class ThicknessSlider extends UIComponent
 	{
 		// ====================================
 		// CONSTANTS

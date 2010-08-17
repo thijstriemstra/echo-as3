@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers.panels
 {
-	import com.collab.echo.display.BaseView;
+	import com.collab.echo.core.UIComponent;
 	import com.collab.echo.display.util.DrawingUtils;
 	import com.collab.echo.display.util.StyleDict;
 	
@@ -34,7 +34,7 @@ package com.collab.echo.containers.panels
 	 * @langversion 3.0
  	 * @playerversion Flash 9
 	 */	
-	public class Panel extends BaseView
+	public class Panel extends UIComponent
 	{
 		// ====================================
 		// PROTECTED VARS

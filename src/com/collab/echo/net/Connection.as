@@ -238,14 +238,15 @@ package com.collab.echo.net
 		 * msgManager.addServerMessageListener(Messages.CHAT, centralChatListener);</listing>
          * 
          * @param type 		The name of the message the listener is registering to receive.
-         * @param method 	The function or method that will be invoked when the specified message
-         *                  is received.
+         * @param method 	The function or method that will be invoked when the specified
+         *                  message is received.
          * @param forRoomIDs  A list of room IDs. If the message was sent to any of the
          *                    rooms in the list, the listener is executed. Otherwise, the
          *                    listener is not executed. Applies to messages sent to rooms
          *                    only, not to messages sent to specific individual clients or
          *                    the entire server.
-         * @return 			  A Boolean indicating whether the listener was successfully added.
+         * @return 			  A Boolean indicating whether the listener was successfully
+         *                    added.
          */        
         public function addServerMessageListener( type:String, method:Function,
         										  forRoomIDs:Array=null ):Boolean
@@ -258,9 +259,11 @@ package com.collab.echo.net
          * Unregisters a message listener method that was earlier registered for message
          * notifications via addServerMessageListener().
          * 
-         * @param type 		The string ID of the message for which the listener is unregistering.
+         * @param type 		The string ID of the message for which the listener is
+         *                  unregistering.
          * @param method 	The function or method to unregister.
-         * @return 			A Boolean indicating whether the listener was successfully removed.
+         * @return 			A Boolean indicating whether the listener was successfully
+         *                  removed.
          */        
         public function removeServerMessageListener( type:String, method:Function ):Boolean
         {
@@ -322,12 +325,16 @@ package com.collab.echo.net
 		}
 		
 		/**
+		 * Returns an array of objects containing values for the specified attribute for
+         * all clients in supplied <code>clientIDs</code>.
+         * 
          * @param clientIDs
          * @param attrName
          * @param attrScope
          * @return 
          */        
-        public function getAttributeForClients(clientIDs:Array, attrName:String, attrScope:String):Array
+        public function getAttributeForClients( clientIDs:Array, attrName:String,
+        										attrScope:String ):Array
         {
         	throw new IllegalOperationError("Implement getAttributeForClients in subclass");
 			return null;

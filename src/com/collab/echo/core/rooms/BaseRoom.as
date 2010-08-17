@@ -32,31 +32,44 @@ package com.collab.echo.core.rooms
 	// ====================================
 	
 	/**
+	 * Dispatched when the room is joined.
+	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.JOIN_RESULT
 	 */
 	[Event(name="joinResult", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
+	 * Dispatched when the room's total number of occupants changes.
+	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.OCCUPANT_COUNT
 	 */
 	[Event(name="occupantCount", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
+	 * Dispatched when a new occupant is added to the room.
+	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.ADD_OCCUPANT
 	 */
 	[Event(name="addOccupant", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
+	 * Dispatched when an existing occupant is removed from the room.
+	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.REMOVE_OCCUPANT
 	 */
 	[Event(name="removeOccupant", type="com.collab.echo.events.BaseRoomEvent")]
 
 	/**
-	 * @eventType com.collab.echo.events.BaseRoomEvent.ATTRIBUTE_UPDATE
+	 * Dispatched when a client attribute in the room is updated.
+	 * 
+	 * @eventType com.collab.echo.events.BaseRoomEvent.CLIENT_ATTRIBUTE_UPDATE
 	 */
-	[Event(name="attributeUpdate", type="com.collab.echo.events.BaseRoomEvent")]
+	[Event(name="clientAttributeUpdate", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
+	 * Dispatched when the room has been synchronized to match the state of
+	 * the server.
+	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.SYNCHRONIZE
 	 */
 	[Event(name="synchronize", type="com.collab.echo.events.BaseRoomEvent")]
@@ -98,7 +111,7 @@ package com.collab.echo.core.rooms
 		protected var password			: String;
 		
 		/**
-		 * 
+		 * @private
 		 */		
 		protected var joinedRoom		: Boolean;
 		
@@ -242,8 +255,12 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * @param type
-		 * @param method
+		 * Registers a listener to be notified when messages of the specified type are sent
+		 * to the room.
+		 * 
+		 * @param type		A message name, such as "CHAT". When a message by this name is
+		 * 					received, the specified listener will be executed.
+		 * @param method	The function to be executed when the specified message is received.
 		 */		
 		public function addMessageListener( type:String, method:Function ):void
         {
@@ -251,18 +268,23 @@ package com.collab.echo.core.rooms
         }
         
         /**
+         * Unregisters a message listener previously registered via addMessageListener().
+         * 
 		 * @param type
 		 * @param method
 		 */		
 		public function removeMessageListener( type:String, method:Function ):void
         {
+        	// XXX: doublecheck this
         	_listeners[ type ] = null;
         }
         
         /**
-         * @param type
-         * @param message
-         * @param includeSelf
+         * Sends a message to clients in and observing this room.
+         * 
+         * @param type			The name of the message to send.
+         * @param message		The string for the message.
+         * @param includeSelf	Indicates whether to send the message to the current client.
          */        
         public function sendMessage( type:String, message:String, includeSelf:Boolean=false ):void
         {
@@ -270,6 +292,8 @@ package com.collab.echo.core.rooms
         }
         
         /**
+         * Returns an array of objects representing all clients currently in the room.
+         * 
          * @return 
          */        
         public function getOccupants():Array
@@ -279,6 +303,8 @@ package com.collab.echo.core.rooms
         }
         
         /**
+         * Returns an array of IDs of all clients currently in the room.
+         * 
          * @return 
          */        
         public function getOccupantIDs():Array
@@ -288,9 +314,13 @@ package com.collab.echo.core.rooms
         }
         
         /**
-         * @param clientIDs
-         * @param attrName
-         * @param attrScope
+         * Returns an array of objects containing values for the specified attribute for
+         * all clients in supplied <code>clientIDs</code>.
+         * 
+         * @param clientIDs	 An array of client ids indicating the clients for which to
+         * 					 retrieve the specified attribute.
+         * @param attrName	 The name of the attribute to retrieve.
+         * @param attrScope	 The scope of the attribute to retrieve.
          * @return 
          */        
         public function getAttributeForClients( clientIDs:Array, attrName:String,
@@ -303,7 +333,7 @@ package com.collab.echo.core.rooms
         /**
          * Asks the server to set an attribute for this room.
          *  
-         * @param attrName
+         * @param attrName		The name of the attribute to set.
          * @param attrValue
          * @param isShared
          * @param isPersistent
@@ -376,13 +406,13 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Look up the clientID and userName of a selected client.
+		 * Look up the clientID of a selected client by username
 		 * 
 		 * @param username.
 		 */
-		public function findUserName( userName:String ):Object
+		public function getClientIdByUsername( userName:String ):String
 		{
-			throw new IllegalOperationError("Implement findUserName in subclass");
+			throw new IllegalOperationError("Implement getClientIdByUsername in subclass");
 			return null;
 		}
 		

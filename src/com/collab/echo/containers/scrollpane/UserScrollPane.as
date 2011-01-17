@@ -250,10 +250,13 @@ package com.collab.echo.containers.scrollpane
 		 * Remove a <code>UserPanel</code>.
 		 * 
 		 * @param child
+		 * @return
 		 * @private
 		 */		
-		override public function remove( child:DisplayObject ):void
+		override public function remove( child:DisplayObject ):Boolean
 		{
+			var success:Boolean = false;
+			
 			if ( child && _panels )
 			{
 				for ( _index=0; _index<_panels.length; _index++)
@@ -265,15 +268,22 @@ package com.collab.echo.containers.scrollpane
 				}
 				
 				super.remove( child );
+				success = true;
 			}
+			
+			return success;
 		}
 		
 		/**
 		 * Remove all <code>UserPanel</code> instances.
+		 * 
+		 * @return 
 		 * @private
 		 */		
-		override public function removeAll():void
+		override public function removeAll():Boolean
 		{
+			var success:Boolean = false;
+			
 			if ( _panels && _panels.length > 0 )
 			{
 				// remove existing panels
@@ -282,29 +292,35 @@ package com.collab.echo.containers.scrollpane
 					super.remove( _item );
 				}
 				
+				success = true;
 				_panels = new Vector.<UserPanel>();
 			}
+			
+			return success;
 		}
 		
 		/**
 		 * Remove a <code>UserPanel</code> at a specified index.
 		 * 
 		 * @param index
+		 * @return
 		 * @private
 		 */		
-		override public function removeAt( index:int ):void
+		override public function removeAt( index:int ):Boolean
 		{
+			var success:Boolean = false;
+			
 			try
 			{
 				_item = _panels[ index ];
+				_panels.splice( index, 1 );
+				success = remove( _item );
 			}
 			catch ( e:Error )
 			{
-				return;
 			}
 
-			_panels.splice( index, 1 );
-			remove( _item );
+			return success;
 		}
 		
 	}

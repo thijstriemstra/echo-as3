@@ -1,8 +1,12 @@
+<!--
+Copyright (C) 2010-2011 Collab
+
+Flex configuration file for conditional compilation definitions.
+-->
 <flex-config>
 
     <compiler>
 
-        <!-- compiler.define: define a global AS3 conditional compilation definition -->
         <define>
             <name>ECHO::version</name>
             <value>'0.1.0a2'</value>

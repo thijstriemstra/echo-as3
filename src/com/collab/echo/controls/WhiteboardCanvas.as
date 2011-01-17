@@ -107,8 +107,7 @@ package com.collab.echo.controls
 		 * @param thickness
 		 * @param color
 		 */
-		public function createLine( thickness:int=1,
-								    color:uint=StyleDict.BLACK ): void
+		public function createLine( thickness:int=1, color:uint=0x000000 ): void
 		{
 			_totalLines++;
 			_lineParts = "";

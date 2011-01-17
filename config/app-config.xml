@@ -23,6 +23,7 @@ Flex configuration file for general compiler settings.
              ActionScript class hierarchies -->
         <source-path>
             <path-element>../src</path-element>
+            <path-element>../../cabin/src</path-element>
         </source-path>
 
         <namespaces>

@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.controls.buttons
 {
 	import com.collab.cabin.controls.buttons.LabelButton;
-	import com.collab.cabin.display.util.StyleDict;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	
 	import flash.events.MouseEvent;
@@ -71,8 +70,8 @@ package com.collab.echo.controls.buttons
 		 */		
 		public function BaseExpandButton( width:Number=123, font:Font=null,
 										  fontSize:int=15,
-										  textUpColor:uint=StyleDict.BLACK,
-										  backgroundColor:uint=StyleDict.YELLOW1,
+										  textUpColor:uint=0x000000,
+										  backgroundColor:uint=0xFFF71C,
 										  backgroundAlpha:Number=1,
 										  cornerRadius:Number=0, padding:Number=4,
 										  alpha:Number=1, bold:Boolean=false  )

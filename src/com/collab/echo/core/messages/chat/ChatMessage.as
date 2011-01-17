@@ -1,7 +1,7 @@
 ﻿/*
 Echo project.
 
-Copyright (C) 2003-2010 Collab
+Copyright (C) 2003-2011 Collab
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

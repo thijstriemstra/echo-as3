@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="com/collab/echo/Echo.as" version="3">
-  <compiler additionalCompilerArguments="-load-config+=../config/compiler-def.xml -static-link-runtime-shared-libraries=true" copyDependentFiles="false" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersion="10.1.0" htmlPlayerVersionCheck="true" outputFolderPath="bin" sourceFolderPath="src" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
+<actionScriptProperties mainApplicationPath="com/collab/echo/Echo.as" projectUUID="4da8d70f-fd64-4764-8199-a0aa437dbf22" version="6">
+  <compiler additionalCompilerArguments="-load-config+=../config/compiler-def.xml -static-link-runtime-shared-libraries=true" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/cabin/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="tests"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path="">
@@ -30,4 +31,3 @@
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
-

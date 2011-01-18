@@ -25,6 +25,11 @@ Flex configuration file for general compiler settings.
             <path-element>../src</path-element>
             <path-element>../../cabin/src</path-element>
         </source-path>
+        
+        <!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
+        <library-path>
+       		<path-element>../lib</path-element>
+        </library-path>
 
         <namespaces>
             <namespace>

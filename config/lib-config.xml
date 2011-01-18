@@ -5,14 +5,6 @@ Flex configuration file for Library compiler settings.
 -->
 <flex-config>
 
-    <compiler>
-      <!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
-      <library-path>
-         <path-element>../lib</path-element>
-      </library-path>
-
-    </compiler>
-
     <!-- include-namespaces: all classes in the listed namespaces are included in the output SWC-->
     <include-namespaces>
         <uri>http://echo.collab.com</uri>

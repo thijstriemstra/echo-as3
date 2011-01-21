@@ -27,7 +27,7 @@ package com.collab.echo.containers.form
 	/**
 	 * FormItem for the ProfileInfo component.
 	 * 
-	 * @see com.collab.echo.containers.ProfileInfo
+	 * @see com.collab.echo.containers.ProfileInfo ProfileInfo
 	 * 
 	 * @author Thijs Triemstra
 	 * 

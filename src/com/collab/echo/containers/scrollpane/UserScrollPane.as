@@ -33,7 +33,7 @@ package com.collab.echo.containers.scrollpane
 	/**
 	 * Scrollpane containing UserPanel instances.
 	 * 
-	 * @see com.collab.echo.containers.panels.UserPanel
+	 * @see com.collab.echo.containers.panels.UserPanel UserPanel
 	 * 
 	 * @author Thijs Triemstra
 	 * @langversion 3.0

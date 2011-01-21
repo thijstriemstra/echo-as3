@@ -30,7 +30,7 @@ package com.collab.echo.containers.skins
 	/**
 	 * Base skin for the Hub.
 	 * 
-	 * @see com.collab.echo.containers.Hub
+	 * @see com.collab.echo.containers.Hub Hub
 	 *
 	 * @langversion 3.0
      * @playerversion Flash 9

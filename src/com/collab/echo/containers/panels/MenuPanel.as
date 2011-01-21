@@ -28,7 +28,7 @@ package com.collab.echo.containers.panels
 	/**
 	 * Panel containing a MenuBar.
 	 * 
-	 * @see com.collab.echo.controls.MenuBar
+	 * @see com.collab.echo.controls.MenuBar MenuBar
 	 * 
 	 * @author Thijs Triemstra
 	 * 

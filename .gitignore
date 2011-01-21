@@ -7,4 +7,7 @@
 /GenerateManifest
 /*.iml
 /.settings
+/.FlexUnitSettings
+/html-template
 /build.properties
+/src/FlexUnit*.as

@@ -132,6 +132,7 @@ package com.collab.echo.controls.buttons
 			var type:String;
 			expanded = activate;
 			
+			// XXX: localize
 			if ( expanded )
 			{
 				label = "Expand";

@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers
 {
 	import com.collab.cabin.display.util.StyleDict;
+	import com.collab.cabin.util.StringUtil;
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ToolBar;
 	import com.collab.echo.controls.WhiteboardCanvas;
@@ -332,7 +333,8 @@ package com.collab.echo.containers
 			//trace( "Whiteboard.onSendLine: " + event );
 			
 			var evt:WhiteboardEvent = new WhiteboardEvent( WhiteboardEvent.SEND_LINE );
-			evt.line = event.line + "?" + _lineThickness + "?" + _lineColor;
+			evt.line = StringUtil.replace( "%s?%s?%s", event.line,
+										   _lineThickness, _lineColor );
 			dispatchEvent( evt );
 		}
 		

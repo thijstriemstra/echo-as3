@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers
 {
 	import com.collab.cabin.util.DateUtils;
+	import com.collab.cabin.util.StringUtil;
 	import com.collab.echo.containers.panels.MenuPanel;
 	import com.collab.echo.controls.ChatInput;
 	import com.collab.echo.core.messages.chat.ChatMessage;
@@ -245,11 +246,12 @@ package com.collab.echo.containers
 				// add timestamp
 				if ( _showTimestamp )
 				{
-					addStamp = "(" + DateUtils.createClientStamp() + ")";
+					addStamp = StringUtil.replace( "(%s)",
+							   DateUtils.createClientStamp() );
 				}
 				
 				// add text to chat
-				text = addStamp + " " + data.message;
+				text = StringUtil.replace( "%s %s", addStamp, data.message );
 				
 				if ( data.append )
 				{

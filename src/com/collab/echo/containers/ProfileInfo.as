@@ -283,7 +283,8 @@ package com.collab.echo.containers
 		 * @return 
 		 */		
 		internal function createFormItem( width:int=0, height:int=0,
-										  label:String="Label", value:String="Value" ):ProfileInfoFormItem
+										  label:String="Label",
+										  value:String="Value" ):ProfileInfoFormItem
 		{
 			var field:ProfileInfoFormItem = new ProfileInfoFormItem( width, height );
 			field.label = label;

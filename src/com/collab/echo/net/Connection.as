@@ -154,6 +154,16 @@ package com.collab.echo.net
 		public function Connection( host:String, port:int,
 									logging:Boolean=true, logLevel:String="info" )
 		{
+			if ( host == null )
+			{
+				throw new TypeError( "Invalid host specified: " + host );
+			}
+			
+			if ( port <= 0 )
+			{
+				throw new TypeError( "Invalid port specified: " + port );
+			}	
+			
 			_hostUrl = host;
 			_hostPort = port;
 			_logging = logging;

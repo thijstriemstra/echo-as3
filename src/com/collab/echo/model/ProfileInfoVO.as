@@ -40,7 +40,7 @@ package com.collab.echo.model
 		 * @param age
 		 */		
 		public function ProfileInfoVO( location:String=null, website:String=null,
-									email:String=null, age:String=null )
+									   email:String=null, age:String=null )
 		{
 			this.location = location;
 			this.website = website;

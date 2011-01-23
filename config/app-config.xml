@@ -30,7 +30,7 @@ Flex configuration file for general compiler settings.
         <library-path>
        		<path-element>../lib</path-element>
         </library-path>
-
+        
         <namespaces>
             <namespace>
                 <uri>http://echo.collab.com</uri>

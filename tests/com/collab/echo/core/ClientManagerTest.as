@@ -59,26 +59,31 @@ package com.collab.echo.core
 		}
 		
 		[Test]
+		[Ignore]
 		public function testConnect():void
 		{
 		}
 		
 		[Test]
+		[Ignore]
 		public function testCreateRooms():void
 		{
 		}
 		
 		[Test]
+		[Ignore]
 		public function testNotifyClient():void
 		{
 		}
 		
 		[Test]
+		[Ignore]
 		public function testSubscribeClient():void
 		{
 		}
 		
 		[Test]
+		[Ignore]
 		public function testUnsubscribeClient():void
 		{
 		}

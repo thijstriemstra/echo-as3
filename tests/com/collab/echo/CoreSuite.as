@@ -19,11 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo
 {
 	import com.collab.echo.core.*;
+	import com.collab.echo.core.rooms.BaseRoomTest;
 
 	[Suite]
 	[RunWith("org.flexunit.runners.Suite")]
 	public class CoreSuite
 	{
 		public var t1	: ClientManagerTest;
+		public var t2	: BaseRoomTest;
 	}
 }

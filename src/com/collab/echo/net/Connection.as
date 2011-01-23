@@ -42,6 +42,11 @@ package com.collab.echo.net
 	[Event(name="connectionSuccess", type="com.collab.echo.events.BaseConnectionEvent")]
 	
 	/**
+	 * @eventType com.collab.echo.events.BaseConnectionEvent.DISCONNECTING
+	 */
+	[Event(name="disconnecting", type="com.collab.echo.events.BaseConnectionEvent")]
+	
+	/**
 	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTION_CLOSED
 	 */
 	[Event(name="connectionClosed", type="com.collab.echo.events.BaseConnectionEvent")]
@@ -187,6 +192,19 @@ package com.collab.echo.net
 				dispatchEvent( _conEvt );
             }
         }
+		
+		/**
+		 * Disconnect from server.
+		 */		
+		public function disconnect():void
+		{
+			if ( _hostUrl && _hostPort )
+			{
+				// notify others
+				_conEvt = new BaseConnectionEvent( BaseConnectionEvent.DISCONNECTING );
+				dispatchEvent( _conEvt );
+			}
+		}
         
         /**
          * Create one or more rooms.

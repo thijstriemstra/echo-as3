@@ -55,6 +55,17 @@ package com.collab.echo.net
 			conn.connect();
 		}
 		
+		[Test( async )]
+		public function testDisconnect():void
+		{
+			conn.addEventListener( BaseConnectionEvent.DISCONNECTING, 
+				Async.asyncHandler( this, null, 100, null,
+					handleEventNeverOccurred ), 
+				false, 0, true );
+
+			conn.disconnect();
+		}
+		
 		protected function handleEventNeverOccurred( passThroughData:Object ):void
 		{
 			Assert.fail( 'Pending Event Never Occurred' );

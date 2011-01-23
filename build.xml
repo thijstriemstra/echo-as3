@@ -96,6 +96,9 @@ Project build file.
     </target>
     
     <target name="update-manifest" description="Update class manifest">
+    	<echo>===================</echo>
+		<echo>= UPDATE MANIFEST =</echo>
+		<echo>===================</echo>
 		<exec executable="${manifest.exe}" failonerror="true">
             <arg line="${app.src}"/>
 			<arg value="${lib.manifest}" />

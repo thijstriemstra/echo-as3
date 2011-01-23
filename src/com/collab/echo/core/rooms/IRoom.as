@@ -59,6 +59,8 @@ package com.collab.echo.core.rooms
 		function numClients( total:int ):void;
 		
 		/**
+		 * Client's attribute updated.
+		 * 
 		 * @param client
 		 * @param attr
 		 */		

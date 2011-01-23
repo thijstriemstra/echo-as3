@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.core.rooms
 {
+	import com.collab.cabin.util.ClassUtils;
+	import com.collab.cabin.util.StringUtil;
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.model.UserVO;
 	import com.collab.echo.net.Connection;
@@ -142,7 +144,14 @@ package com.collab.echo.core.rooms
 		 */		
 		public function get self():*
 		{
-			return _connection.self;
+			var result:*;
+			
+			if ( _connection )
+			{
+				result = _connection.self;
+			}
+			
+			return result;
 		}
 		
 		/**
@@ -221,7 +230,7 @@ package com.collab.echo.core.rooms
 			_listeners = new Dictionary();
 			joinedRoom = false;
 			
-			name = getQualifiedClassName( this ).split( "::" )[ 1 ]
+			name = ClassUtils.className( this );
 		}
 		
 		// ====================================
@@ -421,7 +430,7 @@ package com.collab.echo.core.rooms
 		 */		
 		override public function toString():String
 		{
-			return "<BaseRoom id='" + id + "' />";
+			return StringUtil.replace( "<BaseRoom id='%s' />", id );
 		}
 		
 		// ====================================

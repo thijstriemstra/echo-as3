@@ -58,6 +58,7 @@ package com.collab.echo.events
 		 * <p>This event has the following properties:</p>
 		 */		
 		public static const JOIN_RESULT					: String = NAME + "_joinResult";
+		public static const LEAVE_RESULT				: String = NAME + "_leaveResult";
 		public static const SYNCHRONIZE					: String = NAME + "_synchronize";
 		public static const OCCUPANT_COUNT				: String = NAME + "_occupantCount";
 		public static const ADD_OCCUPANT				: String = NAME + "_addOccupant";
@@ -65,7 +66,9 @@ package com.collab.echo.events
 		public static const CLIENT_ATTRIBUTE_UPDATE		: String = NAME + "_clientAttributeUpdate";
 		
 		public static const ROOM_ADDED					: String = NAME + "_roomAdded";
+		public static const ROOM_ADDED_RESULT			: String = NAME + "_roomAddedResult";
 		public static const ROOM_REMOVED				: String = NAME + "_roomRemoved";
+		public static const ROOM_REMOVED_RESULT			: String = NAME + "_roomRemovedResult";
 		public static const ROOM_COUNT					: String = NAME + "_roomCount";
 		
 		// ====================================

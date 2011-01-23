@@ -34,11 +34,18 @@ package com.collab.echo.core.rooms
 	// ====================================
 	
 	/**
-	 * Dispatched when the room is joined.
+	 * Dispatched when a client joined the room.
 	 * 
 	 * @eventType com.collab.echo.events.BaseRoomEvent.JOIN_RESULT
 	 */
 	[Event(name="joinResult", type="com.collab.echo.events.BaseRoomEvent")]
+	
+	/**
+	 * Dispatched when the current client left the room.
+	 * 
+	 * @eventType com.collab.echo.events.BaseRoomEvent.LEAVE_RESULT
+	 */
+	[Event(name="leaveResult", type="com.collab.echo.events.BaseRoomEvent")]
 	
 	/**
 	 * Dispatched when the room's total number of occupants changes.
@@ -214,13 +221,16 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Constructor.
+		 * Creates a new BaseRoom.
 		 *  
-		 * @param id
-		 * @param autoJoin
-		 * @param watch
+		 * @param id		Name of the room.
+		 * @param autoJoin	Indicates if the room should be joined
+		 * 					automatically.
+		 * @param watch		Indicates if the room should be watched
+		 * 					automatically.
 		 */		
-		public function BaseRoom( id:String, autoJoin:Boolean=false, watch:Boolean=true )
+		public function BaseRoom( id:String, autoJoin:Boolean=false,
+								  watch:Boolean=true )
 		{
 			super();
 			
@@ -238,9 +248,10 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
-		 * Create a new room.
+		 * Setup the room connection.
 		 * 
-		 * @param connection The connection to the parent multi-user engine for the new room.
+		 * @param connection The connection to the parent multi-user engine for
+		 * 					 the new room.
 		 */		
 		public function create( connection:Connection ):void
 		{
@@ -248,24 +259,24 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Asks the server to place the current client in the server-side room represented by this
-		 * BaseRoom object.
+		 * Asks the server to place the current client in the server-side room
+		 * represented by this BaseRoom object.
 		 */		
 		public function join():void
 		{
 		}
 		
 		/**
-		 * Asks the server to remove the current client from the server-side room represented by
-		 * this BaseRoom object.
+		 * Asks the server to remove the current client from the server-side
+		 * room represented by this BaseRoom object.
 		 */		
 		public function leave():void
 		{
 		}
 		
 		/**
-		 * Registers a listener to be notified when messages of the specified type are sent
-		 * to the room.
+		 * Registers a listener to be notified when messages of the specified
+		 * type are sent to the room.
 		 * 
 		 * @param type		A message name, such as "CHAT". When a message by this name is
 		 * 					received, the specified listener will be executed.
@@ -438,7 +449,7 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
-		 * Invoked when the room was joined.
+		 * Invoked when a client joined the room.
 		 * 
 		 * @param event
 		 */		
@@ -447,6 +458,19 @@ package com.collab.echo.core.rooms
 			event.preventDefault();
 			
 			_evt = new BaseRoomEvent( BaseRoomEvent.JOIN_RESULT, event );
+			dispatchEvent( _evt );
+		}
+		
+		/**
+		 * Invoked when the current client left the room.
+		 * 
+		 * @param event
+		 */		
+		protected function leaveResult( event:*=null ):void
+		{
+			event.preventDefault();
+			
+			_evt = new BaseRoomEvent( BaseRoomEvent.LEAVE_RESULT, event );
 			dispatchEvent( _evt );
 		}
 		

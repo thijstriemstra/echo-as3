@@ -32,21 +32,29 @@ package com.collab.echo.net
 	// ====================================
 	
 	/**
+	 * Dispatched when an attempt to create a connection was initiated.
+	 * 
 	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTING
 	 */
 	[Event(name="connecting", type="com.collab.echo.events.BaseConnectionEvent")]
 	
 	/**
+	 * Dispatched when the connection attempt was successful.
+	 * 
 	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTION_SUCCESS
 	 */
 	[Event(name="connectionSuccess", type="com.collab.echo.events.BaseConnectionEvent")]
 	
 	/**
+	 * Dispatched when disconnecting from the server.
+	 * 
 	 * @eventType com.collab.echo.events.BaseConnectionEvent.DISCONNECTING
 	 */
 	[Event(name="disconnecting", type="com.collab.echo.events.BaseConnectionEvent")]
 	
 	/**
+	 * Dispatched when the connection was closed.
+	 * 
 	 * @eventType com.collab.echo.events.BaseConnectionEvent.CONNECTION_CLOSED
 	 */
 	[Event(name="connectionClosed", type="com.collab.echo.events.BaseConnectionEvent")]
@@ -65,9 +73,24 @@ package com.collab.echo.net
 		// PROTECTED VARS
 		// ====================================
 		
+		/**
+		 * @private 
+		 */		
 		protected var _connected      		: Boolean;
+		
+		/**
+		 * @private 
+		 */		
 		protected var _conEvt				: BaseConnectionEvent;
+		
+		/**
+		 * @private 
+		 */		
 		protected var _roomEvt				: BaseRoomEvent;
+		
+		/**
+		 * @private 
+		 */		
 		protected var _rooms				: Vector.<BaseRoom>;
 		
 		// ====================================

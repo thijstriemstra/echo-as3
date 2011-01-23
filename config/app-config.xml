@@ -26,7 +26,8 @@ Flex configuration file for general compiler settings.
             <path-element>../../cabin/src</path-element>
         </source-path>
         
-        <!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
+        <!-- compiler.library-path: list of SWC files or directories that
+        							contain SWC files-->
         <library-path>
        		<path-element>../lib</path-element>
         </library-path>
@@ -41,13 +42,13 @@ Flex configuration file for general compiler settings.
     </compiler>
 
     <metadata>
-        <!-- metadata.creator: A creator's name to store in the SWF metadata-->
+        <!-- metadata.creator: A creator's name to store in the SWC metadata-->
         <creator>Collab</creator>
 
         <!-- metadata.description: The default description to store in the SWC metadata-->
         <description>http://echo.collab.com</description>
 
-        <!-- metadata.title: The default title to store in the SWF metadata-->
+        <!-- metadata.title: The default title to store in the SWC metadata-->
         <title>Echo</title>
     </metadata>
 

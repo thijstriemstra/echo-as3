@@ -156,12 +156,22 @@ package com.collab.echo.core.rooms
 		}
 		
 		[Test]
-		public function testCreate():void
+		public function testConnect():void
 		{
 			var conn:Connection = new Connection("localhost", 80);
-			room.create( conn );
+			room.connect( conn );
 			
 			assertThat( room.connection, equalTo( conn ));
+		}
+		
+		[Test]
+		public function testDisconnect():void
+		{
+			var conn:Connection = new Connection("localhost", 80);
+			room.connect( conn );
+			room.disconnect();
+			
+			assertThat( room.connection, nullValue() );
 		}
 		
 		protected function foobar():void {}

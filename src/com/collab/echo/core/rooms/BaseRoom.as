@@ -102,7 +102,7 @@ package com.collab.echo.core.rooms
 		private var _autoJoin			: Boolean;
 		private var _watch				: Boolean;
 		private var _evt				: BaseRoomEvent;
-		private var _listeners			: Dictionary;
+		private var _messageListeners	: Dictionary;
 		private var _data				: *;
 		
 		// ====================================
@@ -129,11 +129,13 @@ package com.collab.echo.core.rooms
 		// ====================================
 		
 		/**
+		 * The room's message listeners.
+		 * 
 		 * @return 
 		 */		
 		public function get listeners():Dictionary
 		{
-			return _listeners;
+			return _messageListeners;
 		}
 		
 		/**
@@ -147,6 +149,8 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
+		 * Reference to own client.
+		 * 
 		 * @return 
 		 */		
 		public function get self():*
@@ -191,7 +195,8 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Auto join the room when it's created.
+		 * Indicates if the room is automatically joined after it's been
+		 * created.
 		 *  
 		 * @return 
 		 */		
@@ -201,7 +206,8 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Watch the room after it's created.
+		 * Boolean that indicates if the room is watched after it's been
+		 * created.
 		 *  
 		 * @return 
 		 */		
@@ -211,7 +217,7 @@ package com.collab.echo.core.rooms
 		}
 		
 		/**
-		 * Whether the local client joined the room.
+		 * Boolean that indicates if the local client joined the room.
 		 *  
 		 * @return 
 		 */		
@@ -228,6 +234,9 @@ package com.collab.echo.core.rooms
 		 * 					automatically.
 		 * @param watch		Indicates if the room should be watched
 		 * 					automatically.
+		 * @see #id
+		 * @see #autoJoin
+		 * @see #watch
 		 */		
 		public function BaseRoom( id:String, autoJoin:Boolean=false,
 								  watch:Boolean=true )
@@ -237,7 +246,7 @@ package com.collab.echo.core.rooms
 			_id = id;
 			_autoJoin = autoJoin;
 			_watch = watch;
-			_listeners = new Dictionary();
+			_messageListeners = new Dictionary();
 			joinedRoom = false;
 			
 			name = ClassUtils.className( this );
@@ -252,15 +261,29 @@ package com.collab.echo.core.rooms
 		 * 
 		 * @param connection The connection to the parent multi-user engine for
 		 * 					 the new room.
+		 * @see #disconnect()
 		 */		
-		public function create( connection:Connection ):void
+		public function connect( connection:Connection ):void
 		{
 			this.connection = connection;
 		}
 		
 		/**
+		 * Close the room connection.
+		 * 
+		 * @see #connect()
+		 */		
+		public function disconnect():void
+		{
+			this.connection = null;
+		}
+		
+		/**
 		 * Asks the server to place the current client in the server-side room
 		 * represented by this BaseRoom object.
+		 * 
+		 * @see #leave()
+		 * @see #joined
 		 */		
 		public function join():void
 		{
@@ -269,6 +292,8 @@ package com.collab.echo.core.rooms
 		/**
 		 * Asks the server to remove the current client from the server-side
 		 * room represented by this BaseRoom object.
+		 * 
+		 * @see #join()
 		 */		
 		public function leave():void
 		{
@@ -281,10 +306,11 @@ package com.collab.echo.core.rooms
 		 * @param type		A message name, such as "CHAT". When a message by this name is
 		 * 					received, the specified listener will be executed.
 		 * @param method	The function to be executed when the specified message is received.
+		 * @see #removeMessageListener()
 		 */		
 		public function addMessageListener( type:String, method:Function ):void
         {
-        	_listeners[ type ] = method;
+			_messageListeners[ type ] = method;
         }
         
         /**
@@ -292,11 +318,12 @@ package com.collab.echo.core.rooms
          * 
 		 * @param type
 		 * @param method
+		 * @see #addMessageListener()
 		 */		
 		public function removeMessageListener( type:String, method:Function ):void
         {
         	// XXX: doublecheck this
-        	_listeners[ type ] = null;
+			_messageListeners[ type ] = null;
         }
         
         /**
@@ -315,6 +342,7 @@ package com.collab.echo.core.rooms
          * Returns an array of objects representing all clients currently in the room.
          * 
          * @return 
+		 * @see #getOccupantIDs()
          */        
         public function getOccupants():Array
         {
@@ -326,6 +354,7 @@ package com.collab.echo.core.rooms
          * Returns an array of IDs of all clients currently in the room.
          * 
          * @return 
+		 * @see #getOccupants()
          */        
         public function getOccupantIDs():Array
         {
@@ -342,6 +371,7 @@ package com.collab.echo.core.rooms
          * @param attrName	 The name of the attribute to retrieve.
          * @param attrScope	 The scope of the attribute to retrieve.
          * @return 
+		 * @see #setAttribute()
          */        
         public function getAttributeForClients( clientIDs:Array, attrName:String,
         										attrScope:String=null ):Array
@@ -394,6 +424,7 @@ package com.collab.echo.core.rooms
 		 * @param attrName
 		 * @param attrValue
 		 * @return 
+		 * @see #getClientById()
 		 */		
 		public function getClientByAttribute( attrName:String,
 													   attrValue:String ):*
@@ -407,6 +438,7 @@ package com.collab.echo.core.rooms
 		 * 
 		 * @param id
 		 * @return 
+		 * @see #getClientByAttribute()
 		 */		
 		public function getClientById( id:String ):*
 		{
@@ -418,6 +450,7 @@ package com.collab.echo.core.rooms
 		 * Get own client id.
 		 * 
 		 * @return 
+		 * @see #getClientIdByUsername()
 		 */		
 		public function getClientId():String
 		{
@@ -429,6 +462,8 @@ package com.collab.echo.core.rooms
 		 * Look up the clientID of a selected client by username
 		 * 
 		 * @param username.
+		 * @return
+		 * @see #getClientId()
 		 */
 		public function getClientIdByUsername( userName:String ):String
 		{

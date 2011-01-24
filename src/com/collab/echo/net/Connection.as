@@ -109,8 +109,6 @@ package com.collab.echo.net
 		
 		/**
 		 * Host URL.
-		 *  
-		 * @return 
 		 */		
 		public function get url():String
 		{
@@ -119,8 +117,6 @@ package com.collab.echo.net
 		
 		/**
 		 * Host port number.
-		 *  
-		 * @return 
 		 */		
 		public function get port():int
 		{
@@ -129,8 +125,6 @@ package com.collab.echo.net
 		
 		/**
 		 * Enabled logging.
-		 *  
-		 * @return 
 		 */		
 		public function get logging():Boolean
 		{
@@ -139,8 +133,6 @@ package com.collab.echo.net
 		
 		/**
 		 * Current log level.
-		 *  
-		 * @return 
 		 */		
 		public function get logLevel():String
 		{
@@ -149,8 +141,6 @@ package com.collab.echo.net
 		
 		/**
 		 * Reference to local client.
-		 * 
-		 * @return 
 		 */		
 		public function get self():*
 		{
@@ -161,10 +151,11 @@ package com.collab.echo.net
 		/**
          * Connection status.
          * 
-         * <p>True if the connection to the presence server has been successfully
-		 * completed.</p>
+         * <p>Boolean indicating if the connection to the presence server
+		 * has been successfully completed.</p>
 		 * 
-         * @return 
+		 * @see #connect()
+		 * @see #disconnect()
          */		
         public function get connected():Boolean
         {
@@ -205,6 +196,9 @@ package com.collab.echo.net
 		
 		/**
          * Connect to server.
+		 * 
+		 * @see #disconnect()
+		 * @see #connected
          */		
         public function connect():void
         {
@@ -218,6 +212,9 @@ package com.collab.echo.net
 		
 		/**
 		 * Disconnect from server.
+		 * 
+		 * @see #connect()
+		 * @see #connected
 		 */		
 		public function disconnect():void
 		{
@@ -233,14 +230,33 @@ package com.collab.echo.net
          * Create one or more rooms.
          * 
          * @param rooms
+		 * @see #createRoom()
+		 * @see #watchRooms()
          */        
         public function createRooms( rooms:Vector.<BaseRoom> ):void
         {
         	throw new IllegalOperationError("Implement createRooms in subclass");
         }
+		
+		/**
+		 * Create a new room.
+		 *  
+		 * @param id
+		 * @param settings
+		 * @param attrs
+		 * @param modules
+		 * @see #createRooms()
+		 */        
+		public function createRoom( id:String, settings:*, attrs:*, modules:* ):*
+		{
+			throw new IllegalOperationError("Implement createRoom in subclass");
+			return null;
+		}
         
         /**
 		 * Watch for rooms.
+		 * 
+		 * @see #createRooms()
 		 */		
 		public function watchRooms():void
 		{
@@ -283,6 +299,7 @@ package com.collab.echo.net
          *                    the entire server.
          * @return 			  A Boolean indicating whether the listener was successfully
          *                    added.
+		 * @see #removeServerMessageListener()
          */        
         public function addServerMessageListener( type:String, method:Function,
         										  forRoomIDs:Array=null ):Boolean
@@ -300,6 +317,7 @@ package com.collab.echo.net
          * @param method 	The function or method to unregister.
          * @return 			A Boolean indicating whether the listener was successfully
          *                  removed.
+		 * @see #addServerMessageListener()
          */        
         public function removeServerMessageListener( type:String, method:Function ):Boolean
         {
@@ -322,20 +340,6 @@ package com.collab.echo.net
         }
         
         /**
-         * Create a new room.
-         *  
-         * @param id
-         * @param settings
-         * @param attrs
-         * @param modules
-         */        
-        public function createRoom( id:String, settings:*, attrs:*, modules:* ):*
-        {
-        	throw new IllegalOperationError("Implement createRoom in subclass");
-			return null;
-        }
-        
-        /**
          * Get a user's IP address by <code>name</code>.
          * 
 		 * @param name
@@ -353,6 +357,7 @@ package com.collab.echo.net
 		 * @param attrName
 		 * @param attrValue
 		 * @return 
+		 * @see #getClientById()
 		 */		
 		public function getClientByAttribute( attrName:String, attrValue:String ):*
 		{
@@ -381,6 +386,7 @@ package com.collab.echo.net
 		 * 
 		 * @param id
 		 * @return 
+		 * @see #getClientByAttribute()
 		 */		
 		public function getClientById( id:String ):*
 		{

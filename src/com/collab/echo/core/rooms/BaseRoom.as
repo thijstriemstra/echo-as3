@@ -307,6 +307,7 @@ package com.collab.echo.core.rooms
 		 * 					received, the specified listener will be executed.
 		 * @param method	The function to be executed when the specified message is received.
 		 * @see #removeMessageListener()
+		 * @see #hasMessageListener()
 		 */		
 		public function addMessageListener( type:String, method:Function ):void
         {
@@ -314,17 +315,43 @@ package com.collab.echo.core.rooms
         }
         
         /**
-         * Unregisters a message listener previously registered via addMessageListener().
+         * Unregisters a message listener previously registered via
+		 * addMessageListener().
          * 
 		 * @param type
 		 * @param method
 		 * @see #addMessageListener()
+		 * @see #hasMessageListener()
 		 */		
 		public function removeMessageListener( type:String, method:Function ):void
         {
         	// XXX: doublecheck this
 			_messageListeners[ type ] = null;
         }
+		
+		/**
+		 * Indicates if message listener was previously registered via
+		 * addMessageListener().
+		 * 
+		 * @param type
+		 * @param method
+		 * @return Boolean indicating if the message listener was previously
+		 *         registered.
+		 * @see #addMessageListener()
+		 * @see #removeMessageListener()
+		 */		
+		public function hasMessageListener( type:String,
+											method:Function ):Boolean
+		{
+			var hasProp:Boolean = _messageListeners.hasOwnProperty( type );
+			
+			if ( hasProp )
+			{
+				hasProp = ( _messageListeners[ type ] == method );
+			}
+			
+			return hasProp;
+		}
         
         /**
          * Sends a message to clients in and observing this room.

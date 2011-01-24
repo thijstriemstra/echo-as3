@@ -185,6 +185,12 @@ package com.collab.echo.core.rooms
 		}
 		
 		[Test]
+		[Ignore]
+		public function testHasMessageListener():void
+		{
+		}
+		
+		[Test]
 		public function testRemoveMessageListener():void
 		{
 			room.addMessageListener( "foo", foobar );

@@ -66,6 +66,12 @@ package com.collab.echo.core
 		
 		[Test]
 		[Ignore]
+		public function testDisconnect():void
+		{
+		}
+		
+		[Test]
+		[Ignore]
 		public function testCreateRooms():void
 		{
 		}

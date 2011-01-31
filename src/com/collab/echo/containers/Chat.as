@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.containers
 {
+	import com.collab.cabin.display.util.TextUtils;
+	import com.collab.cabin.log.Logger;
 	import com.collab.cabin.util.DateUtils;
 	import com.collab.cabin.util.StringUtil;
 	import com.collab.echo.containers.panels.MenuPanel;
@@ -32,6 +34,7 @@ package com.collab.echo.containers
 	
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
+	import flash.text.Font;
 	
 	/**
 	 * Chat panel.
@@ -176,7 +179,7 @@ package com.collab.echo.containers
 		 */		
 		public function addOccupant( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.addOccupant: " + client );
+			Logger.debug( "Chat.addOccupant: " + client );
 		}
 		
 		/**
@@ -186,12 +189,17 @@ package com.collab.echo.containers
 		 */		
 		public function removeOccupant( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.removeOccupant: " + client );
+			Logger.debug( "Chat.removeOccupant: " + client );
 			
 			textArea.verticalScrollPosition = textArea.maxVerticalScrollPosition;
 		}
 		
-		public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		/**
+		 * @param client
+		 * @param attr
+		 */		
+		public function clientAttributeUpdate( client:UserVO,
+											   attr:Object ):void
 		{
 			
 		}
@@ -203,7 +211,7 @@ package com.collab.echo.containers
 		 */		
 		public function joinedRoom( client:UserVO ):void
 		{
-			//Logger.debug( "Chat.joinedRoom: " + client );
+			Logger.debug( "Chat.joinedRoom: " + client );
 		}
 		
 		/**
@@ -213,7 +221,7 @@ package com.collab.echo.containers
 		 */		
 		public function numClients( total:int ):void
 		{
-			//Logger.debug( "Chat.numClients: " + total );
+			Logger.debug( "Chat.numClients: " + total );
 		}
 		
 		/**
@@ -223,6 +231,8 @@ package com.collab.echo.containers
 		 */		
 		public function addMessage( data:ChatMessage ):void
 		{
+			Logger.debug( "Chat.addMessage: " + data );
+			
 			var addStamp:String = "";
 			var text:String = "";
 			
@@ -318,7 +328,10 @@ package com.collab.echo.containers
 			textArea = new TextArea();
 			textArea.setSize( viewWidth, h ); 
 			textArea.condenseWhite = true; 
-			textArea.editable = false;
+			textArea.editable = true;
+			textArea.htmlText = "Abc d";
+			textArea.setStyle( "textFormat", TextUtils.createTextFormat() );
+			textArea.setStyle( "embedFonts", true );
 			addChild( textArea );
 		}
 		

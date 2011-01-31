@@ -26,7 +26,66 @@ package com.collab.echo.containers.skins
 	import com.collab.echo.containers.panels.UserPanel;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
+	
+	import fl.core.ComponentShim;
 
+	// XXX: make sure the skin classes from the swc are imported
+	ScrollPane_upSkin;
+	ScrollPane_disabledSkin;
+	Button_upSkin;
+	Button_downSkin;
+	Button_overSkin;
+	Button_disabledSkin;
+	Button_selectedDisabledSkin;
+	Button_selectedUpSkin;
+	Button_selectedDownSkin;
+	Button_selectedOverSkin;
+	Button_emphasizedSkin;
+	ScrollTrack_skin;
+	ScrollThumb_upSkin;
+	ScrollThumb_overSkin;
+	ScrollThumb_downSkin;
+	ScrollArrowDown_disabledSkin;
+	ScrollArrowDown_downSkin;
+	ScrollArrowDown_overSkin;
+	ScrollArrowDown_upSkin;
+	ScrollArrowUp_upSkin;
+	ScrollArrowUp_downSkin;
+	ScrollArrowUp_overSkin;
+	ScrollArrowUp_disabledSkin;
+	ScrollBar_thumbIcon;
+	TextArea_upSkin;
+	TextArea_disabledSkin;
+	TextInput_upSkin;
+	TextInput_disabledSkin;
+	ColorPicker_upSkin;
+	ColorPicker_backgroundSkin;
+	ColorPicker_colorWell;
+	ColorPicker_disabledSkin;
+	ColorPicker_downSkin;
+	ColorPicker_overSkin;
+	ColorPicker_swatchSelectedSkin;
+	ColorPicker_swatchSkin;
+	ColorPicker_textFieldSkin;
+	ComponentShim;
+	SliderThumb_disabledSkin;
+	SliderThumb_downSkin;
+	SliderThumb_overSkin;
+	SliderThumb_upSkin;
+	SliderTick_skin;
+	SliderTrack_disabledSkin;
+	SliderTrack_skin;
+	CellRenderer_disabledSkin;
+	CellRenderer_downSkin;
+	CellRenderer_overSkin;
+	CellRenderer_selectedDisabledSkin;
+	CellRenderer_selectedDownSkin;
+	CellRenderer_selectedOverSkin;
+	CellRenderer_selectedUpSkin;
+	CellRenderer_upSkin;
+	List_skin;
+	focusRectSkin;
+    
 	/**
 	 * Base skin for the Hub.
 	 * 
@@ -39,6 +98,16 @@ package com.collab.echo.containers.skins
 	 */	
 	public class HubSkin
 	{
+		// fonts
+		[Embed(source='/usr/share/fonts/truetype/msttcorefonts/Arial.ttf', 
+        	fontName='Arial', 
+        	mimeType='application/x-font',
+        	embedAsCFF='true'
+     	)]
+		// You do not use this variable directly. It exists so that 
+		// the compiler will link in the font.
+		private var arial:Class;
+		
 		// ====================================
 		// CLASS CONSTANTS
 		// ====================================

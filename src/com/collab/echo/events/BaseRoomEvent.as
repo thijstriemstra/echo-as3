@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 package com.collab.echo.events
 {
+	import com.collab.cabin.util.StringUtil;
+	
 	import flash.events.Event;
 	
 	/**
@@ -111,7 +113,8 @@ package com.collab.echo.events
 		 */		
 		override public function toString():String
 		{
-			return "<BaseRoomEvent type='" + type + "' data='" + _data + "' />";
+			return StringUtil.replace("<BaseRoomEvent type='%s' data='%s' />",
+				                      type, _data);
 		}
 		
 	}

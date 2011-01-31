@@ -135,6 +135,7 @@ package com.collab.echo.controls
 		{
 			// textInput
 			_textInput = new TextInput();
+			_textInput.setStyle( "fontFamily", "Arial" );
 			if ( _inputMessage )
 			{
 				_textInput.text = _inputMessage;

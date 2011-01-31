@@ -197,7 +197,8 @@ package com.collab.echo.core.rooms
 		/**
 		 * Indicates if the room is automatically joined after it's been
 		 * created.
-		 *  
+		 * 
+		 * @default false
 		 * @return 
 		 */		
 		public function get autoJoin():Boolean
@@ -209,6 +210,7 @@ package com.collab.echo.core.rooms
 		 * Boolean that indicates if the room is watched after it's been
 		 * created.
 		 *  
+		 * @default true
 		 * @return 
 		 */		
 		public function get watch():Boolean

@@ -125,6 +125,8 @@ package com.collab.echo.net
 		
 		/**
 		 * Enabled logging.
+		 * 
+		 * @default true
 		 */		
 		public function get logging():Boolean
 		{
@@ -133,6 +135,8 @@ package com.collab.echo.net
 		
 		/**
 		 * Current log level.
+		 * 
+		 * @default info
 		 */		
 		public function get logLevel():String
 		{
@@ -154,6 +158,7 @@ package com.collab.echo.net
          * <p>Boolean indicating if the connection to the presence server
 		 * has been successfully completed.</p>
 		 * 
+		 * @default false
 		 * @see #connect()
 		 * @see #disconnect()
          */		

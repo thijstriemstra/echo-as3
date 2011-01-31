@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.collab.echo.containers
 {
 	import com.collab.cabin.containers.scrollpane.FlashScrollPane;
+	import com.collab.cabin.util.ClassUtils;
 	import com.collab.echo.containers.scrollpane.UserScrollPane;
 	import com.collab.echo.containers.skins.HubSkin;
 	import com.collab.echo.controls.buttons.BaseExpandButton;
@@ -26,6 +27,7 @@ package com.collab.echo.containers
 	import com.collab.echo.core.messages.chat.ChatMessage;
 	import com.collab.echo.core.rooms.IChatRoom;
 	import com.collab.echo.core.rooms.IWhiteboardRoom;
+	import com.collab.echo.events.BaseConnectionEvent;
 	import com.collab.echo.events.BaseRoomEvent;
 	import com.collab.echo.events.CommunicationPanelEvent;
 	import com.collab.echo.model.UserVO;
@@ -33,8 +35,6 @@ package com.collab.echo.containers
 	import com.greensock.easing.Quad;
 	
 	import fl.events.ScrollEvent;
-	
-	import flash.utils.getQualifiedClassName;
 	
 	import org.osflash.thunderbolt.Logger;
 
@@ -231,7 +231,7 @@ package com.collab.echo.containers
         {
         	data = args;
 			
-			//trace("Hub.update: " + notification);
+			Logger.debug("Hub.update: " + notification);
 			
             switch ( notification )
             {
@@ -245,7 +245,7 @@ package com.collab.echo.containers
             	case BaseRoomEvent.RECEIVE_LINE:
             		addLine( args[0][0] );
             		break;
-            	
+				
             	default:
             		super.update( notification, args );
             		break;
@@ -294,6 +294,7 @@ package com.collab.echo.containers
 
 			// find the user
 			/*
+			XXX: clean
 			for each ( myGuy in data )
 			{
 				if ( myGuy == client )
@@ -305,7 +306,8 @@ package com.collab.echo.containers
 				index++;
 			}
 			*/
-			//Logger.debug( 'Hub.removeOccupant: ' + client );
+
+			Logger.debug( 'Hub.removeOccupant: ' + client );
 
 			// remove occupant from components
 			userPane.removeOccupant( client );
@@ -329,7 +331,8 @@ package com.collab.echo.containers
 		 * @param client
 		 * @param attr
 		 */		
-		override public function clientAttributeUpdate( client:UserVO, attr:Object ):void
+		override public function clientAttributeUpdate( client:UserVO,
+														attr:Object ):void
 		{
 			chat.clientAttributeUpdate( client, attr );
 			userPane.clientAttributeUpdate( client, attr );
@@ -343,7 +346,7 @@ package com.collab.echo.containers
 		 */
 		public function addMessage( data:ChatMessage ):void
 		{
-			trace("Hub.chat.addMessage: " + getQualifiedClassName( data ));
+			trace("Hub.chat.addMessage: " + ClassUtils.getQualifiedName( data ));
 
 			chat.addMessage( data );
 		}
@@ -372,7 +375,8 @@ package com.collab.echo.containers
 			// pane
 			pane = _skin.pane;
 			pane.setSize( PANEL_WIDTH_MIN, viewHeight );
-			pane.addEventListener( ScrollEvent.SCROLL, scrollHandler, false, 0, true );
+			pane.addEventListener( ScrollEvent.SCROLL, scrollHandler,
+				                   false, 0, true );
 			addChild( pane );
 
 			// user pane
@@ -401,10 +405,10 @@ package com.collab.echo.containers
 			// expand button
 			expandButton = _skin.expandButton;
 			expandButton.width = pane.width;
-			expandButton.addEventListener( CommunicationPanelEvent.EXPAND, onExpandPanel,
-										    false, 0, true );
-			expandButton.addEventListener( CommunicationPanelEvent.COLLAPSE, onExpandPanel,
-										    false, 0, true );
+			expandButton.addEventListener( CommunicationPanelEvent.EXPAND,
+				                           onExpandPanel, false, 0, true );
+			expandButton.addEventListener( CommunicationPanelEvent.COLLAPSE,
+				                           onExpandPanel, false, 0, true );
 			addChild( expandButton );
 		}
 

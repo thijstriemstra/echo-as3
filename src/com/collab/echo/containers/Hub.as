@@ -173,6 +173,7 @@ package com.collab.echo.containers
 			return _welcomeMessage;
 		}
 
+		[Inspectable(defaultValue=null)]
 		/**
 		 * Label for the chat's send button.
 		 * 

@@ -192,7 +192,7 @@ package com.collab.echo.containers.scrollpane
 		 * @return 
 		 * @private
 		 */		
-		override public function add( child:DisplayObject ):DisplayObject
+		override public function add( child:DisplayObject ):Boolean
 		{
 			_index = 0;
 			
@@ -252,6 +252,8 @@ package com.collab.echo.containers.scrollpane
 		 * @param child
 		 * @return
 		 * @private
+		 * @see #removeAt()
+		 * @see #removeAll()
 		 */		
 		override public function remove( child:DisplayObject ):Boolean
 		{
@@ -279,6 +281,7 @@ package com.collab.echo.containers.scrollpane
 		 * 
 		 * @return 
 		 * @private
+		 * @see #remove()
 		 */		
 		override public function removeAll():Boolean
 		{
@@ -305,6 +308,8 @@ package com.collab.echo.containers.scrollpane
 		 * @param index
 		 * @return
 		 * @private
+		 * @see #remove()
+		 * @see #removeAll()
 		 */		
 		override public function removeAt( index:int ):Boolean
 		{

@@ -42,7 +42,7 @@ package com.collab.echo.core.rooms
 		 *
 		 * @param client
 		 */
-		function removeOccupant( client:UserVO ):void
+		function removeOccupant( client:UserVO ):void;
 		
 		/**
 		 * Joined the room.

@@ -45,7 +45,7 @@ Project build file.
 		<delete dir="${basedir}/${app.outputfolder}/api" failOnError="false"
 		                includeEmptyDirs="true"/>
 		<pathconvert property="asdoc.files" pathsep="," dirsep=".">
-                <fileset dir="src">
+                <fileset dir="${app.src}">
                         <include name="**/*.as"/>
                 </fileset>
                 <mapper>
